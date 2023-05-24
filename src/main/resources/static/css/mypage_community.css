@@ -1,0 +1,121 @@
+#main>h1 {
+    color: white;
+    margin-top: 40px;
+    margin-left: 60px;
+}
+
+/* ---------- 네비게이션 ---------- */
+.mypage_nav {
+    display: inline-block;
+    width: 15%;
+    height: 80%;
+    background-color: #1D267D;
+    color: white;
+    margin-left: 40px;
+
+}
+.mypage_nav ul {
+    padding: 0;
+    line-height: 375%;
+    /* 줄간격 조정 */
+}
+.mypage_nav ul li {
+    list-style: none;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+.mypage_nav ul li:hover {
+    color: orange;
+    font-weight: bold;
+}
+
+/* ---------- 마이페이지 내용 ----------*/
+.mypage_contents {
+    display: inline-block;
+    width: 75%;
+    height: 80%;
+    background-color: rgb(224, 224, 224);
+    margin-left: 10px;
+}
+.mypage_contents>h1 {
+    margin-left: 20px;
+}
+.mypage_contents h2 {
+    margin-left: 20px;
+    margin-bottom: 0px;
+    color: #5C469C;
+}
+
+/* ---------- 내가 작성한 게시글 ---------- */
+.board_list_wrap {
+    padding: 0px 10px 20px 10px;
+}
+.board_list>div {
+    border-bottom: 1px solid #ddd;
+    font-size: 0;
+}
+.board_list>div.top {
+    border-bottom: 1px solid #999;
+}
+.board_list>div>div {
+    display: inline-block;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 1.1rem;
+}
+.board_list>div.top>div {
+    font-weight: 600;
+}
+.board_list .num {
+    width: 10%;
+}
+.board_list .title {
+    width: 70%;
+    /* text-align: left; */
+}
+.board_list .date {
+    width: 10%;
+}
+.board_list .count {
+    width: 10%;
+}
+.title>a {
+    color: black;
+    font-size: 1.1rem;
+}
+
+/* ---------- 내가 작성한 댓글 ---------- */
+.comment_list_wrap {
+    padding: 0px 10px 10px 10px;
+}
+.comment_list>div {
+    border-bottom: 1px solid #ddd;
+    font-size: 0;
+}
+.comment_list>div.top {
+    border-bottom: 1px solid #999;
+}
+.comment_list>div>div {
+    display: inline-block;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 1.1rem;
+}
+.comment_list>div.top>div {
+    font-weight: 600;
+}
+.comment_list .num {
+    width: 10%;
+}
+.comment_list .title {
+    width: 40%;
+    /* text-align: left; */
+}
+.comment_list .comment {
+    width: 50%;
+}
+.title>a {
+    color: black;
+    font-size: 1.1rem;
+}
