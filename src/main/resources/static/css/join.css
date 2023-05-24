@@ -1,0 +1,164 @@
+@charset "utf-8";
+/* base - 브라우저 별로 다를 수도 있는 것을 초기화 */
+*{ padding: 0; margin: 0;} /* 태그 여백 없앰 */
+li{ list-style: none; } /* 기호나 번호를 제거 */
+button{ cursor: pointer; } /* 모든 버튼에 마우스손모양 처리 */
+
+/* body설정 */
+body{ background-color: #333; }
+
+/* 기본틀 */
+.loginbox{
+    position: absolute;top: 15%;left: 25%;margin:-100px 0 0 -100px;
+    width: 700px; height: 650px;
+    margin: 0 auto; /* 블록요소를 부모영역에서 가운데 처리 */
+}
+
+.loginbox h2{
+    text-align: center; font-size: 50px;
+    color: #5C469C;
+    font-weight: normal;
+    margin-bottom: 40px;
+}
+/* 로그인의 메인 */
+.loginbox form{
+    border-radius: 10%;
+    width: 100%; height: 730px;
+    background-color: #ccc;
+    /* 패딩수치를 인사이드 처리 */
+    padding: 30px; box-sizing: border-box;
+}
+.loginbox fieldset{
+    border: none; /* 테두리 제거 */
+    margin-left: 22%;
+    margin-right: 25%;
+}
+.loginbox legend{
+    /* 요소를 화면 밖으로 처리 */
+    position: absolute; left: -999em;
+
+    /* 웹접근성으로 스크린리더기가 읽어줘야 하므로 display: none;을 사용하지 말것 */
+}
+
+.loginbox input{
+    display: block;
+    width: 100%; height: 50px;
+    margin-bottom:0px; /* 동위선택자와의 간격 조정 */
+    border: none; background-color: #ededed;
+    padding: 0 20px; /* 앞상하 뒷좌우 */
+    box-sizing: border-box; /* 패딩수치를 인사이드 처리 */
+}
+
+.loginbox .user{
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+/* 로그인 버튼 부분 */      
+.loginbox #login{
+    display: block;
+    width: 100%; height: 50px;
+    margin: 0 auto; /* 블록요소가 부모 영역에서 가운데 오기 */
+    border: none;
+    background-color: #5C469C;
+    border-radius: 10px 10px;
+    color: #fff; font-size: 24px;
+}
+
+/* 소셜로그인 부분 */
+.socialLogin{
+    margin-top: 30px;
+    margin-left: 20px;
+    width: auto; height: 200px;
+}
+.socialLogin img{
+    display: inline;
+    width: 75px; height: 75px;
+}
+
+.loginbox #join{
+    display: block;
+    width: 100%; height: 40px;
+    margin: 0 auto; /* 블록요소가 부모 영역에서 가운데 오기 */
+    border: none;
+    background-color: #D4ADFC;
+    border-radius: 10px 10px;
+    color: #fff; font-size: 18px;
+}
+.join {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #ccc;
+    margin-bottom: 20px;
+  }
+  .join input{
+    width: 100%;
+    height: 50px;
+    font-size: 18px;
+  }
+  .join-title{
+    float: left;
+    height: 50px;
+    width: 70px;
+    background-size: cover;
+    border: 1px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .join-keyword{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #ccc;
+    margin-left: 5px
+  }
+  .join-kw{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #ccc;
+    
+    margin-bottom: 5px;
+  }
+  #kw{
+    width: 100%;
+    height: auto;
+    font-size: 18px;
+    background-color: #ededed;
+  }
+.join-btn{
+    display: flex;
+    
+   
+}
+.join-btn #find_join button{
+    display: block;
+    width: 180px; height: 40px;
+    margin: 0 auto; /* 블록요소가 부모 영역에서 가운데 오기 */
+    border: none;
+    background-color: #5C469C;
+    border-radius: 10px 10px;
+    color: #fff; font-size: 18px;
+    margin-right: 10px;
+    
+}
+.join-btn #find_cancel button{
+    display: block;
+    width: 180px; height: 40px;
+    margin: 0 auto; /* 블록요소가 부모 영역에서 가운데 오기 */
+    border: none;
+    background-color: #D4ADFC;
+    border-radius: 10px 10px;
+    color: #fff; font-size: 18px;
+}
