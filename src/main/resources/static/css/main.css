@@ -1,12 +1,13 @@
 body {
+  display: flex; /* body를 flex container로 만들어줍니다 */
   margin: 0;
+  height: 100vh; /* 브라우저 창의 높이를 맞춰줍니다 */
 }
 #nav {
   background-color: #5c469c;
   width: 17vw;
   height: 100vh;
   text-align: center;
-  float: left;
 }
 #nav > div {
   margin-bottom: 7vh;
@@ -42,14 +43,14 @@ a {
   left: 10%;
   display: flex;
   align-items: center;
-  width: 15vw;
+  width: 13vw;
   border: 1px solid #ccc;
   border-radius: 5px;
   overflow: hidden;
   background-color: silver;
 }
 .search-input {
-  width: 14vw;
+  width: 13vw;
   font-size: 18px;
 }
 .search-icon {
@@ -62,7 +63,6 @@ a {
   width: 83vw;
   height: 100vh;
   background-color: #424242;
-  margin-left: 17vw;
 }
 #playlist {
   width: 30vw;
