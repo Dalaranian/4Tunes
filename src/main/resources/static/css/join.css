@@ -1,193 +1,161 @@
 @charset "utf-8";
+
 /* base - 브라우저 별로 다를 수도 있는 것을 초기화 */
 * {
-  padding: 0;
-  margin: 0;
-} /* 태그 여백 없앰 */
-li {
-  list-style: none;
-} /* 기호나 번호를 제거 */
-button {
-  cursor: pointer;
-} /* 모든 버튼에 마우스손모양 처리 */
-#main {
-  justify-content: center;
-  align-items: center;
+    padding: 0;
+    margin: 0;
 }
+
 /* body설정 */
 body {
-  background-color: #333;
+    text-size-adjust: 100%;
+    overflow: hidden;
+    zoom: 1;
+    background-color: #333;
 }
 
 /* 기본틀 */
 .loginbox {
-  position: relative;
-  top: 5%;
-  left: 50%;
-  right: 50%;
-  margin: -100px 0 0 -100px;
-  width: 40vw;
-  height: 80vh;
-  margin: 0 auto; /* 블록요소를 부모영역에서 가운데 처리 */
+    position: absolute;
+    top: 15%;
+    left: 40%;
+    margin: -100px 0 0 -100px;
+    width: 35vw;
+    height: 80vh;
+    margin: 0 auto;
 }
 
 .loginbox h2 {
-  text-align: center;
-  font-size: 50px;
-  color: #5c469c;
-  font-weight: normal;
-  margin-bottom: 40px;
+    text-align: center;
+    font-size: 50px;
+    color: #5c469c;
+    font-weight: normal;
+    margin-bottom: 40px;
 }
+
 /* 로그인의 메인 */
 .loginbox form {
-  border-radius: 10%;
-  min-width: 450px;
-  width: 100%;
-  height: 90vh;
-  background-color: #ccc;
-  /* 패딩수치를 인사이드 처리 */
-  padding: 30px;
-  box-sizing: border-box;
+    border-radius: 10%;
+    width: 100%;
+    height: 80vh;
+    background-color: #ccc;
+    padding: 30px;
+    box-sizing: border-box;
 }
-.loginbox fieldset {
-  border: none; /* 테두리 제거 */
-}
-.loginbox legend {
-  /* 요소를 화면 밖으로 처리 */
-  position: absolute;
-  left: -999em;
 
-  /* 웹접근성으로 스크린리더기가 읽어줘야 하므로 display: none;을 사용하지 말것 */
+.loginbox fieldset {
+    border: none;
+    margin: 0 10% 0 10%;
 }
 
 .loginbox input {
-  display: block;
-  width: 100%;
-  height: 50px;
-  margin-bottom: 0px; /* 동위선택자와의 간격 조정 */
-  border: none;
-  background-color: #ededed;
-  padding: 0 20px; /* 앞상하 뒷좌우 */
-  box-sizing: border-box; /* 패딩수치를 인사이드 처리 */
+    display: block;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 0px;
+    border: none;
+    background-color: #ededed;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .loginbox .user {
-  width: 100%;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-/* 로그인 버튼 부분 */
-.loginbox #login {
-  display: block;
-  width: 100%;
-  height: 50px;
-  margin: 0 auto; /* 블록요소가 부모 영역에서 가운데 오기 */
-  border: none;
-  background-color: #5c469c;
-  border-radius: 10px 10px;
-  color: #fff;
-  font-size: 24px;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-/* 소셜로그인 부분 */
-.socialLogin {
-  margin-top: 30px;
-  margin-left: 20px;
-  width: auto;
-  height: 200px;
-}
-.socialLogin img {
-  display: inline;
-  width: 75px;
-  height: 75px;
-}
-
-.loginbox #join {
-  display: block;
-  width: 100%;
-  height: 40px;
-  margin: 0 auto; /* 블록요소가 부모 영역에서 가운데 오기 */
-  border: none;
-  background-color: #d4adfc;
-  border-radius: 10px 10px;
-  color: #fff;
-  font-size: 18px;
-}
 .join {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  border-radius: 5px;
-  overflow: hidden;
-  background-color: #ccc;
-  margin-bottom: 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 0.3124vw;
+    overflow: hidden;
+    background-color: #ccc;
+    margin-bottom: 1.25vw;
 }
-.join input {
-  width: 100%;
-  height: 50px;
-  font-size: 18px;
-}
-.join-title {
-  float: left;
-  height: 50px;
-  width: 70px;
-  background-size: cover;
-  border: 1px;
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-}
-.join-keyword {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  border-radius: 5px;
-  overflow: hidden;
-  background-color: #ccc;
-  margin-left: 5px;
-}
-.join-kw {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  border-radius: 5px;
-  overflow: hidden;
-  background-color: #ccc;
 
-  margin-bottom: 5px;
+.join input {
+    width: 100%;
+    height: 2.5vw;
+    font-size: 1.125vw;
+}
+
+.join-title {
+    float: left;
+    height: 2.5vw;
+    width: 2.5vw;
+    background-size: cover;
+    border: 0.015625vw;
+    font-size: 1.125vw;;
+    font-weight: bold;
+    text-align: center;
+}
+
+.join-keyword {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #ccc;
+    margin-left: 5px
+}
+
+.join-kw {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #ccc;
+    margin-bottom: 5px;
+}
+.join-kw input{
+    width: 100%;
+    height: 2.5vw;
+    font-size: 1.125vw;
 }
 #kw {
-  width: 100%;
-  height: auto;
-  font-size: 18px;
-  background-color: #ededed;
+    width: 100%;
+    height: auto;
+    font-size: 1.125vw;
+    background-color: #ededed;
 }
+
 .join-btn {
-  display: flex;
+    display: flex;
+
+
 }
+
 .join-btn #find_join button {
-  display: block;
-  width: 180px;
-  height: 40px;
-  margin: 0 auto; /* 블록요소가 부모 영역에서 가운데 오기 */
-  border: none;
-  background-color: #5c469c;
-  border-radius: 10px 10px;
-  color: #fff;
-  font-size: 18px;
-  margin-right: 10px;
+    display: block;
+    width: 12.375vw;
+    height: 2.5vw;
+    margin: 0 auto;
+    /* 블록요소가 부모 영역에서 가운데 오기 */
+    border: none;
+    background-color: #5C469C;
+    border-radius: 10px 10px;
+    color: #fff;
+    font-size: 1.125vw;
+    margin-right: 0.6vw;
+
 }
+
 .join-btn #find_cancel button {
-  display: block;
-  width: 180px;
-  height: 40px;
-  margin: 0 auto; /* 블록요소가 부모 영역에서 가운데 오기 */
-  border: none;
-  background-color: #d4adfc;
-  border-radius: 10px 10px;
-  color: #fff;
-  font-size: 18px;
+    display: block;
+    width: 12.375vw;
+    height: 2.5vw;
+    margin: 0 auto;
+    /* 블록요소가 부모 영역에서 가운데 오기 */
+    border: none;
+    background-color: #D4ADFC;
+    border-radius: 10px 10px;
+    color: #fff;
+    font-size: 1.125vw;
 }
