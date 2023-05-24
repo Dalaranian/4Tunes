@@ -58,7 +58,6 @@ a {
   width: 21px;
   background-size: cover;
 }
-
 #main {
   position: relative;
   width: 83vw;
@@ -72,21 +71,6 @@ a {
   position: relative;
   top: 10%;
   left: 10%;
-}
-#buttons {
-  display: flex;
-  position: absolute;
-  top: 10%;
-  right: 10%;
-}
-#buttons > div {
-  font-size: 16px;
-  color: white;
-  padding: 2px;
-  background-color: #5c469c;
-  border-radius: 10px;
-  margin-right: 1vw;
-  cursor: pointer;
 }
 #MyPlayList {
   width: fit-content;
