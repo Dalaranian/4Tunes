@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../static/css/nav.css" />
-  <link rel="stylesheet" href="../static/css/login.css" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/nav.css" />
+    <link rel="stylesheet" href="../static/css/login.css" />
+    <link rel="stylesheet" href="../static/css/globalfont.css" />
 
-  <title>4Tunes</title>
-</head>
+    <title>4Tunes</title>
+  </head>
 
-<body>
-  <div id="nav">
+  <body>
+    <div id="nav">
       <div class="banner">
         <a href=""><img src="../static/img/banner.png" /></a>
       </div>
@@ -30,8 +31,8 @@
       </div>
       <div class="search-container">
         <span class="search-icon"
-          ><img src="../static/img/search-icon.png" class="search-icon"/>
-         </span>
+          ><img src="../static/img/search-icon.png" class="search-icon" />
+        </span>
         <input type="text" class="search-input" placeholder="키워드 입력" />
       </div>
       <div><a href="">맞춤추천</a></div>
@@ -39,47 +40,58 @@
       <div><a href="">커뮤니티</a></div>
       <div><a href="">멤버십</a></div>
     </div>
-  <div class="main">
-    <!-- 로그인 시작하는 부분 -->
-    <div class="loginbox">
-      <form action="#">
-        <fieldset>
-          <legend>로그인 구역</legend>
-          <h2>LOGIN</h2>
-          <!-- ID -->
-          <div class="login-inf">
-            <span class="login-icon"><img src="../static/img/login.png" class="login-icon" /></span>
-            <input type="text" id="login-input" placeholder="Email을 입력해주세요">
-          </div>
-          <!-- PW -->
-          <div class="login-inf">
-            <span class="login-icon"><img src="../static/img/key.png" class="login-icon" /></span>
-            <input type="password" id="login-input" placeholder="비밀번호를 입력해 주세요">
-          </div>
-          <!-- 로그인 버튼 -->
-          <button type="submit" id="login">Login</button>
-          <!-- 아이디 비번 찾기 -->
-          <div class="user">
-            <div id="find_Id">
-              <button type="submit">아이디 찾기</button>
+    <div class="main">
+      <!-- 로그인 시작하는 부분 -->
+      <div class="loginbox">
+        <form action="#">
+          <fieldset>
+            <legend>로그인 구역</legend>
+            <h2>LOGIN</h2>
+            <!-- ID -->
+            <div class="login-inf">
+              <span class="login-icon"
+                ><img src="../static/img/login.png" class="login-icon"
+              /></span>
+              <input
+                type="text"
+                id="login-input"
+                placeholder="Email을 입력해주세요"
+              />
             </div>
-            <div id="find_Pw">
-              <button type="submit">비밀번호 찾기</button>
+            <!-- PW -->
+            <div class="login-inf">
+              <span class="login-icon"
+                ><img src="../static/img/key.png" class="login-icon"
+              /></span>
+              <input
+                type="password"
+                id="login-input"
+                placeholder="비밀번호를 입력해 주세요"
+              />
             </div>
-          </div>
-          <!-- 회원 가입 버튼 -->
-          <button type="submit" id="join">회원가입</button>
-          <!-- 소셜 로그인 -->
-          <div class="socialLogin">
-            <a href="#"><img src="../static/img/naver.svg"></a>
-            <a href="#"><img src="../static/img/kakao.webp"></a>
-            <a href="#"><img src="../static/img/face.png"></a>
-            <a href="#"><img src="../static/img/github.png"></a>
-          </div>
-        </fieldset>
-      </form>
+            <!-- 로그인 버튼 -->
+            <button type="submit" id="login">Login</button>
+            <!-- 아이디 비번 찾기 -->
+            <div class="user">
+              <div id="find_Id">
+                <button type="submit">아이디 찾기</button>
+              </div>
+              <div id="find_Pw">
+                <button type="submit">비밀번호 찾기</button>
+              </div>
+            </div>
+            <!-- 회원 가입 버튼 -->
+            <button type="submit" id="join">회원가입</button>
+            <!-- 소셜 로그인 -->
+            <div class="socialLogin">
+              <a href="#"><img src="../static/img/naver.svg" /></a>
+              <a href="#"><img src="../static/img/kakao.webp" /></a>
+              <a href="#"><img src="../static/img/face.png" /></a>
+              <a href="#"><img src="../static/img/github.png" /></a>
+            </div>
+          </fieldset>
+        </form>
+      </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>
