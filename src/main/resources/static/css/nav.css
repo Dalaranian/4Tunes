@@ -63,4 +63,6 @@ a {
   width: 83vw;
   height: 100vh;
   background-color: #424242;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
