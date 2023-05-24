@@ -12,7 +12,7 @@
     background-color: #1D267D;
     color: white;
     margin-left: 40px;
-
+    vertical-align: top;
 }
 .mypage_nav ul {
     padding: 0;
@@ -72,7 +72,9 @@
 }
 .board_list .title {
     width: 70%;
-    /* text-align: left; */
+}
+.board_list .title:hover {
+    font-weight: bold;
 }
 .board_list .date {
     width: 10%;
@@ -111,6 +113,9 @@
 .comment_list .title {
     width: 40%;
     /* text-align: left; */
+}
+.comment_list .title:hover {
+    font-weight: bold;
 }
 .comment_list .comment {
     width: 50%;
