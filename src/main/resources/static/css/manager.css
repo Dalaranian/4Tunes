@@ -1,0 +1,33 @@
+#main h1 {
+    color: #fff;
+    font-size: 2.5vw;
+    line-height: 3.5;
+    margin-left: 5vw;
+}
+
+.wapper_circle {
+    display: flex;
+    justify-content: center;
+    margin-top: 17vh;
+    flex-direction: row;
+}
+
+.circle1,
+.circle2,
+.circle3 {
+    width: 15vw;
+    height: 30vh;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 7vw;
+}
+
+
+.circle-text {
+    color: #5C469C;
+    font-size: 2vw;
+    font-weight: bold;
+}
