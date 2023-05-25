@@ -1,0 +1,24 @@
+@charset "utf-8";
+
+#content{
+    height: 100vh;
+}
+
+#membershipInfo{
+    width: max-content;
+    height: 70vh;
+    padding: auto;
+}
+
+#membershipJoin{
+    width: max-content;
+    height: 30vh;
+    padding: auto;
+}
+
+#joinBtn{
+    display: block;
+    margin: 0 auto;
+    width: 80vw;
+}
+
