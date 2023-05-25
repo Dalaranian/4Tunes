@@ -1,0 +1,87 @@
+#main>h1 {
+    color: white;
+    margin-top: 40px;
+    margin-left: 60px;
+}
+
+.adminpage_contents {
+    width: 90%;
+    height: 80%;
+    background-color: rgb(224, 224, 224);
+    margin-left: 60px;
+    vertical-align: top;
+    padding-top: 30px;
+}
+
+/* ---------- 검색창 ---------- */
+.search{
+    margin-right: 30px;
+    text-align: right;
+}
+
+/* ---------- 회원정보 테이블 ---------- */
+.user_list_wrap {
+    padding: 0px 10px 20px 10px;
+    margin-top: 30px;
+}
+.user_list>div {
+    border-bottom: 1px solid #ddd;
+    font-size: 0;
+}
+.user_list>div.top {
+    border-bottom: 1px solid #999;
+}
+.user_list>div>div {
+    display: inline-block;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 1.1rem;
+}
+.user_list>div.top>div {
+    font-weight: 600;
+}
+.user_list .num {
+    width: 10%;
+}
+.user_list .name {
+    width: 20%;
+}
+.user_list .id {
+    width: 40%;
+}
+.user_list .grade {
+    width: 10%;
+}
+.user_list .modify {
+    width: 10%;
+}
+.user_list .drop {
+    width: 10%;
+}
+
+/* ---------- 버튼 ---------- */
+#submit{
+    background-color: #1D267D;
+    color: white;
+    cursor: pointer;
+    border: 0px;
+    border-radius: 3px;
+    padding: 3px 5px;
+}
+#modify{
+    background-color: #1D267D;
+    color: white;
+    cursor: pointer;
+    border: 0px;
+    border-radius: 3px;
+    padding: 3px 7px;
+}
+
+#drop{
+    background-color: rgb(192, 57, 43);
+    color: white;
+    cursor: pointer;
+    border: 0px;
+    border-radius: 3px;
+    padding: 3px 7px;
+}
