@@ -32,7 +32,7 @@
   }
 
 
-   .scroll-container {
+   .list_headerwrap {
     display: flex;
     align-items: center;
     flex-grow: 1;
