@@ -21,7 +21,7 @@
 
 .list-header .num,
 .list-header .title,
-.list-header .nick,
+.list-header .name,
 .list-header .content,
 .list-header .date,
 .list-header .count {
@@ -49,7 +49,7 @@
 
 .list-item .num,
 .list-item .title,
-.list-item .nick,
+.list-item .name,
 .list-item .content,
 .list-item .date,
 .list-item .count {
