@@ -1,0 +1,71 @@
+#main>h1 {
+    color: white;
+    margin-top: 40px;
+    margin-left: 60px;
+}
+
+.adminpage_contents {
+    width: 90%;
+    height: 80%;
+    background-color: rgb(224, 224, 224);
+    margin-left: 60px;
+    vertical-align: top;
+    padding-top: 30px;
+}
+
+/* ---------- 게시글 테이블 ---------- */
+.community_list_wrap {
+    padding: 0px 10px 20px 10px;
+    margin-top: 30px;
+}
+.community_list>div {
+    border-bottom: 1px solid #ddd;
+    font-size: 0;
+}
+.community_list>div.top {
+    border-bottom: 1px solid #999;
+}
+.community_list>div>div {
+    display: inline-block;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 1.1rem;
+}
+.community_list>div.top>div {
+    font-weight: 600;
+}
+.community_list .num {
+    width: 10%;
+}
+.community_list .name {
+    width: 10%;
+}
+.community_list .id {
+    width: 20%;
+}
+.community_list .title {
+    width: 40%;
+}
+.community_list .reports {
+    width: 10%;
+}
+.community_list .confirm {
+    width: 10%;
+}
+.title>a {
+    color: black;
+    font-size: 1.1rem;
+}
+.community_list .title:hover {
+    font-weight: bold;
+}
+
+/* ---------- 버튼 ---------- */
+#confirm{
+    background-color: #1D267D;
+    color: white;
+    cursor: pointer;
+    border: 0px;
+    border-radius: 3px;
+    padding: 3px 7px;
+}
