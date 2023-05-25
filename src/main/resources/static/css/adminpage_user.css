@@ -58,3 +58,30 @@
 .user_list .drop {
     width: 10%;
 }
+
+/* ---------- 버튼 ---------- */
+#submit{
+    background-color: #1D267D;
+    color: white;
+    cursor: pointer;
+    border: 0px;
+    border-radius: 3px;
+    padding: 3px 5px;
+}
+#modify{
+    background-color: #1D267D;
+    color: white;
+    cursor: pointer;
+    border: 0px;
+    border-radius: 3px;
+    padding: 3px 7px;
+}
+
+#drop{
+    background-color: rgb(192, 57, 43);
+    color: white;
+    cursor: pointer;
+    border: 0px;
+    border-radius: 3px;
+    padding: 3px 7px;
+}
