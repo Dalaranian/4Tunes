@@ -1,76 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../static/css/nav.css" />
-    <link rel="stylesheet" href="../static/css/globalfont.css" />
-    <link rel="stylesheet" href="../static/css/communitylist.css" />
-    <title>4Tunes</title>
-  </head>
 
-  <body>
-    <div id="nav">
-      <div class="banner">
-        <a href=""><img src="../static/img/banner.png" /></a>
-      </div>
-      <div id="login">
-        <div>
-          <a href=""
-            ><img class="login_img" src="../static/img/login.png" />LOGIN</a
-          >
-        </div>
-        <br />
-        <div>
-          <a href=""
-            ><img class="mypage_img" src="../static/img/mypage.png" />MYPAGE</a
-          >
-        </div>
-      </div>
-      <div class="search-container">
-        <span class="search-icon"
-          ><img src="../static/img/search-icon.png" class="search-icon"
-        /></span>
-        <input type="text" class="search-input" placeholder="키워드 입력" />
-      </div>
-      <div><a href="">맞춤추천</a></div>
-      <div><a href="">인기차트</a></div>
-      <div><a href="">커뮤니티</a></div>
-      <div><a href="">멤버십</a></div>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../static/css/nav.css" />
+  <link rel="stylesheet" href="../static/css/globalfont.css" />
+  <link rel="stylesheet" href="../static/css/communitylist.css" />
+  <title>4Tunes</title>
+</head>
 
-  
-<div id="main">
-  <h1>커뮤니티</h1>
-  <div class="list_header">
-    <div class="list_headerwrap">
-      <div class="num">NO</div>
-      <div class="title">글 제목</div>
-      <div class="nick">작성자</div>
-      <div class="content">내용</div>
-      <div class="date">날짜</div>
-      <div class="count">조회수</div>
+<body>
+  <div id="nav">
+    <div class="banner">
+      <a href=""><img src="../static/img/banner.png" /></a>
     </div>
+    <div id="login">
+      <div>
+        <a href=""><img class="login_img" src="../static/img/login.png" />LOGIN</a>
+      </div>
+      <br />
+      <div>
+        <a href=""><img class="mypage_img" src="../static/img/mypage.png" />MYPAGE</a>
+      </div>
+    </div>
+    <div class="search-container">
+      <span class="search-icon"><img src="../static/img/search-icon.png" class="search-icon" /></span>
+      <input type="text" class="search-input" placeholder="키워드 입력" />
+    </div>
+    <div><a href="">맞춤추천</a></div>
+    <div><a href="">인기차트</a></div>
+    <div><a href="">커뮤니티</a></div>
+    <div><a href="">멤버십</a></div>
   </div>
 
-  <div class="list">
-    <div class="list-item" th:each="# : ${#}">
-      <div class="num" th:text="${#.#}">1</div>
-      <div class="title"><a href="communitydetail.html" th:text="${#.#}">노래 추천할게요^^</a></div>
-      <div class="nick" th:text="${#.#}">하윤지</div>
-      <div class="content" th:text="${#.#}">긴 내용입니다. 테스트. 긴 내용 잘리나요.</div>
-      <div class="date" th:text="${#.#}">yyyy-mm-dd</div>
-      <!-- 타임리프 날짜 포맷팅 ${#dates.format(date, 'yyyy-MM-dd')} -->
-      <div class="count" th:text="${#.#}">30</div>
-    </div>
-  </div>
+  <div id="main">
     
-    <div class="review-write">
-    <a href="communitywrite.html" class="btn-primary">글 작성</a>
+    <h1>커뮤니티</h1>
+    <div class="list-header">
+      <div class="list-headerwrap">
+        <div class="num">NO</div>
+        <div class="title">글 제목</div>
+        <div class="nick">작성자</div>
+        <div class="content">내용</div>
+        <div class="date">날짜</div>
+        <div class="count">조회수</div>
+      </div>
+    </div>
+
+    <div class="list">
+
+      <div class="list-item" th:each="# : ${#}">
+        <div class="num" th:text="${#.#}">1</div>
+        <div class="title"><a href="communitydetail.html" th:text="${#.#}">노래 추천할게요^^</a></div>
+        <div class="nick" th:text="${#.#}">하윤지</div>
+        <div class="content" th:text="${#.#}">긴 내용입니다. 테스트. 긴 내용 잘리나요.</div>
+        <div class="date" th:text="${#.#}">yyyy-mm-dd</div>
+        <!-- 타임리프 날짜 포맷팅 ${#dates.format(date, 'yyyy-MM-dd')} -->
+        <div class="count" th:text="${#.#}">30</div>
+      </div>
+
+      <div class="list-item" th:each="# : ${#}">
+        <div class="num" th:text="${#.#}">2</div>
+        <div class="title"><a href="communitydetail.html" th:text="${#.#}">노래 추천이용^^</a></div>
+        <div class="nick" th:text="${#.#}">유니지</div>
+        <div class="content" th:text="${#.#}">긴 내용입니다. 테스트. 긴 내용 잘리나요.</div>
+        <div class="date" th:text="${#.#}">yyyy-mm-dd</div>
+        <!-- 타임리프 날짜 포맷팅 ${#dates.format(date, 'yyyy-MM-dd')} -->
+        <div class="count" th:text="${#.#}">55</div>
+      </div>
+
+    </div>
+
+    <div class="commu-write">
+      <a href="communitywrite.html" class="write-btn">글 작성</a>
+    </div>
+
   </div>
-  </div>
-</div>
-    
-    </body>
-        </html>
+
+</body>
+</html>
