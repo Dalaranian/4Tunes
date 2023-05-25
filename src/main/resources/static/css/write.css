@@ -1,0 +1,51 @@
+@charset "utf-8";
+/* base - 브라우저 별로 다를 수도 있는 것을 초기화 */
+* {
+  padding: 0;
+  margin: 0;
+}
+
+/* body설정 */
+body {
+  text-size-adjust: 100%;
+  overflow: hidden;
+  zoom: 1;
+  background-color: #333;
+}
+
+/* 기본틀 */
+.community-main {
+  position: absolute;
+  top: 15%;
+  left: 40%;
+  margin: -100px 0 0 -100px;
+  width: 35vw;
+  height: 80vh;
+  margin: 0 auto;
+}
+
+/* 로그인의 메인 */
+.community-main form {
+  border-radius: 10%;
+  width: 100%;
+  height: 80vh;
+  background-color: #ccc;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.community-main fieldset {
+  border: none;
+  margin: 0 10% 0 10%;
+}
+
+.community-main input {
+  display: block;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 0px;
+  border: none;
+  background-color: #ededed;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
