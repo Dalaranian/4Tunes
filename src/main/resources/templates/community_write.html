@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../static/css/nav.css" />
     <link rel="stylesheet" href="../static/css/globalfont.css" />
+    <link rel="stylesheet" href="../static/css/write.css" />
     <title>4Tunes</title>
 </head>
 
@@ -34,8 +35,8 @@
         <div><a href="">멤버십</a></div>
     </div>
     <div id="main">
-        <h1>커뮤니티 글 작성 및 수정</h1>
         <div class="community-main">
+            <h1>커뮤니티 글 작성 및 수정</h1>
             <form action="#">
                 <fieldset>
                     <div class="community-inf">
@@ -44,14 +45,20 @@
                     </div>
                     <div class="community-inf">
                         <span class="community-title">작성자</span>
-                        <input type="text" id="community-input" placeholder="로그인 되어있는 사용자 자동입력" disabled/>
+                        <input type="text" id="community-input" placeholder="로그인 되어있는 사용자 자동입력" disabled />
                     </div>
                     <div class="community-inf">
-                        <span class="community-title">내용</span>
-                        <textarea cols = "50" rows="10" id="community-input" placeholder="내용을 입력해주세요"></textarea>
+                        <span class="community-text">내용</span>
+                        <textarea cols="50" rows="10" id="community-input" placeholder="내용을 입력해주세요"></textarea>
                     </div>
-                    <button type="submit" id="input">작성 완료</button>
-                    <button type="submit" id="cancel">취소</button>
+                    <div class="community-btn">
+                        <div id="input">
+                            <button type="submit">작성 완료</button>
+                        </div>
+                        <div id="cancel">
+                            <button type="submit">취소</button>
+                        </div>
+                    </div>
                 </fieldset>
             </form>
 

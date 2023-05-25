@@ -13,39 +13,110 @@ body {
   background-color: #333;
 }
 
+
 /* 기본틀 */
 .community-main {
   position: absolute;
-  top: 15%;
-  left: 40%;
-  margin: -100px 0 0 -100px;
-  width: 35vw;
+  top: 8%;
+  left: 8%;
+  width: 120vw;
   height: 80vh;
-  margin: 0 auto;
+}
+.community-main h1{
+    color: white;
+    margin-bottom: 2vw;
+    font-size: 3vw;
 }
 
 /* 로그인의 메인 */
 .community-main form {
-  border-radius: 10%;
-  width: 100%;
-  height: 80vh;
+  width: 50%;
+  /* height: 80vh; */
   background-color: #ccc;
-  padding: 30px;
+  padding: 4vw;
   box-sizing: border-box;
 }
 
 .community-main fieldset {
   border: none;
-  margin: 0 10% 0 10%;
+  /* margin: 0 10% 0 10%; */
 }
 
-.community-main input {
+.community-main input
+{
   display: block;
   width: 100%;
   height: 50px;
   margin-bottom: 0px;
   border: none;
-  background-color: #ededed;
+  background-color: white;
   padding: 0 20px;
   box-sizing: border-box;
+}
+.community-inf {
+    position: relative;
+    display: flex;
+    width: 100%;
+    border-radius: 0.3124vw;
+    overflow: hidden;
+    background-color: #ccc;
+    margin-bottom: 1.25vw;
+}
+.community-title {
+    float: left;
+    height: 2.5vw;
+    width: 10vw;
+    background-size: cover;
+    border: 0.015625vw;
+    font-size: 1.725vw;;
+    text-align: center;
+    margin-right: 2vw;
+}
+
+.community-text{
+    float: left;
+    height: 2.5vw;
+    width: 10.125vw;
+    background-size: cover;
+    border: 0.015625vw;
+    font-size: 1.725vw;;
+    text-align: center;
+    margin-right: 2vw;
+}
+.community-main textarea{
+    width: 100%;
+    border:  0.015625vw #ccc;
+    padding: 20px 0 0 20px;
+}
+.community-btn{
+    display: flex;
+    float: right;
+}
+
+.community-btn #input button{
+    display: block;
+    width: 8.375vw;
+    height: 2.5vw;
+    margin: 0 auto;
+    /* 블록요소가 부모 영역에서 가운데 오기 */
+    border: none;
+    background-color: #0C134F;
+    border-radius: 0.3vw;
+    color: #fff;
+    font-size: 1.125vw;
+    margin-right: 0.6vw;
+
+}
+
+.community-btn #cancel button{
+    display: block;
+    width: 8.375vw;
+    height: 2.5vw;
+    margin: 0 auto;
+    /* 블록요소가 부모 영역에서 가운데 오기 */
+    border: none;
+    background-color: #0C134F;
+    border-radius:  0.3vw;
+    color: #fff;
+    font-size: 1.125vw;
 }
