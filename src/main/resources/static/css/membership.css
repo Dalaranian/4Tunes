@@ -17,14 +17,53 @@
 
 #membershipJoin{
     width: max-content;
-    height: 30vh;
-    padding: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%; /* div를 화면 전체 높이로 설정하거나 원하는 높이로 설정하세요 */
 }
 
 #joinBtn{
-    margin: 0 auto;
-    width: 80vw;
-    display: flex;
-    justify-content: center;
-    margin-left: 10px;
+    
+}
+
+h1{
+    text-align: center;
+    margin: 10px;
+}
+
+.container{
+    width: fit-content;
+    height: 80%;
+}
+
+/* bootstrap css */
+
+.accordion .card {
+	border: none;
+	margin-bottom: 2px;
+}
+.accordion .card-header {
+	background: #1D267D;
+	padding-top: 7px;
+	padding-bottom: 7px;
+}
+.accordion .card-header h2 {
+	color: #D4ADFC;
+	font-size: 1rem;
+	font-family: "Roboto", sans-serif;
+	font-weight: 500;
+}
+.accordion .card-header h2 span {
+	float: left;
+	margin-top: 10px;
+}
+.accordion .card-header button {
+	color: #fff;
+	font-size: 1.3rem;
+	line-height: 1.3rem;
+	float: right;
+}
+.accordion .card-header button:hover {
+	color: #23384e;
 }
