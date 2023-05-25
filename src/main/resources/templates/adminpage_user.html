@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="../static/css/nav.css" />
+    <link rel="stylesheet" href="../static/css/globalfont.css" />
+    <link rel="stylesheet" href="../static/css/adminpage_user.css" />
+    <title>4Tunes</title>
+</head>
+
+<body>
+    <div id="nav">
+        <div class="banner">
+            <a href=""><img src="../static/img/banner.png" /></a>
+        </div>
+        <div id="login">
+            <div>
+                <a href="">
+                    <img class="login_img" src="../static/img/login.png" />LOGIN
+                </a>
+            </div>
+            <br />
+            <div>
+                <a href="">
+                    <img class="mypage_img" src="../static/img/mypage.png" />MYPAGE
+                </a>
+            </div>
+        </div>
+        <div class="search-container">
+            <span class="search-icon"><img src="../static/img/search-icon.png" class="search-icon" /></span>
+            <input type="text" class="search-input" placeholder="키워드 입력" />
+        </div>
+        <div><a href="">맞춤추천</a></div>
+        <div><a href="">인기차트</a></div>
+        <div><a href="">커뮤니티</a></div>
+        <div><a href="">멤버십</a></div>
+    </div>
+
+    <div id="main">
+        <h1>회원정보 조회</h1>
+
+        <div class="adminpage_contents">
+            <div>
+                <form class="search">
+                    <input type="text" size="25" name="username" placeholder="조회할 회원의 이름을 입력하세요.">
+                    <input type="submit" value="검색">
+                </form>
+            </div>
+
+            <div class="user_list_wrap">
+                <div class="user_list">
+                    <div class="top">
+                        <div class="num">회원번호</div>
+                        <div class="name">이름</div>
+                        <div class="id">아이디</div>
+                        <div class="grade">회원등급</div>
+                        <div class="modify">수정버튼</div>
+                        <div class="drop">탈퇴버튼</div>
+                    </div>
+                    <div>
+                        <div class="num">1</div>
+                        <div class="name">배정민</div>
+                        <div class="id">princess@naver.com</div>
+                        <div class="grade"><input type="text" size="10" value="free" style="text-align: center;"></div>
+                        <div class="modify"><input type="button" value="수정완료" onclick=""></div>
+                        <div class="drop"><input type="button" value="탈퇴처리" onclick=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
