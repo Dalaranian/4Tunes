@@ -6,13 +6,15 @@
 }
 
 #membershipInfo{
-    width: 70vw;
+    width: 40vw;
     height: 70vh;
-    margin: 10%;
+    margin-left: 25%;
+    margin-right: 10%;
+    margin-top: 10%;
+    margin-bottom: 10%;
     background-color: #ccc;
-    /* display: flex; */
-    justify-content: center;
     border-radius : 5%;
+    position : relative;
 }
 
 #membershipJoin{
@@ -20,7 +22,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 10%; /* div를 화면 전체 높이로 설정하거나 원하는 높이로 설정하세요 */
+    height: 10%;
+    position: absolute;
+    bottom: 0;
+    right: 37%;
 }
 
 #joinBtn{
