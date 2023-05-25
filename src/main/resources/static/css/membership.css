@@ -1,13 +1,18 @@
 @charset "utf-8";
 
 #content{
-    height: 100vh;
+    height: fit-content;
+    width: fit-content;
 }
 
 #membershipInfo{
-    width: max-content;
+    width: 70vw;
     height: 70vh;
-    padding: auto;
+    margin: 10%;
+    background-color: #ccc;
+    /* display: flex; */
+    justify-content: center;
+    border-radius : 5%;
 }
 
 #membershipJoin{
@@ -17,8 +22,9 @@
 }
 
 #joinBtn{
-    display: block;
     margin: 0 auto;
     width: 80vw;
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
 }
-
