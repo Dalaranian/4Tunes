@@ -8,12 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/nav")
 public class NavController {
 	
-	// 루트 요청(페이지를 index.html 로 보내기)
-	@RequestMapping("/")
-	public String root() {
-		return "index";
-	}
-	
 	// 로그인 페이지로 이동
 	@GetMapping("/login")
 	public String gotoLogin() {
