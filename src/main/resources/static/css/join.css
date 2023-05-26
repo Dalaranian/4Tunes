@@ -2,160 +2,159 @@
 
 /* base - 브라우저 별로 다를 수도 있는 것을 초기화 */
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 /* body설정 */
 body {
-    text-size-adjust: 100%;
-    overflow: hidden;
-    zoom: 1;
-    background-color: #333;
+  text-size-adjust: 100%;
+  overflow: hidden;
+  zoom: 1;
+  background-color: #333;
 }
 
 /* 기본틀 */
 .loginbox {
-    position: absolute;
-    top: 15%;
-    left: 40%;
-    margin: -100px 0 0 -100px;
-    width: 35vw;
-    height: 80vh;
-    margin: 0 auto;
+  position: absolute;
+  top: 15%;
+  left: 40%;
+  margin: -100px 0 0 -100px;
+  width: 35vw;
+  height: 80vh;
+  margin: 0 auto;
+  min-height: 700px;
 }
 
 .loginbox h2 {
-    text-align: center;
-    font-size: 50px;
-    color: #5c469c;
-    font-weight: normal;
-    margin-bottom: 40px;
+  text-align: center;
+  font-size: 50px;
+  color: #5c469c;
+  font-weight: normal;
+  margin-bottom: 40px;
 }
 
 /* 로그인의 메인 */
 .loginbox form {
-    border-radius: 10%;
-    width: 100%;
-    height: 80vh;
-    background-color: #ccc;
-    padding: 30px;
-    box-sizing: border-box;
+  border-radius: 10%;
+  width: 100%;
+  height: 80vh;
+  background-color: #ccc;
+  padding: 30px;
+  box-sizing: border-box;
+  min-height: 700px;
 }
 
 .loginbox fieldset {
-    border: none;
-    margin: 0 10% 0 10%;
+  border: none;
+  margin: 0 10% 0 10%;
 }
 
 .loginbox input {
-    display: block;
-    width: 100%;
-    height: 50px;
-    margin-bottom: 0px;
-    border: none;
-    background-color: #ededed;
-    padding: 0 20px;
-    box-sizing: border-box;
+  display: block;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 0px;
+  border: none;
+  background-color: #ededed;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .loginbox .user {
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .join {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    border-radius: 0.3124vw;
-    overflow: hidden;
-    background-color: #ccc;
-    margin-bottom: 1.25vw;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 0.3124vw;
+  overflow: hidden;
+  background-color: #ccc;
+  margin-bottom: 1.25vw;
 }
 
 .join input {
-    width: 100%;
-    height: 2.5vw;
-    font-size: 1.125vw;
+  width: 100%;
+  height: 2.5vw;
+  font-size: 1.125vw;
 }
 
 .join-title {
-    float: left;
-    height: 2.5vw;
-    width: 2.5vw;
-    background-size: cover;
-    border: 0.015625vw;
-    font-size: 1.125vw;;
-    font-weight: bold;
-    text-align: center;
+  float: left;
+  height: 2.5vw;
+  width: 2.5vw;
+  background-size: cover;
+  border: 0.015625vw;
+  font-size: 1.125vw;
+  font-weight: bold;
+  text-align: center;
 }
 
 .join-keyword {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    border-radius: 5px;
-    overflow: hidden;
-    background-color: #ccc;
-    margin-left: 5px
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #ccc;
+  margin-left: 5px;
 }
 
 .join-kw {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    border-radius: 5px;
-    overflow: hidden;
-    background-color: #ccc;
-    margin-bottom: 5px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #ccc;
+  margin-bottom: 5px;
 }
-.join-kw input{
-    width: 100%;
-    height: 2.5vw;
-    font-size: 1.125vw;
+.join-kw input {
+  width: 100%;
+  height: 2.5vw;
+  font-size: 1.125vw;
 }
 #kw {
-    width: 100%;
-    height: auto;
-    font-size: 1.125vw;
-    background-color: #ededed;
+  width: 100%;
+  height: auto;
+  font-size: 1.125vw;
+  background-color: #ededed;
 }
 
 .join-btn {
-    display: flex;
-
-
+  display: flex;
 }
 
 .join-btn #find_join button {
-    display: block;
-    width: 12.375vw;
-    height: 2.5vw;
-    margin: 0 auto;
-    /* 블록요소가 부모 영역에서 가운데 오기 */
-    border: none;
-    background-color: #5C469C;
-    border-radius: 10px 10px;
-    color: #fff;
-    font-size: 1.125vw;
-    margin-right: 0.6vw;
-
+  display: block;
+  width: 12.375vw;
+  height: 2.5vw;
+  margin: 0 auto;
+  /* 블록요소가 부모 영역에서 가운데 오기 */
+  border: none;
+  background-color: #5c469c;
+  border-radius: 10px 10px;
+  color: #fff;
+  font-size: 1.125vw;
+  margin-right: 0.6vw;
 }
 
 .join-btn #find_cancel button {
-    display: block;
-    width: 12.375vw;
-    height: 2.5vw;
-    margin: 0 auto;
-    /* 블록요소가 부모 영역에서 가운데 오기 */
-    border: none;
-    background-color: #D4ADFC;
-    border-radius: 10px 10px;
-    color: #fff;
-    font-size: 1.125vw;
+  display: block;
+  width: 12.375vw;
+  height: 2.5vw;
+  margin: 0 auto;
+  /* 블록요소가 부모 영역에서 가운데 오기 */
+  border: none;
+  background-color: #d4adfc;
+  border-radius: 10px 10px;
+  color: #fff;
+  font-size: 1.125vw;
 }
