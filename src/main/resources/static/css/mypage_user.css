@@ -1,7 +1,7 @@
 #main>h1 {
     color: white;
-    margin-top: 40px;
-    margin-left: 60px;
+    margin-top: 3vw;
+    margin-left: 3.5vw;
 }
 
 /* ---------- 네비게이션 ---------- */
@@ -35,9 +35,89 @@
     display: inline-block;
     width: 75%;
     height: 80%;
-    background-color: rgb(224, 224, 224);
+    background-color: #ccc;
     margin-left: 10px;
 }
 .mypage_contents>h1 {
     margin-left: 20px;
 }
+.mypage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 50%;
+    border-radius: 0.3124vw;
+    overflow: hidden;
+    background-color: #ccc;
+    margin-bottom: 1vw;
+}
+.mypage_inf{
+    margin-left: 7vw;;
+}
+.mypage input {
+    width: 100%;
+    height: 2.1vw;
+    font-size: 1.125vw;
+}
+
+.mypage_title {
+    float: left;
+    height: 2.1vw;
+    width: 10vw;
+    background-size: cover;
+    border: 0.015625vw;
+    font-size: 1.125vw;;
+    font-weight: bold;
+    text-align: start;
+    margin-right: 1vw;
+}
+.mypage_kw_group{
+    position: relative;
+    display: inline-block;
+    align-items: center;
+    width: 80%;
+    border-radius: 0.3124vw;
+    overflow: hidden;
+    background-color: #ccc;
+    margin-bottom: 1.25vw;
+}
+
+.mypage_keyword {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #ccc;
+    
+}
+
+.mypage_keyword_group{
+    width: 100%;
+    height: 100%;
+    font-size: 1.125vw;
+}
+
+.mypage_kw {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #ccc;
+    margin-bottom: 5px;
+}
+.mypage_kw input{
+    width: 100%;
+    height: 2.5vw;
+    font-size: 1.125vw;
+}
+#kw {
+    width: 100%;
+    height: auto;
+    font-size: 1.125vw;
+    background-color: #ededed;
+}
+
