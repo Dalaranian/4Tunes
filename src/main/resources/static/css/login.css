@@ -75,6 +75,7 @@ body {
   border-radius: 10px;
   color: #fff;
   font-size: 1.875vw;
+  cursor: pointer;
 }
 
 /* 소셜로그인 부분 */
@@ -93,6 +94,7 @@ body {
   display: inline;
   width: 4.6875vw;
   height: 4.6875vw;
+  cursor: pointer;
 }
 
 /* 아이디 비밀번호 찾기부분 */
@@ -113,6 +115,7 @@ body {
   border-radius: 10px;
   color: #fff;
   font-size: 1.125vw;
+  cursor: pointer;
 }
 
 .loginbox #join {
@@ -125,6 +128,7 @@ body {
   border-radius: 10px;
   color: #fff;
   font-size: 1.125vw;
+  cursor: pointer;
 }
 
 .login-inf {
@@ -144,6 +148,7 @@ body {
   width: 100%;
   height: 2.5vw;
   font-size: 1.125vw;
+  
 }
 
 .login-icon {

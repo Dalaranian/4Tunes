@@ -128,8 +128,6 @@ body {
 
 .join-btn {
     display: flex;
-
-
 }
 
 .join-btn #find_join button {
@@ -144,6 +142,7 @@ body {
     color: #fff;
     font-size: 1.125vw;
     margin-right: 0.6vw;
+    cursor: pointer;
 
 }
 
@@ -158,4 +157,5 @@ body {
     border-radius: 10px 10px;
     color: #fff;
     font-size: 1.125vw;
+    cursor: pointer;
 }
