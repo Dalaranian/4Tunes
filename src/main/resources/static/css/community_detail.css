@@ -1,0 +1,186 @@
+.detail {
+  background-color: gainsboro;
+  padding: 2vw;
+  margin: 4vw;
+  height: 77vh;
+}
+
+.detail-title {
+  margin-top: 0vh;
+  margin-bottom: 1vh;
+}
+
+.detail-btns {
+  display: flex;
+  position: fixed;
+  top: 12%;
+  right: 6%;
+  flex-shrink: 1;
+}
+
+#update-btn,
+#delete-btn,
+#write-btn {
+  color: #fff;
+  background-color: #1D267D;
+  border-color: #1D267D;
+  border-radius: 15px;
+  font-weight: bold;
+  padding: 10px 20px;
+  margin-right: 1vw;
+  cursor: pointer;
+  border: none;
+} 
+
+#report-btn {
+  color: #fff;
+  background-color: red;
+  border-color: red;
+  border-radius: 15px;
+  font-weight: bold;
+  padding: 10px 20px;
+  margin-right: 1vw;
+  cursor: pointer;
+  border: none;
+}
+
+#update-btn:hover,
+#delete-btn:hover,
+#write-btn:hover,
+#report-btn:hover {
+  background-color: #5C469C;
+  border-color: #5C469C;
+}
+
+.detail-wrap {
+  background-color: gray;
+  max-height: 330px;  /* 내용 8줄부터 스크롤 활성화 */
+  overflow-y: auto;
+  margin-right: 0vw;
+  margin-bottom: 2.5vh;
+}
+
+.detail-name,
+.detail-count {
+  display: inline-block;
+  color: white;
+  font-size: 1.1vw;
+  margin-top: 1.5vh;
+  margin-left: 1vw;
+}
+
+.detail-name {
+  margin-right: 10vw;
+}
+
+.detail-content {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  font-size: 1.1vw;
+}
+
+#content-input {
+  background-color: white;
+  padding: 1vw;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;  /* 내용이 넘치는 경우 숨김 처리 */
+} 
+
+.content-box {
+  overflow-wrap: break-word;  /* 글 내용이 박스 크기에 맞게 자동 줄바꿈 */
+  min-height: 17vh;
+}
+
+.comment-main {
+  background-color: gray;
+  max-height: 77vh;  /* 댓글 약 4~5개부터 스크롤 활성화 */
+  overflow-y: auto;
+  overflow-x: none;
+  margin-right: 0vw;
+  display: flex;
+  height: 35vh;
+  margin-bottom: 2.5vh;
+}
+
+.comment-detailfirst,
+.comment-detailsecond {
+  flex-basis: 50%;
+  padding: 1.5vw;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.comment-title {
+  color: white;
+  margin-left: 0.5vw;
+  margin-top: 0.5vh;
+}
+
+.comment-wrap {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.comment-name {
+  font-weight: bold;
+  margin-left: 0.6vw;
+  margin-right: 2vw;
+  margin-bottom: 2.5vh;
+}
+
+.comment-content {
+  margin-left: 0.6vw;
+  margin-right: 2vw;
+  margin-bottom: 2.5vh;
+  white-space: normal;
+}
+
+.comment-dropdown {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  margin-left: 0.6vw;
+  margin-right: 2vw;
+  margin-bottom: 2.5vh;
+}
+
+.comment-dropdown img {
+  display: block;
+}
+
+.comment-write {
+  float: right;
+  margin-top: 2vh;
+  margin-bottom: 1vh;
+  margin-right: 0.5vw;
+}
+
+.comment-btn {
+  position: absolute;
+  bottom: 10vh;
+  right: 6vw;
+  transform: translate(50%, 50%);
+}
+
+#commentwrite-btn {
+  color: #fff;
+  background-color: #1D267D;
+  border-color: #1D267D;
+  border-radius: 15px;
+  font-weight: bold;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+    
+#commentwrite-btn:hover {
+  background-color: #5C469C;
+  border-color: #5C469C;
+}
+
