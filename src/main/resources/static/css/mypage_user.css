@@ -75,7 +75,7 @@
     position: relative;
     display: inline-block;
     align-items: center;
-    width: 80%;
+    width: 70%;
     border-radius: 0.3124vw;
     overflow: hidden;
     background-color: #ccc;
@@ -119,5 +119,25 @@
     height: auto;
     font-size: 1.125vw;
     background-color: #ededed;
+}
+.mypage_kw_btn{
+    display: flex;
+    float: right;
+    margin-top: 14.5vw;
+    
+}
+.mypage_kw_btn button{
+    display: inline-block;
+    width: 8.375vw;
+    height: 2.5vw;
+    margin: 0 auto;
+    /* 블록요소가 부모 영역에서 가운데 오기 */
+    border: none;
+    background-color: #0C134F;
+    border-radius: 0.3vw;
+    color: #fff;
+    font-size: 1.125vw;
+    margin-right: 1vw;
+    cursor: pointer;
 }
 
