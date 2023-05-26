@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/nav.css" />
+    <link rel="stylesheet" href="../static/css/login_join.css" />
+
+    <title>4Tunes</title>
+  </head>
+
+  <body>
+    <div id="nav">
+      <div class="banner">
+        <a href=""><img src="../static/img/banner.png" /></a>
+      </div>
+      <div id="login">
+        <div>
+          <a href=""
+            ><img class="login_img" src="../static/img/login.png" />LOGIN</a
+          >
+        </div>
+        <br />
+        <div>
+          <a href=""
+            ><img class="mypage_img" src="../static/img/mypage.png" />MYPAGE</a
+          >
+        </div>
+      </div>
+      <div class="search-container">
+        <span class="search-icon"
+          ><img src="../static/img/search-icon.png" class="search-icon"
+        /></span>
+        <input type="text" class="search-input" placeholder="키워드 입력" />
+      </div>
+      <div><a href="">맞춤추천</a></div>
+      <div><a href="">인기차트</a></div>
+      <div><a href="">커뮤니티</a></div>
+      <div><a href="">멤버십</a></div>
+    </div>
+    <div class="main">
+      <!-- 로그인 시작하는 부분 -->
+      <div class="loginbox">
+        <form action="#">
+          <fieldset>
+            <h2>JOIN</h2>
+            <div class="join">
+              <span class="join-title">ID</span>
+              <input
+                type="text"
+                id="join-input"
+                placeholder="Email를 입력해 주세요"
+              />
+            </div>
+            <div class="join">
+              <span class="join-title">PW</span>
+              <input
+                type="password"
+                id="join-input"
+                placeholder="비밀번호를 입력해 주세요"
+              />
+            </div>
+            <div class="join">
+              <span class="join-title">이름</span>
+              <input
+                type="text"
+                id="join-input"
+                placeholder="이름을 입력해 주세요"
+              />
+            </div>
+            <div class="join-keyword">
+              <p class="join-title">KeyWord</p>
+            </div>
+            <div class="join-kw">
+              <input
+                type="search"
+                id="join-input"
+                placeholder="내용을 입력해주세요."
+              />
+            </div>
+            <div class="join-kw">
+              <select name="keyword" id="kw" multiple>
+                <option value="kpop">KPOP</option>
+                <option value="bal">발라드</option>
+                <option value="pop">팝송</option>
+                <option value="rap">랩</option>
+                <option value="rap">키</option>
+                <option value="rap">워</option>
+                <option value="rap">드</option>
+              </select>
+            </div>
+            <div class="join-kw">
+              <input
+                type="text"
+                id="disabled"
+                placeholder="선택된 내용 보여주기"
+                disabled
+              />
+            </div>
+            <div class="join-btn">
+              <div id="find_join">
+                <button type="submit">Join</button>
+              </div>
+              <div id="find_cancel">
+                <button type="submit">Cancel</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

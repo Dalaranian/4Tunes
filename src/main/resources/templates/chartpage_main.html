@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../static/css/myplaylist.css" />
     <link rel="stylesheet" href="../static/css/globalfont.css" />
+    <link rel="stylesheet" href="../static/css/chartpage_main.css" />
     <link rel="stylesheet" href="../static/css/nav.css" />
     <title>4Tunes</title>
   </head>
@@ -38,12 +38,10 @@
       <div><a href="">커뮤니티</a></div>
       <div><a href="">멤버십</a></div>
     </div>
+
     <div id="main">
-      <h1>나의 재생목록</h1>
-      <div id="buttons">
-        <div>재생목록 선택</div>
-        <div>재생목록 공개</div>
-      </div>
+      <h1>오늘의 선곡(${키워드})</h1>
+      <div id="buttons"></div>
 
       <!-- 재생목록이 추가될 경우 list_wrapper클래스 div를 복붙하게 할것 -->
       <div id="MyPlayList">
@@ -58,14 +56,15 @@
                 ></iframe>
               </div>
               <div id="context">
+                <span>1위</span>
                 <h2>노래제목</h2>
                 <br />
                 <h3>가수 이름</h3>
                 <br />
                 <div>
-                  <button style="display: inline-block">-</button>
+                  <button style="display: inline-block">+</button>
                   <div style="display: inline-block">
-                    내 플레이리스트에서 제거
+                    내 플레이리스트에서 추가
                   </div>
                 </div>
               </div>
@@ -81,14 +80,15 @@
                 ></iframe>
               </div>
               <div id="context">
+                <span>2위</span>
                 <h2>노래제목</h2>
                 <br />
                 <h3>가수 이름</h3>
                 <br />
                 <div>
-                  <button style="display: inline-block">-</button>
+                  <button style="display: inline-block">+</button>
                   <div style="display: inline-block">
-                    내 플레이리스트에서 제거
+                    내 플레이리스트에서 추가
                   </div>
                 </div>
               </div>
@@ -107,14 +107,15 @@
                 ></iframe>
               </div>
               <div id="context">
+                <span>3위</span>
                 <h2>노래제목</h2>
                 <br />
                 <h3>가수 이름</h3>
                 <br />
                 <div>
-                  <button style="display: inline-block">-</button>
+                  <button style="display: inline-block">+</button>
                   <div style="display: inline-block">
-                    내 플레이리스트에서 제거
+                    내 플레이리스트에서 추가
                   </div>
                 </div>
               </div>
@@ -130,14 +131,15 @@
                 ></iframe>
               </div>
               <div id="context">
+                <span>4위</span>
                 <h2>노래제목</h2>
                 <br />
                 <h3>가수 이름</h3>
                 <br />
                 <div>
-                  <button style="display: inline-block">-</button>
+                  <button style="display: inline-block">+</button>
                   <div style="display: inline-block">
-                    내 플레이리스트에서 제거
+                    내 플레이리스트에서 추가
                   </div>
                 </div>
               </div>
@@ -156,14 +158,15 @@
                 ></iframe>
               </div>
               <div id="context">
+                <span>5위</span>
                 <h2>노래제목</h2>
                 <br />
                 <h3>가수 이름</h3>
                 <br />
                 <div>
-                  <button style="display: inline-block">-</button>
+                  <button style="display: inline-block">+</button>
                   <div style="display: inline-block">
-                    내 플레이리스트에서 제거
+                    내 플레이리스트에서 추가
                   </div>
                 </div>
               </div>
@@ -179,63 +182,15 @@
                 ></iframe>
               </div>
               <div id="context">
+                <span>6위</span>
                 <h2>노래제목</h2>
                 <br />
                 <h3>가수 이름</h3>
                 <br />
                 <div>
-                  <button style="display: inline-block">-</button>
+                  <button style="display: inline-block">+</button>
                   <div style="display: inline-block">
-                    내 플레이리스트에서 제거
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="list_wrapper">
-          <div id="List_left">
-            <div id="video">
-              <div class="video-container">
-                <iframe
-                  src="https://www.youtube.com/embed/VIDEO_ID"
-                  frameborder="0"
-                  allowfullscreen
-                ></iframe>
-              </div>
-              <div id="context">
-                <h2>노래제목</h2>
-                <br />
-                <h3>가수 이름</h3>
-                <br />
-                <div>
-                  <button style="display: inline-block">-</button>
-                  <div style="display: inline-block">
-                    내 플레이리스트에서 제거
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="List_right">
-            <div id="video">
-              <div class="video-container">
-                <iframe
-                  src="https://www.youtube.com/embed/VIDEO_ID"
-                  frameborder="0"
-                  allowfullscreen
-                ></iframe>
-              </div>
-              <div id="context">
-                <h2>노래제목</h2>
-                <br />
-                <h3>가수 이름</h3>
-                <br />
-                <div>
-                  <button style="display: inline-block">-</button>
-                  <div style="display: inline-block">
-                    내 플레이리스트에서 제거
+                    내 플레이리스트에서 추가
                   </div>
                 </div>
               </div>
