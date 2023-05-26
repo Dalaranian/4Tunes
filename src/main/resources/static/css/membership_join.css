@@ -68,3 +68,7 @@ h1{
 .accordion .card-header button:hover {
 	color: #23384e;
 }
+
+#joinBtn{
+	border: 0;
+}
