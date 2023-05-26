@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../static/css/nav.css" />
-    <link rel="stylesheet" href="../static/css/globalfont.css" />
-    <link rel="stylesheet" href="../static/css/membership_join.css">
+    <link rel="stylesheet" href="resources/css/nav.css" />
+    <link rel="stylesheet" href="resources/css/globalfont.css" />
+    <link rel="stylesheet" href="resources/css/membership_join.css">
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -39,17 +39,17 @@
   <body>
     <div id="nav">
       <div class="banner">
-        <a href=""><img src="../static/img/banner.png" /></a>
+        <a href="#"><img src="../static/img/banner.png" /></a>
       </div>
       <div id="login">
         <div>
-          <a href=""
+          <a href="/nav/login"
             ><img class="login_img" src="../static/img/login.png" />LOGIN</a
           >
         </div>
         <br />
         <div>
-          <a href=""
+          <a href="/nav/mypage"
             ><img class="mypage_img" src="../static/img/mypage.png" />MYPAGE</a
           >
         </div>
@@ -60,11 +60,12 @@
         /></span>
         <input type="text" class="search-input" placeholder="키워드 입력" />
       </div>
-      <div><a href="">맞춤추천</a></div>
-      <div><a href="">인기차트</a></div>
-      <div><a href="">커뮤니티</a></div>
-      <div><a href="">멤버십</a></div>
+      <div><a href="/nav/suggested">맞춤추천</a></div>
+      <div><a href="/nav/chart">인기차트</a></div>
+      <div><a href="/nav/community">커뮤니티</a></div>
+      <div><a href="/nav/membership">멤버십</a></div>
     </div>
+    
     <div id="main">
         <div id="membershipInfo">
           <h1>Join Membership</h1>
