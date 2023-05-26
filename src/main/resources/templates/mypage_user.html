@@ -52,9 +52,54 @@
         </div>
         <div class="mypage_contents">
             <h1>내 정보 조회 및 수정</h1>
-
-            
+            <div class="mypage_inf">
+                <div class="mypage">
+                    <span class="mypage_title">아이디</span>
+                    <input type="text" id="mypage_input" placeholder="Email를 입력해 주세요">
+                </div>
+                <div class="mypage">
+                    <span class="mypage_title">이름</span>
+                    <input type="text" id="mypage_input" placeholder="이름를 입력해 주세요">
+                </div>
+                <div class="mypage">
+                    <span class="mypage_title">비밀번호</span>
+                    <input type="password" id="mypage_input" placeholder="비밀번호을 입력해 주세요">
+                </div>
+                <div class="mypage">
+                    <span class="mypage_title">비밀번호 확인</span>
+                    <input type="password" id="mypage_input" placeholder="비밀번호 확인을 해주세요">
+                </div>
+                <div class="mypage_kw_group">
+                    <div class="mypage_keyword">
+                        <p class="mypage_title">KeyWord</p>
+                    </div>
+                    <div class="mypage_keyword_group">
+                        <div class="mypage_kw">
+                            <input type="search" id="mypage_input" placeholder="내용을 입력해주세요.">
+                        </div>
+                        <div class="mypage_kw">
+                            <select name="keyword" id="kw" multiple>
+                                <option value="kpop">KPOP</option>
+                                <option value="bal">발라드</option>
+                                <option value="pop">팝송</option>
+                                <option value="rap">랩</option>
+                                <option value="rap">키</option>
+                                <option value="rap">워</option>
+                                <option value="rap">드</option>
+                            </select>
+                        </div>
+                        <div class="mypage_kw">
+                            <input type="text" id="disabled" placeholder="선택된 내용 보여주기" disabled>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="mypage_kw_btn">
+                    <button type = "submit">수정 완료</button>
+                </div>
+            </div>
         </div>
+    </div>
     </div>
 
 </body>
