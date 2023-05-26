@@ -18,21 +18,15 @@
     </div>
     <div id="login">
       <div>
-        <a href="/nav/login"
-          ><img class="login_img" src="/resources/img/usertest.png" />LOGIN</a
-        >
+        <a href="/nav/login"><img class="login_img" src="/resources/img/usertest.png" />LOGIN</a>
       </div>
       <br />
       <div>
-        <a href="/nav/mypage"
-          ><img class="mypage_img" src="/resources/img/file.png" />MYPAGE</a
-        >
+        <a href="/nav/mypage"><img class="mypage_img" src="/resources/img/file.png" />MYPAGE</a>
       </div>
     </div>
     <div class="search-container">
-      <span class="search-icon"
-        ><img src="/resources/img/search.png" class="search-icon"
-      /></span>
+      <span class="search-icon"><img src="/resources/img/search.png" class="search-icon" /></span>
       <input type="text" class="search-input" placeholder="키워드 입력" />
     </div>
     <div><a href="/nav/suggested">맞춤추천</a></div>
@@ -42,7 +36,7 @@
   </div>
 
   <div id="main">
-    
+
     <h1>커뮤니티</h1>
     <div class="list-header">
       <div class="list-headerwrap">
@@ -57,23 +51,25 @@
 
     <div class="list">
 
-      <div class="list-item" th:each="# : ${#}">
-        <div class="num" th:text="${#.#}">1</div>
-        <div class="title"><a href="/" th:text="${#.#}">노래 추천할게요^^</a></div>
-        <div class="name" th:text="${#.#}">하윤지</div>
-        <div class="content" th:text="${#.#}">긴 내용입니다. 테스트. 긴 내용 잘리나요.</div>
-        <div class="date" th:text="${#.#}">yyyy-mm-dd</div>
-        <!-- 타임리프 날짜 포맷팅 ${#dates.format(date, 'yyyy-MM-dd')} -->
-        <div class="count" th:text="${#.#}">30</div>
+      <!-- th:each="#" : ${#}" -->
+      <!-- th:text="${#.#}" -->
+      <!-- 타임리프 날짜 포맷팅 ${#dates.format(date, 'yyyy-MM-dd')} -->
+      <div class="list-item">
+        <div class="num">1</div>
+        <div class="title"><a href="/">노래 추천할게요^^</a></div>
+        <div class="name">하윤지</div>
+        <div class="content">긴 내용입니다. 테스트. 긴 내용 잘리나요.</div>
+        <div class="date">yyyy-mm-dd</div>
+        <div class="count">30</div>
       </div>
 
-      <div class="list-item" th:each="# : ${#}">
-        <div class="num" th:text="${#.#}">2</div>
-        <div class="title"><a href="/" th:text="${#.#}">노래 추천이용^^</a></div>
-        <div class="name" th:text="${#.#}">유니지</div>
-        <div class="content" th:text="${#.#}">긴 내용입니다. 테스트. 긴 내용 잘리나요.</div>
-        <div class="date" th:text="${#.#}">yyyy-mm-dd</div>
-        <div class="count" th:text="${#.#}">55</div>
+      <div class="list-item">
+        <div class="num">2</div>
+        <div class="title"><a href="/">노래 추천이용^^</a></div>
+        <div class="name">유니지</div>
+        <div class="content">긴 내용입니다. 테스트. 긴 내용 잘리나요.</div>
+        <div class="date">yyyy-mm-dd</div>
+        <div class="count">55</div>
       </div>
 
     </div>
@@ -85,4 +81,5 @@
   </div>
 
 </body>
+
 </html>
