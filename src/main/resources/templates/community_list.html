@@ -5,33 +5,33 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="resources/css/nav.css" />
-  <link rel="stylesheet" href="resources/css/globalfont.css" />
-  <link rel="stylesheet" href="resources/css/community_list.css" />
+  <link rel="stylesheet" href="/resources/css/nav.css" />
+  <link rel="stylesheet" href="/resources/css/globalfont.css" />
+  <link rel="stylesheet" href="/resources/css/community_list.css" />
   <title>4Tunes</title>
 </head>
 
 <body>
   <div id="nav">
     <div class="banner">
-      <a href="#"><img src="resources/img/banner.png" /></a>
+      <a href="#"><img src="/resources/img/banner.png" /></a>
     </div>
     <div id="login">
       <div>
         <a href="/nav/login"
-          ><img class="login_img" src="resources/img/usertest.png" />LOGIN</a
+          ><img class="login_img" src="/resources/img/usertest.png" />LOGIN</a
         >
       </div>
       <br />
       <div>
         <a href="/nav/mypage"
-          ><img class="mypage_img" src="resources/img/file.png" />MYPAGE</a
+          ><img class="mypage_img" src="/resources/img/file.png" />MYPAGE</a
         >
       </div>
     </div>
     <div class="search-container">
       <span class="search-icon"
-        ><img src="resources/img/search.png" class="search-icon"
+        ><img src="/resources/img/search.png" class="search-icon"
       /></span>
       <input type="text" class="search-input" placeholder="키워드 입력" />
     </div>
@@ -59,7 +59,7 @@
 
       <div class="list-item" th:each="# : ${#}">
         <div class="num" th:text="${#.#}">1</div>
-        <div class="title"><a href="communitydetail.html" th:text="${#.#}">노래 추천할게요^^</a></div>
+        <div class="title"><a href="/" th:text="${#.#}">노래 추천할게요^^</a></div>
         <div class="name" th:text="${#.#}">하윤지</div>
         <div class="content" th:text="${#.#}">긴 내용입니다. 테스트. 긴 내용 잘리나요.</div>
         <div class="date" th:text="${#.#}">yyyy-mm-dd</div>
@@ -69,7 +69,7 @@
 
       <div class="list-item" th:each="# : ${#}">
         <div class="num" th:text="${#.#}">2</div>
-        <div class="title"><a href="communitydetail.html" th:text="${#.#}">노래 추천이용^^</a></div>
+        <div class="title"><a href="/" th:text="${#.#}">노래 추천이용^^</a></div>
         <div class="name" th:text="${#.#}">유니지</div>
         <div class="content" th:text="${#.#}">긴 내용입니다. 테스트. 긴 내용 잘리나요.</div>
         <div class="date" th:text="${#.#}">yyyy-mm-dd</div>
@@ -79,7 +79,7 @@
     </div>
 
     <div class="commu-write">
-      <a href="communitywrite.html" class="write-btn">글 작성</a>
+      <a href="/" class="write-btn">글 작성</a>
     </div>
 
   </div>
