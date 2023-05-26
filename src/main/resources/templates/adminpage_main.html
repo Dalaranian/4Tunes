@@ -5,41 +5,41 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../static/css/nav.css" />
-  <link rel="stylesheet" href="../static/css/adminpage_main.css" />
-  <link rel="stylesheet" href="../static/css/globalfont.css" />
+  <link rel="stylesheet" href="resources/css/nav.css" />
+  <link rel="stylesheet" href="resources/css/adminpage_main.css" />
+  <link rel="stylesheet" href="resources/css/globalfont.css" />
   <title>4Tunes</title>
 </head>
 
 <body>
   <div id="nav">
-    <div class="banner">
-      <a href=""><img src="../static/img/banner.png" /></a>
-    </div>
-    <div id="login">
-      <div>
-        <a href=""
-          ><img class="login_img" src="../static/img/login.png" />LOGIN</a
-        >
+      <div class="banner">
+        <a href="#"><img src="../static/img/banner.png" /></a>
       </div>
-      <br />
-      <div>
-        <a href=""
-          ><img class="mypage_img" src="../static/img/mypage.png" />MYPAGE</a
-        >
+      <div id="login">
+        <div>
+          <a href="/nav/login"
+            ><img class="login_img" src="../static/img/login.png" />LOGIN</a
+          >
+        </div>
+        <br />
+        <div>
+          <a href="/nav/mypage"
+            ><img class="mypage_img" src="../static/img/mypage.png" />MYPAGE</a
+          >
+        </div>
       </div>
+      <div class="search-container">
+        <span class="search-icon"
+          ><img src="../static/img/search-icon.png" class="search-icon"
+        /></span>
+        <input type="text" class="search-input" placeholder="키워드 입력" />
+      </div>
+      <div><a href="/nav/suggested">맞춤추천</a></div>
+      <div><a href="/nav/chart">인기차트</a></div>
+      <div><a href="/nav/community">커뮤니티</a></div>
+      <div><a href="/nav/membership">멤버십</a></div>
     </div>
-    <div class="search-container">
-      <span class="search-icon"
-        ><img src="../static/img/search-icon.png" class="search-icon"
-      /></span>
-      <input type="text" class="search-input" placeholder="키워드 입력" />
-    </div>
-    <div><a href="">맞춤추천</a></div>
-    <div><a href="">인기차트</a></div>
-    <div><a href="">커뮤니티</a></div>
-    <div><a href="">멤버십</a></div>
-  </div>
 
   <div id="main">
     <h1>관리자 페이지</h1>
