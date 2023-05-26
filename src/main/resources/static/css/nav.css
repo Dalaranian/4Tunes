@@ -1,7 +1,12 @@
 body {
-  display: flex; /* body를 flex container로 만들어줍니다 */
+  display: flex;
   margin: 0;
-  height: 100vh; /* 브라우저 창의 높이를 맞춰줍니다 */
+  height: 100vh;
+  text-size-adjust: 100%;
+}
+* {
+  padding: 0;
+  margin: 0;
 }
 #nav {
   background-color: #5c469c;
@@ -43,20 +48,23 @@ a {
   left: 10%;
   display: flex;
   align-items: center;
-  width: 13vw;
-  border: 1px solid #ccc;
+  width: 12vw;
   border-radius: 5px;
   overflow: hidden;
-  background-color: silver;
+  background-color: #1d267d;
+  padding-left: 0.5vw;
 }
+
 .search-input {
-  width: 13vw;
+  width: 10.5vw;
   font-size: 18px;
+  margin-left: 0.5vw;
 }
 .search-icon {
   height: 21px;
   width: 21px;
   background-size: cover;
+  vertical-align: top;
 }
 #main {
   position: relative;
