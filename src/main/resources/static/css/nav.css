@@ -13,6 +13,10 @@ body {
   width: 17vw;
   height: 100vh;
   text-align: center;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 #nav > div {
   margin-bottom: 7vh;
@@ -23,6 +27,7 @@ body {
 }
 .banner img {
   width: 15vw;
+  min-width: 200px;
 }
 .login > div {
   padding-bottom: 5vh;
@@ -31,11 +36,14 @@ body {
   width: 2.6vh;
   height: 2.6vh;
   background-size: cover;
+  vertical-align: middle; /* 아이콘을 수직 가운데로 정렬 */
+  margin-bottom: 2px;
 }
 .mypage_img {
   width: 3vh;
   height: 3vh;
   background-size: cover;
+  vertical-align: middle; /* 아이콘을 수직 가운데로 정렬 */
 }
 a {
   display: inline-block;
@@ -45,20 +53,22 @@ a {
 }
 .search-container {
   position: relative;
-  left: 10%;
   display: flex;
   align-items: center;
   width: 12vw;
   border-radius: 5px;
   background-color: #1d267d;
   padding-left: 0.5vw;
+  min-width: 160px;
+  margin: 0 auto;
 }
 
 .search-input {
   width: 10.5vw;
   font-size: 18px;
-  margin-left: 0.5vw;
+  margin-left: 6px;
   text-align: center;
+  min-width: 130px;
 }
 .search-icon {
   height: 21px;

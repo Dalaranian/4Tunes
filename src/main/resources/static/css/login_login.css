@@ -15,12 +15,12 @@ body {
 /* 기본틀 */
 .loginbox {
   position: absolute;
-  top: 15%;
-  left: 40%;
-  margin: -100px 0 0 -100px;
+  top: 50%;
+  left: 58.5%;
+  transform: translate(-50%, -50%);
   width: 35vw;
   height: 80vh;
-  margin: 0 auto;
+  min-width: 388px;
 }
 
 .loginbox h2 {
@@ -29,21 +29,27 @@ body {
   color: #5c469c;
   font-weight: normal;
   margin-bottom: 40px;
+  min-width: 328px;
 }
 
 /* 로그인의 메인 */
 .loginbox form {
-  border-radius: 10%;
-  width: 100%;
-  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
   background-color: #ccc;
   padding: 30px;
   box-sizing: border-box;
+  border-radius: 10%;
 }
-
+.loginbox fieldset legend {
+  display: none;
+}
 .loginbox fieldset {
   border: none;
-  margin: 0 10% 0 10%;
+  height: calc(100% - 60px);
 }
 
 .loginbox input {
@@ -55,6 +61,8 @@ body {
   background-color: #ededed;
   padding: 0 20px;
   box-sizing: border-box;
+  min-width: 306px;
+  min-height: 27.5px;
 }
 
 .loginbox .user {
@@ -75,11 +83,13 @@ body {
   color: #fff;
   font-size: 1.875vw;
   cursor: pointer;
+  min-width: 328px;
+  min-height: 50px;
 }
 
 /* 소셜로그인 부분 */
 .socialLogin {
-  margin-top: 1.875vw;
+  margin-top: 25px;
   margin-left: auto;
   margin-right: auto;
   width: auto;
@@ -94,27 +104,32 @@ body {
   width: 4.6875vw;
   height: 4.6875vw;
   cursor: pointer;
+  min-width: 47.33px;
+  min-height: 47.33px;
 }
 
 /* 아이디 비밀번호 찾기부분 */
 .user {
+  gap: 1vw;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
 .user #find_Id button,
 .user #find_Pw button {
   display: block;
-  width: 9.375vw;
+  width: 14vw;
   height: 2.5vw;
-  margin: 0 1.25vw;
   border: none;
   background-color: #d4adfc;
   border-radius: 10px;
   color: #fff;
   font-size: 1.125vw;
   cursor: pointer;
+  display: inline-block;
+  min-width: 162px;
+  min-height: 28px;
 }
 
 .loginbox #join {
@@ -128,6 +143,8 @@ body {
   color: #fff;
   font-size: 1.125vw;
   cursor: pointer;
+  min-width: 340px;
+  min-height: 28px;
 }
 
 .login-inf {
@@ -135,19 +152,21 @@ body {
   display: flex;
   align-items: center;
   width: 100%;
-  border: 0.15vw solid silver;
   border-radius: 0.3125vw;
   overflow: hidden;
   background-color: #ccc;
-  margin-bottom: 1.25vw;
+  margin-bottom: 15px;
+  min-width: 328px;
+  min-height: 27px;
 }
 
 .login-inf input {
   border: 0.1875vw solid rgb(163, 163, 163);
-  width: 100%;
+  width: 90%;
   height: 2.5vw;
   font-size: 1.125vw;
-  
+  min-width: 301px;
+  min-height: 27px;
 }
 
 .login-icon {
@@ -155,6 +174,29 @@ body {
   float: left;
   height: 2.5vw;
   width: 2.5vw;
+  min-width: 27.65px;
+  min-height: 27.65px;
   background-size: cover;
   border: 0.015625vw;
+}
+@media (max-width: 1000px) {
+  #main {
+    width: 130vw;
+    background-color: #424242;
+  }
+  .loginbox {
+    left: 65%;
+  }
+}
+@media (max-width: 630px) {
+  #nav {
+    display: none;
+  }
+  #main {
+    width: 130vw;
+    background-color: #424242;
+  }
+  .loginbox {
+    left: 50%;
+  }
 }

@@ -1,22 +1,30 @@
 #main h1 {
   color: #fff;
-  font-size: 2.5vw;
+  font-size: 30px;
   line-height: 3.5;
-  margin-left: 5vw;
+  margin-left: 38px;
+  min-height: 105px;
+  min-width: 895px;
+}
+#list_container {
+  margin-right: 38px;
+  margin-left: 38px;
+  min-width: 900px;
 }
 
 .list {
-  max-height: 500px;  /* 글 9개부터 스크롤 활성화 */
+  max-height: 500px; /* 글 9개부터 스크롤 활성화 */
   overflow-y: auto;
-  margin-right: 5vw;
+  min-width: 900px;
+  display: block;
+  height: 70vh;
 }
 
 .list-header {
   display: flex;
   font-weight: bold;
   background-color: #f5f5f5;
-  margin-left: 5vw;
-  margin-right: 5vw;
+  min-width: 900px;
 }
 
 .list-header .num,
@@ -36,15 +44,14 @@
   flex-grow: 1;
   padding: 10px;
   border-bottom: 1px solid #ddd;
-} 
+}
 
 .list-item {
   display: flex;
   align-items: center;
   border-bottom: 1px solid #ddd;
   padding: 10px;
-  margin-left: 5vw;
-  color: #fff;  
+  color: #fff;
 }
 
 .list-item .num,
@@ -66,32 +73,53 @@
 }
 
 @keyframes blink {
-  0% { opacity: 1; }
-  50% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .list-item .title {
   animation: blink 2.3s infinite;
 }
-  
+
 .commu-write {
-  position: fixed;
-  bottom: 6vh;
-  right: 5vw;
+  float: right;
 }
 
 .write-btn {
   color: #fff;
-  background-color: #1D267D;
-  border-color: #1D267D;
+  background-color: #1d267d;
+  border-color: #1d267d;
   border-radius: 15px;
   font-weight: bold;
   padding: 10px 20px;
   text-decoration: none;
 }
-    
+
 .write-btn:hover {
-  background-color: #5C469C;
-  border-color: #5C469C;
+  background-color: #5c469c;
+  border-color: #5c469c;
+}
+@media (max-width: 1130px) {
+  #nav {
+    display: none;
+  }
+  .mypage_nav {
+    display: none;
+  }
+  .mypage_contents {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #main {
+    width: 130vw;
+    background-color: #424242;
+  }
 }
