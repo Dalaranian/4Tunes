@@ -24,6 +24,7 @@ public class InnerPagingController {
 		return "mypage_user";
 	}
 	
+	// 내 활동 조회로 전환
 	@GetMapping("/mypage/community")
 	public String gotoMyPageCommmunity() {
 		return "mypage_community";
