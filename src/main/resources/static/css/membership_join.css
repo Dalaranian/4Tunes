@@ -1,74 +1,112 @@
 @charset "utf-8";
-
-#content{
-    height: fit-content;
-    width: fit-content;
+#banner a img {
+  height: 79.813px;
+  min-width: 200px;
 }
 
-#membershipInfo{
-    width: 40vw;
-    height: 70vh;
-    margin-left: 25%;
-    margin-right: 10%;
-    margin-top: 10%;
-    margin-bottom: 10%;
-    background-color: #ccc;
-    border-radius : 5%;
-    position : relative;
+#content {
+  height: fit-content;
+  width: fit-content;
 }
 
-#membershipJoin{
-    width: max-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 10%;
-    position: absolute;
-    bottom: 0;
-    right: 37%;
+#membershipInfo {
+  width: 40vw;
+  height: 78vh;
+  margin: 0 auto;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+  background-color: #ccc;
+  border-radius: 5%;
+  position: relative;
+  min-width: 392px;
+  min-height: 580px;
 }
 
-h1{
-    text-align: center;
-    margin: 10px;
+#membershipJoin {
+  width: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
+  margin: 0 auto;
+}
+.offset-lg-2 {
+  margin: 0 !important;
+}
+h1 {
+  padding-top: 15px;
+  text-align: center;
+  margin: 10px;
 }
 
-.container{
-    width: fit-content;
-    height: 80%;
+.container {
+  width: fit-content !important;
 }
 
 /* bootstrap css */
 
 .accordion .card {
-	border: none;
-	margin-bottom: 2px;
+  border: none;
+  margin-bottom: 2px;
+}
+.card {
+  width: 362px;
+}
+.card-body {
+  width: 362px;
+  height: 232px;
+  overflow: scroll;
 }
 .accordion .card-header {
-	background: #1D267D;
-	padding-top: 7px;
-	padding-bottom: 7px;
+  background: #1d267d;
+  padding-top: 7px;
+  padding-bottom: 7px;
 }
 .accordion .card-header h2 {
-	color: #D4ADFC;
-	font-size: 1rem;
-	font-family: "Roboto", sans-serif;
-	font-weight: 500;
+  color: #d4adfc;
+  font-size: 1rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
 }
 .accordion .card-header h2 span {
-	float: left;
-	margin-top: 10px;
+  float: left;
+  margin-top: 10px;
 }
 .accordion .card-header button {
-	color: #fff;
-	font-size: 1.3rem;
-	line-height: 1.3rem;
-	float: right;
+  color: #fff;
+  font-size: 1.3rem;
+  line-height: 1.3rem;
+  float: right;
 }
 .accordion .card-header button:hover {
-	color: #23384e;
+  color: #23384e;
 }
 
-#joinBtn{
-	border: 0;
+#joinBtn {
+  border: 0;
+}
+@media (max-width: 615px) {
+  #nav {
+    display: none;
+  }
+  #main {
+    width: 110vw;
+  }
+}
+.card-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.card-body::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.card-body::-webkit-scrollbar-thumb {
+  background-color: #d4adfc;
+  height: 50%;
+  border-radius: 5px;
+}
+
+.card-body::-webkit-scrollbar-thumb:hover {
+  background-color: #a36ae1;
 }
