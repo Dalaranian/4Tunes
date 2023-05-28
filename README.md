@@ -12,7 +12,9 @@
 ![JS](https://img.shields.io/badge/JS-F7DF1E.svg?&style=for-the-badge&logo=javascript&logoColor=white)
 ![mariadb](https://img.shields.io/badge/mariadb-003545.svg?&style=for-the-badge&logo=mariadb&logoColor=white)
 ![Swagger](https://img.shields.io/badge/Swagger-85EA2D.svg?&style=for-the-badge&logo=Swagger&logoColor=white) 
-![TypeScript](https://img.shields.io/badge/typescript-3178C6.svg?&style=for-the-badge&logo=typescript&logoColor=white)
+![TypeScript](https://img.shields.io/badge/typescript-61DAFB.svg?&style=for-the-badge&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/react-3178C6.svg?&style=for-the-badge&logo=react&logoColor=white)
+<br>
 ## 👨🏻‍💻 Contributors 👩🏻‍💻<br>
 <table border="1" class="table">
     <thead>
