@@ -1,4 +1,4 @@
-package com.multi.fourtunes.model.controller;
+package com.multi.fourtunes.model.controller.paging;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
