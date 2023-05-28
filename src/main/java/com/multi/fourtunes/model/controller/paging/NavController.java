@@ -1,4 +1,4 @@
-package com.multi.fourtunes.model.controller;
+package com.multi.fourtunes.model.controller.paging;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +42,12 @@ public class NavController {
 	@GetMapping("/membership")
 	public String gotoMembership() {
 		return "membership_join";
+	}
+	
+	// 검색 기능(차후 기능구현시 restcontroller 활용하여 수정)
+	@GetMapping("/search")
+	public String gotoSearch() {
+		return "playlist_searchresult";
 	}
 	
 }
