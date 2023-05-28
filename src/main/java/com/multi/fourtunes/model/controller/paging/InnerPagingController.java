@@ -7,12 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/innerpaging")
 public class InnerPagingController {
-	// 로그인 페이지
-	
-	// 회원 가입 페이지로 이동
-	@GetMapping("/join")
+
+	@GetMapping("/login/join")
 	public String gotoJoin() {
-		System.out.println("회원가입페이지로 이동");
 		return "login_join";
+	}
+
+	@RequestMapping("/mypage")
+	public class MyPage {
+
 	}
 }
