@@ -69,6 +69,8 @@ public class ManiaDbApi {
 		// XML 을 JSON 으로 파싱
 		JSONObject jsonObject = XML.toJSONObject(responseBodyByXML);
 		
+		System.out.println(jsonObject.toString());
+		
 		 // TODO: JSON을 SongDto 목록으로 변환하는 로직을 구현해야 함
 		return null;
 	}
@@ -78,8 +80,11 @@ public class ManiaDbApi {
 		// TODO Auto-generated method stub
 		StringBuffer urlBuffer = new StringBuffer();
 		urlBuffer.append(URL_PREFIX);
+		// 검색어 넣기
 		urlBuffer.append(searchPrompt);
 		urlBuffer.append(URL_INTERFIX);
+		// 검색 타입 넣기
+		urlBuffer.append(searchType);
 		urlBuffer.append(URL_SUFFIX);
 		return urlBuffer.toString();
 	}
