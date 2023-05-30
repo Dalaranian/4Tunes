@@ -17,8 +17,8 @@ public class ApiTestController {
 	@GetMapping("/mania")
 	public void maniaTest() {
 		ManiaDbApi mda = new ManiaDbApi();
-		mda.setPrompt("소녀시대");
-		mda.setType(true);
+		mda.setPrompt("밤편지");
+		mda.setType(false);
 		mda.search();
 	}
 }
