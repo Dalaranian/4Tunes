@@ -10,6 +10,10 @@ import org.springframework.web.client.RestTemplate;
 
 import com.multi.fourtunes.model.dto.SongDto;
 
+/**
+ * @author Dalanarian
+ *
+ */
 public class ManiaDbApi {
 
 	// ManiaDB API URL 예시
@@ -32,17 +36,28 @@ public class ManiaDbApi {
 		// TODO Auto-generated constructor stub
 	}
 
-	// 검색어 설정
+	/**
+	 * 검색어를 설정하는 메소드 <br>
+	 * String prompt : 검색어 (ex. 소녀시대 / 밤편지)
+	 * @param prompt type String
+	 */
 	public void setPrompt(String prompt) {
 		this.searchPrompt = prompt;
 	}
 
 	// 검색 타입 설정
+	
+	/**
+	 * 검색 타입을 설정하는메소드 <br>
+	 * boolean type : 타입 지정 (true 일 시 artist, false 일 시 song)
+	 * @param type boolean
+	 */
 	public void setType(boolean type) {
 		// type 이 true일 경우, artist
 		// false 인 경우, song
 	    searchType = type ? "artist" : "song";
 	}
+	
 	
 	public ArrayList<SongDto> search() {
 		if(searchPrompt !=null&&searchType != null) {
