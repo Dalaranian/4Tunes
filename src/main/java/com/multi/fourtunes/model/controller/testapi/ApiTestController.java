@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.multi.fourtunes.apis.ManiaDbApi;
 
+/**
+ * @author Dalanarian
+ *
+ */
 @RestController
 @RequestMapping("/test")
 public class ApiTestController {
