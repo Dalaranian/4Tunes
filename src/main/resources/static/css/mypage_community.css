@@ -1,7 +1,8 @@
 #main>h1 {
-    color: white;
-    margin-top: 40px;
-    margin-left: 60px;
+  color: white;
+  margin-top: 3vw;
+  margin-left: 40px;
+  height: 48px;
 }
 
 /* ---------- 네비게이션 ---------- */
@@ -37,14 +38,18 @@
     height: 80%;
     background-color: rgb(224, 224, 224);
     margin-left: 10px;
+     min-width: 760px;
 }
 .mypage_contents>h1 {
     margin-left: 20px;
+    padding-top:10px;
 }
 .mypage_contents h2 {
     margin-left: 20px;
     margin-bottom: 0px;
     color: #5C469C;
+    min-width:737px;
+    min-height:36px;
 }
 
 /* ---------- 내가 작성한 게시글 ---------- */
@@ -60,7 +65,7 @@
 }
 .board_list>div>div {
     display: inline-block;
-    padding: 15px 0;
+    padding-top:15px;
     text-align: center;
     font-size: 1.1rem;
 }
@@ -69,18 +74,26 @@
 }
 .board_list .num {
     width: 10%;
+    min-width:74px;
+    height:36.5px;
 }
 .board_list .title {
-    width: 70%;
+    width: 65%;
+    min-width:479px;
+    height:36.5px;
 }
 .board_list .title:hover {
     font-weight: bold;
 }
 .board_list .date {
-    width: 10%;
+    width: 15%;
+    min-width:110.5px;
+    height:36.5px;
 }
 .board_list .count {
     width: 10%;
+    min-width:73.7px;
+    height:36.5px;
 }
 .title>a {
     color: black;
@@ -123,4 +136,43 @@
 .title>a {
     color: black;
     font-size: 1.1rem;
+}
+@media (max-width: 1170px) {
+  .mypage_nav {
+    display: none;
+  }
+  .mypage_contents {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .mypage_kw_btn button {
+    margin-right: 100px;
+  }
+}
+@media (max-width: 980px) {
+  #nav {
+    display: none;
+  }
+  .mypage_nav {
+    display: none;
+  }
+  .mypage_contents {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #main {
+    width: 130vw;
+    background-color: #424242;
+  }
+  #main>h1 {
+  color: white;
+  margin-top: 3vw;
+  margin-left: auto;
+  margin-right: auto;
+  height: 48px;
+  width:75%;
+  min-width:760px;
+}
 }
