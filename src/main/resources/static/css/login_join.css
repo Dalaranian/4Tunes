@@ -17,13 +17,13 @@ body {
 /* 기본틀 */
 .loginbox {
   position: absolute;
-  top: 15%;
-  left: 40%;
-  margin: -100px 0 0 -100px;
+  top: 50%;
+  left: 58.5%;
+  transform: translate(-50%, -50%);
   width: 35vw;
   height: 80vh;
-  margin: 0 auto;
-  min-height: 700px;
+  min-width: 388px;
+  min-height: 600px;
 }
 
 .loginbox h2 {
@@ -129,7 +129,9 @@ body {
 }
 
 .join-btn {
-  display: flex;
+  display:flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .join-btn #find_join button {

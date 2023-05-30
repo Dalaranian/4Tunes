@@ -35,7 +35,6 @@ body {
 
 /* 로그인의 메인 */
 .loginbox_form_button{
-	display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;

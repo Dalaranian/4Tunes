@@ -8,10 +8,12 @@
   height: fit-content;
   width: fit-content;
 }
-
+#main{
+  overflow:hidden;
+}
 #membershipInfo {
   width: 40vw;
-  height: 78vh;
+  height: 653px	;
   margin: 0 auto;
   margin-top: 10vh;
   margin-bottom: 10vh;
@@ -29,11 +31,13 @@
   align-items: center;
   height: 10%;
   margin: 0 auto;
+  padding-top:30px;
 }
 .offset-lg-2 {
   margin: 0 !important;
 }
 h1 {
+	margin-bottom:1.5rem !important;
   padding-top: 15px;
   text-align: center;
   margin: 10px;
@@ -41,6 +45,7 @@ h1 {
 
 .container {
   width: fit-content !important;
+  height:440px;
 }
 
 /* bootstrap css */
@@ -92,21 +97,4 @@ h1 {
   #main {
     width: 110vw;
   }
-}
-.card-body::-webkit-scrollbar {
-  width: 10px;
-}
-
-.card-body::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-
-.card-body::-webkit-scrollbar-thumb {
-  background-color: #d4adfc;
-  height: 50%;
-  border-radius: 5px;
-}
-
-.card-body::-webkit-scrollbar-thumb:hover {
-  background-color: #a36ae1;
 }
