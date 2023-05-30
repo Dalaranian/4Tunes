@@ -39,11 +39,13 @@
 }
 
 #List_left {
-  width: 480px;
+  width: 550px;
+  display:flex;
 }
 
 #List_right {
-  width: 460px;
+  width: 550px;
+  display:flex;
 }
 
 #video {
