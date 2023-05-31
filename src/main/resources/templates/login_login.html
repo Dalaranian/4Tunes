@@ -57,44 +57,40 @@
     <div class="main">
       <!-- 로그인 시작하는 부분 -->
       <div class="loginbox">
-      <div class="loginbox_form_button">
-        <form method="post" action="/member/login">
-          <fieldset>
-            <h2>LOGIN</h2>
-            <!-- ID -->
-            <div class="login-inf">
-              <span class="login-icon">
-              	<img src="/resources/img/login.png" class="login-icon"/>
-              </span>
-              <input
-                type="text"
-                id="login-input"
-                name="user_id"
-                placeholder="Email을 입력해주세요"
-              />
-            </div>
-            
-            <!-- PW -->
-            <div class="login-inf">
-              <span class="login-icon">
-              	<img src="/resources/img/key.png" class="login-icon"/>
-              </span>
-              <input
-                type="password"
-                id="login-input"
-                name="user_pw"
-                placeholder="비밀번호를 입력해 주세요"
-              />
-            </div>
-            
-            <!-- 로그인 버튼 -->
-            <button type="submit" id="login">Login</button>
-			</fieldset>
-			</form>
-            <!-- 아이디 비번 찾기 -->
-            <div class="user">
-              <div id="find_Id">
-                <button type="submit">아이디 찾기</button>
+        <div class="loginbox_form_button">
+          <form action="#">
+            <fieldset>
+              <h2>LOGIN</h2>
+              <!-- ID -->
+              <div class="login-inf">
+                <span class="login-icon"
+                  ><img src="/resources/img/login.png" class="login-icon"
+                /></span>
+                <input
+                  type="text"
+                  id="email-input"
+                  placeholder="Email을 입력해주세요"
+                />
+              </div>
+              <!-- PW -->
+              <div class="login-inf">
+                <span class="login-icon"
+                  ><img src="/resources/img/key.png" class="login-icon"
+                /></span>
+                <input
+                  type="password"
+                  id="pw-input"
+                  placeholder="비밀번호를 입력해 주세요"
+                />
+              </div>
+              <!-- 로그인 버튼 -->
+              <button type="submit" id="login">Login</button>
+            </fieldset>
+          </form>
+          <!-- 아이디 비번 찾기 -->
+          <div class="user">
+            <div id="find_Id">
+              <button type="submit">아이디 찾기</button>
             </div>
             <div id="find_Pw">
               <button type="submit">비밀번호 찾기</button>
