@@ -80,9 +80,11 @@ iframe {
   min-width: 225px;
   min-height: 154px;
 }
-.plus_btn {
-  padding: 0 4px;
+#context div button{
+  display: inline-block;
+  padding: 0 5px;
 }
+
 h2,
 h3 {
   margin: 0;

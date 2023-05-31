@@ -1,6 +1,6 @@
 #main > h1 {
   color: white;
-  margin-top: 3vw;
+  margin-top: 30px;
   margin-left: 40px;
   height: 48px;
 }
@@ -58,10 +58,11 @@
   border-radius: 0.3124vw;
   overflow: hidden;
   background-color: rgb(224, 224, 224);
-  margin-bottom: 1vw;
+  margin-bottom: 12px;
 }
 .mypage > span {
-  min-width: 71px;
+  min-width: 90px;
+  font-size:15px;
 }
 .mypage_inf {
   display: flex;
@@ -73,8 +74,8 @@
 }
 .mypage input {
   width: 100%;
-  height: 2.1vw;
-  font-size: 1.125vw;
+  height: 27px;
+  font-size: 15px;
 }
 
 .mypage_title {
@@ -82,11 +83,12 @@
   height: 2.1vw;
   width: 10vw;
   background-size: cover;
-  border: 0.015625vw;
-  font-size: 1.125vw;
+  min-width:117px;
+  min-height:25px;
+  font-size: 15px;
   font-weight: bold;
   text-align: start;
-  margin-right: 1vw;
+  margin-right: 12px;
 }
 .mypage_kw_group {
   position: relative;
@@ -114,7 +116,7 @@
 .mypage_keyword_group {
   width: 100%;
   height: 100%;
-  font-size: 1.125vw;
+  font-size: 15px;
 }
 
 .mypage_kw {
@@ -131,13 +133,13 @@
 }
 .mypage_kw input {
   width: 100%;
-  height: 2.5vw;
-  font-size: 1.125vw;
+  height: 26px;
+  font-size: 15px;
 }
 #kw {
   width: 100%;
   height: auto;
-  font-size: 1.125vw;
+  font-size: 14px;
   background-color: #ededed;
 }
 .mypage_kw_btn {
