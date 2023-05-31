@@ -81,9 +81,6 @@
 		    <groupId>org.mariadb.jdbc</groupId>
 		    <artifactId>mariadb-java-client</artifactId>
 		</dependency>
-		
-
-
 	</dependencies>
 
 	<build>
