@@ -13,20 +13,21 @@ import com.multi.fourtunes.model.dto.UserDto;
 @Controller
 @RequestMapping("/member")
 public class UserController {
-	
+
 	@Autowired
 	private UserBiz memberBiz;
-	
+
 	@PostMapping("/login")
 	public String login(HttpSession session, UserDto dto) {
+//		System.out.println("LoginController 진입 \n" + dto.toString());
 		UserDto res = memberBiz.login(dto);
-		
-		if(res != null) {
+//		System.out.println("리턴받은 dto : " + res.toString());
+		if (res != null) {
 			session.setAttribute("login", res);
+			return "index";
 		} else {
 			return "login_login";
 		}
-		return "index";
 	}
-	
+
 }

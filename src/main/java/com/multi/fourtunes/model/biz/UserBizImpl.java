@@ -12,7 +12,6 @@ public class UserBizImpl implements UserBiz {
 	@Autowired
 	private UserDao memberDao;
 
-	@Autowired
 	public UserBizImpl(UserDao memberDao) {
 		super();
 		this.memberDao = memberDao;
@@ -21,6 +20,8 @@ public class UserBizImpl implements UserBiz {
 	
 	@Override
 	public UserDto login(UserDto dto) {
+//		System.out.println("비즈 진입 + " + dto);
+		
 		return memberDao.login(dto);
 	}
 	
