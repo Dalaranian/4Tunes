@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,35 +7,45 @@
     <link rel="stylesheet" href="/resources/css/nav.css" />
     <link rel="stylesheet" href="/resources/css/login_login.css" />
     <link rel="stylesheet" href="/resources/css/globalfont.css" />
-    <link
-      rel="shortcut icon"
-      href="/resources/img/realfavicon.ico"
-    />
+    <link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
     <title>4Tunes</title>
+    <script
+      type="text/javascript"
+      src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
+      charset="utf-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="http://code.jquery.com/jquery-1.11.3.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="http://code.jquery.com/jquery-1.11.3.min.js"
+    ></script>
   </head>
 
   <body>
-   <div id="nav">
-    <div class="banner">
-      <a href="/"><img src="/resources/img/banner.png" /></a>
-    </div>
-    <div id="login">
-      <div>
-        <a href="/nav/login"
-          ><img class="login_img" src="/resources/img/usertest.png" />LOGIN</a
-        >
+    <div id="nav">
+      <div class="banner">
+        <a href="/"><img src="/resources/img/banner.png" /></a>
       </div>
-      <br />
-      <div>
-        <a href="/nav/mypage"
-          ><img class="mypage_img" src="/resources/img/file.png" />MYPAGE</a
-        >
+      <div id="login">
+        <div>
+          <a href="/nav/login"
+            ><img class="login_img" src="/resources/img/usertest.png" />LOGIN</a
+          >
+        </div>
+        <br />
+        <div>
+          <a href="/nav/mypage"
+            ><img class="mypage_img" src="/resources/img/file.png" />MYPAGE</a
+          >
+        </div>
       </div>
-    </div>
-    <div class="search-container">
-      <span class="search-icon"
-        ><img src="/resources/img/search.png" class="search-icon"
-      /></span>
+      <div class="search-container">
+        <span class="search-icon"
+          ><img src="/resources/img/search.png" class="search-icon"
+        /></span>
         <input type="text" class="search-input" placeholder="키워드 입력" />
       </div>
       <div><a href="/nav/suggested">맞춤추천</a></div>
@@ -43,7 +53,7 @@
       <div><a href="/nav/community">커뮤니티</a></div>
       <div><a href="/nav/membership">멤버십</a></div>
     </div>
-    
+
     <div class="main">
       <!-- 로그인 시작하는 부분 -->
       <div class="loginbox">
@@ -85,22 +95,41 @@
             <div class="user">
               <div id="find_Id">
                 <button type="submit">아이디 찾기</button>
-              </div>
-              <div id="find_Pw">
-                <button type="submit">비밀번호 찾기</button>
-              </div>
             </div>
-            <!-- 회원 가입 버튼 -->
-            <button type="submit" id="join" onclick="location.href='/innerpaging/login/join'">회원가입</button>
-            <!-- 소셜 로그인 -->
-            <div class="socialLogin">
-              <a href="#"><img src="/resources/img/naver.svg" /></a>
-              <a href="#"><img src="/resources/img/kakao.webp" /></a>
-              <a href="#"><img src="/resources/img/face.png" /></a>
-              <a href="#"><img src="/resources/img/github.png" /></a>
+            <div id="find_Pw">
+              <button type="submit">비밀번호 찾기</button>
             </div>
+          </div>
+          <!-- 회원 가입 버튼 -->
+          <button
+            type="submit"
+            id="join"
+            onclick="location.href='/innerpaging/login/join'"
+          >
+            회원가입
+          </button>
+          <!-- 소셜 로그인 -->
+          <div class="socialLogin">
+            <div id="naver_id_login"></div>
+            <a href="#"><img src="/resources/img/kakao.webp" /></a>
+            <a href="#"><img src="/resources/img/face.png" /></a>
+            <a href="#"><img src="/resources/img/github.png" /></a>
+          </div>
+          <script th:inline="javascript">
+            /* JavaScript 코드 작성 */
+            var naver_id_login = new naver_id_login(
+              "_Bz0QIIPqcH1PJ3NCi5I",
+              "http://localhost:8787/"
+            );
+            var state = naver_id_login.getUniqState();
+            naver_id_login.setButton("green", 1, 72);
+            naver_id_login.setDomain("http://localhost:8787");
+            naver_id_login.setState(state);
+            naver_id_login.setPopup(false);
+            naver_id_login.init_naver_id_login();
+          </script>
+        </div>
       </div>
-    </div>
     </div>
   </body>
 </html>
