@@ -28,5 +28,12 @@ public class UserDaoImpl implements UserDao {
 		return res;
 	}
 
+
+	@Override
+	public UserDto selectUserByEmailAndId(String email, String userId) {
+	    UserDto res = null;
+	    res = memberMapper. selectUserByEmailAndId(email, userId);
+	    return res;
+	}
+}	
 	
-}
