@@ -15,4 +15,5 @@ import lombok.ToString;
 public class SongDto {
 	String seq;
 	String title;
+	String artist;
 }
