@@ -2,10 +2,18 @@ package com.multi.fourtunes.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 // lombok 을 이용한 DTO 생성
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class SongDto {
 	String seq;
     @JsonProperty("title")
