@@ -4,10 +4,6 @@ import java.util.ArrayList;
 
 import org.json.JSONObject;
 import org.json.XML;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -15,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.fourtunes.model.dto.SongDto;
+import com.multi.fourtunes.tools.EmebedLinkGetter;
 
 /**
  * @author Dalanarian
@@ -84,14 +81,15 @@ public class ManiaDbApi {
 			String responseBodyByXML = response.getBody();
 
 			// 받은 값을 파싱하기
-			return parseResonsBody(responseBodyByXML);
+			return parseResponseBody(responseBodyByXML);
 		} else {
 			throw new IllegalArgumentException("검색어와 검색 타입이 잘 입력되었는지 확인해주세요. ");
 		}
 	}
 
-	private ArrayList<SongDto> parseResonsBody(String responseBodyByXML) {
-		// TODO Auto-generated method stub
+	private ArrayList<SongDto> parseResponseBody(String responseBodyByXML) {
+		// 결과를 저장할 리스트 선언
+		ArrayList<SongDto> result = new ArrayList<>();
 
 		// XML 을 JSON 으로 파싱
 		JSONObject jsonObject = XML.toJSONObject(responseBodyByXML);
@@ -107,7 +105,7 @@ public class ManiaDbApi {
 			JsonNode channelNode = rssNode.get("channel");
 			JsonNode itemArrayNode = channelNode.get("item");
 
-			// 데이터 꺼내기
+			// 데이터 꺼내서 DTO에 포장 후 List 에 넣
 			for (JsonNode itemNode : itemArrayNode) {
 				System.out.println(itemNode.toString());
 				String title = itemNode.get("title").asText();
@@ -118,20 +116,30 @@ public class ManiaDbApi {
 				System.out.println("Name: " + name);
 				System.out.println("Link " + link);
 				
-				Document songDoc = Jsoup.connect(link).get();
-				Elements embedLink = songDoc.select("#container > div.album-title");
-				System.out.println(embedLink.size());
-				for(Element e:embedLink) {
-					System.out.println(e.toString());
-				}
+				EmebedLinkGetter elg = new EmebedLinkGetter();
+				
+				String embedLink = elg.getLink(title, link);
+				
+				// SongDto 생성후 값 Set
+				SongDto currentMusic = new SongDto();
+				currentMusic.setArtist(name);
+				currentMusic.setTitle(title);
+				
+				currentMusic.toString();
+				
+				
+				// 다 불러온 친구를 저
+				result.add(currentMusic);
 				System.out.println("----------------");
+				
+				
 			}
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 
-		return null;
+		return result;
 	}
 
 	/**
