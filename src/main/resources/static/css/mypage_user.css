@@ -1,10 +1,12 @@
 #main > h1 {
   color: white;
-  margin-top: 3vw;
-  margin-left: 3.5vw;
+  margin-top: 30px;
+  margin-left: 40px;
   height: 48px;
 }
-
+#main{
+	  overflow-x:auto;
+}
 /* ---------- 마이페이지 네비게이션 ---------- */
 .mypage_nav {
   display: inline-block;
@@ -37,11 +39,12 @@
   display: inline-block;
   width: 75%;
   height: 80%;
-  background-color: #ccc;
+  background-color: rgb(224, 224, 224);
   margin-left: 10px;
   min-width: 720px;
 }
 .mypage_contents > h1 {
+	padding-top:10px;
   margin-left: 20px;
 }
 .mypage > * {
@@ -51,14 +54,15 @@
   position: relative;
   display: flex;
   align-items: center;
-  width: 50%;
+  width: 70%;
   border-radius: 0.3124vw;
   overflow: hidden;
-  background-color: #ccc;
-  margin-bottom: 1vw;
+  background-color: rgb(224, 224, 224);
+  margin-bottom: 12px;
 }
 .mypage > span {
-  min-width: 71px;
+  min-width: 90px;
+  font-size:15px;
 }
 .mypage_inf {
   display: flex;
@@ -70,8 +74,8 @@
 }
 .mypage input {
   width: 100%;
-  height: 2.1vw;
-  font-size: 1.125vw;
+  height: 27px;
+  font-size: 15px;
 }
 
 .mypage_title {
@@ -79,11 +83,12 @@
   height: 2.1vw;
   width: 10vw;
   background-size: cover;
-  border: 0.015625vw;
-  font-size: 1.125vw;
+  min-width:117px;
+  min-height:25px;
+  font-size: 15px;
   font-weight: bold;
   text-align: start;
-  margin-right: 1vw;
+  margin-right: 12px;
 }
 .mypage_kw_group {
   position: relative;
@@ -92,7 +97,7 @@
   width: 70%;
   border-radius: 0.3124vw;
   overflow: hidden;
-  background-color: #ccc;
+  background-color: rgb(224, 224, 224);
   margin-bottom: 1.25vw;
 }
 
@@ -103,7 +108,7 @@
   width: 100%;
   border-radius: 5px;
   overflow: hidden;
-  background-color: #ccc;
+  background-color: rgb(224, 224, 224);
   min-width: 504px;
   min-height: 24px;
 }
@@ -111,7 +116,7 @@
 .mypage_keyword_group {
   width: 100%;
   height: 100%;
-  font-size: 1.125vw;
+  font-size: 15px;
 }
 
 .mypage_kw {
@@ -121,20 +126,20 @@
   width: 100%;
   border-radius: 5px;
   overflow: hidden;
-  background-color: #ccc;
+  background-color: rgb(224, 224, 224);
   margin-bottom: 5px;
   min-width: 504px;
   min-height: 24px;
 }
 .mypage_kw input {
   width: 100%;
-  height: 2.5vw;
-  font-size: 1.125vw;
+  height: 26px;
+  font-size: 15px;
 }
 #kw {
   width: 100%;
   height: auto;
-  font-size: 1.125vw;
+  font-size: 14px;
   background-color: #ededed;
 }
 .mypage_kw_btn {

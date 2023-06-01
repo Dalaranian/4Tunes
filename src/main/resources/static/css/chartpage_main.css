@@ -1,7 +1,8 @@
-#main > h1 {
+#main  h1 {
   color: #d4adfc;
   position: relative;
-  margin: 40px 0 40px 5.5vw;
+  top:7%;
+  left:6%;
 }
 #main-container {
   width: 80vw;
@@ -27,6 +28,7 @@
 #MyPlayList {
   width: fit-content;
   position: relative;
+  top: 10%;
   left: 6%;
   display: flex;
   flex-wrap: wrap;
@@ -38,11 +40,13 @@
 }
 
 #List_left {
-  width: 460px;
+  width: 550px;
+  display:flex;
 }
 
 #List_right {
-  width: 460px;
+  width: 550px;
+  display:flex;
 }
 
 #video {
@@ -118,3 +122,4 @@ h3 {
     margin-bottom: 35px;
   }
 }
+

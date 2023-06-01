@@ -1,21 +1,32 @@
+body{
+  overflow-y:hidden;
+}
+#main{
+  overflow-y:hidden;
+}
 .detail {
   background-color: gainsboro;
-  padding: 2vw;
-  margin: 4vw;
-  height: 77vh;
+  padding: 25.8px;
+  margin: 51.5px;
+  height: 80vh;
+  width: 61vw;
+  min-width: 1082px;
+  min-height: 602px;
 }
 
 .detail-title {
   margin-top: 0vh;
   margin-bottom: 1vh;
+  width: 61vw;
+  min-width: 1082px;
+  min-height: 48px;
 }
 
 .detail-btns {
+	width: 61vw;
+  min-width: 1082px;
   display: flex;
-  position: fixed;
-  top: 12%;
-  right: 6%;
-  flex-shrink: 1;
+  justify-content: flex-end;
 }
 
 #update-btn,
@@ -26,8 +37,8 @@
   border-color: #1D267D;
   border-radius: 15px;
   font-weight: bold;
-  padding: 10px 20px;
-  margin-right: 1vw;
+  padding: 4px 10px;
+  margin-right: 12px;
   cursor: pointer;
   border: none;
 } 
@@ -38,9 +49,10 @@
   border-color: red;
   border-radius: 15px;
   font-weight: bold;
-  padding: 10px 20px;
-  margin-right: 1vw;
+  padding: 5px 10px;
+  margin-right: 4px;
   cursor: pointer;
+  font-size:18px;
   border: none;
 }
 
@@ -56,37 +68,52 @@
   background-color: gray;
   max-height: 330px;  /* 내용 8줄부터 스크롤 활성화 */
   overflow-y: auto;
+  overflow-x:hidden;
   margin-right: 0vw;
-  margin-bottom: 2.5vh;
+  margin-bottom: 18px;
+  margin-top:10px;
+  width: 61vw;
+  min-width: 1082px;
+  min-height: 214px;
 }
-
 .detail-name,
 .detail-count {
   display: inline-block;
   color: white;
-  font-size: 1.1vw;
-  margin-top: 1.5vh;
-  margin-left: 1vw;
+  font-size:  17px;
+  margin-top: 11px;
+  margin-left: 13px;
 }
-
 .detail-name {
-  margin-right: 10vw;
+  margin-right: 128px;
 }
-
+.detail-name>span,
+.detail-count>span
+{
+	min-width:50px;
+	min-height:21px;
+	font-size:16px;
+}
 .detail-content {
-  margin-top: 2vh;
-  margin-bottom: 2vh;
-  margin-left: 1vw;
-  margin-right: 1vw;
-  font-size: 1.1vw;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 13px;
+  margin-right: 13px;
+  font-size: 18px;
+  min-width:1057px;
+  min-height:156px;
+  overflow-x:hidden;
 }
 
 #content-input {
   background-color: white;
-  padding: 1vw;
+  padding: 13px;
   border: 1px solid #ccc;
   border-radius: 5px;
   overflow: hidden;  /* 내용이 넘치는 경우 숨김 처리 */
+  min-width:1029px;
+  min-height:128.1px;
+  font-size:18px;
 } 
 
 .content-box {
@@ -98,7 +125,7 @@
   background-color: gray;
   max-height: 77vh;  /* 댓글 약 4~5개부터 스크롤 활성화 */
   overflow-y: auto;
-  overflow-x: none;
+  overflow-x: hidden;
   margin-right: 0vw;
   display: flex;
   height: 35vh;
@@ -108,36 +135,34 @@
 .comment-detailfirst,
 .comment-detailsecond {
   flex-basis: 50%;
-  padding: 1.5vw;
+  padding: 19px;
   box-sizing: border-box;
   position: relative;
 }
 
 .comment-title {
   color: white;
-  margin-left: 0.5vw;
-  margin-top: 0.5vh;
+  margin-left: 6px;
+  margin-top: 3.8px;
 }
 
 .comment-wrap {
-  flex-shrink: 0;
   display: flex;
-  flex-direction: row;
   align-items: center;
   white-space: nowrap;
+  min-width:475px;
+  max-height:85px;
 }
 
 .comment-name {
   font-weight: bold;
-  margin-left: 0.6vw;
-  margin-right: 2vw;
-  margin-bottom: 2.5vh;
+  margin-left: 7.3px;
+  margin-right: 24.2px;
+  width:50px;
+  height:24px;
 }
 
 .comment-content {
-  margin-left: 0.6vw;
-  margin-right: 2vw;
-  margin-bottom: 2.5vh;
   white-space: normal;
 }
 
@@ -146,27 +171,25 @@
   border: none;
   padding: 0;
   cursor: pointer;
-  margin-left: 0.6vw;
-  margin-right: 2vw;
-  margin-bottom: 2.5vh;
+  margin-left: 7.3px;
+  margin-right: 24.4px;
 }
 
 .comment-dropdown img {
   display: block;
+  position: relative;
+    top: 7px;
 }
 
 .comment-write {
   float: right;
-  margin-top: 2vh;
-  margin-bottom: 1vh;
-  margin-right: 0.5vw;
+  margin-top: 15px;
+  margin-bottom: 7.5px;
+  margin-right: 6px;
 }
 
 .comment-btn {
-  position: absolute;
-  bottom: 10vh;
-  right: 6vw;
-  transform: translate(50%, 50%);
+  float:right;
 }
 
 #commentwrite-btn {
@@ -183,4 +206,11 @@
   background-color: #5C469C;
   border-color: #5C469C;
 }
-
+@media (max-width: 1300px) {
+  #nav {
+    display: none;
+  }
+  #main {
+    width: 110vw;
+  }
+}

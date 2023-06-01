@@ -33,11 +33,13 @@
 }
 
 #List_left {
-  width: 50%;
+  width: 550px;
+  display:flex;
 }
 
 #List_right {
-  width: 50%;
+  width: 550px;
+  display:flex;
 }
 
 #video {
