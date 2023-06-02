@@ -9,19 +9,16 @@
     <link rel="stylesheet" href="/resources/css/globalfont.css" />
     <link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
     <title>4Tunes</title>
+      <script
+      type="text/javascript"
+      src="http://code.jquery.com/jquery-1.11.3.min.js"
+    ></script>
     <script
       type="text/javascript"
       src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
       charset="utf-8"
     ></script>
-    <script
-      type="text/javascript"
-      src="http://code.jquery.com/jquery-1.11.3.min.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="http://code.jquery.com/jquery-1.11.3.min.js"
-    ></script>
+
   </head>
 
   <body>
@@ -68,7 +65,7 @@
               </span>
               <input
                 type="text"
-                id="login-input"
+                id="login-email"
                 name="user_id"
                 placeholder="Email을 입력해주세요"
               />
@@ -81,7 +78,7 @@
               </span>
               <input
                 type="password"
-                id="login-input"
+                id="login-pw"
                 name="user_pw"
                 placeholder="비밀번호를 입력해 주세요"
               />
@@ -115,21 +112,10 @@
             <a href="#"><img src="/resources/img/face.png" /></a>
             <a href="#"><img src="/resources/img/github.png" /></a>
           </div>
-         <script>
-         var naver_id_login = new naver_id_login(
-        		  "_Bz0QIIPqcH1PJ3NCi5I",
-        		  "http://localhost:8787/"
-        		);
-        		var state = naver_id_login.getUniqState();
-        		naver_id_login.setButton("green", 1, 72);
-        		naver_id_login.setDomain("http://localhost:8787");
-        		naver_id_login.setState(state);
-        		naver_id_login.setPopup(false);
-        		naver_id_login.init_naver_id_login();
-
-         </script>
         </div>
       </div>
     </div>
+    
+       <script type="text/javascript" src=/resources/js/sociallogin_naver.js /></script>
   </body>
 </html>
