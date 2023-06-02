@@ -28,15 +28,8 @@
 	charset="utf-8"></script>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
-
 <body>
-
-
-
-
 	<div id="nav">
 		<div class="banner">
 			<a href="/"><img src="/resources/img/banner.png" /></a>
@@ -117,46 +110,31 @@
 
 					<button id="fb-login-btn"></button>
 					<script> 
-    document.getElementById('fb-login-btn').addEventListener('click', function() {
-      FB.login(
-        function(response) {
-          if (response.status === 'connected') {
-            FB.api('/me', 'get', { fields: 'name,email' }, function(r) {
-              const facebook_email = r.email;
-              const facebook_name = r.name;
-              console.log(facebook_email);
-              console.log(facebook_name);
-              window.location.href = "/facebook/login?email=" + encodeURIComponent(facebook_email) + "&name=" + encodeURIComponent(facebook_name);
+            document.getElementById('fb-login-btn').addEventListener('click', function() {
+              FB.login(
+                function(response) {
+                  if (response.status === 'connected') {
+                    FB.api('/me', 'get', { fields: 'name,email' }, function(r) {
+                      const facebook_email = r.email;
+                      const facebook_name = r.name;
+                      console.log(facebook_email);
+                      console.log(facebook_name);
+                      window.location.href = "/facebook/login?email=" + encodeURIComponent(facebook_email) + "&name=" + encodeURIComponent(facebook_name);
+                    });
+                  } else if (response.status === 'not_authorized') {
+                    alert('로그인해야 이용 가능한 기능입니다.');
+                  } else {
+                    alert('페이스북에 로그인해야 이용 가능한 기능입니다.');
+                  }
+                },
+                { scope: 'public_profile,email' }
+              );
             });
-          } else if (response.status === 'not_authorized') {
-            alert('로그인해야 이용 가능한 기능입니다.');
-          } else {
-            alert('페이스북에 로그인해야 이용 가능한 기능입니다.');
-          }
-        },
-        { scope: 'public_profile,email' }
-      );
-    });
-  </script>
-
-
-					<a href="#"><img src="/resources/img/github.png" /></a>
-				</div>
-				<script>
-         var naver_id_login = new naver_id_login(
-        		  "_Bz0QIIPqcH1PJ3NCi5I",
-        		  "http://localhost:8787/"
-        		);
-        		var state = naver_id_login.getUniqState();
-        		naver_id_login.setButton("green", 1, 72);
-        		naver_id_login.setDomain("http://localhost:8787");
-        		naver_id_login.setState(state);
-        		naver_id_login.setPopup(false);
-        		naver_id_login.init_naver_id_login();
-
-         </script>
+            </script>
+        </div>
 			</div>
 		</div>
 	</div>
-</body>
+         <script type="text/javascript" src=/resources/js/sociallogin_naver.js /></script>
+</body>   
 </html>
