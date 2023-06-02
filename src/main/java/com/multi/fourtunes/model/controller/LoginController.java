@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,7 +21,7 @@ public class LoginController {
 	private LoginBiz loginBiz;
 
 	@GetMapping("/sociallogin")
-	public String login(@RequestParam("email") String email, @RequestParam("name") String name) {
+	public String socialLogin(@RequestParam("email") String email, @RequestParam("name") String name) {
 		boolean isUserExist = faceloginBiz.checkUserExist(email, name);
 		if (isUserExist) {
 			// DB에 있는 이메일이면 로그인 진행
