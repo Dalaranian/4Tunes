@@ -210,3 +210,9 @@ body {
 	overflow: hidden;
 	border: 1px solid #03C75A;
 }
+#fb-login-btn {
+  background: url("/resources/img/face.png") no-repeat center 50%;
+  width: 72px;
+  height: 72px;
+  border: none;
+}

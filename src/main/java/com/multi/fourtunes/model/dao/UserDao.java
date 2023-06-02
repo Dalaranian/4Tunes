@@ -6,4 +6,6 @@ public interface UserDao {
 
 	public UserDto login(UserDto dto);
 	
+	public UserDto selectUserByEmailAndId(String email, String userId);
 }
+
