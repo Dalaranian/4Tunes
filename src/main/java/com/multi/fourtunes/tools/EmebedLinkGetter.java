@@ -18,15 +18,15 @@ public class EmebedLinkGetter {
 	 */
 	public String getLink(String title, String link) {
 		webdriver = null;
-		File webDriverFile = new File("WebDriver/chromedriver_mac64/chromedriver.exec");
+		File webDriverFile = new File("WebDriver/chromedriver_mac64/chromedriver");
 		
 		System.out.println(webDriverFile.getName() + " " + webDriverFile.getAbsolutePath());
 		
 		try {
 	        // Chrome 웹 드라이버 경로 설정
 			String driverPath = webDriverFile.getAbsolutePath();
-//			System.setProperty("webdriver.chrome.driver", driverPath);
-			System.setProperty("webdriver.chrome.driver", "/Users/baes_macbook/Desktop/Repo/GitHub Repo/4Tunes/WebDriver/chromedriver_mac64/chromedriver");
+			System.setProperty("webdriver.chrome.driver", driverPath);
+//			System.setProperty("webdriver.chrome.driver", "/Users/baes_macbook/Desktop/Repo/GitHub_Repo/4Tunes/WebDriver/chromedriver_mac64/chromedriver");
 			
 	        // Chrome 옵션 설정
 	        ChromeOptions options = new ChromeOptions();
