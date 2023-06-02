@@ -49,8 +49,6 @@ public class ManiaDbApi {
 		this.searchPrompt = prompt;
 	}
 
-	// 검색 타입 설정
-
 	/**
 	 * 검색 타입을 설정하는메소드 <br>
 	 * boolean type : 타입 지정 (true 일 시 artist, false 일 시 song)
