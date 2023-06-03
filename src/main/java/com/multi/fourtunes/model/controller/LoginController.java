@@ -1,5 +1,7 @@
 package com.multi.fourtunes.model.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.multi.fourtunes.model.biz.FaceloginBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
+import com.multi.fourtunes.model.biz.UserBiz;
+import com.multi.fourtunes.model.dto.UserDto;
 
 @Controller
 @RequestMapping("/login")
@@ -20,6 +24,9 @@ public class LoginController {
 	
 	@Autowired
 	private LoginBiz loginBiz;
+	
+	@Autowired
+	private UserBiz memberBiz;
 
 	@GetMapping("/sociallogin")
 	public String login(@RequestParam("email") String email, @RequestParam("name") String name) {
@@ -49,5 +56,30 @@ public class LoginController {
 		}
 		model.addAttribute("keywordlist", keywordList);
 		return "login_join";
+	}
+	
+	/**
+	 * 소셜로그인이 아닌 일반적인 로그인을 처리
+	 * @param session
+	 * @param dto
+	 * @return
+	 */
+	@PostMapping("/login")
+	public String login(HttpSession session, UserDto dto) {
+//		System.out.println("LoginController 진입 \n" + dto.toString());
+		UserDto res = memberBiz.login(dto);
+//		System.out.println("리턴받은 dto : " + res.toString());
+		if (res != null) {
+			session.setAttribute("currentUser", res);
+			return "index";
+		} else {
+			return "login_login";
+		}
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("currentUser");
+		return "index";
 	}
 }

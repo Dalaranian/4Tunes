@@ -22,6 +22,4 @@ public class UserDto {
 	private String user_grade;
 	private int membership_duration;
 	private Date pay_date;
-	
-	
 }
