@@ -1,5 +1,7 @@
 package com.multi.fourtunes.model.controller.paging;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,7 @@ public class NavController {
 	public String gotoLogin() {
 		return "login_login";
 	}
+	
 	
 	// 마이페이지로 이동
 	@GetMapping("/mypage")

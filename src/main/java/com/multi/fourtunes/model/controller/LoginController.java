@@ -49,4 +49,9 @@ public class LoginController {
 		model.addAttribute("keywordlist", keywordList);
 		return "login_join";
 	}
+	
+	@GetMapping("/callback")
+	public String callback() {
+		return "callback";
+	}
 }
