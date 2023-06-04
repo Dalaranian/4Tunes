@@ -109,6 +109,28 @@
 					<a href="#"><img src="/resources/img/kakao.webp" /></a>
 
 					<button id="fb-login-btn"></button>
+					<script> 
+            document.getElementById('fb-login-btn').addEventListener('click', function() {
+              FB.login(
+                function(response) {
+                  if (response.status === 'connected') {
+                    FB.api('/me', 'get', { fields: 'name,email' }, function(r) {
+                      const facebook_email = r.email;
+                      const facebook_name = r.name;
+                      console.log(facebook_email);
+                      console.log(facebook_name);
+                      window.location.href = "/facebook/login?email=" + encodeURIComponent(facebook_email) + "&name=" + encodeURIComponent(facebook_name);
+                    });
+                  } else if (response.status === 'not_authorized') {
+                    alert('로그인해야 이용 가능한 기능입니다.');
+                  } else {
+                    alert('페이스북에 로그인해야 이용 가능한 기능입니다.');
+                  }
+                },
+                { scope: 'public_profile,email' }
+              );
+            });
+            </script>
 				</div>
 			</div>
 		</div>
