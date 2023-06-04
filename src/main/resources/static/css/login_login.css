@@ -84,7 +84,7 @@ body {
   background-color: #5c469c;
   border-radius: 10px;
   color: #fff;
-  font-size: 1.875vw;
+  font-size: 18px;
   cursor: pointer;
   min-width: 328px;
   min-height: 50px;
@@ -128,7 +128,7 @@ body {
   background-color: #d4adfc;
   border-radius: 10px;
   color: #fff;
-  font-size: 1.125vw;
+  font-size: 15px;
   cursor: pointer;
   display: inline-block;
   min-width: 162px;
@@ -144,7 +144,7 @@ body {
   background-color: #d4adfc;
   border-radius: 10px;
   color: #fff;
-  font-size: 1.125vw;
+  font-size: 15px;
   cursor: pointer;
   min-width: 340px;
   min-height: 28px;
@@ -167,7 +167,7 @@ body {
   border: 0.1875vw solid rgb(163, 163, 163);
   width: 90%;
   height: 2.5vw;
-  font-size: 1.125vw;
+  font-size: 15px;
   min-width: 301px;
   min-height: 27px;
 }
@@ -209,4 +209,10 @@ body {
 	border-radius: 50%; 
 	overflow: hidden;
 	border: 1px solid #03C75A;
+}
+#fb-login-btn {
+  background: url("/resources/img/face.png") no-repeat center 50%;
+  width: 72px;
+  height: 72px;
+  border: none;
 }
