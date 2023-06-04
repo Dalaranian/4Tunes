@@ -20,30 +20,40 @@ import com.multi.fourtunes.model.dto.UserDto;
 public class LoginController {
 
 	@Autowired
-	private FaceloginBiz faceloginBiz;
-	
-	@Autowired
 	private LoginBiz loginBiz;
-	
+
 	@Autowired
 	private UserBiz memberBiz;
 
 	@GetMapping("/sociallogin")
-	public String login(@RequestParam("email") String email, @RequestParam("name") String name) {
-		boolean isUserExist = faceloginBiz.checkUserExist(email, name);
+	public String login(@RequestParam("email") String email, @RequestParam("name") String name, HttpSession session,
+			Model model) {
+
+		// 소셜 로그인한 유저가 실제로 존제하는지 확인
+		boolean isUserExist = loginBiz.checkUserExist(email, name);
+		// 실제 회원 정보를 불러오기 위한 DTO 생성
+		UserDto login = new UserDto();
+		login.setUser_id(email);
+		login.setUser_name(name);
 		if (isUserExist) {
 			// DB에 있는 이메일이면 로그인 진행
 			// 로그인 처리 로직 구현
+
+			// 생성된 DTO 를 통해 실제 유저 정보를 불러옴
+			UserDto currentUser = memberBiz.login(login);
+			session.setAttribute("currentUser", currentUser);
 			return "index"; // 로그인 후 이동할 페이지
 		} else {
 			// DB에 없는 이메일이면 ID 입력칸과 이름 입력칸으로 이동
 			// 회원 가입 페이지로 이동
-			return "login_join";
+			model.addAttribute("joinUser", login);
+			return "login_socialjoin";
 		}
 	}
 
 	/**
 	 * 회원가입 페이지에, MODEL 에 키워드 배열을 담아서 전달
+	 * 
 	 * @param model
 	 * @return 회원가입페이지로 전환
 	 */
@@ -51,15 +61,16 @@ public class LoginController {
 	public String join(Model model) {
 		System.out.println("join 진입");
 		String[] keywordList = loginBiz.getKeyword();
-		for(String str:keywordList) {
-			System.out.println("키워드 : " + str);
-		}
+//		for(String str:keywordList) {
+//			System.out.println("키워드 : " + str);
+//		}
 		model.addAttribute("keywordlist", keywordList);
 		return "login_join";
 	}
-	
+
 	/**
 	 * 소셜로그인이 아닌 일반적인 로그인을 처리
+	 * 
 	 * @param session
 	 * @param dto
 	 * @return
@@ -76,7 +87,7 @@ public class LoginController {
 			return "login_login";
 		}
 	}
-	
+
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("currentUser");
