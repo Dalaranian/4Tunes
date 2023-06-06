@@ -1,6 +1,6 @@
 window.fbAsyncInit = function() {
     FB.init({
-      appId: '/',
+      appId: '6473407266107089',
       cookie: true,
       xfbml: true,
       version: 'v17.0'
@@ -16,7 +16,7 @@ window.fbAsyncInit = function() {
             const facebook_name = r.name;
             console.log(facebook_email);
             console.log(facebook_name);
-            window.location.href = "/facebook/login?email=" + encodeURIComponent(facebook_email) + "&name=" + encodeURIComponent(facebook_name);
+            window.location.href = "/login/sociallogin?email=" + encodeURIComponent(facebook_email) + "&name=" + encodeURIComponent(facebook_name);
           });
         } else if (response.status === 'not_authorized') {
           alert('로그인해야 이용 가능한 기능입니다.');
