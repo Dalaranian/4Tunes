@@ -11,12 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.fourtunes.model.dto.SongDto;
-import com.multi.fourtunes.tools.EmebedLinkGetter;
 
-/**
- * @author Dalanarian
- *
- */
 public class ManiaDbApi {
 
 	// ManiaDB API URL 예시
@@ -103,7 +98,7 @@ public class ManiaDbApi {
 			JsonNode channelNode = rssNode.get("channel");
 			JsonNode itemArrayNode = channelNode.get("item");
 
-			// 데이터 꺼내서 DTO에 포장 후 List 에 넣
+			// 데이터 꺼내서 DTO에 포장 후 List 에 넣기
 			for (JsonNode itemNode : itemArrayNode) {
 				System.out.println(itemNode.toString());
 				String title = itemNode.get("title").asText();
@@ -113,11 +108,7 @@ public class ManiaDbApi {
 				System.out.println("Title: " + title);
 				System.out.println("Name: " + name);
 				System.out.println("Link " + link);
-				
-				EmebedLinkGetter elg = new EmebedLinkGetter();
-				
-				String embedLink = elg.getLink(title, link);
-				
+												
 				// SongDto 생성후 값 Set
 				SongDto currentMusic = new SongDto();
 				currentMusic.setArtist(name);
