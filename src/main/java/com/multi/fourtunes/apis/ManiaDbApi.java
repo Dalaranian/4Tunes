@@ -126,7 +126,7 @@ public class ManiaDbApi {
 				currentMusic.toString();
 				
 				
-				// 다 불러온 친구를 저
+				// 다 불러온 친구를 저장
 				result.add(currentMusic);
 				System.out.println("----------------");
 				
