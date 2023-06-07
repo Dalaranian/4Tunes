@@ -1,11 +1,14 @@
 window.fbAsyncInit = function() {
     FB.init({
-        appId: '6473407266107089',
+        appId: '197607052774933',
         cookie: true,
         xfbml: true,
         version: 'v17.0'
     });
     FB.AppEvents.logPageView();
+
+    // onclick 속성에 함수 할당
+    document.getElementById('fb-login-btn').onclick = fbLogin;
 };
 
 // fbLogin 함수 정의
@@ -27,9 +30,6 @@ function fbLogin() {
         }
     }, { scope: 'public_profile,email' });
 }
-
-// onclick 속성에 함수 할당
-document.getElementById('fb-login-btn').onclick = fbLogin;
   
   
    // 수정할 예정
