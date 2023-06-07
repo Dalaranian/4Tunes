@@ -28,4 +28,10 @@ public class LoginBizImple implements LoginBiz {
 		return keywordDao.getAllList();
 	}
 
+	@Override
+	public UserDto login(UserDto dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
