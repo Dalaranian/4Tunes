@@ -72,7 +72,7 @@ public class LoginController {
 	@PostMapping("/login")
 	public String login(HttpSession session, UserDto dto) {
 //		System.out.println("LoginController 진입 \n" + dto.toString());
-		UserDto res = memberBiz.login(dto);
+		UserDto res = loginBiz.login(dto);
 //		System.out.println("리턴받은 dto : " + res.toString());
 		if (res != null) {
 			session.setAttribute("login", res);

@@ -10,21 +10,13 @@ import com.multi.fourtunes.model.mapper.UserMapper;
 public class UserDaoImpl implements UserDao {
 
 	@Autowired
-	private UserMapper memberMapper;
-	
-//	@Autowired
-//	private SqlSessionTemplate sqlSession;
+	private UserMapper userMapper;
 	
 	@Override
 	public UserDto login(UserDto dto) {
 		UserDto res = null;
-		
-//		res = sqlSession.selectOne("login", dto);
-		
-		res = memberMapper.login(dto);
-		
-		System.out.println("dao 에서 받은 dto " + res.toString());
-		
+		res = userMapper.login(dto);
+				
 		return res;
 	}
 
@@ -32,7 +24,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public UserDto selectUserByEmailAndId(String email, String userId) {
 	    UserDto res = null;
-	    res = memberMapper. selectUserByEmailAndId(email, userId);
+	    res = userMapper. selectUserByEmailAndId(email, userId);
 	    return res;
 	}
 }	
