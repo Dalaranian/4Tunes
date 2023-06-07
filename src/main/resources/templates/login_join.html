@@ -14,7 +14,7 @@
       $(document).ready(function () {
         const searchKeyword = $("#search-keyword");
         const kwSelect = $("#kw");
-        const disabledInput = $("#disabled");
+        const readonlyInput = $("#readonly");
 
         searchKeyword.on("input", function () {
           const inputValue = searchKeyword.val().toLowerCase();
@@ -33,7 +33,7 @@
             }
           });
 
-          disabledInput
+          readonlyInput
             .val()
             .split(",")
             .map(function (item) {
@@ -49,7 +49,7 @@
             });
         });
 
-        //옵션 더블 클릭 시 #disabled에 표시
+        //옵션 더블 클릭 시 #readonly에 표시
         kwSelect.on("dblclick", function () {
           const selectedOptions = kwSelect
             .find("option:selected")
@@ -58,11 +58,10 @@
             })
             .get();
 
-          disabledInput.val(function (index, value) {
-            return value
-              ? value + ", " + selectedOptions.join(", ")
-              : selectedOptions.join(", ");
-          });
+          readonlyInput.val(function (index, value) {
+        	  const allOptions = value ? value.split(", ") : [];
+        	  return allOptions.concat(selectedOptions).join(", ");
+        	});
           kwSelect.find("option:selected").hide();
         });
       });
@@ -134,8 +133,8 @@
 						</select>
 					</div>
 					<div class="join-kw" id="selected_keyword">
-						<input type="text" id="disabled" placeholder="선택된 내용 보여주기" name="selected_keyword"
-							disabled />
+						<input type="text" id="readonly" placeholder="선택된 내용 보여주기" name="selected_keyword"
+							readonly />
 					</div>
 				</fieldset>
 				<div class="join-btn">
