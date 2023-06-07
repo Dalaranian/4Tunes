@@ -62,9 +62,9 @@ public class LoginController {
 	public String join(Model model) {
 		System.out.println("join 진입");
 		String[] keywordList = loginBiz.getKeyword();
-		for(String str:keywordList) {
-			System.out.println("키워드 : " + str);
-		}
+//		for(String str:keywordList) {
+//			System.out.println("키워드 : " + str);
+//		}
 		model.addAttribute("keywordlist", keywordList);
 		return "login_join";
 	}
@@ -82,14 +82,14 @@ public class LoginController {
 		}
 	}
 	
-	@PostMapping("/insertuser")
+	@GetMapping("/insertuser")
     public String insertUser(
         @RequestParam("join-email") String email,
         @RequestParam("join-pw") String password,
         @RequestParam("join-name") String name,
-        @RequestParam("keyword") List<String> selectedKeywords
+        @RequestParam("keyword") String selectedKeywords
     ) {
-		System.out.println(email + " " + password + " " + "name" + selectedKeywords.toString());
-		return null; 
+		System.out.println(email + " " + password + " " + name + " " + selectedKeywords.toString());
+		return "index"; 
 	}
 }
