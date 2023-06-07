@@ -1,11 +1,14 @@
-Kakao.init('aef00a860346906c88050b79c5211154'); //발급받은 키 중 javascript키를 사용해준다.
-console.log(Kakao.isInitialized()); // sdk초기화여부판단
+window.kakaoAsyncInit function(){
+	Kakao.init ('aef00a860346906c88050b79c5211154');
+	document.getElementById('kakao_id_login').onclick = kakao_id_login;
+	console.log(kakao_id_login);
+}
 //카카오로그인
-var kakao_id_login = new kakao_id_login
 function kakao_id_login() {
-    Kakao.Auth.login({
+    window.Kakao.Auth.login({
       success: function (response) {
-        Kakao.API.request({
+      console.log(response);
+        window.Kakao.API.request({
           url: '/v2/user/me',
           success: function (response) {
         	  console.log(response)
@@ -20,3 +23,4 @@ function kakao_id_login() {
       },
     })
   }
+  
