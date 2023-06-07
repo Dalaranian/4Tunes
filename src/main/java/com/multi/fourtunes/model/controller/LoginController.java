@@ -1,9 +1,10 @@
 package com.multi.fourtunes.model.controller;
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -81,4 +82,15 @@ public class LoginController {
 			return "login_login";
 		}
 	}
+	
+	
+	@GetMapping("/logout")
+    public String logout(HttpSession session) {
+        if (session != null) {
+            session.invalidate(); // 세션 무효화
+        }
+       
+        return "index"; 
+    }
+
 }
