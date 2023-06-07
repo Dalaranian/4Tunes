@@ -99,6 +99,8 @@ public class LoginController {
     public String logout(HttpSession session) {
         if (session != null) {
             session.invalidate(); // 세션 무효화
+        }
         return "index"; 
     }
 }
+
