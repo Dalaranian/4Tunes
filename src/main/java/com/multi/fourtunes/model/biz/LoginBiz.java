@@ -9,4 +9,6 @@ public interface LoginBiz {
     
 	public UserDto login(UserDto dto);
 
+	UserDto socialLogin(UserDto loginUser);
+
 }

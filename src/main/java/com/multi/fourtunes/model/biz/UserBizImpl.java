@@ -21,8 +21,9 @@ public class UserBizImpl implements UserBiz {
 	@Override
 	public UserDto login(UserDto dto) {
 //		System.out.println("비즈 진입 + " + dto);
-		
-		return memberDao.login(dto);
+		UserDto currentDto = memberDao.login(dto);
+//		System.out.println("UserBiz " + currentDto.toString());
+		return currentDto;
 	}
 	
 	
