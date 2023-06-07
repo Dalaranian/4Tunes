@@ -1,9 +1,10 @@
 package com.multi.fourtunes.model.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -79,5 +80,16 @@ public class LoginController {
 		} else {
 			return "login_login";
 		}
+	}
+	
+	@PostMapping("/insertuser")
+    public String insertUser(
+        @RequestParam("join-email") String email,
+        @RequestParam("join-pw") String password,
+        @RequestParam("join-name") String name,
+        @RequestParam("keyword") List<String> selectedKeywords
+    ) {
+		System.out.println(email + " " + password + " " + "name" + selectedKeywords.toString());
+		return null; 
 	}
 }
