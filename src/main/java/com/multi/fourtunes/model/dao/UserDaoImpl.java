@@ -16,7 +16,6 @@ public class UserDaoImpl implements UserDao {
 	public UserDto login(UserDto dto) {
 		UserDto res = null;
 		res = userMapper.login(dto);
-				
 		return res;
 	}
 
