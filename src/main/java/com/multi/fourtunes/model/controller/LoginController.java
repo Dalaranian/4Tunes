@@ -15,21 +15,26 @@ import com.multi.fourtunes.model.biz.LoginBiz;
 public class LoginController {
 
 	@Autowired
-	private FaceloginBiz faceloginBiz;
-	
-	@Autowired
 	private LoginBiz loginBiz;
 
 	@GetMapping("/sociallogin")
-	public String socialLogin(@RequestParam("email") String email, @RequestParam("name") String name) {
-		boolean isUserExist = faceloginBiz.checkUserExist(email, name);
+	public String socialLogin(@RequestParam("email") String email, @RequestParam("name") String name, Model model) {
+		boolean isUserExist = loginBiz.checkUserExist(email, name);
 		if (isUserExist) {
 			// DB에 있는 이메일이면 로그인 진행
 			// 로그인 처리 로직 구현
+			
+			
+			
 			return "index"; // 로그인 후 이동할 페이지
 		} else {
 			// DB에 없는 이메일이면 ID 입력칸과 이름 입력칸으로 이동
 			// 회원 가입 페이지로 이동
+			model.addAttribute("email", email);
+			model.addAttribute("name", name);
+			
+			String[] keywordList = loginBiz.getKeyword();
+			model.addAttribute("keywordlist", keywordList);			
 			return "login_join";
 		}
 	}
