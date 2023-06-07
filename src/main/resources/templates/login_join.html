@@ -14,7 +14,7 @@
       $(document).ready(function () {
         const searchKeyword = $("#search-keyword");
         const kwSelect = $("#kw");
-        const disabledInput = $("#disabled");
+        const readonlyInput = $("#readonly");
 
         searchKeyword.on("input", function () {
           const inputValue = searchKeyword.val().toLowerCase();
@@ -33,7 +33,7 @@
             }
           });
 
-          disabledInput
+          readonlyInput
             .val()
             .split(",")
             .map(function (item) {
@@ -49,7 +49,7 @@
             });
         });
 
-        //옵션 더블 클릭 시 #disabled에 표시
+        //옵션 더블 클릭 시 #readonly에 표시
         kwSelect.on("dblclick", function () {
           const selectedOptions = kwSelect
             .find("option:selected")
@@ -58,11 +58,10 @@
             })
             .get();
 
-          disabledInput.val(function (index, value) {
-            return value
-              ? value + "/ " + selectedOptions.join("/ ")
-              : selectedOptions.join("/ ");
-          });
+          readonlyInput.val(function (index, value) {
+        	  const allOptions = value ? value.split(", ") : [];
+        	  return allOptions.concat(selectedOptions).join(", ");
+        	});
           kwSelect.find("option:selected").hide();
         });
       });
@@ -87,9 +86,9 @@
 			</div>
 		</div>
 		<div class="search-container">
-			<span class="search-icon"><img
-				src="/resources/img/search.png" class="search-icon" /></span> <input
-				type="text" class="search-input" placeholder="키워드 입력" />
+			<span class="search-icon"><img src="/resources/img/search.png"
+				class="search-icon" /></span> <input type="text" class="search-input"
+				placeholder="키워드 입력" />
 		</div>
 		<div>
 			<a href="/nav/suggested">맞춤추천</a>
@@ -104,66 +103,51 @@
 			<a href="/nav/membership">멤버십</a>
 		</div>
 	</div>
-    <div class="main">
-      <!-- 로그인 시작하는 부분 -->
-      <div class="loginbox">
-        <form action="/login/insertuser">
-          <fieldset>
-            <h2>JOIN</h2>
-            <div class="join">
-              <span class="join-title">ID</span>
-                    <input type="text" id="join-email" placeholder="Email를 입력해 주세요" />
-            </div>
-            <div class="join">
-              <span class="join-title">PW</span>
-              <input
-                type="password"
-                id="join-pw"
-                placeholder="비밀번호를 입력해 주세요"
-              />
-            </div>
-            <div class="join">
-              <span class="join-title">이름</span>
-              <input
-                type="text"
-                id="join-name"
-                placeholder="이름을 입력해 주세요"
-              />
-            </div>
-            <div class="join-keyword">
-              <p class="join-title">KeyWord</p>
-            </div>
-            <div class="join-kw">
-              <input
-                type="search"
-                id="search-keyword"
-                placeholder="내용을 입력해주세요."
-              />
-            </div>
-            <div class="join-kw">
-             	 <select name="keyword" id="kw" multiple>
- 				 <option th:each="keyword : ${keywordlist}" th:value="${keyword}" th:text="${keyword}"></option>
-				</select>
-            </div>
-            <div class="join-kw" id="selected_keyword">
-              <input
-                type="text"
-                id="disabled"
-                placeholder="선택된 내용 보여주기"
-                disabled
-              />
-            </div>
-          </fieldset>
-          <div class="join-btn">
-            <div id="find_join">
-              <button type="submit">Join</button>
-            </div>
-            <div id="find_cancel">
-              <button type="submit">Cancel</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </body>
+	<div class="main">
+		<!-- 로그인 시작하는 부분 -->
+		<div class="loginbox">
+			<form action="/login/insertuser" method="GET">
+				<fieldset>
+					<h2>JOIN</h2>
+					<div class="join">
+						<span class="join-title">ID</span> <input type="text"
+							name="join-email" id="join-email" placeholder="Email를 입력해 주세요" />
+					</div>
+					<div class="join">
+						<span class="join-title">PW</span> <input type="password" name="join-pw"
+							id="join-pw" placeholder="비밀번호를 입력해 주세요" />
+					</div>
+					<div class="join">
+						<span class="join-title">이름</span> <input type="text" name="join-name"
+							id="join-name" placeholder="이름을 입력해 주세요" />
+					</div>
+					<div class="join-keyword">
+						<p class="join-title">KeyWord</p>
+					</div>
+					<div class="join-kw">
+						<input type="search" id="search-keyword" placeholder="내용을 입력해주세요." />
+					</div>
+					<div class="join-kw">
+						<select name="keyword" id="kw" multiple>
+							<option th:each="keyword : ${keywordlist}" th:value="${keyword}"
+								th:text="${keyword}"></option>
+						</select>
+					</div>
+					<div class="join-kw" id="selected_keyword">
+						<input type="text" id="readonly" placeholder="선택된 내용 보여주기" name="selected_keyword"
+							readonly />
+					</div>
+				</fieldset>
+				<div class="join-btn">
+					<div id="find_join">
+						<button type="submit">Join</button>
+					</div>
+					<div id="find_cancel">
+						<button type="submit">Cancel</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
 </html>
