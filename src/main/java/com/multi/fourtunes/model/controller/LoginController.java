@@ -3,6 +3,7 @@ package com.multi.fourtunes.model.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,13 +26,18 @@ public class LoginController {
 	private LoginBiz loginBiz;
 
 	@GetMapping("/sociallogin")
-	public String socialLogin(@RequestParam("email") String email, @RequestParam("name") String name, Model model) {
+	public String socialLogin(@RequestParam("email") String email, @RequestParam("name") String name, Model model, HttpSession session) {
 		boolean isUserExist = loginBiz.checkUserExist(email, name);
 		if (isUserExist) {
 			// DB에 있는 이메일이면 로그인 진행
 			// 로그인 처리 로직 구현
 			
+			UserDto loginUser = new UserDto();
+			loginUser.setUser_id(email);
+			loginUser.setUser_name(name);
 			
+			UserDto res = memberBiz.login(loginUser);
+			session.setAttribute("login", res);
 			
 			return "index"; // 로그인 후 이동할 페이지
 		} else {
