@@ -23,7 +23,7 @@ public class UserDaoImpl implements UserDao {
 		
 		res = memberMapper.login(dto);
 		
-		System.out.println("dao 에서 받은 dto " + res.toString());
+//		System.out.println("dao 에서 받은 dto " + res.toString());
 		
 		return res;
 	}
@@ -32,7 +32,9 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public UserDto selectUserByEmailAndId(String email, String userId) {
 	    UserDto res = null;
-	    res = memberMapper. selectUserByEmailAndId(email, userId);
+	    res = memberMapper.selectUserByEmailAndId(email, userId);
+	    // 방금한거
+	    System.out.println("UserDao : " + (res == null));
 	    return res;
 	}
 }	
