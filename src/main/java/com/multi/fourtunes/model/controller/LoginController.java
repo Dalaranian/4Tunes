@@ -87,7 +87,7 @@ public class LoginController {
         @RequestParam("join-email") String email,
         @RequestParam("join-pw") String password,
         @RequestParam("join-name") String name,
-        @RequestParam("keyword") String selectedKeywords
+        @RequestParam("selected_keyword") List<String> selectedKeywords
     ) {
 		System.out.println(email + " " + password + " " + name + " " + selectedKeywords.toString());
 		return "index"; 
