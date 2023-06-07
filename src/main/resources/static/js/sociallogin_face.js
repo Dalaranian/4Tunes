@@ -1,34 +1,35 @@
 window.fbAsyncInit = function() {
     FB.init({
-      appId: '6473407266107089',
-      cookie: true,
-      xfbml: true,
-      version: 'v17.0'
+        appId: '6473407266107089',
+        cookie: true,
+        xfbml: true,
+        version: 'v17.0'
     });
     FB.AppEvents.logPageView();
-  };
-  document.getElementById('fb-login-btn').addEventListener('click', function() {
-    FB.login(
-      function(response) {
+};
+
+// fbLogin 함수 정의
+function fbLogin() {
+    FB.login(function(response) {
+        // 로그인 처리 코드 작성
         if (response.status === 'connected') {
-          FB.api('/me', 'get', { fields: 'name,email' }, function(r) {
-            const facebook_email = r.email;
-            const facebook_name = r.name;
-            console.log(facebook_email);
-            console.log(facebook_name);
-            window.location.href = "/login/sociallogin?email=" + encodeURIComponent(facebook_email) + "&name=" + encodeURIComponent(facebook_name);
-          });
+            FB.api('/me', 'get', { fields: 'name,email' }, function(r) {
+                const facebook_email = r.email;
+                const facebook_name = r.name;
+                console.log(facebook_email);
+                console.log(facebook_name);
+                window.location.href = "/login/sociallogin?email=" + encodeURIComponent(facebook_email) + "&name=" + encodeURIComponent(facebook_name);
+            });
         } else if (response.status === 'not_authorized') {
-          alert('로그인해야 이용 가능한 기능입니다.');
+            alert('로그인해야 이용 가능한 기능입니다.');
         } else {
-          alert('페이스북에 로그인해야 이용 가능한 기능입니다.');
+            alert('페이스북에 로그인해야 이용 가능한 기능입니다.');
         }
-      },
-      { scope: 'public_profile,email' }
-    );
-  });
-  
-  
+    }, { scope: 'public_profile,email' });
+}
+
+// onclick 속성에 함수 할당
+document.getElementById('fb-login-btn').onclick = fbLogin;
   
   
    // 수정할 예정
