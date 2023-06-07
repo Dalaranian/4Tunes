@@ -27,6 +27,7 @@ public class LoginController {
 
 	@GetMapping("/sociallogin")
 	public String socialLogin(@RequestParam("email") String email, @RequestParam("name") String name, Model model, HttpSession session) {
+		System.out.println(email+ " " + name);
 		boolean isUserExist = loginBiz.checkUserExist(email, name);
 		if (isUserExist) {
 			// DB에 있는 이메일이면 로그인 진행
@@ -36,7 +37,7 @@ public class LoginController {
 			loginUser.setUser_id(email);
 			loginUser.setUser_name(name);
 			
-			UserDto res = memberBiz.login(loginUser);
+			UserDto res = loginBiz.socialLogin(loginUser);
 			session.setAttribute("login", res);
 			
 			return "index"; // 로그인 후 이동할 페이지
