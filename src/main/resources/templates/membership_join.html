@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -20,6 +20,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/resources/js/kakaopay.js"></script>
     <script>
       $(document).ready(function () {
         // Add minus icon for collapse element which is open by default
@@ -47,6 +48,7 @@
               .removeClass("fa-minus-circle")
               .addClass("fa-plus-circle");
           });
+        
       });
     </script>
     <style>
@@ -64,10 +66,11 @@
       </div>
       <div id="login">
         <div>
-          <a href="/nav/login"
-            ><img class="login_img" src="/resources/img/usertest.png" />LOGIN</a
-          >
-        </div>
+  			<a th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
+    		<img class="login_img" src="/resources/img/usertest.png" />
+    		<span th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
+  			</a>
+		</div>
         <br />
         <div>
           <a href="/nav/mypage"
@@ -229,7 +232,8 @@
         </div>
         <!-- bootstrap template end -->
         <div id="membershipJoin">
-          <button
+          <!-- 로그인 되어있으면 카카오페이 결제창으로 이동 -->
+          <button th:if="${session.login != null}"
             type="button"
             class="btn btn-primary btn-lg"
             id="joinBtn"
@@ -237,7 +241,18 @@
           >
             Join Membership
           </button>
+          
+          <!-- 로그인 안되어있으면 로그인창으로 이동 -->
+          <button th:if="${session.login == null}"
+            type="button"
+            class="btn btn-primary btn-lg"
+            id="loginBtn"
+            style="background-color: #5c469c"
+          >
+            Join Membership
+          </button>
         </div>
+        
       </div>
     </div>
   </body>

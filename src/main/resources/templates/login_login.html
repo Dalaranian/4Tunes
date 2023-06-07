@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/resources/css/globalfont.css" />
 <link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
 <script async defer crossorigin="anonymous"
-	src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v17.0&6473407266107089=YOUR_APP_ID&autoLogAppEvents=1"
+	src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v17.0&197607052774933=YOUR_APP_ID&autoLogAppEvents=1"
 	nonce="YOUR_NONCE_VALUE">
 	</script>
 	<script type="text/javascript" src="/resources/js/sociallogin_face.js"> </script>
@@ -26,10 +26,12 @@
 			<a href="/"><img src="/resources/img/banner.png" /></a>
 		</div>
 		<div id="login">
-			<div>
-				<a href="/nav/login"><img class="login_img"
-					src="/resources/img/usertest.png" />LOGIN</a>
-			</div>
+		<div>
+  			<a th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
+    		<img class="login_img" src="/resources/img/usertest.png" />
+    		<span th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
+  			</a>
+		</div>
 			<br />
 			<div>
 				<a href="/nav/mypage"><img class="mypage_img"
@@ -59,7 +61,7 @@
 		<!-- 로그인 시작하는 부분 -->
 		<div class="loginbox">
 			<div class="loginbox_form_button">
-				<form method="post" action="/member/login">
+				<form method="post" action="/login/login">
 					<fieldset>
 						<h2>LOGIN</h2>
 						<!-- ID -->
