@@ -48,26 +48,26 @@
     <div id="main">
         <div class="community-main">
             <h1>커뮤니티 글 작성 및 수정</h1>
-            <form action="#">
+            <form action="/community/create" method="post">
                 <fieldset>
                     <div class="community-inf">
                         <span class="community-title">글 제목</span>
-                        <input type="text" id="community-input" placeholder="내용을 입력해주세요" />
+                        <input type="text" id="community-input" name="title" placeholder="내용을 입력해주세요" />
                     </div>
                     <div class="community-inf">
                         <span class="community-title">작성자</span>
-                        <input type="text" id="community-input" placeholder="로그인 되어있는 사용자 자동입력" disabled />
+                        <input type="text" id="community-input" name="author" placeholder="로그인 되어있는 사용자 자동입력" disabled />
                     </div>
                     <div class="community-inf">
                         <span class="community-text">내용</span>
-                        <textarea cols="50" rows="10" id="community-input" placeholder="내용을 입력해주세요"></textarea>
+                        <textarea cols="50" rows="10" id="community-input" name="content" placeholder="내용을 입력해주세요"></textarea>
                     </div>
                     <div class="community-btn">
                         <div id="input">
                             <button type="submit">작성 완료</button>
                         </div>
                         <div id="cancel">
-                            <button type="submit">취소</button>
+                            <button type="button" onclick="cancel()">취소</button>
                         </div>
                     </div>
                 </fieldset>
