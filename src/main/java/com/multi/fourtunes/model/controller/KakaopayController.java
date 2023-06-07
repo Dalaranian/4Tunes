@@ -29,7 +29,7 @@ public class KakaopayController {
 			con.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 			con.setDoOutput(true); //Input은 default가 true임
 			
-			String param = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name=membership&quantity=1&total_amount=990&tax_free_amount=0&approval_url=http://localhost:8787/nav/mypage&cancel_url=http://localhost:8787/nav/membership&fail_url=http://localhost:8787/nav/membership";
+			String param = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name=4TUNES_MEMBERSHIP&quantity=1&total_amount=990&tax_free_amount=0&approval_url=http://localhost:8787/nav/mypage&cancel_url=http://localhost:8787/nav/membership&fail_url=http://localhost:8787/nav/membership";
 		
 			OutputStream output = con.getOutputStream();
 			DataOutputStream dataoutput = new DataOutputStream(output);
@@ -56,5 +56,6 @@ public class KakaopayController {
 			e.printStackTrace();
 		}
 		return "{\"result\":\"NO\"}";
+		
 	}
 }

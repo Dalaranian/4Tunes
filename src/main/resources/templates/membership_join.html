@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -231,7 +231,8 @@
         </div>
         <!-- bootstrap template end -->
         <div id="membershipJoin">
-          <button
+          <!-- 로그인 되어있으면 카카오페이 결제창으로 이동 -->
+          <button th:if="${session.login != null}"
             type="button"
             class="btn btn-primary btn-lg"
             id="joinBtn"
@@ -239,7 +240,18 @@
           >
             Join Membership
           </button>
+          
+          <!-- 로그인 안되어있으면 로그인창으로 이동 -->
+          <button th:if="${session.login == null}"
+            type="button"
+            class="btn btn-primary btn-lg"
+            id="loginBtn"
+            style="background-color: #5c469c"
+          >
+            Join Membership
+          </button>
         </div>
+        
       </div>
     </div>
   </body>
