@@ -1,5 +1,7 @@
 package com.multi.fourtunes.model.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,10 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.multi.fourtunes.model.biz.LoginBiz;
+import com.multi.fourtunes.model.biz.UserBiz;
+import com.multi.fourtunes.model.dto.UserDto;
 
 @Controller
 @RequestMapping("/login")
 public class LoginController {
+	
+	@Autowired
+	private UserBiz memberBiz;
 
 	@Autowired
 	private LoginBiz loginBiz;
@@ -35,7 +42,7 @@ public class LoginController {
 			
 			String[] keywordList = loginBiz.getKeyword();
 			model.addAttribute("keywordlist", keywordList);			
-			return "login_join";
+			return "login_socialjoin";
 		}
 	}
 
@@ -53,5 +60,18 @@ public class LoginController {
 		}
 		model.addAttribute("keywordlist", keywordList);
 		return "login_join";
+	}
+	
+	@PostMapping("/login")
+	public String login(HttpSession session, UserDto dto) {
+//		System.out.println("LoginController 진입 \n" + dto.toString());
+		UserDto res = memberBiz.login(dto);
+//		System.out.println("리턴받은 dto : " + res.toString());
+		if (res != null) {
+			session.setAttribute("login", res);
+			return "index";
+		} else {
+			return "login_login";
+		}
 	}
 }
