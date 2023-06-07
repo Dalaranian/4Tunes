@@ -9,6 +9,29 @@
 <link rel="stylesheet" href="/resources/css/globalfont.css" />
 <link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+	Kakao.init('aef00a860346906c88050b79c5211154'); //발급받은 키 중 javascript키를 사용해준다.
+	console.log(Kakao.isInitialized()); // sdk초기화여부판단
+	//카카오로그인
+	function kakao_id_login() {
+	    Kakao.Auth.login({
+	      success: function (response) {
+	        Kakao.API.request({
+	          url: '/v2/user/me',
+	          success: function (response) {
+	        	  console.log(response)
+	          },
+	          fail: function (error) {
+	            console.log(error)
+	          },
+	        })
+	      },
+	      fail: function (error) {
+	        console.log(error)
+	      },
+	    })
+	  }
+	</script>
 <script async defer crossorigin="anonymous"
 	src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v17.0&6473407266107089=YOUR_APP_ID&autoLogAppEvents=1"
 	nonce="YOUR_NONCE_VALUE"></script>
@@ -96,13 +119,16 @@
 				<!-- 소셜 로그인 -->
 				<div class="socialLogin">
 					<div id="naver_id_login"></div>
-					<div id="kakao_id_login"></div>
+					<button onclick="kakao_id_login();" id= "kakao_id_login">
+						<a href="javascript:void(0)">
+					</button>
 					<button id="fb-login-btn"></button>
 
 				</div>
 			</div>
 		</div>
 	</div>
+	
 	<script type="text/javascript" src="/resources/js/sociallogin_kakao.js"> </script>
 	<script type="text/javascript" src="/resources/js/sociallogin_face.js"> </script>
 	<script type="text/javascript" src=/resources/js/sociallogin_naver.js /></script>
