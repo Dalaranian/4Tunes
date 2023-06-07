@@ -35,8 +35,7 @@ public class LoginBizImple implements LoginBiz {
 
 	@Override
 	public UserDto login(UserDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDao.login(dto);
 	}
 
 	@Override
