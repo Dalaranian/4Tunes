@@ -60,8 +60,8 @@
 
           disabledInput.val(function (index, value) {
             return value
-              ? value + "/ " + selectedOptions.join("/ ")
-              : selectedOptions.join("/ ");
+              ? value + ", " + selectedOptions.join(", ")
+              : selectedOptions.join(", ");
           });
           kwSelect.find("option:selected").hide();
         });
