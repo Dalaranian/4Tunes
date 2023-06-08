@@ -1,5 +1,6 @@
 package com.multi.fourtunes.apis;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -9,6 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class ApiTestController {
+	
+	// 이런식으로 꼭 해줘야 한다고 함
+	@Autowired
+	YoutubeApi getLink;
 	
 	@GetMapping("/gototestpage")
 	public String pageMove() {
@@ -21,9 +26,11 @@ public class ApiTestController {
 	}
 	
 	@GetMapping("/YoutubeData")
-	public void test2() {
-		YoutubeApi getLink = new YoutubeApi();
+	public String test2() {
+//		YoutubeApi getLink = new YoutubeApi();
 		getLink.embedLinkGetter("아이유","밤편지");
+		
+		return "apitestpage";
 	}
 	
 }
