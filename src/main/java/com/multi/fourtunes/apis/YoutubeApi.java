@@ -37,10 +37,18 @@ public class YoutubeApi {
 	public String embedLinkGetter(String singer, String title) {
 
 		restTemplate = new RestTemplate();
+		
+//		파라미터로 넘어온 단어들 조합하기
+		StringBuilder query = new StringBuilder();
+		query.append(singer);
+		query.append("-");
+		query.append(title);
+		
+		System.out.println(query.toString());
 
 		// UriComponentsBuilder를 사용하여 URL 및 쿼리 파라미터를 생성
 		UriComponents uriComponents = UriComponentsBuilder.fromHttpUrl(apiUrl).queryParam("part", "id,snippet")
-				.queryParam("q", singer + "_" + title).queryParam("key", apiKey).queryParam("type", "video").build();
+				.queryParam("q", query.toString()).queryParam("key", apiKey).queryParam("type", "video").build();
 
 		ResponseEntity<String> responseEntity = restTemplate.exchange(uriComponents.toUri(), HttpMethod.GET, null,
 				String.class);
@@ -59,14 +67,14 @@ public class YoutubeApi {
 //			System.out.println(itemsNode.toPrettyString());
 //			System.out.println("-------------------------------------");
 			JsonNode targetNode = itemsNode.get(0);
-//			System.out.println(targetNode.toPrettyString());
+			System.out.println(targetNode.toPrettyString());
 //			System.out.println("-------------------------------------");
 			JsonNode targetIdNode = targetNode.get("id");
 //			System.out.println(targetIdNode.toPrettyString());
 //			System.out.println("-------------------------------------");
 			String id = targetIdNode.get("videoId").asText();
 
-			return EMBED_LINK_PREFIX + "id";
+			return EMBED_LINK_PREFIX + id;
 		} catch (JsonMappingException e) {
 			// TODO Auto-generated catch block
 			System.out.println(singer + " " + title + "노래는 뭔가 뭔가 이상함");
