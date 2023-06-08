@@ -47,19 +47,19 @@
     <div class="detail">
       <h1 class="detail-title">글 제목</h1>
       <div class="detail-btns">
-        <button style="display: inline-block" id="update-btn"><a href="/innerpaging/community/write">수정하기</a></button>
+        <button style="display: inline-block" id="update-btn"><a href="/community/write">수정하기</a></button>
         <button style="display: inline-block" id="delete-btn"><a href="/">삭제하기</a></button>
         <button style="display: inline-block" id="write-btn"><a href="/">글 작성</a></button>
         <button style="display: inline-block" id="report-btn"><a href="/">신고하기</a></button>
       </div>
 
       <div class="detail-wrap">
-        <div class="detail-name"><span>&nbsp작성자 :</span><span>{$user}</span></div>
-        <div class="detail-count"><span>&nbsp조회수 :</span><span>{$view_cw}</span></div>
-        <div class="detail-content">
-          <div class="content-box" input type="text" id="content-input">내용을 보여줍니다</div>
-        </div>
-      </div>
+  <div class="detail-name"><span>&nbsp;작성자 :</span><span th:text="${user}"></span></div>
+  <div class="detail-count"><span>&nbsp;조회수 :</span><span th:text="${view_cw}"></span></div>
+  <div class="detail-content">
+    <div class="content-box" type="text" id="content-input">내용을 보여줍니다</div>
+  </div>
+</div>
 
 
       <div class="comment-main">

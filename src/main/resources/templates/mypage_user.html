@@ -13,6 +13,7 @@
      rel="shortcut icon"
      href="/resources/img/realfavicon.ico"
     />
+    <script type="text/javascript" src="/resources/js/keywordlist.js" ></script>
     <title>4Tunes</title>
 </head>
 
@@ -86,14 +87,8 @@
                         </div>
                         <div class="mypage_kw">
                             <select name="keyword" id="kw" multiple>
-                                <option value="kpop">KPOP</option>
-                                <option value="bal">발라드</option>
-                                <option value="pop">팝송</option>
-                                <option value="rap">랩</option>
-                                <option value="rap">키</option>
-                                <option value="rap">워</option>
-                                <option value="rap">드</option>
-                            </select>
+ 				 				<option th:each="keyword : ${keywordlist}" th:value="${keyword}" th:text="${keyword}"></option>
+							</select>
                         </div>
                         <div class="mypage_kw">
                             <input type="text" id="disabled" placeholder="선택된 내용 보여주기" disabled>

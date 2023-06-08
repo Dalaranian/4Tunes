@@ -71,6 +71,13 @@ public class LoginController {
 		return "login_join";
 	}
 	
+
+	@GetMapping("/callback")
+	public String callback() {
+		return "callback";
+	}
+}
+
 	@PostMapping("/login")
 	public String login(HttpSession session, UserDto dto) {
 //		System.out.println("LoginController 진입 \n" + dto.toString());
@@ -104,4 +111,3 @@ public class LoginController {
         return "index"; 
     }
 }
-
