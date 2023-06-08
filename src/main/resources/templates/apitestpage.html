@@ -50,8 +50,17 @@ body {
 		</table>
 		<!-- 여기부터 TEST COMPONENT -->
 		<div>
-			<label>유튭 테스트</label>
-			<button onclick="location.href='/YoutubeData'" class="btn btn-dark btn-lg">Youtube</button>
+			<!-- <label>유튭 테스트</label>
+			<button onclick="location.href='/YoutubeData'" class="btn btn-dark btn-lg">Youtube</button> -->
+			<form action="/YoutubeData" method="GET">
+				<fieldset>
+					<label>Singer</label>
+					<input type="text" name="singer">
+					<label>Title</label>
+					<input type="text" name="title">
+					<input type="submit">
+				</fieldset>
+			</form>
 		</div>
 	</div>
 </body>

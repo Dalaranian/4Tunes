@@ -26,9 +26,15 @@ public class ApiTestController {
 	}
 	
 	@GetMapping("/YoutubeData")
-	public String test2() {
+	public String test2(String singer, String title) {
+		
+		System.out.println("YouTubeController 진입");
+		
 //		YoutubeApi getLink = new YoutubeApi();
-		getLink.embedLinkGetter("아이유","밤편지");
+		
+		String link = getLink.embedLinkGetter(singer, title);
+		
+		System.out.println(link);
 		
 		return "apitestpage";
 	}
