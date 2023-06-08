@@ -12,7 +12,7 @@ public interface UserMapper {
 	@Select(" SELECT * FROM USER WHERE USER_ID=#{user_id} AND USER_PW=#{user_pw} ")
 	UserDto login(UserDto dto);
 
-	@Select("SELECT * FROM USER WHERE USER_ID=#{user_id} AND USER_NAME=#{user_name}")
-	UserDto selectUserByEmailAndId(@Param("user_id") String userId, @Param("user_name") String userName);
+	@Select("SELECT * FROM USER WHERE USER_ID = #{email} AND USER_NAME = #{userId}")
+	UserDto selectUserByEmailAndId(String email, String userId);
 	
 }

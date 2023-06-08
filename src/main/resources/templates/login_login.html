@@ -8,20 +8,11 @@
 <link rel="stylesheet" href="/resources/css/login_login.css" />
 <link rel="stylesheet" href="/resources/css/globalfont.css" />
 <link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
-<script>
-	  window.fbAsyncInit = function() {
-	    FB.init({
-	      appId: '/',
-	      cookie: true,
-	      xfbml: true,
-	      version: 'v17.0'
-	    });
-	    FB.AppEvents.logPageView();
-	  };
-	</script>
 <script async defer crossorigin="anonymous"
-	src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v17.0&//=YOUR_APP_ID&autoLogAppEvents=1"
-	nonce="YOUR_NONCE_VALUE"></script>
+	src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v17.0&197607052774933=YOUR_APP_ID&autoLogAppEvents=1"
+	nonce="YOUR_NONCE_VALUE">
+	</script>
+	<script type="text/javascript" src="/resources/js/sociallogin_face.js"> </script>
 <title>4Tunes</title>
 <script type="text/javascript"
 	src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
@@ -35,10 +26,12 @@
 			<a href="/"><img src="/resources/img/banner.png" /></a>
 		</div>
 		<div id="login">
-			<div>
-				<a href="/nav/login"><img class="login_img"
-					src="/resources/img/usertest.png" />LOGIN</a>
-			</div>
+		<div>
+  			<a th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
+    		<img class="login_img" src="/resources/img/usertest.png" />
+    		<span th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
+  			</a>
+		</div>
 			<br />
 			<div>
 				<a href="/nav/mypage"><img class="mypage_img"
@@ -68,7 +61,7 @@
 		<!-- 로그인 시작하는 부분 -->
 		<div class="loginbox">
 			<div class="loginbox_form_button">
-				<form method="post" action="/member/login">
+				<form method="post" action="/login/login">
 					<fieldset>
 						<h2>LOGIN</h2>
 						<!-- ID -->
@@ -105,35 +98,12 @@
 					onclick="location.href='/login/join'">회원가입</button>
 				<!-- 소셜 로그인 -->
 				<div class="socialLogin">
-					<div id="naver_id_login"></div>
-					<a href="#"><img src="/resources/img/kakao.webp" /></a>
-
-					<button id="fb-login-btn"></button>
-					<script> 
-            document.getElementById('fb-login-btn').addEventListener('click', function() {
-              FB.login(
-                function(response) {
-                  if (response.status === 'connected') {
-                    FB.api('/me', 'get', { fields: 'name,email' }, function(r) {
-                      const facebook_email = r.email;
-                      const facebook_name = r.name;
-                      console.log(facebook_email);
-                      console.log(facebook_name);
-                      window.location.href = "/facebook/login?email=" + encodeURIComponent(facebook_email) + "&name=" + encodeURIComponent(facebook_name);
-                    });
-                  } else if (response.status === 'not_authorized') {
-                    alert('로그인해야 이용 가능한 기능입니다.');
-                  } else {
-                    alert('페이스북에 로그인해야 이용 가능한 기능입니다.');
-                  }
-                },
-                { scope: 'public_profile,email' }
-              );
-            });
-            </script>
-				</div>
-			</div>
-		</div>
+				  <div id="naver_id_login"></div>
+				    <a href="#"><img src="/resources/img/kakao.webp" /></a>
+				    <button id="fb-login-btn" onclick="fbLogin()"></button>
+				  </div>
+			  </div>
+		 </div>
 	</div>
 	<script type="text/javascript" src="/resources/js/sociallogin_naver.js" ></script>
 </body>   

@@ -1,7 +1,5 @@
 package com.multi.fourtunes.model.dto;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,8 +18,5 @@ public class UserDto {
 	private String user_name;
 	private String user_pw;
 	private String user_grade;
-	private int membership_duration;
-	private Date pay_date;
-	
 	
 }
