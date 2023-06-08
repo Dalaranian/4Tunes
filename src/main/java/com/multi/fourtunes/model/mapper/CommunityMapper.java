@@ -10,9 +10,15 @@ import com.multi.fourtunes.model.dto.CommunityDto;
 @Mapper
 public interface CommunityMapper {
 
-    @Select("SELECT * FROM COMMUNITY_BOARD")
+    @Select(" SELECT * FROM COMMUNITY_BOARD ")
     List<CommunityDto> getAll();
     
-    @Select("SELECT * FROM COMMUNITY_BOARD WHERE boardNo = #{boardNo}")
+    @Select(" SELECT * FROM COMMUNITY_BOARD WHERE boardNo = #{boardNo} ")
     CommunityDto get(int boardNo);
+
+	int insert(CommunityDto community);
+
+	int update(CommunityDto community);
+
+	int delete(int boardNo);
 }

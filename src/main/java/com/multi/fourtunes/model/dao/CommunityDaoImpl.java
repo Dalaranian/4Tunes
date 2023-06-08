@@ -16,7 +16,7 @@ public class CommunityDaoImpl implements CommunityDao {
 
 	@Override
 	public List<CommunityDto> getAll() {
-		return communityMapper.getAll();
+	    return communityMapper.getAll();
 	}
 
 	@Override
@@ -26,19 +26,16 @@ public class CommunityDaoImpl implements CommunityDao {
 
 	@Override
 	public int insert(CommunityDto community) {
-		// TODO Auto-generated method stub
-		return 0;
+	    return communityMapper.insert(community);
 	}
 
 	@Override
 	public int update(CommunityDto community) {
-		// TODO Auto-generated method stub
-		return 0;
+	    return communityMapper.update(community);
 	}
 
 	@Override
 	public int delete(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	    return communityMapper.delete(boardNo);
 	}
 }
