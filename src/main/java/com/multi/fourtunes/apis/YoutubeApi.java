@@ -17,12 +17,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class YoutubeApi {
 
-	/**
-	 * @param singer (가수 이름)
-	 * @param title  (노래 제목)
-	 * @return EmebedLink by String
-	 */
-
 	private RestTemplate restTemplate;
 
 	// 요청할 API 의 URL
@@ -34,6 +28,11 @@ public class YoutubeApi {
 	@Value("${youtubeapi.key}")
 	private String apiKey;
 
+	/**
+	 * @param singer (가수 이름)
+	 * @param title  (노래 제목)
+	 * @return EmebedLink by String
+	 */
 	public String embedLinkGetter(String singer, String title) {
 
 		restTemplate = new RestTemplate();
@@ -76,7 +75,7 @@ public class YoutubeApi {
 //			System.out.println(targetIdNode.toPrettyString());
 //			System.out.println("-------------------------------------");
 			String id = targetIdNode.get("videoId").asText();
-			
+
 			return id;
 		} catch (JsonMappingException e) {
 			// TODO Auto-generated catch block
