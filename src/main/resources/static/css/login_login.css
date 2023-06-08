@@ -215,4 +215,14 @@ body {
   width: 72px;
   height: 72px;
   border: none;
+  
+}
+#kakao_id_login{
+	background: url("/resources/img/kakao.png");
+    width: 72px;
+    height: 72px;
+    background-size: cover;
+	border: none;
+	border-radius: 50%; 
+	cursor: pointer;
 }
