@@ -1,46 +1,41 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <script
-      type="text/javascript"
-      src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
-      charset="utf-8"
-    ></script>
-    <script
-      type="text/javascript"
-      src="http://code.jquery.com/jquery-1.11.3.min.js"
-    ></script>
-  </head>
-  <body>
-    <div id="naver_id_login"></div>
-    <script type="text/javascript">
-      var naver_id_login = new naver_id_login(
-        "_Bz0QIIPqcH1PJ3NCi5I",
-        "http://localhost:8787/login/sociallogin"
-      );
-      var state = naver_id_login.getUniqState();
-      naver_id_login.setButton("green", 1, 1);
-      naver_id_login.setDomain("http://localhost:8787");
-      naver_id_login.setState(state);
-      naver_id_login.init_naver_id_login();
+<head>
+<script type="text/javascript"
+	src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
+	charset="utf-8"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+	<div id="naver_id_login"></div>
+	<script type="text/javascript">
+		var naver_id_login = new naver_id_login("_Bz0QIIPqcH1PJ3NCi5I",
+				"http://localhost:8787/login/sociallogin");
+		var state = naver_id_login.getUniqState();
+		naver_id_login.setButton("green", 1, 1);
+		naver_id_login.setDomain("http://localhost:8787");
+		naver_id_login.setState(state);
+		naver_id_login.init_naver_id_login();
 
-      // ¸®´ÙÀÌ·ºÆ® ÇÔ¼ö
-      function redirectToSocialLogin(email, name) {
-        var url = "/login/sociallogin?email=" + encodeURIComponent(email) + "&name=" + encodeURIComponent(name);
-        window.location.href = url;
-      }
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ì·ï¿½Æ® ï¿½Ô¼ï¿½
+		function redirectToSocialLogin(email, name) {
+			var url = "/login/sociallogin?email=" + encodeURIComponent(email)
+					+ "&name=" + encodeURIComponent(name);
+			window.location.href = url;
+		}
 
-      // ³×ÀÌ¹ö »ç¿ëÀÚ ÇÁ·ÎÇÊ Á¶È¸ ÀÌÈÄ ÇÁ·ÎÇÊ Á¤º¸¸¦ Ã³¸®ÇÒ callback function
-      function naverSignInCallback() {
-        var email = naver_id_login.getProfileData("email");
-        var name = naver_id_login.getProfileData("name");
+		// ï¿½ï¿½ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ callback function
+		function naverSignInCallback() {
+			var email = naver_id_login.getProfileData("email");
+			var name = naver_id_login.getProfileData("name");
 
-        // ¸®´ÙÀÌ·ºÆ® È£Ãâ
-        redirectToSocialLogin(email, name);
-      }
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Ì·ï¿½Æ® È£ï¿½ï¿½
+			redirectToSocialLogin(email, name);
+		}
 
-      // ³×ÀÌ¹ö »ç¿ëÀÚ ÇÁ·ÎÇÊ Á¶È¸
-      naver_id_login.get_naver_userprofile("naverSignInCallback()");
-    </script>
-  </body>
+		// ï¿½ï¿½ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
+		naver_id_login.get_naver_userprofile("naverSignInCallback()");
+	</script>
+</body>
 </html>

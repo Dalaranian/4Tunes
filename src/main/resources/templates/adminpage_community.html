@@ -1,87 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="/resources/css/nav.css" />
-    <link rel="stylesheet" href="/resources/css/globalfont.css" />
-    <link rel="stylesheet" href="/resources/css/adminpage_community.css" />
-    <link
-      rel="shortcut icon"
-      href="/resources/img/realfavicon.ico"
-    />
-    <title>4Tunes</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="/resources/css/nav.css" />
+<link rel="stylesheet" href="/resources/css/globalfont.css" />
+<link rel="stylesheet" href="/resources/css/adminpage_community.css" />
+<link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
+<title>4Tunes</title>
 </head>
 
 <body>
-  <div id="nav">
-    <div class="banner">
-      <a href="/"><img src="/resources/img/banner.png" /></a>
-    </div>
-    <div id="login">
-       <div>
-  			<a th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
-    		<img class="login_img" src="/resources/img/usertest.png" />
-    		<span th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
-  			</a>
+	<div id="nav">
+		<div class="banner">
+			<a href="/"><img src="/resources/img/banner.png" /></a>
 		</div>
-      <br />
-      <div>
-        <a href="/nav/mypage"
-          ><img class="mypage_img" src="/resources/img/file.png" />MYPAGE</a
-        >
-      </div>
-    </div>
-    <div class="search-container">
-      <span class="search-icon"
-        ><img src="/resources/img/search.png" class="search-icon"
-      /></span>
-      <input type="text" class="search-input" placeholder="키워드 입력" />
-    </div>
-    <div><a href="/nav/suggested">맞춤추천</a></div>
-    <div><a href="/nav/chart">인기차트</a></div>
-    <div><a href="/nav/community">커뮤니티</a></div>
-    <div><a href="/nav/membership">멤버십</a></div>
-  </div>
+		<div id="login">
+			<div>
+				<a
+					th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
+					<img class="login_img" src="/resources/img/usertest.png" /> <span
+					th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
+				</a>
+			</div>
+			<br />
+			<div>
+				<a href="/nav/mypage"><img class="mypage_img"
+					src="/resources/img/file.png" />MYPAGE</a>
+			</div>
+		</div>
+		<div class="search-container">
+			<span class="search-icon"><img
+				src="/resources/img/search.png" class="search-icon" /></span> <input
+				type="text" class="search-input" placeholder="키워드 입력" />
+		</div>
+		<div>
+			<a href="/nav/suggested">맞춤추천</a>
+		</div>
+		<div>
+			<a href="/nav/chart">인기차트</a>
+		</div>
+		<div>
+			<a href="/nav/community">커뮤니티</a>
+		</div>
+		<div>
+			<a href="/nav/membership">멤버십</a>
+		</div>
+	</div>
 
-    <div id="main">
-        <h1>게시글 관리</h1>
+	<div id="main">
+		<h1>게시글 관리</h1>
 
-        <div class="adminpage_contents">
-          
-            <div class="community_list_wrap">
-                <div class="community_list">
-                    <div class="top">
-                        <div class="num">회원번호</div>
-                        <div class="name">이름</div>
-                        <div class="id">아이디</div>
-                        <div class="title">게시글 제목</div>
-                        <div class="reports">신고 누적 횟수</div>
-                        <div class="confirm">확인 버튼</div>
-                    </div>
-                    <div>
-                        <div class="num">1</div>
-                        <div class="name">배정민</div>
-                        <div class="id">princess@naver.com</div>
-                        <div class="title"><a href="#">반갑습니다</a></div>
-                        <div class="reports">12</div>
-                        <div class="confirm"><input type="button" id="confirm" value="문제없음" onclick=""></div>
-                    </div>
-                    <div>
-                        <div class="num">2</div>
-                        <div class="name">조민수</div>
-                        <div class="id">minsu@naver.com</div>
-                        <div class="title"><a href="#">ㅎㅇㅎㅇㅎㅇ</a></div>
-                        <div class="reports">21</div>
-                        <div class="confirm"><input type="button" id="confirm" value="문제없음" onclick=""></div>
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-    </div>
-    
+		<div class="adminpage_contents">
+
+			<div class="community_list_wrap">
+				<div class="community_list">
+					<div class="top">
+						<div class="num">회원번호</div>
+						<div class="name">이름</div>
+						<div class="id">아이디</div>
+						<div class="title">게시글 제목</div>
+						<div class="reports">신고 누적 횟수</div>
+						<div class="confirm">확인 버튼</div>
+					</div>
+					<div>
+						<div class="num">1</div>
+						<div class="name">배정민</div>
+						<div class="id">princess@naver.com</div>
+						<div class="title">
+							<a href="#">반갑습니다</a>
+						</div>
+						<div class="reports">12</div>
+						<div class="confirm">
+							<input type="button" id="confirm" value="문제없음" onclick="">
+						</div>
+					</div>
+					<div>
+						<div class="num">2</div>
+						<div class="name">조민수</div>
+						<div class="id">minsu@naver.com</div>
+						<div class="title">
+							<a href="#">ㅎㅇㅎㅇㅎㅇ</a>
+						</div>
+						<div class="reports">21</div>
+						<div class="confirm">
+							<input type="button" id="confirm" value="문제없음" onclick="">
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>

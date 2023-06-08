@@ -25,12 +25,13 @@
 			<a href="/"><img src="/resources/img/banner.png" /></a>
 		</div>
 		<div id="login">
-		<div>
-  			<a th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
-    		<img class="login_img" src="/resources/img/usertest.png" />
-    		<span th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
-  			</a>
-		</div>
+			<div>
+				<a
+					th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
+					<img class="login_img" src="/resources/img/usertest.png" /> <span
+					th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
+				</a>
+			</div>
 			<br />
 			<div>
 				<a href="/nav/mypage"><img class="mypage_img"
@@ -99,7 +100,7 @@
 				<div class="socialLogin">
 
 					<div id="naver_id_login"></div>
-					<a href ="javascript:kakao_id_login()" id= "kakao_id_login"></a>
+					<a href="javascript:kakao_id_login()" id="kakao_id_login"></a>
 					<button id="fb-login-btn"></button>
 
 				</div>
@@ -107,7 +108,8 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="/resources/js/sociallogin_kakao.js">	
+	<script type="text/javascript" src="/resources/js/sociallogin_kakao.js">
+		
 	</script>
 	<script type="text/javascript" src="/resources/js/sociallogin_face.js">
 		

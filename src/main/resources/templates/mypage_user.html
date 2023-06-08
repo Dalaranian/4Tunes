@@ -2,106 +2,115 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="/resources/css/nav.css" />
-    <link rel="stylesheet" href="/resources/css/globalfont.css" />
-    <link rel="stylesheet" href="/resources/css/mypage_user.css" />
-    <link
-     rel="shortcut icon"
-     href="/resources/img/realfavicon.ico"
-    />
-    <script type="text/javascript" src="/resources/js/keywordlist.js" ></script>
-    <title>4Tunes</title>
+<link rel="stylesheet" href="/resources/css/nav.css" />
+<link rel="stylesheet" href="/resources/css/globalfont.css" />
+<link rel="stylesheet" href="/resources/css/mypage_user.css" />
+<link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
+<script type="text/javascript" src="/resources/js/keywordlist.js"></script>
+<title>4Tunes</title>
 </head>
 
 <body>
-  <div id="nav">
-    <div class="banner">
-        <a href="/"><img src="/resources/img/banner.png" /></a>
-      </div>
-      <div id="login">
-     	 <div>
-  			<a th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
-    		<img class="login_img" src="/resources/img/usertest.png" />
-    		<span th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
-  			</a>
+	<div id="nav">
+		<div class="banner">
+			<a href="/"><img src="/resources/img/banner.png" /></a>
 		</div>
-        <br />
-        <div>
-          <a href="/nav/mypage"
-            ><img class="mypage_img" src="/resources/img/file.png" />MYPAGE</a
-          >
-        </div>
-      </div>
-      <div class="search-container">
-        <span class="search-icon"
-          ><img src="/resources/img/search.png" class="search-icon"
-        /></span>
-        <input type="text" class="search-input" placeholder="키워드 입력" />
-      </div>
-      <div><a href="/nav/suggested">맞춤추천</a></div>
-      <div><a href="/nav/chart">인기차트</a></div>
-      <div><a href="/nav/community">커뮤니티</a></div>
-      <div><a href="/nav/membership">멤버십</a></div>
-    </div>
+		<div id="login">
+			<div>
+				<a
+					th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
+					<img class="login_img" src="/resources/img/usertest.png" /> <span
+					th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
+				</a>
+			</div>
+			<br />
+			<div>
+				<a href="/nav/mypage"><img class="mypage_img"
+					src="/resources/img/file.png" />MYPAGE</a>
+			</div>
+		</div>
+		<div class="search-container">
+			<span class="search-icon"><img
+				src="/resources/img/search.png" class="search-icon" /></span> <input
+				type="text" class="search-input" placeholder="키워드 입력" />
+		</div>
+		<div>
+			<a href="/nav/suggested">맞춤추천</a>
+		</div>
+		<div>
+			<a href="/nav/chart">인기차트</a>
+		</div>
+		<div>
+			<a href="/nav/community">커뮤니티</a>
+		</div>
+		<div>
+			<a href="/nav/membership">멤버십</a>
+		</div>
+	</div>
 
-    <div id="main">
-        <h1>ooo님 안녕하세요 !</h1>
+	<div id="main">
+		<h1>ooo님 안녕하세요 !</h1>
 
-        <div class="mypage_nav">
-            <ul>
-                <li id="info" onclick="location.href='/innerpaging/mypage/user'">내 정보 조회</li>
-                <li id="analysis" onclick="alert('개발중인 기능입니다. ')">내 통계 조회</li>
-                <li id="community" onclick="location.href='/innerpaging/mypage/community'">내 활동 조회</li>
-            </ul>
-        </div>
-        <div class="mypage_contents">
-            <h1>내 정보 조회 및 수정</h1>
-            <div class="mypage_inf">
-                <div class="mypage">
-                    <span class="mypage_title">아이디</span>
-                    <input type="text" id="mypage_input" placeholder="Email를 입력해 주세요">
-                </div>
-                <div class="mypage">
-                    <span class="mypage_title">이름</span>
-                    <input type="text" id="mypage_input" placeholder="이름를 입력해 주세요">
-                </div>
-                <div class="mypage">
-                    <span class="mypage_title">비밀번호</span>
-                    <input type="password" id="mypage_input" placeholder="비밀번호을 입력해 주세요">
-                </div>
-                <div class="mypage">
-                    <span class="mypage_title">비밀번호 확인</span>
-                    <input type="password" id="mypage_input" placeholder="비밀번호 확인을 해주세요">
-                </div>
-                <div class="mypage_kw_group">
-                    <div class="mypage_keyword">
-                        <p class="mypage_title">KeyWord</p>
-                    </div>
-                    <div class="mypage_keyword_group">
-                        <div class="mypage_kw">
-                            <input type="search" id="mypage_input" placeholder="내용을 입력해주세요.">
-                        </div>
-                        <div class="mypage_kw">
-                            <select name="keyword" id="kw" multiple>
- 				 				<option th:each="keyword : ${keywordlist}" th:value="${keyword}" th:text="${keyword}"></option>
+		<div class="mypage_nav">
+			<ul>
+				<li id="info" onclick="location.href='/innerpaging/mypage/user'">내
+					정보 조회</li>
+				<li id="analysis" onclick="alert('개발중인 기능입니다. ')">내 통계 조회</li>
+				<li id="community"
+					onclick="location.href='/innerpaging/mypage/community'">내 활동
+					조회</li>
+			</ul>
+		</div>
+		<div class="mypage_contents">
+			<h1>내 정보 조회 및 수정</h1>
+			<div class="mypage_inf">
+				<div class="mypage">
+					<span class="mypage_title">아이디</span> <input type="text"
+						id="mypage_input" placeholder="Email를 입력해 주세요">
+				</div>
+				<div class="mypage">
+					<span class="mypage_title">이름</span> <input type="text"
+						id="mypage_input" placeholder="이름를 입력해 주세요">
+				</div>
+				<div class="mypage">
+					<span class="mypage_title">비밀번호</span> <input type="password"
+						id="mypage_input" placeholder="비밀번호을 입력해 주세요">
+				</div>
+				<div class="mypage">
+					<span class="mypage_title">비밀번호 확인</span> <input type="password"
+						id="mypage_input" placeholder="비밀번호 확인을 해주세요">
+				</div>
+				<div class="mypage_kw_group">
+					<div class="mypage_keyword">
+						<p class="mypage_title">KeyWord</p>
+					</div>
+					<div class="mypage_keyword_group">
+						<div class="mypage_kw">
+							<input type="search" id="mypage_input" placeholder="내용을 입력해주세요.">
+						</div>
+						<div class="mypage_kw">
+							<select name="keyword" id="kw" multiple>
+								<option th:each="keyword : ${keywordlist}" th:value="${keyword}"
+									th:text="${keyword}"></option>
 							</select>
-                        </div>
-                        <div class="mypage_kw">
-                            <input type="text" id="disabled" placeholder="선택된 내용 보여주기" disabled>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="mypage_kw_btn">
-                    <button type = "submit">수정 완료</button>
-                </div>
-        </div>
-    </div>
+						</div>
+						<div class="mypage_kw">
+							<input type="text" id="disabled" placeholder="선택된 내용 보여주기"
+								disabled>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="mypage_kw_btn">
+				<button type="submit">수정 완료</button>
+			</div>
+		</div>
+	</div>
 
 </body>
 
