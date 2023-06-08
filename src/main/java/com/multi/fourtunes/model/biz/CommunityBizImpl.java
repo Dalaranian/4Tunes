@@ -20,7 +20,7 @@ public class CommunityBizImpl implements CommunityBiz {
 	public List<CommunityDto> getAll() {
 		return communityDao.getAll();
 	}
-
+	
 	@Override
 	public CommunityDto get(int boardNo) {
 		// TODO Auto-generated method stub
