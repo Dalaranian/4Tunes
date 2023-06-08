@@ -67,7 +67,7 @@ public class YoutubeApi {
 //			System.out.println(itemsNode.toPrettyString());
 //			System.out.println("-------------------------------------");
 			JsonNode targetNode = itemsNode.get(0);
-			System.out.println(targetNode.toPrettyString());
+//			System.out.println(targetNode.toPrettyString());
 //			System.out.println("-------------------------------------");
 			JsonNode targetIdNode = targetNode.get("id");
 //			System.out.println(targetIdNode.toPrettyString());
