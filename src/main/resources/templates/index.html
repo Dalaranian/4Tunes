@@ -17,10 +17,11 @@
       </div>
       <div id="login">
         <div>
-          <a href="/nav/login"
-            ><img class="login_img" src="/resources/img/usertest.png" />LOGIN</a
-          >
-        </div>
+  			<a th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
+    		<img class="login_img" src="/resources/img/usertest.png" />
+    		<span th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
+  			</a>
+		</div>
         <br />
         <div>
           <a href="/nav/mypage"

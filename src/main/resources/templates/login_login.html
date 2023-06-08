@@ -25,10 +25,12 @@
 			<a href="/"><img src="/resources/img/banner.png" /></a>
 		</div>
 		<div id="login">
-			<div>
-				<a href="/nav/login"><img class="login_img"
-					src="/resources/img/usertest.png" />LOGIN</a>
-			</div>
+		<div>
+  			<a th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
+    		<img class="login_img" src="/resources/img/usertest.png" />
+    		<span th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
+  			</a>
+		</div>
 			<br />
 			<div>
 				<a href="/nav/mypage"><img class="mypage_img"
@@ -58,7 +60,7 @@
 		<!-- 로그인 시작하는 부분 -->
 		<div class="loginbox">
 			<div class="loginbox_form_button">
-				<form method="post" action="/member/login">
+				<form method="post" action="/login/login">
 					<fieldset>
 						<h2>LOGIN</h2>
 						<!-- ID -->

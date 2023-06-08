@@ -15,12 +15,16 @@ public class LoginBizImple implements LoginBiz {
 	
 	@Autowired
 	private KeywordDao keywordDao;
+	
 
 	@Override
 	public boolean checkUserExist(String email, String userId) {
+		// 방금한거
+		System.out.println("email : " + email + "\nuserId : " + userId);
 		UserDto userDTO = userDao.selectUserByEmailAndId(email, userId);
-		System.out.println("LoginBizImple " + userDTO.toString());
-		return userDTO != null ? true : false;
+		// 방금한거
+		//System.out.println("LoginBizImple " + userDTO.toString());
+		return (userDTO != null) ? true : false;
 	}
 
 	@Override
@@ -31,8 +35,7 @@ public class LoginBizImple implements LoginBiz {
 
 	@Override
 	public UserDto login(UserDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDao.login(dto);
 	}
 
 	@Override

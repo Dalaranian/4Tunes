@@ -1,9 +1,10 @@
 package com.multi.fourtunes.model.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,9 +64,9 @@ public class LoginController {
 	public String join(Model model) {
 		System.out.println("join 진입");
 		String[] keywordList = loginBiz.getKeyword();
-		for(String str:keywordList) {
-			System.out.println("키워드 : " + str);
-		}
+//		for(String str:keywordList) {
+//			System.out.println("키워드 : " + str);
+//		}
 		model.addAttribute("keywordlist", keywordList);
 		return "login_join";
 	}
@@ -73,7 +74,7 @@ public class LoginController {
 	@PostMapping("/login")
 	public String login(HttpSession session, UserDto dto) {
 //		System.out.println("LoginController 진입 \n" + dto.toString());
-		UserDto res = memberBiz.login(dto);
+		UserDto res = loginBiz.login(dto);
 //		System.out.println("리턴받은 dto : " + res.toString());
 		if (res != null) {
 			session.setAttribute("login", res);
@@ -82,4 +83,25 @@ public class LoginController {
 			return "login_login";
 		}
 	}
+	
+
+	@GetMapping("/insertuser")
+    public String insertUser(
+        @RequestParam("join-email") String email,
+        @RequestParam("join-pw") String password,
+        @RequestParam("join-name") String name,
+        @RequestParam("selected_keyword") List<String> selectedKeywords
+    ) {
+		System.out.println(email + " " + password + " " + name + " " + selectedKeywords.toString());
+		return "index"; 
+	}
+	
+	@GetMapping("/logout")
+    public String logout(HttpSession session) {
+        if (session != null) {
+            session.invalidate(); // 세션 무효화
+        }
+        return "index"; 
+    }
 }
+
