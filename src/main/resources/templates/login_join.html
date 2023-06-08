@@ -73,12 +73,14 @@
 		<div class="banner">
 			<a href="/"><img src="/resources/img/banner.png" /></a>
 		</div>
-		<div>
-  			<a th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
-    		<img class="login_img" src="/resources/img/usertest.png" />
-    		<span th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
-  			</a>
-		</div>
+		<div id="login">
+			<div>
+				<a
+					th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
+					<img class="login_img" src="/resources/img/usertest.png" /> <span
+					th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
+				</a>
+			</div>
 			<br />
 			<div>
 				<a href="/nav/mypage"><img class="mypage_img"
@@ -102,6 +104,7 @@
 		<div>
 			<a href="/nav/membership">멤버십</a>
 		</div>
+	</div>
 	<div class="main">
 		<!-- 로그인 시작하는 부분 -->
 		<div class="loginbox">
@@ -113,12 +116,12 @@
 							name="join-email" id="join-email" placeholder="Email를 입력해 주세요" />
 					</div>
 					<div class="join">
-						<span class="join-title">PW</span> <input type="password" name="join-pw"
-							id="join-pw" placeholder="비밀번호를 입력해 주세요" />
+						<span class="join-title">PW</span> <input type="password"
+							name="join-pw" id="join-pw" placeholder="비밀번호를 입력해 주세요" />
 					</div>
 					<div class="join">
-						<span class="join-title">이름</span> <input type="text" name="join-name"
-							id="join-name" placeholder="이름을 입력해 주세요" />
+						<span class="join-title">이름</span> <input type="text"
+							name="join-name" id="join-name" placeholder="이름을 입력해 주세요" />
 					</div>
 					<div class="join-keyword">
 						<p class="join-title">KeyWord</p>
@@ -133,8 +136,8 @@
 						</select>
 					</div>
 					<div class="join-kw" id="selected_keyword">
-						<input type="text" id="readonly" placeholder="선택된 내용 보여주기" name="selected_keyword"
-							readonly />
+						<input type="text" id="readonly" placeholder="선택된 내용 보여주기"
+							name="selected_keyword" readonly />
 					</div>
 				</fieldset>
 				<div class="join-btn">
