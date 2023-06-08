@@ -1,16 +1,16 @@
 package com.multi.fourtunes.model.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 import lombok.Data;
 
 @Data
 public class CommunityDto {
-    private int boardNo;
-    private String title;
-    private String content;
-    private int userNo;
-    private int reportCount;
-    private Date writeDate;
-    private int viewCount;
+	private int boardNo;
+	private String boardTitle;
+	private String boardContent;
+	private int userNo;
+	private int boardReportCnt;
+	private Date boardWriteDate;
+	private int boardViewCnt;
 }

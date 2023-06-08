@@ -11,40 +11,37 @@ import com.multi.fourtunes.model.dto.CommunityDto;
 
 @Service
 public class CommunityBizImpl implements CommunityBiz {
-    private CommunityDao communityDao;
 
-    @Autowired
-    public CommunityBizImpl(CommunityDao communityDao) {
-        this.communityDao = communityDao;
-    }
+	@Autowired
+	private CommunityDao communityDao;
 
-    @Override
-    @Transactional
-    public List<CommunityDto> getAll() {
-        return communityDao.getAll();
-    }
+	@Override
+	@Transactional
+	public List<CommunityDto> getAll() {
+		return communityDao.getAll();
+	}
 
-    @Override
-    public CommunityDto get(int boardNo) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	@Override
+	public CommunityDto get(int boardNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Override
-    public void insert(CommunityDto community) {
-        // TODO Auto-generated method stub
+	@Override
+	public void insert(CommunityDto community) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
-    @Override
-    public void update(CommunityDto community) {
-        // TODO Auto-generated method stub
+	@Override
+	public void update(CommunityDto community) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
-    @Override
-    public void delete(int boardNo) {
-        // TODO Auto-generated method stub
+	@Override
+	public void delete(int boardNo) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 }

@@ -12,10 +12,9 @@ public class LoginBizImple implements LoginBiz {
 
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
 	private KeywordDao keywordDao;
-	
 
 	@Override
 	public boolean checkUserExist(String email, String userId) {
@@ -23,7 +22,7 @@ public class LoginBizImple implements LoginBiz {
 		System.out.println("email : " + email + "\nuserId : " + userId);
 		UserDto userDTO = userDao.selectUserByEmailAndId(email, userId);
 		// 방금한거
-		//System.out.println("LoginBizImple " + userDTO.toString());
+		// System.out.println("LoginBizImple " + userDTO.toString());
 		return (userDTO != null) ? true : false;
 	}
 

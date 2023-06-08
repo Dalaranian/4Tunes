@@ -11,7 +11,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Autowired
 	private UserMapper userMapper;
-	
+
 	@Override
 	public UserDto login(UserDto dto) {
 		UserDto res = null;
@@ -19,12 +19,10 @@ public class UserDaoImpl implements UserDao {
 		return res;
 	}
 
-
 	@Override
 	public UserDto selectUserByEmailAndId(String email, String userId) {
-	    UserDto res = null;
-	    res = userMapper. selectUserByEmailAndId(email, userId);
-	    return res;
+		UserDto res = null;
+		res = userMapper.selectUserByEmailAndId(email, userId);
+		return res;
 	}
-}	
-	
+}

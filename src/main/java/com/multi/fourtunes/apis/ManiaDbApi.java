@@ -91,7 +91,7 @@ public class ManiaDbApi {
 
 		try {
 			ObjectMapper objectMapper = new ObjectMapper();
-			
+
 			// 원하는 데이터까지 탐색하기
 			JsonNode rootNode = objectMapper.readTree(jsonObject.toString());
 			JsonNode rssNode = rootNode.get("rss");
@@ -108,22 +108,20 @@ public class ManiaDbApi {
 				System.out.println("Title: " + title);
 				System.out.println("Name: " + name);
 				System.out.println("Link " + link);
-												
+
 				// SongDto 생성후 값 Set
 				SongDto currentMusic = new SongDto();
-				currentMusic.setArtist(name);
-				currentMusic.setTitle(title);
-				
+				currentMusic.setSongArtist(name);
+				currentMusic.setSongTitle(title);
+
 				currentMusic.toString();
-				
-				
+
 				// 다 불러온 친구를 저장
 				result.add(currentMusic);
 				System.out.println("----------------");
-				
-				
+
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}

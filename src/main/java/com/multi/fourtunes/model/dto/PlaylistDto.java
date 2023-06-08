@@ -7,5 +7,5 @@ public class PlaylistDto {
 	private int playlistNo;
 	private String playlistName;
 	private int userNo;
-	private String disclosure; // 근데 이거 뭐임?
+	private String playlistVisibility; // 플레이리스트 공개여부
 }

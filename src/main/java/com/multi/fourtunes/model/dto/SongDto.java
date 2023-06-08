@@ -13,7 +13,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class SongDto {
-	String seq;
-	String title;
-	String artist;
+	private int songNo;
+	private String songTitle;
+	private String songArtist;
+	private String songLink;
 }
