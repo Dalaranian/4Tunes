@@ -22,6 +22,13 @@ public interface CommunityMapper {
 	@Select(" SELECT * FROM COMMUNITY_BOARD ")
 	List<CommunityDto> getAll();
 
+	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
+		@Result(property = "boardTitle", column = "BOARD_TITLE"),
+		@Result(property = "boardContent", column = "BOARD_CONTENT"),
+		@Result(property = "userNo", column = "USER_NO"),
+		@Result(property = "boardReportCnt", column = "BOARD_REPORT_CNT"),
+		@Result(property = "boardWriteDate", column = "BOARD_WRITE_DATE"),
+		@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
 	@Select(" SELECT * FROM COMMUNITY_BOARD WHERE BOARD_NO = #{boardNo} ")
 	CommunityDto get(int boardNo);
 
