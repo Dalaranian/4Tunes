@@ -14,4 +14,6 @@ public interface CommunityDao {
 	int update(CommunityDto community);
 
 	int delete(int boardNo);
+	
+	int incrementViewCount(int boardNo);
 }
