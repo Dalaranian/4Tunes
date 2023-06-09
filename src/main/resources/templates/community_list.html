@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="UTF-8" />
@@ -64,27 +64,15 @@
 					<div class="count">조회수</div>
 				</div>
 			</div>
-
 			<div class="list">
-
-				<!-- th:each="#" : ${#}" -->
-				<!-- th:text="${#.#}" -->
-				<!-- 타임리프 날짜 포맷팅 ${#dates.format(date, 'yyyy-MM-dd')} -->
-				<div class="list-item" th:each="community : ${communityList}">
+				<div th:each="community : ${communityList}" class="list-item">
 					<div class="num" th:text="${community.boardNo}"></div>
-					<div class="title">
-						<a
-							th:href="@{/community/detail/{boardNo}(boardNo=${community.boardNo})}"
-							th:text="${community.title}"></a>
-					</div>
-					<!-- 원래 코드에는 author 필드가 없어서 userNo로 대체했습니다. 필요에 따라 적절한 필드로 변경하세요. -->
+					<div class="title" th:text="${community.boardTitle}"></div>
 					<div class="name" th:text="${community.userNo}"></div>
-					<div class="content" th:text="${community.content}"></div>
-					<div class="date" th:text="${community.writeDate}"></div>
-					<!-- 원래 코드에는 views 필드가 없어서 viewCount로 대체했습니다. 필요에 따라 적절한 필드로 변경하세요. -->
-					<div class="count" th:text="${community.viewCount}"></div>
+					<div class="content" th:text="${community.boardContent}"></div>
+					<div class="date" th:text="${community.boardWriteDate}"></div>
+					<div class="count" th:text="${community.boardViewCnt}"></div>
 				</div>
-
 			</div>
 
 			<div class="commu-write">
@@ -92,7 +80,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
-
 </html>

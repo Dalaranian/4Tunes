@@ -16,24 +16,27 @@ body {
 
 /* 기본틀 */
 .community-main {
-  position: absolute;
-  top: 8%;
-  left: 8%;
-  width: 120vw;
+  position: flex;
+  padding: 0 60px;
+  width: 75vw;
   height: 80vh;
+  min-width:820px;
+  min-height:470px;
 }
-.community-main h1{
+h1{
+	position:flex;
+	width:885px;
+	min-height:69px;	
     color: white;
-    margin-bottom: 2vw;
-    font-size: 3vw;
+    font-size: 46px;
+    padding:30px 0 0 60px;
 }
 
 /* 로그인의 메인 */
 .community-main form {
-  width: 50%;
   /* height: 80vh; */
   background-color: #ccc;
-  padding: 4vw;
+  padding: 51px;
   box-sizing: border-box;
 }
 
@@ -60,17 +63,20 @@ body {
     border-radius: 0.3124vw;
     overflow: hidden;
     background-color: #ccc;
-    margin-bottom: 1.25vw;
+    margin-bottom: 16px;
 }
-.community-title {
+.community-title,
+.community-writer {
     float: left;
     height: 2.5vw;
     width: 10vw;
     background-size: cover;
     border: 0.015625vw;
-    font-size: 1.725vw;;
+    font-size: 18px;;
     text-align: center;
     margin-right: 2vw;
+    min-height:32px;
+    min-width:110px;
 }
 
 .community-text{
@@ -79,9 +85,11 @@ body {
     width: 10.125vw;
     background-size: cover;
     border: 0.015625vw;
-    font-size: 1.725vw;;
+    font-size: 18px;;
     text-align: center;
     margin-right: 2vw;
+    min-height:32px;
+    min-width:110px;
 }
 .community-main textarea{
     width: 100%;
@@ -119,4 +127,27 @@ body {
     border-radius:  0.3vw;
     color: #fff;
     font-size: 1.125vw;
+}
+#write-form{
+	min-width:820px;
+	min-height:369px;
+}
+@media (max-width: 1250px) {
+  #nav {
+    display: none;
+  }
+  #main {
+    width: 130vw;
+    background-color: #424242;
+  }
+  .loginbox {
+    left: 50%;
+  }
+  .community-main{
+  	margin:0 auto;
+  }
+  h1{
+  	margin:0 auto;
+  	text-align:center;
+  }
 }
