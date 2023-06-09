@@ -20,22 +20,28 @@ public interface CommunityMapper {
 			@Result(property = "boardReportCnt", column = "BOARD_REPORT_CNT"),
 			@Result(property = "boardWriteDate", column = "BOARD_WRITE_DATE"),
 			@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
-	@Select("SELECT * FROM COMMUNITY_BOARD")
+	@Select(" SELECT * FROM COMMUNITY_BOARD ")
 	List<CommunityDto> getAll();
-	
-	
-	@Select(" SELECT * FROM COMMUNITY_BOARD WHERE boardNo = #{boardNo} ")
+
+	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
+			@Result(property = "boardTitle", column = "BOARD_TITLE"),
+			@Result(property = "boardContent", column = "BOARD_CONTENT"),
+			@Result(property = "userNo", column = "USER_NO"),
+			@Result(property = "boardReportCnt", column = "BOARD_REPORT_CNT"),
+			@Result(property = "boardWriteDate", column = "BOARD_WRITE_DATE"),
+			@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
+	@Select(" SELECT * FROM COMMUNITY_BOARD WHERE BOARD_NO = #{boardNo} ")
 	CommunityDto get(int boardNo);
 
 	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
-		@Result(property = "boardTitle", column = "BOARD_TITLE"),
-		@Result(property = "boardContent", column = "BOARD_CONTENT"),
-		@Result(property = "userNo", column = "USER_NO"),
-		@Result(property = "boardReportCnt", column = "BOARD_REPORT_CNT"),
-		@Result(property = "boardWriteDate", column = "BOARD_WRITE_DATE"),
-		@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
-	@Insert("INSERT INTO COMMUNITY_BOARD (BOARD_TITLE, BOARD_CONTENT, USER_NO, BOARD_WRITE_DATE) " +
-	        "VALUES (#{boardTitle}, #{boardContent}, #{userNo}, #{boardWriteDate})")
+			@Result(property = "boardTitle", column = "BOARD_TITLE"),
+			@Result(property = "boardContent", column = "BOARD_CONTENT"),
+			@Result(property = "userNo", column = "USER_NO"),
+			@Result(property = "boardReportCnt", column = "BOARD_REPORT_CNT"),
+			@Result(property = "boardWriteDate", column = "BOARD_WRITE_DATE"),
+			@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
+	@Insert("INSERT INTO COMMUNITY_BOARD (BOARD_TITLE, BOARD_CONTENT, USER_NO, BOARD_WRITE_DATE) "
+			+ "VALUES (#{boardTitle}, #{boardContent}, #{userNo}, #{boardWriteDate})")
 	int insert(CommunityDto community);
 
 	int update(CommunityDto community);
