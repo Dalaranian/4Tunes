@@ -66,16 +66,12 @@
 			</div>
 			<div class="list">
 				<div th:each="community : ${communityList}" class="list-item">
-					<div class="num" th:text="${community.getUserNo()}"></div>
-					<div class="title">
-						<a th:href="@{/community/detail/{boardNo}(boardNo=${community.boardNo})}"
-						   th:text="${community.boardTitle}"></a>
-					</div>
-					<div class="name" th:text="${community.userNo}"></div>
-					<div class="content" th:text="${community.getBoardContent()}"></div>
-					<div class="date"
-						th:text="${#dates.format(#calendars.createNow().setTime(community.boardWriteDate).getTime(), 'yyyy-MM-dd')}"></div>
-					<div class="count" th:text="${community.boardViewCnt}"></div>
+					<div class="num" th:text="${community.BOARD_NO}"></div>
+					<div class="title" th:text="${community.BOARD_TITLE}"></div>
+					<div class="name" th:text="${community.USER_NO}"></div>
+					<div class="content" th:text="${community.BOARD_CONTENT}"></div>
+					<div class="date" th:text="${community.BOARD_WRITE_DATE}"></div>
+					<div class="count" th:text="${community.BOARD_VIEW_CNT}"></div>
 				</div>
 			</div>
 
