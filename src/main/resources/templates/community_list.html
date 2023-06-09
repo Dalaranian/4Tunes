@@ -66,12 +66,12 @@
 			</div>
 			<div class="list">
 				<div th:each="community : ${communityList}" class="list-item">
-					<div class="num" th:text="${community.BOARD_NO}"></div>
-					<div class="title" th:text="${community.BOARD_TITLE}"></div>
-					<div class="name" th:text="${community.USER_NO}"></div>
-					<div class="content" th:text="${community.BOARD_CONTENT}"></div>
-					<div class="date" th:text="${community.BOARD_WRITE_DATE}"></div>
-					<div class="count" th:text="${community.BOARD_VIEW_CNT}"></div>
+					<div class="num" th:text="${community.boardNo}"></div>
+					<div class="title" th:text="${community.boardTitle}"></div>
+					<div class="name" th:text="${community.userNo}"></div>
+					<div class="content" th:text="${community.boardContent}"></div>
+					<div class="date" th:text="${community.boardWriteDate}"></div>
+					<div class="count" th:text="${community.boardViewCnt}"></div>
 				</div>
 			</div>
 
