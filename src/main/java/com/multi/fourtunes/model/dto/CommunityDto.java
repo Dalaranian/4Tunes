@@ -22,4 +22,5 @@ public class CommunityDto {
     private int boardReportCnt;
     private Date boardWriteDate;
     private int boardViewCnt;
+    private String user_name;
 }
