@@ -43,4 +43,9 @@ public class LoginBizImple implements LoginBiz {
 		return userDao.selectUserByEmailAndId(loginUser.getUser_id(), loginUser.getUser_name());
 	}
 
+	@Override
+	public int insertUser(UserDto insert) {
+		return userDao.insertUser(insert);
+	}
+
 }

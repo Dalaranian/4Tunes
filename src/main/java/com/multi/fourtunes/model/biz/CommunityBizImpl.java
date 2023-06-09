@@ -18,30 +18,30 @@ public class CommunityBizImpl implements CommunityBiz {
 	@Override
 	@Transactional
 	public List<CommunityDto> getAll() {
-		return communityDao.getAll();
+		System.out.println("Biz getAll 진입");
+		return communityDao.getAll();	
 	}
-
+	
 	@Override
 	public CommunityDto get(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return communityDao.get(boardNo);
 	}
 
 	@Override
 	public void insert(CommunityDto community) {
-		// TODO Auto-generated method stub
+		communityDao.insert(community);
 
 	}
 
 	@Override
 	public void update(CommunityDto community) {
-		// TODO Auto-generated method stub
+	    communityDao.update(community);
 
 	}
 
 	@Override
 	public void delete(int boardNo) {
-		// TODO Auto-generated method stub
+		communityDao.delete(boardNo);
 
 	}
 }
