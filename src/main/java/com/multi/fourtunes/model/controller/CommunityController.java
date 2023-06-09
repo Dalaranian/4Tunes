@@ -17,7 +17,7 @@ public class CommunityController {
 
 	@Autowired
 	private CommunityBiz communityBiz;
-	
+
 //	@RequestMapping("/community")
 //	public String getCommunityList(Model model) {
 //		List<CommunityDto> communityList = communityBiz.getAll();
@@ -28,20 +28,21 @@ public class CommunityController {
 	// 상세 페이지로 이동
 	@RequestMapping("/detail/{boardNo}")
 	public String getCommunityDetail(@PathVariable int boardNo, Model model) {
-	    CommunityDto community = communityBiz.get(boardNo);
-	    model.addAttribute("community", community);
-	    return "community_detail";
+		CommunityDto community = communityBiz.get(boardNo);
+		communityBiz.incrementViewCount(boardNo);
+		model.addAttribute("community", community);
+		return "community_detail";
 	}
-	
+
 	@RequestMapping("/write")
 	public String communityWrite(HttpSession session) {
 		System.out.println("Session Contents: " + session.getAttribute("login"));
 		return "community_write";
 	}
-	
+
 	@RequestMapping("/create")
 	public String communityCreate() {
-		
+
 		return "community_detail";
 	}
 }

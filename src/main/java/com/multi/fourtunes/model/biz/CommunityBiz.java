@@ -14,4 +14,6 @@ public interface CommunityBiz {
 	void update(CommunityDto community);
 
 	void delete(int boardNo);
+
+	void incrementViewCount(int boardNo);
 }
