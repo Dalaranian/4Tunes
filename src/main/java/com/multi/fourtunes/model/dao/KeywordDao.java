@@ -4,4 +4,6 @@ public interface KeywordDao {
 
 	String[] getAllList();
 
+	public int insertKeyword(String keyword, String userId);
+
 }

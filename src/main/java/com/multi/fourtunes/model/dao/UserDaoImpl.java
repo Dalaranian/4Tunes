@@ -25,4 +25,9 @@ public class UserDaoImpl implements UserDao {
 		res = userMapper.selectUserByEmailAndId(email, userId);
 		return res;
 	}
+
+	@Override
+	public int insertUser(UserDto insert) {
+		return userMapper.insertUser(insert);
+	}
 }

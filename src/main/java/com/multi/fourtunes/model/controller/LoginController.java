@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.multi.fourtunes.model.biz.FaceloginBiz;
+import com.multi.fourtunes.model.biz.KeywordBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
 import com.multi.fourtunes.model.dto.UserDto;
 
@@ -22,6 +23,9 @@ public class LoginController {
 
 	@Autowired
 	private LoginBiz loginBiz;
+	
+	@Autowired
+	private KeywordBiz keywordBiz;
 
 	@GetMapping("/sociallogin")
 	public String socialLogin(@RequestParam("email") String email, @RequestParam("name") String name, Model model,
@@ -60,7 +64,7 @@ public class LoginController {
 	 */
 	@GetMapping("/join")
 	public String join(Model model) {
-		System.out.println("join 진입");
+		//System.out.println("join 진입");
 		String[] keywordList = loginBiz.getKeyword();
 //		for(String str:keywordList) {
 //			System.out.println("키워드 : " + str);
@@ -90,8 +94,33 @@ public class LoginController {
 	@GetMapping("/insertuser")
 	public String insertUser(@RequestParam("join-email") String email, @RequestParam("join-pw") String password,
 			@RequestParam("join-name") String name, @RequestParam("selected_keyword") List<String> selectedKeywords) {
-		System.out.println(email + " " + password + " " + name + " " + selectedKeywords.toString());
-		return "index";
+		//System.out.println(email + " " + password + " " + name + " " + selectedKeywords.toString());
+		
+		UserDto insert = new UserDto();
+		insert.setUser_id(email);
+		insert.setUser_pw(password);
+		insert.setUser_name(name);
+		
+		// 회원정보(아이디, 비밀번호, 이름) 먼저 Insert하고 성공하면
+		if(loginBiz.insertUser(insert) > 0) {
+			// 선택한 Keyword Insert 처리 (회원번호 저장해야해서?)
+			String userId = insert.getUser_id();
+			//System.out.println(userId);
+			
+			for(Object object : selectedKeywords) {
+				String keyword = (String)object;
+				//System.out.println(keyword);
+				
+				if(keywordBiz.insertKeyword(keyword, userId) > 0 ) {
+					//System.out.println("키워드 insert 성공 ㅎㅎ");
+				} else {
+					//System.out.println("키워드 insert 실패 ㅜㅜ");
+				}
+			}
+			return "membership_join";
+		} else {
+			return "login_join";
+		}
 	}
 
 	@GetMapping("/logout")
