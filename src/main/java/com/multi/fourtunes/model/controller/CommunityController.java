@@ -23,6 +23,7 @@ public class CommunityController {
 //		return "community_list";
 //	}
 
+	// 상세 페이지로 이동
 	@RequestMapping("/detail/{boardNo}")
 	public String getCommunityDetail(@PathVariable int boardNo, Model model) {
 	    CommunityDto community = communityBiz.get(boardNo);

@@ -18,7 +18,7 @@ public class CommunityBizImpl implements CommunityBiz {
 	@Override
 	@Transactional
 	public List<CommunityDto> getAll() {
-		System.out.println("Biz getAll 진입");
+		//System.out.println("Biz getAll 진입");
 		return communityDao.getAll();	
 	}
 	

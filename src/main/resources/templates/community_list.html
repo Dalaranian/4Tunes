@@ -67,10 +67,14 @@
 			<div class="list">
 				<div th:each="community : ${communityList}" class="list-item">
 					<div class="num" th:text="${community.boardNo}"></div>
-					<div class="title" th:text="${community.boardTitle}"></div>
+					<div class="title">
+					    <!-- 글 제목 클릭시 글 번호에 해당하는 디테일 페이지로 -->
+						<a th:href="@{/community/detail/{boardNo}(boardNo=${community.boardNo})}"
+						   th:text="${community.boardTitle}"></a></div>
 					<div class="name" th:text="${community.userNo}"></div>
 					<div class="content" th:text="${community.boardContent}"></div>
-					<div class="date" th:text="${community.boardWriteDate}"></div>
+					<div class="date"
+						th:text="${#dates.format(community.boardWriteDate, 'yyyy-MM-dd')}"></div>
 					<div class="count" th:text="${community.boardViewCnt}"></div>
 				</div>
 			</div>

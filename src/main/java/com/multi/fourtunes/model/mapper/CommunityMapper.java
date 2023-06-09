@@ -19,10 +19,10 @@ public interface CommunityMapper {
 			@Result(property = "boardReportCnt", column = "BOARD_REPORT_CNT"),
 			@Result(property = "boardWriteDate", column = "BOARD_WRITE_DATE"),
 			@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
-	@Select("SELECT * FROM COMMUNITY_BOARD")
+	@Select(" SELECT * FROM COMMUNITY_BOARD ")
 	List<CommunityDto> getAll();
 
-	@Select(" SELECT * FROM COMMUNITY_BOARD WHERE boardNo = #{boardNo} ")
+	@Select(" SELECT * FROM COMMUNITY_BOARD WHERE BOARD_NO = #{boardNo} ")
 	CommunityDto get(int boardNo);
 
 	int insert(CommunityDto community);
