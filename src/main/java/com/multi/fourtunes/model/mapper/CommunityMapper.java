@@ -40,10 +40,10 @@ public interface CommunityMapper {
 			@Result(property = "boardReportCnt", column = "BOARD_REPORT_CNT"),
 			@Result(property = "boardWriteDate", column = "BOARD_WRITE_DATE"),
 			@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
-	@Insert("INSERT INTO COMMUNITY_BOARD (BOARD_TITLE, BOARD_CONTENT, USER_NO, BOARD_WRITE_DATE) "
-			+ "VALUES (#{boardTitle}, #{boardContent}, #{userNo}, #{boardWriteDate})")
+	@Insert("INSERT INTO COMMUNITY_BOARD (BOARD_TITLE, BOARD_CONTENT, USER_NO, BOARD_WRITE_DATE, BOARD_VIEW_CNT) "
+	        + "VALUES (#{boardTitle}, #{boardContent}, #{userNo}, NOW(), #{boardViewCnt})")
 	int insert(CommunityDto community);
-
+	
 	int update(CommunityDto community);
 
 	int delete(int boardNo);
