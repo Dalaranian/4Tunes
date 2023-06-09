@@ -18,14 +18,13 @@ public class CommunityController {
 
 	@Autowired
 	private CommunityBiz communityBiz;
-
 	
-	@RequestMapping("/list")
-	public String getCommunityList(Model model) {
-		List<CommunityDto> communityList = communityBiz.getAll();
-		model.addAttribute("communityList", communityList);
-		return "community_list";
-	}
+//	@RequestMapping("/community")
+//	public String getCommunityList(Model model) {
+//		List<CommunityDto> communityList = communityBiz.getAll();
+//		model.addAttribute("communityList", communityList);
+//		return "community_list";
+//	}
 
 	@RequestMapping("/detail/{boardNo}")
 	public String getCommunityDetail(@PathVariable int boardNo, Model model) {

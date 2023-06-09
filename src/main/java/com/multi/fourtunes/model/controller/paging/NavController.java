@@ -1,12 +1,22 @@
 package com.multi.fourtunes.model.controller.paging;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.multi.fourtunes.model.biz.CommunityBiz;
+import com.multi.fourtunes.model.dto.CommunityDto;
 
 @Controller
 @RequestMapping("/nav")
 public class NavController {
+	
+	@Autowired
+	private CommunityBiz communityBiz;
 
 	// 로그인 페이지로 이동
 	@GetMapping("/login")
@@ -33,8 +43,10 @@ public class NavController {
 	}
 
 	// 커뮤니티 페이지로 이동
-	@GetMapping("/community")
-	public String gotoCommunity() {
+	@RequestMapping("/community")
+	public String getCommunityList(Model model) {
+		List<CommunityDto> communityList = communityBiz.getAll();
+		model.addAttribute("communityList", communityList);
 		return "community_list";
 	}
 
