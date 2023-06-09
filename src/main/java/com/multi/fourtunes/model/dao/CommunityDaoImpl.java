@@ -16,7 +16,11 @@ public class CommunityDaoImpl implements CommunityDao {
 
 	@Override
 	public List<CommunityDto> getAll() {
-	    return communityMapper.getAll();
+		//List<CommunityDto> temp = communityMapper.getAll();
+		//for (CommunityDto dto : temp) {
+			//System.out.println(dto.toString());
+		//}
+		return communityMapper.getAll();
 	}
 
 	@Override
@@ -26,16 +30,16 @@ public class CommunityDaoImpl implements CommunityDao {
 
 	@Override
 	public int insert(CommunityDto community) {
-	    return communityMapper.insert(community);
+		return communityMapper.insert(community);
 	}
 
 	@Override
 	public int update(CommunityDto community) {
-	    return communityMapper.update(community);
+		return communityMapper.update(community);
 	}
 
 	@Override
 	public int delete(int boardNo) {
-	    return communityMapper.delete(boardNo);
+		return communityMapper.delete(boardNo);
 	}
 }
