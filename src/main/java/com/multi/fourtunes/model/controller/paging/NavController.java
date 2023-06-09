@@ -33,8 +33,19 @@ public class NavController {
 	}
 
 	// 커뮤니티 페이지로 이동
+<<<<<<< Updated upstream
 	@GetMapping("/community")
 	public String gotoCommunity() {
+=======
+	@RequestMapping("/community")
+	public String getCommunityList(Model model) {
+		List<CommunityDto> communityList = communityBiz.getAll();
+		System.out.println("community size() : "+communityList.size());
+		for(CommunityDto dto : communityList) {
+			System.out.println("fofoffo: "+dto);
+		}
+		model.addAttribute("communityList", communityList);
+>>>>>>> Stashed changes
 		return "community_list";
 	}
 

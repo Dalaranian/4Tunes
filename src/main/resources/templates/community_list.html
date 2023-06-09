@@ -66,11 +66,15 @@
 			</div>
 
 			<div class="list">
+<<<<<<< Updated upstream
 
 				<!-- th:each="#" : ${#}" -->
 				<!-- th:text="${#.#}" -->
 				<!-- 타임리프 날짜 포맷팅 ${#dates.format(date, 'yyyy-MM-dd')} -->
 				<div class="list-item" th:each="community : ${communityList}">
+=======
+				<div th:each="community : ${communityList}" class="list-item">
+>>>>>>> Stashed changes
 					<div class="num" th:text="${community.boardNo}"></div>
 					<div class="title">
 						<a
