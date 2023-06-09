@@ -1,5 +1,7 @@
 package com.multi.fourtunes.model.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,5 +31,17 @@ public class CommunityController {
 	    CommunityDto community = communityBiz.get(boardNo);
 	    model.addAttribute("community", community);
 	    return "community_detail";
+	}
+	
+	@RequestMapping("/write")
+	public String communityWrite(HttpSession session) {
+		System.out.println("Session Contents: " + session.getAttribute("login"));
+		return "community_write";
+	}
+	
+	@RequestMapping("/create")
+	public String communityCreate() {
+		
+		return "community_detail";
 	}
 }
