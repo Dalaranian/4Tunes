@@ -6,12 +6,14 @@ import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.fourtunes.model.dto.SongDto;
 
+@Service
 public class ManiaDbApi {
 
 	// ManiaDB API URL 예시
@@ -87,7 +89,7 @@ public class ManiaDbApi {
 		// XML 을 JSON 으로 파싱
 		JSONObject jsonObject = XML.toJSONObject(responseBodyByXML);
 
-		System.out.println("불러온 JSON : " + jsonObject.toString());
+//		System.out.println("불러온 JSON : " + jsonObject.toString());
 
 		try {
 			ObjectMapper objectMapper = new ObjectMapper();
@@ -100,14 +102,14 @@ public class ManiaDbApi {
 
 			// 데이터 꺼내서 DTO에 포장 후 List 에 넣기
 			for (JsonNode itemNode : itemArrayNode) {
-				System.out.println(itemNode.toString());
+//				System.out.println(itemNode.toString());
 				String title = itemNode.get("title").asText();
 				String name = itemNode.get("maniadb:artist").get("name").asText();
 				String link = itemNode.get("link").asText();
 
-				System.out.println("Title: " + title);
-				System.out.println("Name: " + name);
-				System.out.println("Link " + link);
+//				System.out.println("Title: " + title);
+//				System.out.println("Name: " + name);
+//				System.out.println("Link " + link);
 
 				// SongDto 생성후 값 Set
 				SongDto currentMusic = new SongDto();
@@ -118,7 +120,7 @@ public class ManiaDbApi {
 
 				// 다 불러온 친구를 저장
 				result.add(currentMusic);
-				System.out.println("----------------");
+//				System.out.println("----------------");
 
 			}
 		} catch (Exception e) {
