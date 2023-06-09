@@ -77,34 +77,6 @@ public class LoginController {
 	public String callback() {
 		return "callback";
 	}
-	
-	@PostMapping("/kakao")
-	public String kakao(@RequestParam("email") String email, @RequestParam("name") String name, Model model,HttpSession session){
-		System.out.println(email + " " + name);
-		boolean isUserExist = loginBiz.checkUserExist(email, name);
-		if (isUserExist) {
-			// DB에 있는 이메일이면 로그인 진행
-			// 로그인 처리 로직 구현
-
-			UserDto loginUser = new UserDto();
-			loginUser.setUser_id(email);
-			loginUser.setUser_name(name);
-
-			UserDto res = loginBiz.socialLogin(loginUser);
-			session.setAttribute("login", res);
-
-			return "index"; // 로그인 후 이동할 페이지
-		} else {
-			// DB에 없는 이메일이면 ID 입력칸과 이름 입력칸으로 이동
-			// 회원 가입 페이지로 이동
-			model.addAttribute("email", email);
-			model.addAttribute("name", name);
-
-			String[] keywordList = loginBiz.getKeyword();
-			model.addAttribute("keywordlist", keywordList);
-			return "login_socialjoin";
-		}
-	}
 
 	@PostMapping("/login")
 	public String login(HttpSession session, UserDto dto) {
