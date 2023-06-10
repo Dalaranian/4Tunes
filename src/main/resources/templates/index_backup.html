@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/resources/css/main.css" />
+<link rel="stylesheet" href="/resources/css/nav.css" />
+<link rel="stylesheet" href="/resources/css/globalfont.css" />
+<link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
+<title>4Tunes</title>
+</head>
+<body>
+	<div id="nav">
+		<div class="banner">
+			<a href="/"><img src="/resources/img/banner.png" /></a>
+		</div>
+		<div id="login">
+			<div>
+				<a
+					th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
+					<img class="login_img" src="/resources/img/usertest.png" /> <span
+					th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
+				</a>
+			</div>
+			<br />
+			<div>
+				<a href="/nav/mypage"><img class="mypage_img"
+					src="/resources/img/file.png" />MYPAGE</a>
+			</div>
+		</div>
+		<div class="search-container">
+		<form action="/search/query" method="GET">
+			<span class="search-icon"><input type="image" src="/resources/img/search.png" alt="submit"></span>
+			<input type="text" name="query" class="search-input" placeholder="키워드 입력" />
+		</form>
+		</div>
+		<div>
+			<a href="/nav/suggested">맞춤추천</a>
+		</div>
+		<div>
+			<a href="/nav/chart">인기차트</a>
+		</div>
+		<div>
+			<a href="/nav/community">커뮤니티</a>
+		</div>
+		<div>
+			<a href="/nav/membership">멤버십</a>
+		</div>
+		<!-- API 테스트를 위한 임시 페이징입니다.  -->
+		<div>
+			<a href="/gototestpage">API TEST</a>
+		</div>
+	</div>
+
+	<div id="main">
+		<div id="playlist">
+			<h1>플레이리스트</h1>
+			<div class="playlist">
+				<a href="/innerpaging/playlist/mine">내 재생목록<img src="" alt="" /></a>
+			</div>
+			<div class="playlist">
+				<a href="/innerpaging/playlist/public"><img src="" alt="" />public
+					재생목록</a>
+			</div>
+			<div class="playlist">
+				<a href=""><img src="" alt="" /></a>
+			</div>
+			<div class="playlist">
+				<a href=""><img src="" alt="" /></a>
+			</div>
+		</div>
+
+		<div id="today">
+			<h1>오늘의 선곡</h1>
+			<div class="today">
+				<a href="innerpaging/playlist/suggested">오늘의 선곡<img src=""
+					alt="" /></a>
+			</div>
+			<div class="today">
+				<a href=""><img src="" alt="" /></a>
+			</div>
+			<div class="today"></div>
+			<div class="today">
+				<a href=""><img src="" alt="" /></a>
+			</div>
+			<div class="today">
+				<a href=""><img src="" alt="" /></a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
