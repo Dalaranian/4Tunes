@@ -17,4 +17,9 @@ public class keywordDaoImple implements KeywordDao {
 		return keywordMapper.getAllKeyword();
 	}
 
+	@Override
+	public int insertKeyword(String keyword, String userId) {
+		return keywordMapper.insertKeyword(keyword, userId);
+	}
+
 }

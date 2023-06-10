@@ -71,14 +71,13 @@
 
 			<div class="detail-wrap">
 				<div class="detail-name">
-					<span>&nbsp;작성자 :</span><span th:text="${user}"></span>
+					<span>&nbsp;작성자 :</span><span th:text="${community.user_name}"></span>
 				</div>
 				<div class="detail-count">
-					<span>&nbsp;조회수 :</span><span th:text="${view_cw}"></span>
+					<span>&nbsp;조회수 :</span><span th:text="${community.boardViewCnt}"></span> 
 				</div>
 				<div class="detail-content">
-					<div class="content-box" type="text" id="content-input">내용을
-						보여줍니다</div>
+					<div class="content-box" type="text" id="content-input" th:text="${community.boardContent}"></div>
 				</div>
 			</div>
 

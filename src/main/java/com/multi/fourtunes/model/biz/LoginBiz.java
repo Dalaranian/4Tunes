@@ -11,4 +11,7 @@ public interface LoginBiz {
 
 	UserDto socialLogin(UserDto loginUser);
 
+	public int insertUser(UserDto insert);
+
+
 }
