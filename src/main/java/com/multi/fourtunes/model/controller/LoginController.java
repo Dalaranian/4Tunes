@@ -1,6 +1,8 @@
 package com.multi.fourtunes.model.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,10 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.multi.fourtunes.model.biz.FaceloginBiz;
 import com.multi.fourtunes.model.biz.KeywordBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
 import com.multi.fourtunes.model.dto.UserDto;
@@ -84,6 +87,7 @@ public class LoginController {
 		UserDto res = loginBiz.login(dto);
 //		System.out.println("리턴받은 dto : " + res.toString());
 		if (res != null) {
+			res.setUser_no(res.getUser_no());
 			session.setAttribute("login", res);
 			return "index";
 		} else {
