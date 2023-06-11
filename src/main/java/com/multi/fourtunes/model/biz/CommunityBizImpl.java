@@ -18,10 +18,10 @@ public class CommunityBizImpl implements CommunityBiz {
 	@Override
 	@Transactional
 	public List<CommunityDto> getAll() {
-		//System.out.println("Biz getAll 진입");
-		return communityDao.getAll();	
+		// System.out.println("Biz getAll 진입");
+		return communityDao.getAll();
 	}
-	
+
 	@Override
 	public CommunityDto get(int boardNo) {
 		return communityDao.get(boardNo);
@@ -35,7 +35,7 @@ public class CommunityBizImpl implements CommunityBiz {
 
 	@Override
 	public void update(CommunityDto community) {
-	    communityDao.update(community);
+		communityDao.update(community);
 
 	}
 
@@ -44,4 +44,10 @@ public class CommunityBizImpl implements CommunityBiz {
 		communityDao.delete(boardNo);
 
 	}
+
+	@Override
+	public void incrementViewCount(int boardNo) {
+		communityDao.incrementViewCount(boardNo);
+	}
+
 }

@@ -71,7 +71,7 @@
 					    <!-- 글 제목 클릭시 글 번호에 해당하는 디테일 페이지로 -->
 						<a th:href="@{/community/detail/{boardNo}(boardNo=${community.boardNo})}"
 						   th:text="${community.boardTitle}"></a></div>
-					<div class="name" th:text="${community.userNo}"></div>
+					<div class="name" th:text="${community.user_name}"></div>
 					<div class="content" th:text="${community.boardContent}"></div>
 					<div class="date"
 						th:text="${#dates.format(community.boardWriteDate, 'yyyy-MM-dd')}"></div>

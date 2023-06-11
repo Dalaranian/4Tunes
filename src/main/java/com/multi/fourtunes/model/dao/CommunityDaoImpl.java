@@ -16,10 +16,10 @@ public class CommunityDaoImpl implements CommunityDao {
 
 	@Override
 	public List<CommunityDto> getAll() {
-		//List<CommunityDto> temp = communityMapper.getAll();
-		//for (CommunityDto dto : temp) {
-			//System.out.println(dto.toString());
-		//}
+		// List<CommunityDto> temp = communityMapper.getAll();
+		// for (CommunityDto dto : temp) {
+		// System.out.println(dto.toString());
+		// }
 		return communityMapper.getAll();
 	}
 
@@ -41,5 +41,10 @@ public class CommunityDaoImpl implements CommunityDao {
 	@Override
 	public int delete(int boardNo) {
 		return communityMapper.delete(boardNo);
+	}
+
+	@Override
+	public int incrementViewCount(int boardNo) {
+		return communityMapper.incrementViewCount(boardNo);
 	}
 }
