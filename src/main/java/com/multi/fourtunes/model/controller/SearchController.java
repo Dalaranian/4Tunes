@@ -30,11 +30,11 @@ public class SearchController {
 		mania.setPrompt(query);
 		mania.setType(false);
 		ArrayList<SongDto> result = mania.search();
-		for (SongDto currentSong : result) {
-			currentSong.setSongLink(youtube.embedLinkGetter(currentSong.getSongArtist(), currentSong.getSongTitle()));
-			System.out.println(currentSong);
+		result.stream().forEach(currentSong -> currentSong
+				.setSongLink(youtube.embedLinkGetter(currentSong.getSongArtist(), currentSong.getSongTitle())));
+		for(SongDto dto:result) {
+			System.out.println(dto);
 		}
-		
 		model.addAttribute("searchresult", result);
 
 		return "playlist_searchresult"; // 결과를 표시할 View의 이름을 반환
