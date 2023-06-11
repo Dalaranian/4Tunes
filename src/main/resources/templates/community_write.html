@@ -59,9 +59,10 @@
 						<span class="community-title">글 제목</span> <input type="text"
 							id="community-input" name="boardTitle" placeholder="내용을 입력해주세요" />
 					</div>
-					<div class="community-inf">
-						<span class="community-writer">작성자</span> <input type="text"
-							id="community-input" name="userNo" th:value="${session.login.user_name}"
+					<div class="community-inf">	
+						<span class="community-writer">작성자</span> 
+						<input type="hidden" name="userNo" th:value="${session.login.user_no}" />
+						<input type="text" id="community-input" th:value="${session.login.user_name}"
 							placeholder="로그인 되어있는 사용자 자동입력" disabled/>
 					</div>
 					<div class="community-inf">
