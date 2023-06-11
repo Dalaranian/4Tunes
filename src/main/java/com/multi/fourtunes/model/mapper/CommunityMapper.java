@@ -56,6 +56,14 @@ public interface CommunityMapper {
 			+ "VALUES (#{boardTitle}, #{boardContent}, #{userNo}, #{boardWriteDate})")
 	int insert(CommunityDto community);
 
+	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
+		@Result(property = "boardTitle", column = "BOARD_TITLE"),
+		@Result(property = "boardContent", column = "BOARD_CONTENT"),
+		@Result(property = "userNo", column = "USER_NO"),
+		@Result(property = "boardReportCnt", column = "BOARD_REPORT_CNT"),
+		@Result(property = "boardWriteDate", column = "BOARD_WRITE_DATE"),
+		@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
+	@Update("UPDATE COMMUNITY_BOARD SET BOARD_TITLE = #{boardTitle}, BOARD_CONTENT = #{boardContent} WHERE BOARD_NO = #{boardNo}")
 	int update(CommunityDto community);
 
 	int delete(int boardNo);
