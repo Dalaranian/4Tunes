@@ -1,15 +1,22 @@
 package com.multi.fourtunes.model.controller.paging;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.multi.fourtunes.model.biz.LoginBiz;
 
 // 프론트 작성의 편의를 위한 임시 페이징 클래스입니다. 
 
 @Controller
 @RequestMapping("/innerpaging")
 public class InnerPagingController {
-
+	
+	@Autowired
+	private LoginBiz loginBiz;
+	
 	// 로그인 페이지
 
 	// 회원가입 페이지로 전환
@@ -22,7 +29,9 @@ public class InnerPagingController {
 
 	// 내 정보 보기로 전환
 	@GetMapping("/mypage/user")
-	public String gotoMyPageUser() {
+	public String gotoMyPageUser(Model model) {
+		String[] keywordList = loginBiz.getKeyword();
+    	model.addAttribute("keywordlist", keywordList);
 		return "mypage_user";
 	}
 

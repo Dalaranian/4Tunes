@@ -10,10 +10,8 @@
 <link rel="stylesheet" href="/resources/css/globalfont.css" />
 <link rel="stylesheet" href="/resources/css/mypage_user.css" />
 <link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
-<script type="text/javascript" src="/resources/js/keywordlist.js"></script>
 <title>4Tunes</title>
 </head>
-
 <body>
 	<div id="nav">
 		<div class="banner">
@@ -70,19 +68,19 @@
 			<div class="mypage_inf">
 				<div class="mypage">
 					<span class="mypage_title">아이디</span> <input type="text"
-						id="mypage_input" placeholder="Email를 입력해 주세요">
+						id="mypage_id" placeholder="Email를 입력해 주세요" th:value="${session.login.user_id}" readonly>
 				</div>
 				<div class="mypage">
 					<span class="mypage_title">이름</span> <input type="text"
-						id="mypage_input" placeholder="이름를 입력해 주세요">
+						id="mypage_name" placeholder="이름를 입력해 주세요" th:value="${session.login.user_name}" readonly	>
 				</div>
 				<div class="mypage">
 					<span class="mypage_title">비밀번호</span> <input type="password"
-						id="mypage_input" placeholder="비밀번호을 입력해 주세요">
+						id="mypage_pw" placeholder="비밀번호을 입력해 주세요">
 				</div>
 				<div class="mypage">
 					<span class="mypage_title">비밀번호 확인</span> <input type="password"
-						id="mypage_input" placeholder="비밀번호 확인을 해주세요">
+						id="mypage_pwcheck" placeholder="비밀번호 확인을 해주세요">
 				</div>
 				<div class="mypage_kw_group">
 					<div class="mypage_keyword">
@@ -90,7 +88,7 @@
 					</div>
 					<div class="mypage_keyword_group">
 						<div class="mypage_kw">
-							<input type="search" id="mypage_input" placeholder="내용을 입력해주세요.">
+							<input type="search" id="mypage_input" placeholder="키워드를 선택해주세요.">
 						</div>
 						<div class="mypage_kw">
 							<select name="keyword" id="kw" multiple>
@@ -99,8 +97,8 @@
 							</select>
 						</div>
 						<div class="mypage_kw">
-							<input type="text" id="disabled" placeholder="선택된 내용 보여주기"
-								disabled>
+							<input type="text" id="readonly" placeholder="선택된 내용 보여주기"
+								readonly>
 						</div>
 
 					</div>
@@ -111,6 +109,9 @@
 			</div>
 		</div>
 	</div>
+
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="/resources/js/keywordlist.js"></script>
 
 </body>
 
