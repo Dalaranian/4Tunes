@@ -10,85 +10,7 @@
 <link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
 <title>4Tunes</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-	$(document)
-			.ready(
-					function() {
-						const searchKeyword = $("#search-keyword");
-						const kwSelect = $("#kw");
-						const readonlyInput = $("#readonly");
-
-						searchKeyword
-								.on(
-										"input",
-										function() {
-											const inputValue = searchKeyword
-													.val().toLowerCase();
-											//사용자가 영어 소문자를 칠 수 있을 거라고 가정
-											kwSelect
-													.find("option")
-													.each(
-															function() {
-																const optionValue = $(
-																		this)
-																		.val()
-																		.toLowerCase();
-																const optionText = $(
-																		this)
-																		.text()
-																		.toLowerCase();
-																//value값이 같은 게 포함될때, text값이 같은 게 포함될 때 두 경우 모두 보여줌.
-																if (optionValue
-																		.includes(inputValue)
-																		|| optionText
-																				.includes(inputValue)) {
-																	$(this)
-																			.show();
-																} else {
-																	$(this)
-																			.hide();
-																}
-															});
-
-											readonlyInput
-													.val()
-													.split(",")
-													.map(
-															function(item) {
-																const trimmedItem = item
-																		.trim();
-																kwSelect
-																		.find(
-																				"option")
-																		.filter(
-																				function() {
-																					return ($(
-																							this)
-																							.text()
-																							.toLowerCase() === trimmedItem
-																							.toLowerCase());
-																				})
-																		.hide();
-															});
-										});
-
-						//옵션 더블 클릭 시 #readonly에 표시
-						kwSelect.on("dblclick", function() {
-							const selectedOptions = kwSelect.find(
-									"option:selected").map(function() {
-								return $(this).text();
-							}).get();
-
-							readonlyInput.val(function(index, value) {
-								const allOptions = value ? value.split(", ")
-										: [];
-								return allOptions.concat(selectedOptions).join(
-										", ");
-							});
-							kwSelect.find("option:selected").hide();
-						});
-					});
-</script>
+<script type="text/javascript" src="/resources/js/keywordlist.js"></script>
 </head>
 
 <body>
@@ -113,7 +35,7 @@
 		<div class="search-container">
 			<span class="search-icon"><img src="/resources/img/search.png"
 				class="search-icon" /></span> <input type="text" class="search-input"
-				placeholder="키워드 입력" />
+				placeholder="키워드 입력" />	
 		</div>
 		<div>
 			<a href="/nav/suggested">맞춤추천</a>
@@ -150,7 +72,7 @@
 						<p class="join-title">KeyWord</p>
 					</div>
 					<div class="join-kw">
-						<input type="search" id="search-keyword" placeholder="내용을 입력해주세요." />
+						<input type="search" id="search-keyword" placeholder="키워드를 선택해주세요." />
 					</div>
 					<div class="join-kw">
 						<select name="keyword" id="kw" multiple>

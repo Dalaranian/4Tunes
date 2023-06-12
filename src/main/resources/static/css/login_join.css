@@ -136,7 +136,9 @@ body {
   font-size: 15px;
   background-color: #ededed;
 }
-
+#kw option{
+	cursor:pointer;
+}
 .join-btn {
   display:flex;
   align-items: center;
@@ -157,6 +159,7 @@ body {
   margin-right: 0.6vw;
   min-width:159px;
   min-height:32px;
+  cursor:pointer;	
 }
 
 .join-btn #find_cancel button {
@@ -172,6 +175,7 @@ body {
   font-size: 15px;
   min-width:159px;
   min-height:32px;
+  cursor:pointer;
 }
 @media (max-width: 700px) {
   #nav {
