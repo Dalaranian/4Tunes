@@ -80,7 +80,9 @@
 						<button type="submit">작성 완료</button>
 					</div>
 					<div id="cancel">
-						<button type="button" onclick="cancel()">취소</button>
+						<a th:href="@{/community/detail/{boardNo}(boardNo=${community.boardNo})}">
+							<button type="button">취소</button>
+						</a>
 					</div>
 				</div>
 			</form>

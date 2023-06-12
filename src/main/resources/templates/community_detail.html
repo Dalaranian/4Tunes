@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="UTF-8" />
@@ -58,9 +58,13 @@
 				<button style="display: inline-block" id="update-btn">
 					<a th:href="@{/community/update/{boardNo}(boardNo=${community.boardNo})}">수정하기</a>
 				</button>
-				<button style="display: inline-block" id="delete-btn">
-					<a href="/">삭제하기</a>
+				<button style="display: inline-block" id="delete-btn" type="submit"
+					th:if="${community.user_name == session.login?.user_name}">
+					<form th:action="@{/community/delete/{boardNo}(boardNo=${community.boardNo})}"
+						  method="post" id="delete-form">삭제하기</form>
 				</button>
+				<!-- 삭제 버튼은 글 작성자만 보이도록 해봄 나중에 수정할 수도 -->
+
 				<button style="display: inline-block" id="write-btn">
 					<a href="/community/write">글 작성</a>
 				</button>
@@ -74,10 +78,11 @@
 					<span>&nbsp;작성자 :</span><span th:text="${community.user_name}"></span>
 				</div>
 				<div class="detail-count">
-					<span>&nbsp;조회수 :</span><span th:text="${community.boardViewCnt}"></span> 
+					<span>&nbsp;조회수 :</span><span th:text="${community.boardViewCnt}"></span>
 				</div>
 				<div class="detail-content">
-					<div class="content-box" type="text" id="content-input" th:text="${community.boardContent}"></div>
+					<div class="content-box" type="text" id="content-input"
+						th:text="${community.boardContent}"></div>
 				</div>
 			</div>
 
@@ -129,7 +134,17 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		document.getElementById("delete-btn").addEventListener("click",
+				function(event) {
+					event.preventDefault(); // 폼 제출 이벤트 중지
 
+					if (confirm("정말로 삭제하시겠습니까?")) {
+						// 확인 버튼을 눌렀을 때 폼을 제출
+						document.getElementById("delete-form").submit();
+					}
+				});
+	</script>
 </body>
 
 </html>

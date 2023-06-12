@@ -80,4 +80,23 @@ public class CommunityController {
 	    return "redirect:/community/detail/" + boardNo;
 	}
 	
+	@PostMapping("/delete/{boardNo}")
+	public String communityDelete(@PathVariable int boardNo, HttpSession session) {
+	    // 세션에서 로그인된 사용자 정보를 가져옴
+	    UserDto loginUser = (UserDto) session.getAttribute("login");
+
+	    // 로그인된 사용자가 있을 경우에만 글을 삭제할 수 있음
+	    if (loginUser != null) {
+	        CommunityDto community = communityBiz.get(boardNo);
+
+	        // 작성자와 로그인된 사용자가 같을 경우에만 삭제 가능
+	        if (community.getUser_name().equals(loginUser.getUser_name())) {
+	            communityBiz.delete(boardNo);
+	            return "redirect:/nav/community/";
+	        }
+	    }
+
+	    // 삭제가 완료되지 않았거나 로그인된 사용자가 없는 경우, 해당 글의 상세 페이지로 리다이렉트
+	    return "redirect:/community/detail/" + boardNo;
+	}
 }
