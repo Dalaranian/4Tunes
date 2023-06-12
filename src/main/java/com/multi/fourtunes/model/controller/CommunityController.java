@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -121,6 +123,34 @@ public class CommunityController {
 
 		// 상세 페이지로 리다이렉트
 		return "redirect:/community/detail/" + boardNo;
+	}
+	
+	
+//	@PostMapping("/comment/delete/{boardNo}/{userNo}")
+//    public String deleteComment(@PathVariable int boardNo, @PathVariable int userNo, HttpSession session) {
+//        UserDto loginUser = (UserDto) session.getAttribute("login");
+//        
+//        // 로그인된 사용자와 댓글 작성자의 USER_NO가 같을 경우에만 삭제 가능
+//        if (loginUser != null && loginUser.getUser_no() == userNo) {
+//            communityBiz.deleteComment(boardNo, userNo);
+//        }
+//        
+//        // 상세 페이지로 리다이렉트
+//        return "redirect:/community/detail/" + boardNo;
+//    }
+	
+	
+	@PostMapping("/comment/delete/{boardNo}/{userNo}")
+	public ResponseEntity<String> deleteComment(@PathVariable int boardNo, @PathVariable int userNo, HttpSession session) {
+	    UserDto loginUser = (UserDto) session.getAttribute("login");
+	    
+	    // 로그인된 사용자와 댓글 작성자의 USER_NO가 같을 경우에만 삭제 가능
+	    if (loginUser != null && loginUser.getUser_no() == userNo) {
+	        communityBiz.deleteComment(boardNo, userNo);
+	        return ResponseEntity.ok("댓글이 삭제되었습니다.");
+	    }
+	    
+	    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("댓글 삭제 권한이 없습니다.");
 	}
 
 }

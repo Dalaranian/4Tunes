@@ -21,6 +21,11 @@ public interface CommunityBiz {
 	List<CommentDto> getComments(int boardNo);
 	
 	void addComment(CommentDto comment);
+
+	void deleteComment(int boardNo, int userNo);
+
+	
+
 	
 	
 

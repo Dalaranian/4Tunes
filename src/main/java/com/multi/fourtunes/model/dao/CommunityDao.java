@@ -21,6 +21,10 @@ public interface CommunityDao {
 	List<CommentDto> getComments(int boardNo);
 	
 	int addComment(CommentDto comment);
+
+	int deleteComment(int boardNo, int userNo);
+
+
 	
 
 

@@ -59,6 +59,14 @@ public class CommunityDaoImpl implements CommunityDao {
 		return communityMapper.addComment(comment);
 		
 	}
+
+	@Override
+	public int deleteComment(int boardNo, int userNo) {
+		return communityMapper.deleteComment(boardNo, userNo);
+		
+	}
+
+	
 	
 	
 

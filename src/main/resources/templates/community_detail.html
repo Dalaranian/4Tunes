@@ -65,12 +65,14 @@
 			<h1 class="detail-title" th:text="${community.boardTitle}"></h1>
 			<div class="detail-btns">
 				<button style="display: inline-block" id="update-btn">
-					<a th:href="@{/community/update/{boardNo}(boardNo=${community.boardNo})}">수정하기</a>
+					<a
+						th:href="@{/community/update/{boardNo}(boardNo=${community.boardNo})}">수정하기</a>
 				</button>
 				<button style="display: inline-block" id="delete-btn" type="submit"
 					th:if="${community.user_name == session.login?.user_name}">
-					<form th:action="@{/community/delete/{boardNo}(boardNo=${community.boardNo})}"
-						  method="post" id="delete-form">삭제하기</form>
+					<form
+						th:action="@{/community/delete/{boardNo}(boardNo=${community.boardNo})}"
+						method="post" id="delete-form">삭제하기</form>
 				</button>
 				<!-- 삭제 버튼은 글 작성자만 보이도록 해봄 나중에 수정할 수도 -->
 
@@ -102,7 +104,7 @@
 
 					<h2 class="comment-title">COMMENT</h2>
 					<div class="comment-wrap">
-						<div class="comment-item" th:each="comment : ${commentList}" >
+						<div class="comment-item" th:each="comment : ${commentList}">
 							<div class="comment-name">
 								<span th:text="${comment.user_name}"></span>
 							</div>
@@ -114,10 +116,10 @@
 								<img src="/resources/img/down-arrow.png">
 							</button>
 							<ul class="comment-options" style="display: none;">
-								<select>
+								<select onchange="handleOptionChange(this.value, ${comment.boardNo}, ${comment.userNo})">
 									<option>선택</option>
-									<option>신고하기</option>
-									<option>삭제하기</option>
+									<option value="report">신고하기</option>
+									<option value="delete">삭제하기</option>
 								</select>
 							</ul>
 						</div>
@@ -135,8 +137,9 @@
 
 				<div class="comment-detailsecond">
 					<div class="comment-write">
-						<form th:action="@{/community/comment/{boardNo}(boardNo=${community.boardNo})}"
-							  method="post">
+						<form
+							th:action="@{/community/comment/{boardNo}(boardNo=${community.boardNo})}"
+							method="post">
 							<textarea name="commentContent" rows="7" cols="75"
 								placeholder="댓글을 입력해 주세요"></textarea>
 					</div>
@@ -159,7 +162,7 @@
 							// 확인 버튼을 눌렀을 때 폼을 제출
 							document.getElementById("delete-form").submit();
 						}
-					});
+					});	
 		</script>
 </body>
 
