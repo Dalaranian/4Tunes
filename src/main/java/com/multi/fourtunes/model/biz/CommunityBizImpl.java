@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.multi.fourtunes.model.dao.CommunityDao;
+import com.multi.fourtunes.model.dto.CommentDto;
 import com.multi.fourtunes.model.dto.CommunityDto;
 
 @Service
@@ -50,4 +51,24 @@ public class CommunityBizImpl implements CommunityBiz {
 		communityDao.incrementViewCount(boardNo);
 	}
 
+	@Override
+	public List<CommentDto> getComments(int boardNo) {
+		return communityDao.getComments(boardNo);
+	}
+
+	@Override
+	public void addComment(CommentDto comment) {
+		communityDao.addComment(comment);
+
+	}
+
+//	@Override
+//	public void updateReportCount(int boardNo) {
+//		communityDao.updateReportCount(boardNo);
+//	}
+//
+//	@Override
+//	public int checkDuplicateReport(int boardNo, int userNo) {
+//		return communityDao.checkDuplicateReport(boardNo, userNo);
+//	}
 }

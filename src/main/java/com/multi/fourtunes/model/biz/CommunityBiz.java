@@ -2,6 +2,7 @@ package com.multi.fourtunes.model.biz;
 
 import java.util.List;
 
+import com.multi.fourtunes.model.dto.CommentDto;
 import com.multi.fourtunes.model.dto.CommunityDto;
 
 public interface CommunityBiz {
@@ -16,4 +17,14 @@ public interface CommunityBiz {
 	void delete(int boardNo);
 
 	void incrementViewCount(int boardNo);
+
+	List<CommentDto> getComments(int boardNo);
+	
+	void addComment(CommentDto comment);
+	
+	
+
+//	void updateReportCount(int boardNo);
+//	int checkDuplicateReport(int boardNo, int user_no);
+
 }

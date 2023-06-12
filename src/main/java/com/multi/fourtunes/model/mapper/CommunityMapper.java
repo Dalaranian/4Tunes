@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.multi.fourtunes.model.dto.CommentDto;
 import com.multi.fourtunes.model.dto.CommunityDto;
 
 @Mapper
@@ -76,4 +77,48 @@ public interface CommunityMapper {
 		@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
 	@Delete("DELETE FROM COMMUNITY_BOARD WHERE BOARD_NO = #{boardNo}")
 	int delete(int boardNo);
+
+	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
+	    @Result(property = "userNo", column = "USER_NO"),
+	    @Result(property = "commentContent", column = "COMMENT_CONTENT"),
+	    @Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT"),
+	@Result(property = "user_name", column = "USER_NAME") })
+	@Select("SELECT c.BOARD_NO, c.USER_NO, c.COMMENT_CONTENT, c.COMMENT_REPORT_CNT, u.USER_NAME " +
+	        "FROM COMMENT c " +
+	        "JOIN USER u ON c.USER_NO = u.USER_NO " +
+	        "WHERE c.BOARD_NO = #{boardNo}")
+	List<CommentDto> getComments(int boardNo);
+	
+	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
+	    @Result(property = "userNo", column = "USER_NO"),
+	    @Result(property = "commentContent", column = "COMMENT_CONTENT"),
+	    @Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT"),
+	@Result(property = "user_name", column = "USER_NAME") })
+	@Insert("INSERT INTO COMMENT (BOARD_NO, USER_NO, COMMENT_CONTENT, COMMENT_REPORT_CNT) "
+	        + "VALUES (#{boardNo}, #{userNo}, #{commentContent}, #{commentReportCnt})")
+	int addComment(CommentDto comment);
+
+
+	
+//	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
+//		@Result(property = "boardTitle", column = "BOARD_TITLE"),
+//		@Result(property = "boardContent", column = "BOARD_CONTENT"),
+//		@Result(property = "userNo", column = "USER_NO"),
+//		@Result(property = "boardReportCnt", column = "BOARD_REPORT_CNT"),
+//		@Result(property = "boardWriteDate", column = "BOARD_WRITE_DATE"),
+//		@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
+//	@Select("SELECT COUNT(*) FROM COMMUNITY_BOARD_REPORT WHERE BOARD_NO = #{boardNo} AND USER_NO = #{userNo}")
+//	int checkDuplicateReport(int boardNo, int userNo);
+//	
+//	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
+//		@Result(property = "boardTitle", column = "BOARD_TITLE"),
+//		@Result(property = "boardContent", column = "BOARD_CONTENT"),
+//		@Result(property = "userNo", column = "USER_NO"),
+//		@Result(property = "boardReportCnt", column = "BOARD_REPORT_CNT"),
+//		@Result(property = "boardWriteDate", column = "BOARD_WRITE_DATE"),
+//		@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
+//	@Update("UPDATE COMMUNITY_BOARD SET BOARD_REPORT_CNT = BOARD_REPORT_CNT + 1 WHERE BOARD_NO = #{boardNo}")
+//	int updateReportCount(int boardNo);
+
+	
 }

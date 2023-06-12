@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.multi.fourtunes.model.dto.CommentDto;
 import com.multi.fourtunes.model.dto.CommunityDto;
 import com.multi.fourtunes.model.mapper.CommunityMapper;
 
@@ -47,4 +48,31 @@ public class CommunityDaoImpl implements CommunityDao {
 	public int incrementViewCount(int boardNo) {
 		return communityMapper.incrementViewCount(boardNo);
 	}
+
+	@Override
+	public List<CommentDto> getComments(int boardNo) {
+	    return communityMapper.getComments(boardNo);
+	}
+	
+	@Override
+	public int addComment(CommentDto comment) {
+		return communityMapper.addComment(comment);
+		
+	}
+	
+	
+
+	
+	
+
+//    @Override
+//    public void updateReportCount(int boardNo) {
+//        communityMapper.updateReportCount(boardNo);
+//    }
+//
+//    @Override
+//    public int checkDuplicateReport(int boardNo, int userNo) {
+//        return communityMapper.checkDuplicateReport(boardNo, userNo);
+//    }
+	
 }
