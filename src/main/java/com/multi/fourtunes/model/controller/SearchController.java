@@ -35,6 +35,7 @@ public class SearchController {
 		for(SongDto dto:result) {
 			System.out.println(dto);
 		}
+		model.addAttribute("qeury", query);
 		model.addAttribute("searchresult", result);
 
 		return "playlist_searchresult"; // 결과를 표시할 View의 이름을 반환
