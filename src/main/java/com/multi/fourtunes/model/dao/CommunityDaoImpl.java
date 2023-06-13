@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.multi.fourtunes.model.dto.CommentDto;
 import com.multi.fourtunes.model.dto.CommunityDto;
+import com.multi.fourtunes.model.dto.CommunityReportDto;
 import com.multi.fourtunes.model.mapper.CommunityMapper;
 
 @Repository
@@ -75,6 +76,22 @@ public class CommunityDaoImpl implements CommunityDao {
 	@Override
 	public int deleteComment(int commentNo) {
 		return communityMapper.deleteComment(commentNo);
+		
+	}
+
+	@Override
+	public int isReported(int userNo, int boardNo) {
+		return communityMapper.isReported(userNo, boardNo);
+	}
+
+	@Override
+	public int incrementReportCount(int boardNo) {
+		return communityMapper.incrementReportCount(boardNo);
+	}
+
+	@Override
+	public void reportCommunity(CommunityReportDto reportDto) {
+		communityMapper.reportCommunity(reportDto);
 		
 	}
 

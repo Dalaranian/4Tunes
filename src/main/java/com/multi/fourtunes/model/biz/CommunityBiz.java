@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.multi.fourtunes.model.dto.CommentDto;
 import com.multi.fourtunes.model.dto.CommunityDto;
+import com.multi.fourtunes.model.dto.CommunityReportDto;
 
 public interface CommunityBiz {
 	List<CommunityDto> getAll();
@@ -27,6 +28,12 @@ public interface CommunityBiz {
 	CommentDto getComment(int commentNo);
 
 	void deleteComment(int commentNo);
+
+	int isReported(int userNo, int boardNo);
+
+	void incrementReportCount(int boardNo);
+
+	void reportCommunity(CommunityReportDto reportDto);
 
 	
 

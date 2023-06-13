@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.multi.fourtunes.model.biz.CommunityBiz;
 import com.multi.fourtunes.model.dto.CommentDto;
 import com.multi.fourtunes.model.dto.CommunityDto;
+import com.multi.fourtunes.model.dto.CommunityReportDto;
 import com.multi.fourtunes.model.dto.UserDto;
 
 @Controller
@@ -101,7 +103,7 @@ public class CommunityController {
 			// 작성자와 로그인된 사용자가 같을 경우에만 삭제 가능
 			if (community.getUser_name().equals(loginUser.getUser_name())) {
 				
-				// 먼저 해당 게시글과 관련된 댓글들을 삭제
+				// 먼저 해당 게시글에 달린 댓글들을 삭제
 	            communityBiz.deleteByBoardNo(boardNo);
 	            
 				communityBiz.delete(boardNo);
@@ -153,44 +155,42 @@ public class CommunityController {
 	            // 게시글 상세 페이지로 리다이렉트
 	            return "redirect:/community/detail/" + boardNo;
 	        }
-	    
 	    }
-	    // 삭제가 완료되지 않았거나 로그인된 사용자가 없는 경우, 커뮤니티 목록 페이지로 리다이렉트
-	   
-	    return "redirect:/";
+	    // 삭제가 완료되지 않았거나 로그인된 사용자가 없는 경우, 커뮤니티 리스트로 리다이렉트
+	    return  "redirect:/nav/community/";	
 	
+}
 	
-	
-	
-	
-	
-	
-	
-//	@PostMapping("/comment/delete/{boardNo}/{userNo}")
-//    public String deleteComment(@PathVariable int boardNo, @PathVariable int userNo, HttpSession session) {
-//        UserDto loginUser = (UserDto) session.getAttribute("login");
-//        
-//        // 로그인된 사용자와 댓글 작성자의 USER_NO가 같을 경우에만 삭제 가능
-//        if (loginUser != null && loginUser.getUser_no() == userNo) {
-//            communityBiz.deleteComment(boardNo, userNo);
-//        }
-//        
-//        // 상세 페이지로 리다이렉트
-//        return "redirect:/community/detail/" + boardNo;
-//    }
-	
-	
-//	@PostMapping("/comment/delete/{boardNo}/{userNo}")
-//	public ResponseEntity<String> deleteComment(@PathVariable int boardNo, @PathVariable int userNo, HttpSession session) {
-//	    UserDto loginUser = (UserDto) session.getAttribute("login");
-//	    
-//	    // 로그인된 사용자와 댓글 작성자의 USER_NO가 같을 경우에만 삭제 가능
-//	    if (loginUser != null && loginUser.getUser_no() == userNo) {
-//	        communityBiz.deleteComment(boardNo, userNo);
-//	        return ResponseEntity.ok("댓글이 삭제되었습니다.");
-//	    }
-//	    
-//	    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("댓글 삭제 권한이 없습니다.");
-//	}
+	@PostMapping("/report/{boardNo}")
+    public String reportBoard(@PathVariable int boardNo, HttpSession session) {
+        // 세션에서 로그인된 사용자 정보를 가져옴
+        UserDto loginUser = (UserDto) session.getAttribute("login");
 
+        // 로그인된 사용자가 있을 경우에만 신고 가능
+        if (loginUser != null) {
+            // 해당 게시글에 대한 신고 여부 확인
+            int isReported = communityBiz.isReported(loginUser.getUser_no(), boardNo);
+            if (isReported == 0) {
+                // 게시글 신고 카운트 증가
+                communityBiz.incrementReportCount(boardNo);
+
+
+                // COMMUNITY_REPORT에 신고 정보 저장
+                CommunityReportDto reportDto = new CommunityReportDto();
+                reportDto.setUserNo(loginUser.getUser_no());
+                reportDto.setBoardNo(boardNo);
+                communityBiz.reportCommunity(reportDto);
+
+                // 신고 후에는 상세 페이지로 리다이렉트
+                return "redirect:/community/detail/" + boardNo;
+            }
+        }
+
+        // 로그인되지 않았거나 이미 신고한 경우, 상세 페이지로 리다이렉트
+        return "redirect:/community/detail/" + boardNo;
+    }
+
+	
+	
+	
 }

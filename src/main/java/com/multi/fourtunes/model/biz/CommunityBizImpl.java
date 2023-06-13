@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.multi.fourtunes.model.dao.CommunityDao;
 import com.multi.fourtunes.model.dto.CommentDto;
 import com.multi.fourtunes.model.dto.CommunityDto;
+import com.multi.fourtunes.model.dto.CommunityReportDto;
 
 @Service
 public class CommunityBizImpl implements CommunityBiz {
@@ -76,6 +77,23 @@ public class CommunityBizImpl implements CommunityBiz {
 	@Override
 	public void deleteComment(int commentNo) {
 		communityDao.deleteComment(commentNo);
+		
+	}
+
+	@Override
+	public int isReported(int userNo, int boardNo) {
+		return communityDao.isReported(userNo, boardNo);
+	}
+
+	@Override
+	public void incrementReportCount(int boardNo) {
+		communityDao.incrementReportCount(boardNo);
+		
+	}
+
+	@Override
+	public void reportCommunity(CommunityReportDto reportDto) {
+		communityDao.reportCommunity(reportDto);
 		
 	}
 

@@ -11,7 +11,9 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.multi.fourtunes.model.dto.CommentDto;
+import com.multi.fourtunes.model.dto.CommentReportDto;
 import com.multi.fourtunes.model.dto.CommunityDto;
+import com.multi.fourtunes.model.dto.CommunityReportDto;
 
 @Mapper
 public interface CommunityMapper {
@@ -131,6 +133,23 @@ public interface CommunityMapper {
 	    @Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT") })
 	@Delete("DELETE FROM COMMENT WHERE COMMENT_NO = #{commentNo}")
 	int deleteComment(int commentNo);
+
+	
+	@Results({ @Result(property = "userNo", column = "USER_NO"),
+		@Result(property = "boardNo", column = "BOARD_NO"), 
+	    @Result(property = "userNo", column = ".count(*)") })
+	@Select("SELECT COUNT(*) > 0 AS .count(*) FROM COMMUNITY_REPORT WHERE USER_NO = #{userNo} AND BOARD_NO = #{boardNo}")
+	int isReported(int userNo, int boardNo);
+
+	@Results({ @Result(property = "userNo", column = "USER_NO"),
+		@Result(property = "boardNo", column = "BOARD_NO") })
+	@Update("UPDATE COMMUNITY_BOARD SET BOARD_REPORT_CNT = BOARD_REPORT_CNT + 1 WHERE BOARD_NO = #{boardNo}")
+	int incrementReportCount(int boardNo);
+
+	@Results({ @Result(property = "userNo", column = "USER_NO"),
+		@Result(property = "boardNo", column = "BOARD_NO") })
+	@Insert("INSERT INTO COMMUNITY_REPORT (USER_NO, BOARD_NO) VALUES (#{userNo}, #{boardNo})")
+	Object reportCommunity(CommunityReportDto reportDto);
 
 	
 

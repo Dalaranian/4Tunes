@@ -84,10 +84,12 @@
 				<button style="display: inline-block" id="write-btn">
 					<a href="/community/write">글 작성</a>
 				</button>
-				<button style="display: inline-block" id="report-btn">
-					<!-- <a th:href="@{community/report/{boardNo}(boardNo=${community.boardNo})}"> -->
-					신고하기</a>
-				</button>
+				<form
+					th:action="@{/community/report/{boardNo}(boardNo=${community.boardNo})}"
+					method="post">
+					<button style="display: inline-block" id="report-btn" type="submit">
+						신고하기</button>
+				</form>
 			</div>
 
 			<div class="detail-wrap">
@@ -120,7 +122,7 @@
 							<form
 								th:action="@{/community/delete/comment/{commentNo}(commentNo=${comment.commentNo})}"
 								method="post">
-								<button type="submit" class="comment-dropdown">
+								<button type="submit" class="comment-dropdown" th:if="${comment.user_name == session.login?.user_name}">
 									<img src="/resources/img/down-arrow.png">
 								</button>
 							</form>
