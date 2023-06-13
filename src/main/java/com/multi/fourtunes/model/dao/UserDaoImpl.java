@@ -1,5 +1,7 @@
 package com.multi.fourtunes.model.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -30,4 +32,5 @@ public class UserDaoImpl implements UserDao {
 	public int insertUser(UserDto insert) {
 		return userMapper.insertUser(insert);
 	}
+
 }

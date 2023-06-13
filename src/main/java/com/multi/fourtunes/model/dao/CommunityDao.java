@@ -16,4 +16,6 @@ public interface CommunityDao {
 	int delete(int boardNo);
 	
 	int incrementViewCount(int boardNo);
+	
+	public List<CommunityDto> getUserMyContentAll(int userNo);
 }

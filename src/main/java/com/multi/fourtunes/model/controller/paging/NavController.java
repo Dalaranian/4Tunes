@@ -14,6 +14,7 @@ import com.multi.fourtunes.model.biz.CommunityBiz;
 import com.multi.fourtunes.model.biz.KeywordBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
 import com.multi.fourtunes.model.dto.CommunityDto;
+import com.multi.fourtunes.model.dto.UserDto;
 	
 	@Controller
 	@RequestMapping("/nav")
@@ -43,6 +44,8 @@ import com.multi.fourtunes.model.dto.CommunityDto;
 		        return "login_login";
 		    }
 		}	
+		
+		
 		// 맞춤 추천 페이지로 이동
 		@GetMapping("/suggested")
 		public String gotoSuggested() {
@@ -62,7 +65,13 @@ import com.multi.fourtunes.model.dto.CommunityDto;
 			model.addAttribute("communityList", communityList);
 			return "community_list";
 		}
-	
+		
+		//마이페이지 활동내역
+		@RequestMapping("/communityContent")
+		public String gotocommunityList() {
+			return "mypage_community";
+		}
+		
 		// 멤버쉽 페이지로 이동
 		@GetMapping("/membership")
 		public String gotoMembership() {
