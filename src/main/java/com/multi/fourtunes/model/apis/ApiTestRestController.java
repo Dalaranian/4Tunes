@@ -1,7 +1,7 @@
 package com.multi.fourtunes.model.apis;
 
 import com.multi.fourtunes.model.dto.SongDto;
-import com.multi.fourtunes.model.jpa.entitiy.SongEntity;
+import com.multi.fourtunes.model.jpa.entity.SongEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

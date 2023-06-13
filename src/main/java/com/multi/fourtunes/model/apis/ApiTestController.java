@@ -1,13 +1,10 @@
 package com.multi.fourtunes.model.apis;
 
 import com.multi.fourtunes.model.dto.SongDto;
-import com.multi.fourtunes.model.jpa.entitiy.SongEntity;
-import com.multi.fourtunes.model.jpa.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**

@@ -1,4 +1,4 @@
-package com.multi.fourtunes.model.jpa.entitiy;
+package com.multi.fourtunes.model.jpa.entity;
 
 import lombok.*;
 
