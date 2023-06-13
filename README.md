@@ -17,7 +17,6 @@
 ![amazonec2](https://img.shields.io/badge/amazonec2-FF9900.svg?&style=for-the-badge&logo=amazonec2&logoColor=white)
     <br>   
 ## 💻 Will Be Used 💻<br>
-![Swagger](https://img.shields.io/badge/Swagger-85EA2D.svg?&style=for-the-badge&logo=Swagger&logoColor=white) 
 ![TypeScript](https://img.shields.io/badge/typescript-61DAFB.svg?&style=for-the-badge&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/react-3178C6.svg?&style=for-the-badge&logo=react&logoColor=white)
 ![springsecurity](https://img.shields.io/badge/springsecurity-6DB33F.svg?&style=for-the-badge&logo=springsecurity&logoColor=white) 
