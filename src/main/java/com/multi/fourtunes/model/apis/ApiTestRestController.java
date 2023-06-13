@@ -20,22 +20,28 @@ public class ApiTestRestController {
 
     @Autowired
     ManiaDbApi mania;
+
+    @Autowired
+    ApiTestService service;
+
     @GetMapping("/jpatest")
-    public ModelAndView testJpa(String query){
+    public ModelAndView testJpa(String query) {
 
         mania.setPrompt(query);
         mania.setType(false);
         List<SongDto> result = mania.search();
-        
-        SongEntity song = new SongEntity();
 
         for(SongDto res:result){
+
+            SongEntity song = new SongEntity();
+
             song.setSongArtist(res.getSongArtist());
             song.setSongTitle(res.getSongTitle());
-            song.setSongLink(res.getSongLink());
+            song.setSongLink("temp");
             song.setSongId(res.getSongId());
-
             System.out.println(song.toString());
+
+            service.saveSongEntitiy(song);
         }
 
         ModelAndView mav = new ModelAndView();

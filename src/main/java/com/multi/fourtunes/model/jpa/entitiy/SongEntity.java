@@ -16,7 +16,7 @@ public class SongEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "SONG_NO")
-    private Integer songNo;
+    private Long songNo;
 
     @Column(name = "SONG_TITLE", nullable = false)
     private String songTitle;
