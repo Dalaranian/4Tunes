@@ -33,7 +33,7 @@ public class CommunityController {
 //		return "community_list";
 //	}
 
-	// 상세 페이지로 이동
+	// 게시글 상세 페이지로 이동
 	@RequestMapping("/detail/{boardNo}")
 	public String getCommunityDetail(@PathVariable int boardNo, Model model) {
 		CommunityDto community = communityBiz.get(boardNo);
@@ -57,6 +57,7 @@ public class CommunityController {
 		return "community_detail";
 	}
 
+	// 게시글 수정
 	@RequestMapping("/update/{boardNo}")
 	public String communityUpdate(@PathVariable int boardNo, Model model, HttpSession session) {
 		// 세션에서 로그인된 사용자 정보를 가져옴
@@ -87,6 +88,7 @@ public class CommunityController {
 		return "redirect:/community/detail/" + boardNo;
 	}
 
+	// 게시글 삭제
 	@PostMapping("/delete/{boardNo}")
 	public String communityDelete(@PathVariable int boardNo, HttpSession session) {
 		// 세션에서 로그인된 사용자 정보를 가져옴
@@ -107,6 +109,7 @@ public class CommunityController {
 		return "redirect:/community/detail/" + boardNo;
 	}
 
+	// 댓글 작성
 	@PostMapping("/comment/{boardNo}")
 	public String addComment(@PathVariable int boardNo, @ModelAttribute("comment") CommentDto comment,
 			HttpSession session) {

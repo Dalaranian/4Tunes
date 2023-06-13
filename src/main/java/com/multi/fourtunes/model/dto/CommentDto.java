@@ -12,6 +12,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class CommentDto {
+	private int commentNo;
 	private int boardNo;
 	private int userNo;
 	private String commentContent;

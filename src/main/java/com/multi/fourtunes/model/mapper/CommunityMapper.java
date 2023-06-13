@@ -78,24 +78,26 @@ public interface CommunityMapper {
 	@Delete("DELETE FROM COMMUNITY_BOARD WHERE BOARD_NO = #{boardNo}")
 	int delete(int boardNo);
 
-	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
+	@Results({ @Result(property = "commentNo", column = "COMMENT_NO"), 
+		@Result(property = "boardNo", column = "BOARD_NO"),
 	    @Result(property = "userNo", column = "USER_NO"),
 	    @Result(property = "commentContent", column = "COMMENT_CONTENT"),
 	    @Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT"),
 	@Result(property = "user_name", column = "USER_NAME") })
-	@Select("SELECT c.BOARD_NO, c.USER_NO, c.COMMENT_CONTENT, c.COMMENT_REPORT_CNT, u.USER_NAME " +
+	@Select("SELECT c.COMMENT_NO, c.BOARD_NO, c.USER_NO, c.COMMENT_CONTENT, c.COMMENT_REPORT_CNT, u.USER_NAME " +
 	        "FROM COMMENT c " +
 	        "JOIN USER u ON c.USER_NO = u.USER_NO " +
 	        "WHERE c.BOARD_NO = #{boardNo}")
 	List<CommentDto> getComments(int boardNo);
 	
-	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
+	@Results({ @Result(property = "commentNo", column = "COMMENT_NO"),
+		@Result(property = "boardNo", column = "BOARD_NO"),
 	    @Result(property = "userNo", column = "USER_NO"),
 	    @Result(property = "commentContent", column = "COMMENT_CONTENT"),
 	    @Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT"),
 	@Result(property = "user_name", column = "USER_NAME") })
-	@Insert("INSERT INTO COMMENT (BOARD_NO, USER_NO, COMMENT_CONTENT, COMMENT_REPORT_CNT) "
-	        + "VALUES (#{boardNo}, #{userNo}, #{commentContent}, #{commentReportCnt})")
+	@Insert("INSERT INTO COMMENT (COMMENT_NO, BOARD_NO, USER_NO, COMMENT_CONTENT, COMMENT_REPORT_CNT) "
+	        + "VALUES (#{commentNo}, #{boardNo}, #{userNo}, #{commentContent}, #{commentReportCnt})")
 	int addComment(CommentDto comment);
 
 	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
