@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,9 +32,9 @@
 			</div>
 		</div>
 		<div class="search-container">
-			<span class="search-icon"><img
-				src="/resources/img/search.png" class="search-icon" /></span> <input
-				type="text" class="search-input" placeholder="키워드 입력" />
+			<span class="search-icon"><img src="/resources/img/search.png"
+				class="search-icon" /></span> <input type="text" class="search-input"
+				placeholder="키워드 입력" />
 		</div>
 		<div>
 			<a href="/nav/suggested">맞춤추천</a>
@@ -72,12 +72,13 @@
 						<div class="modify">수정버튼</div>
 						<div class="drop">탈퇴버튼</div>
 					</div>
-					<div>
-						<div class="num">1</div>
-						<div class="name">배정민</div>
-						<div class="id">princess@naver.com</div>
+
+					<div th:each="user : ${userList}">
+						<div class="num" th:text="${user.user_no}"></div>
+						<div class="name" th:text="${user.user_name}"></div>
+						<div class="id" th:text="${user.user_id}"></div>
 						<div class="grade">
-							<input type="text" size="10" value="free"
+							<input type="text" size="10" th:value="${user.user_grade}"
 								style="text-align: center;">
 						</div>
 						<div class="modify">
@@ -87,21 +88,7 @@
 							<input type="button" id="drop" value="탈퇴처리" onclick="">
 						</div>
 					</div>
-					<div>
-						<div class="num">2</div>
-						<div class="name">박윤아</div>
-						<div class="id">yoonaori@naver.com</div>
-						<div class="grade">
-							<input type="text" size="10" value="paid"
-								style="text-align: center;">
-						</div>
-						<div class="modify">
-							<input type="button" id="modify" value="수정완료" onclick="">
-						</div>
-						<div class="drop">
-							<input type="button" id="drop" value="탈퇴처리" onclick="">
-						</div>
-					</div>
+
 				</div>
 			</div>
 		</div>

@@ -1,5 +1,7 @@
 package com.multi.fourtunes.model.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -18,5 +20,8 @@ public interface UserMapper {
 
 	@Insert(" INSERT INTO USER VALUES(NULL, #{user_id}, #{user_name}, #{user_pw}, 'FREE') ")
 	int insertUser(UserDto insert);
+
+	@Select(" SELECT * FROM USER ")
+	List<UserDto> selectList();
 
 }
