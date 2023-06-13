@@ -1,12 +1,16 @@
 package com.multi.fourtunes.model.jpa.entitiy;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "SONG")
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class SongEntity {
 
     @Id
