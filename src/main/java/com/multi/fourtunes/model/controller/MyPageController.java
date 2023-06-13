@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.fourtunes.model.biz.CommunityBiz;
 import com.multi.fourtunes.model.dto.CommunityDto;
+import com.multi.fourtunes.model.dto.UserDto;
 
 @Controller
 @RequestMapping("/communityContent")
@@ -23,11 +24,12 @@ public class MyPageController {
 	private CommunityBiz communityBiz;
 	
 	@RequestMapping("/communityContent")
-	public String getCommunityList(@PathVariable int userNo, Model model) {
-		List<CommunityDto> communityContent = communityBiz.getUserMyContentAll(userNo);
-	for(CommunityDto dto:communityContent) {
-		System.out.println(dto);
-	}
+	public String getCommunityList(Model model, HttpSession session) {
+		UserDto currentUser = (UserDto) session.getAttribute("login");
+		List<CommunityDto> communityContent = communityBiz.getUserMyContentAll(currentUser.getUser_no());
+		for(CommunityDto dto:communityContent) {
+			System.out.println(dto);
+		}
 		model.addAttribute("communityContent",communityContent);
 		return "mypage_community";
 	}
@@ -41,16 +43,5 @@ public class MyPageController {
 			return "community_detail";
 		}
 
-		@RequestMapping("/write")
-		public String communityWrite(HttpSession session) {
-			System.out.println("Session Contents: " + session.getAttribute("login"));
-			return "community_write";
-		}
-
-		@PostMapping("/create")
-	    public String communityCreate(@ModelAttribute("community") CommunityDto community) {
-	        communityBiz.insert(community);
-	        return "redirect:/nav/community";
-	    }
 	
 }

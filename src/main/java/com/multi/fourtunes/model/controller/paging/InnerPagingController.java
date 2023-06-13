@@ -2,6 +2,8 @@ package com.multi.fourtunes.model.controller.paging;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.multi.fourtunes.model.biz.CommunityBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
 import com.multi.fourtunes.model.dto.CommunityDto;
+import com.multi.fourtunes.model.dto.UserDto;
 
 // 프론트 작성의 편의를 위한 임시 페이징 클래스입니다. 
 
@@ -41,13 +44,16 @@ public class InnerPagingController {
     	model.addAttribute("keywordlist", keywordList);
 		return "mypage_user";
 	}
-
-	// 내 활동 조회로 전환
+	
+	//내 활동내역 조회
 	@GetMapping("/mypage/communityContent")
-	public String gotoMyPageCommmunity() {
+	public String gotoMyPageUser(Model model, HttpSession session) {
+		UserDto currentUser = (UserDto) session.getAttribute("login");
+		List<CommunityDto> communityContent = communityBiz.getUserMyContentAll(currentUser.getUser_no());
+		model.addAttribute("communityContent",communityContent);
 		return "mypage_community";
 	}
-
+	
 	// 커뮤니티
 	@GetMapping("/mypage/community")
 	public String gotoCommmunity() {
