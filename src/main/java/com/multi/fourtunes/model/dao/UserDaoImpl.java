@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.multi.fourtunes.model.dto.UserDto;
+import com.multi.fourtunes.model.mapper.KeywordMapper;
 import com.multi.fourtunes.model.mapper.UserMapper;
 
 @Repository
@@ -12,6 +13,9 @@ public class UserDaoImpl implements UserDao {
 	@Autowired
 	private UserMapper userMapper;
 
+	@Autowired
+	private KeywordMapper keywordMapper;
+	
 	@Override
 	public UserDto login(UserDto dto) {
 		UserDto res = null;
