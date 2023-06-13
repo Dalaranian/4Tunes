@@ -49,5 +49,9 @@ public class CommunityBizImpl implements CommunityBiz {
 	public void incrementViewCount(int boardNo) {
 		communityDao.incrementViewCount(boardNo);
 	}
-
+	
+	@Override
+	public List<CommunityDto> getUserMyContentAll(int userNo){
+		return communityDao.getUserMyContentAll(userNo);
+	}
 }
