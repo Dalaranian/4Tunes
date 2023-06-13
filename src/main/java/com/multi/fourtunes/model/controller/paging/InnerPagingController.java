@@ -1,15 +1,33 @@
 package com.multi.fourtunes.model.controller.paging;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.multi.fourtunes.model.biz.CommunityBiz;
+import com.multi.fourtunes.model.biz.LoginBiz;
+import java.util.List;
+import com.multi.fourtunes.model.dto.CommunityDto;
+import com.multi.fourtunes.model.dto.UserDto;
 
 // 프론트 작성의 편의를 위한 임시 페이징 클래스입니다. 
 
 @Controller
 @RequestMapping("/innerpaging")
 public class InnerPagingController {
-
+	
+	@Autowired
+	private CommunityBiz communityBiz;
+	
+	@Autowired
+	private LoginBiz loginBiz;
+	
 	// 로그인 페이지
 
 	// 회원가입 페이지로 전환
@@ -22,18 +40,35 @@ public class InnerPagingController {
 
 	// 내 정보 보기로 전환
 	@GetMapping("/mypage/user")
-	public String gotoMyPageUser() {
-		return "mypage_user";
+	public String gotoMyPageUser(Model model, HttpSession session) {
+	    String[] keywordList = loginBiz.getKeyword();
+	    UserDto currentUser = (UserDto) session.getAttribute("login");
+	    System.out.println(currentUser);
+	    String[] userKeyword = loginBiz.getUserKeyword(currentUser.getUser_no());
+	    StringBuilder myKeyword = new StringBuilder();
+	    for(String str:userKeyword) {
+	    	myKeyword.append(str + " ");
+	    }
+	    model.addAttribute("keywordlist", keywordList);
+	    model.addAttribute("userkeyword", myKeyword.toString());
+	    return "mypage_user";
 	}
+	
 
-	// 내 활동 조회로 전환
-	@GetMapping("/mypage/community")
-	public String gotoMyPageCommmunity() {
+	//내 활동내역 조회
+	@GetMapping("/mypage/communityContent")
+	public String gotoMyPageUser(Model model, HttpSession session) {
+		UserDto currentUser = (UserDto) session.getAttribute("login");
+		List<CommunityDto> communityContent = communityBiz.getUserMyContentAll(currentUser.getUser_no());
+		model.addAttribute("communityContent",communityContent);
 		return "mypage_community";
 	}
-
+	
 	// 커뮤니티
-
+	@GetMapping("/mypage/community")
+	public String gotoCommmunity() {
+		return "community_list";
+	}
 	// 글 작성 페이지로 이동
 	@GetMapping("/community/write")
 	public String gotoCommunityWrite() {

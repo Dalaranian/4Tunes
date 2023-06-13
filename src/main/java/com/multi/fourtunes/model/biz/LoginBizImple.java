@@ -31,7 +31,12 @@ public class LoginBizImple implements LoginBiz {
 		// TODO Auto-generated method stub
 		return keywordDao.getAllList();
 	}
-
+	
+	@Override
+	public String[] getUserKeyword(int userNo) {
+		return keywordDao.userKeyword(userNo);
+	}
+	
 	@Override
 	public UserDto login(UserDto dto) {
 		return userDao.login(dto);
@@ -47,5 +52,6 @@ public class LoginBizImple implements LoginBiz {
 	public int insertUser(UserDto insert) {
 		return userDao.insertUser(insert);
 	}
-
+	
+	
 }

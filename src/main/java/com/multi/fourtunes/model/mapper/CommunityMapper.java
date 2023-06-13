@@ -59,4 +59,33 @@ public interface CommunityMapper {
 	int update(CommunityDto community);
 
 	int delete(int boardNo);
+	
+	
+	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
+		@Result(property = "boardTitle", column = "BOARD_TITLE"),
+		@Result(property = "boardContent", column = "BOARD_CONTENT"),
+		@Result(property = "userNo", column = "USER_NO"),
+		@Result(property = "boardReportCnt", column = "BOARD_REPORT_CNT"),
+		@Result(property = "boardWriteDate", column = "BOARD_WRITE_DATE"),
+		@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
+	@Select("SELECT b.*, u.USER_NAME " +
+	        "FROM COMMUNITY_BOARD b " +   
+	        "JOIN USER u ON b.USER_NO = u.USER_NO " +   
+	        "WHERE u.USER_ID = #{userId} " +
+	        "ORDER BY BOARD_WRITE_DATE DESC") 
+	List<CommunityDto> getUserCommunityList(String userId);
+	
+	
+	//내가 작성할 게시글
+	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
+		@Result(property = "boardTitle", column = "BOARD_TITLE"),
+		@Result(property = "boardContent", column = "BOARD_CONTENT"),
+		@Result(property = "userNo", column = "USER_NO"),
+		@Result(property = "boardWriteDate", column = "BOARD_WRITE_DATE"),
+		@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
+	@Select("SELECT u.USER_NO, b.BOARD_NO, b.BOARD_TITLE, b.BOARD_CONTENT,b.BOARD_WRITE_DATE, b.BOARD_VIEW_CNT " + 
+			" FROM COMMUNITY_BOARD b " +
+			" JOIN USER u  ON u.USER_NO = b.USER_NO " + 
+			" WHERE b.USER_NO = #{userNo} " ) 
+	List<CommunityDto> getUserMyContentAll(int userNo);
 }
