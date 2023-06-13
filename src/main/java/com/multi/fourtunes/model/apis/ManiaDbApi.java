@@ -1,4 +1,4 @@
-package com.multi.fourtunes.apis;
+package com.multi.fourtunes.model.apis;
 
 import java.util.ArrayList;
 
