@@ -1,4 +1,4 @@
-	package com.multi.fourtunes.model.controller.paging;
+	package com.multi.fourtunes.model.controller;
 	
 	import java.util.List;
 
