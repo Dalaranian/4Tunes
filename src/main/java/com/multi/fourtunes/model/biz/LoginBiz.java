@@ -13,5 +13,6 @@ public interface LoginBiz {
 
 	public int insertUser(UserDto insert);
 
-
+	String[] getUserKeyword(int userNo);
+	
 }
