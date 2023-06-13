@@ -1,18 +1,25 @@
 package com.multi.fourtunes.model.controller.paging;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.multi.fourtunes.model.biz.CommunityBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
+import com.multi.fourtunes.model.dto.CommunityDto;
 
 // 프론트 작성의 편의를 위한 임시 페이징 클래스입니다. 
 
 @Controller
 @RequestMapping("/innerpaging")
 public class InnerPagingController {
+	
+	@Autowired
+	private CommunityBiz communityBiz;
 	
 	@Autowired
 	private LoginBiz loginBiz;
@@ -36,13 +43,16 @@ public class InnerPagingController {
 	}
 
 	// 내 활동 조회로 전환
-	@GetMapping("/mypage/community")
+	@GetMapping("/mypage/communityContent")
 	public String gotoMyPageCommmunity() {
 		return "mypage_community";
 	}
 
 	// 커뮤니티
-
+	@GetMapping("/mypage/community")
+	public String gotoCommmunity() {
+		return "community_list";
+	}
 	// 글 작성 페이지로 이동
 	@GetMapping("/community/write")
 	public String gotoCommunityWrite() {

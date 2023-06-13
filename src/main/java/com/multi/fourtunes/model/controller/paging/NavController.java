@@ -62,7 +62,14 @@ import com.multi.fourtunes.model.dto.CommunityDto;
 			model.addAttribute("communityList", communityList);
 			return "community_list";
 		}
-	
+		
+		//마이페이지 활동내역
+		@RequestMapping("/communityContent")
+		public String getCommunityList(Model model,int userNo) {
+			List<CommunityDto> communityContent = communityBiz.getUserMyContentAll(userNo);
+			model.addAttribute("communityContent",communityContent);
+			return "mypage_community";
+		}
 		// 멤버쉽 페이지로 이동
 		@GetMapping("/membership")
 		public String gotoMembership() {

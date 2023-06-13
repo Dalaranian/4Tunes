@@ -16,4 +16,6 @@ public interface CommunityBiz {
 	void delete(int boardNo);
 
 	void incrementViewCount(int boardNo);
+	
+	List<CommunityDto> getUserMyContentAll(int userNo);
 }
