@@ -66,6 +66,11 @@ public class CommunityDaoImpl implements CommunityDao {
 		
 	}
 
+	@Override
+	public int deleteByBoardNo(int boardNo) {
+		return communityMapper.deleteByBoardNo(boardNo);
+	}
+
 	
 	
 	

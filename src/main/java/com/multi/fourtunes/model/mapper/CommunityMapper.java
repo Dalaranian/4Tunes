@@ -108,6 +108,14 @@ public interface CommunityMapper {
 	@Delete("DELETE FROM COMMENT WHERE BOARD_NO = #{boardNo} AND USER_NO = #{userNo}")
 	int deleteComment(int boardNo, int userNo);
 
+	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
+	    @Result(property = "userNo", column = "USER_NO"),
+	    @Result(property = "commentContent", column = "COMMENT_CONTENT"),
+	    @Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT"), 
+	@Result(property = "user_name", column = "USER_NAME") })
+	@Delete("DELETE FROM COMMENT WHERE BOARD_NO = #{boardNo}")
+	int deleteByBoardNo(int boardNo);
+
 	
 
 	

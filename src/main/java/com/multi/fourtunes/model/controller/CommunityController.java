@@ -100,6 +100,10 @@ public class CommunityController {
 
 			// 작성자와 로그인된 사용자가 같을 경우에만 삭제 가능
 			if (community.getUser_name().equals(loginUser.getUser_name())) {
+				
+				// 먼저 해당 게시글과 관련된 댓글들을 삭제
+	            communityBiz.deleteByBoardNo(boardNo);
+	            
 				communityBiz.delete(boardNo);
 				return "redirect:/nav/community/";
 			}
@@ -143,17 +147,17 @@ public class CommunityController {
 //    }
 	
 	
-	@PostMapping("/comment/delete/{boardNo}/{userNo}")
-	public ResponseEntity<String> deleteComment(@PathVariable int boardNo, @PathVariable int userNo, HttpSession session) {
-	    UserDto loginUser = (UserDto) session.getAttribute("login");
-	    
-	    // 로그인된 사용자와 댓글 작성자의 USER_NO가 같을 경우에만 삭제 가능
-	    if (loginUser != null && loginUser.getUser_no() == userNo) {
-	        communityBiz.deleteComment(boardNo, userNo);
-	        return ResponseEntity.ok("댓글이 삭제되었습니다.");
-	    }
-	    
-	    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("댓글 삭제 권한이 없습니다.");
-	}
+//	@PostMapping("/comment/delete/{boardNo}/{userNo}")
+//	public ResponseEntity<String> deleteComment(@PathVariable int boardNo, @PathVariable int userNo, HttpSession session) {
+//	    UserDto loginUser = (UserDto) session.getAttribute("login");
+//	    
+//	    // 로그인된 사용자와 댓글 작성자의 USER_NO가 같을 경우에만 삭제 가능
+//	    if (loginUser != null && loginUser.getUser_no() == userNo) {
+//	        communityBiz.deleteComment(boardNo, userNo);
+//	        return ResponseEntity.ok("댓글이 삭제되었습니다.");
+//	    }
+//	    
+//	    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("댓글 삭제 권한이 없습니다.");
+//	}
 
 }

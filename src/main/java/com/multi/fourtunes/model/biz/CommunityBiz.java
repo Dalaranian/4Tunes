@@ -24,6 +24,8 @@ public interface CommunityBiz {
 
 	void deleteComment(int boardNo, int userNo);
 
+	void deleteByBoardNo(int boardNo);
+
 	
 
 	

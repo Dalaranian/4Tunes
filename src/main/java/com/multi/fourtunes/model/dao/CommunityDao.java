@@ -24,6 +24,8 @@ public interface CommunityDao {
 
 	int deleteComment(int boardNo, int userNo);
 
+	int deleteByBoardNo(int boardNo);
+
 
 	
 
