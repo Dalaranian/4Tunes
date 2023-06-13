@@ -35,6 +35,11 @@
 }
 
 /* ---------- 마이페이지 내용 ----------*/
+fieldset{
+  display:contents;
+  min-width:504px;
+  min-height:450px;
+}
 .mypage_contents {
   display: inline-block;
   width: 75%;
@@ -81,9 +86,9 @@
 .mypage_title {
   float: left;
   height: 2.1vw;
-  width: 10vw;
+  width: 8.5vw;
   background-size: cover;
-  min-width:117px;
+  min-width:90px;
   min-height:25px;
   font-size: 15px;
   font-weight: bold;

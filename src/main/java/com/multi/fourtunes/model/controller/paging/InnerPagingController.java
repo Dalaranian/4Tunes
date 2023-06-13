@@ -1,17 +1,18 @@
 package com.multi.fourtunes.model.controller.paging;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.fourtunes.model.biz.CommunityBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
+import java.util.List;
 import com.multi.fourtunes.model.dto.CommunityDto;
 import com.multi.fourtunes.model.dto.UserDto;
 
@@ -39,12 +40,21 @@ public class InnerPagingController {
 
 	// 내 정보 보기로 전환
 	@GetMapping("/mypage/user")
-	public String gotoMyPageUser(Model model) {
-		String[] keywordList = loginBiz.getKeyword();
-    	model.addAttribute("keywordlist", keywordList);
-		return "mypage_user";
+	public String gotoMyPageUser(Model model, HttpSession session) {
+	    String[] keywordList = loginBiz.getKeyword();
+	    UserDto currentUser = (UserDto) session.getAttribute("login");
+	    System.out.println(currentUser);
+	    String[] userKeyword = loginBiz.getUserKeyword(currentUser.getUser_no());
+	    StringBuilder myKeyword = new StringBuilder();
+	    for(String str:userKeyword) {
+	    	myKeyword.append(str + " ");
+	    }
+	    model.addAttribute("keywordlist", keywordList);
+	    model.addAttribute("userkeyword", myKeyword.toString());
+	    return "mypage_user";
 	}
 	
+
 	//내 활동내역 조회
 	@GetMapping("/mypage/communityContent")
 	public String gotoMyPageUser(Model model, HttpSession session) {
