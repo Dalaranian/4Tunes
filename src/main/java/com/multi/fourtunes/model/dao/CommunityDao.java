@@ -22,9 +22,11 @@ public interface CommunityDao {
 	
 	int addComment(CommentDto comment);
 
-	int deleteComment(int boardNo, int userNo);
-
 	int deleteByBoardNo(int boardNo);
+
+	public CommentDto getComment(int commentNo);
+
+	int deleteComment(int commentNo);
 
 
 	

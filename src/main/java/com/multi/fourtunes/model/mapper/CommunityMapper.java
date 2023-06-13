@@ -100,13 +100,13 @@ public interface CommunityMapper {
 	        + "VALUES (#{commentNo}, #{boardNo}, #{userNo}, #{commentContent}, #{commentReportCnt})")
 	int addComment(CommentDto comment);
 
-	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
-	    @Result(property = "userNo", column = "USER_NO"),
-	    @Result(property = "commentContent", column = "COMMENT_CONTENT"),
-	    @Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT"), 
-	@Result(property = "user_name", column = "USER_NAME") })
-	@Delete("DELETE FROM COMMENT WHERE BOARD_NO = #{boardNo} AND USER_NO = #{userNo}")
-	int deleteComment(int boardNo, int userNo);
+//	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
+//	    @Result(property = "userNo", column = "USER_NO"),
+//	    @Result(property = "commentContent", column = "COMMENT_CONTENT"),
+//	    @Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT"), 
+//	@Result(property = "user_name", column = "USER_NAME") })
+//	@Delete("DELETE FROM COMMENT WHERE BOARD_NO = #{boardNo} AND USER_NO = #{userNo}")
+//	int deleteComment(int boardNo, int userNo);
 
 	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
 	    @Result(property = "userNo", column = "USER_NO"),
@@ -115,6 +115,22 @@ public interface CommunityMapper {
 	@Result(property = "user_name", column = "USER_NAME") })
 	@Delete("DELETE FROM COMMENT WHERE BOARD_NO = #{boardNo}")
 	int deleteByBoardNo(int boardNo);
+
+	@Results({ @Result(property = "commentNo", column = "COMMENT_NO"),
+		@Result(property = "boardNo", column = "BOARD_NO"),
+	    @Result(property = "userNo", column = "USER_NO"),
+	    @Result(property = "commentContent", column = "COMMENT_CONTENT"),
+	    @Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT") })
+	@Select("SELECT * FROM COMMENT WHERE COMMENT_NO = #{commentNo}")
+	CommentDto getComment(int commentNo);
+	
+	@Results({ @Result(property = "commentNo", column = "COMMENT_NO"),
+		@Result(property = "boardNo", column = "BOARD_NO"),
+	    @Result(property = "userNo", column = "USER_NO"),
+	    @Result(property = "commentContent", column = "COMMENT_CONTENT"),
+	    @Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT") })
+	@Delete("DELETE FROM COMMENT WHERE COMMENT_NO = #{commentNo}")
+	int deleteComment(int commentNo);
 
 	
 

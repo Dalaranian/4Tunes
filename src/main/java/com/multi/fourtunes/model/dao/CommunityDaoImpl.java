@@ -60,15 +60,22 @@ public class CommunityDaoImpl implements CommunityDao {
 		
 	}
 
-	@Override
-	public int deleteComment(int boardNo, int userNo) {
-		return communityMapper.deleteComment(boardNo, userNo);
-		
-	}
 
 	@Override
 	public int deleteByBoardNo(int boardNo) {
 		return communityMapper.deleteByBoardNo(boardNo);
+	}
+
+	@Override
+	public CommentDto getComment(int commentNo) {
+		return communityMapper.getComment(commentNo);
+		
+	}
+
+	@Override
+	public int deleteComment(int commentNo) {
+		return communityMapper.deleteComment(commentNo);
+		
 	}
 
 	

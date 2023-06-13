@@ -61,14 +61,21 @@ public class CommunityBizImpl implements CommunityBiz {
 		communityDao.addComment(comment);
 	}
 
-	@Override
-	public void deleteComment(int boardNo, int userNo) {
-	    communityDao.deleteComment(boardNo, userNo);
-	}
 
 	@Override
 	public void deleteByBoardNo(int boardNo) {
 		communityDao.deleteByBoardNo(boardNo);
+		
+	}
+
+	@Override
+	public CommentDto getComment(int commentNo) {
+	    return communityDao.getComment(commentNo);
+	}
+
+	@Override
+	public void deleteComment(int commentNo) {
+		communityDao.deleteComment(commentNo);
 		
 	}
 

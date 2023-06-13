@@ -22,9 +22,11 @@ public interface CommunityBiz {
 	
 	void addComment(CommentDto comment);
 
-	void deleteComment(int boardNo, int userNo);
-
 	void deleteByBoardNo(int boardNo);
+
+	CommentDto getComment(int commentNo);
+
+	void deleteComment(int commentNo);
 
 	
 

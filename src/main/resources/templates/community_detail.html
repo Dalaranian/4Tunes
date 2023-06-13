@@ -20,6 +20,11 @@
 			options.style.display = options.style.display === "none" ? "block"
 					: "none";
 		}
+		
+		
+		
+		
+
 	</script>
 
 	<div id="nav">
@@ -112,19 +117,15 @@
 								<span th:text="${comment.commentContent}"></span>
 							</div>
 							<!-- 댓글 옵션 버튼 및 목록 추가 -->
-							<button class="comment-dropdown" onclick="toggleOptions(this)">
-								<img src="/resources/img/down-arrow.png">
-							</button>
-							<ul class="comment-options" style="display: none;">
-								<select onchange="handleOptionChange(this.value, ${comment.boardNo}, ${comment.userNo})">
-									<option>선택</option>
-									<option value="report">신고하기</option>
-									<option value="delete">삭제하기</option>
-								</select>
-							</ul>
+							<form
+								th:action="@{/community/delete/comment/{commentNo}(commentNo=${comment.commentNo})}"
+								method="post">
+								<button type="submit" class="comment-dropdown">
+									<img src="/resources/img/down-arrow.png">
+								</button>
+							</form>
 						</div>
 					</div>
-
 
 					<!-- 
         <ul class="comment-options" th:classappend="${showOptions ? 'show' : ''}">

@@ -133,6 +133,39 @@ public class CommunityController {
 	}
 	
 	
+	
+	@PostMapping("/delete/comment/{commentNo}")
+	public String deleteComment(@PathVariable int commentNo, HttpSession session) {
+	    // 세션에서 로그인된 사용자 정보를 가져옴
+	    UserDto loginUser = (UserDto) session.getAttribute("login");
+
+	    // 로그인된 사용자가 있을 경우에만 댓글을 삭제할 수 있음
+	    if (loginUser != null) {
+	        CommentDto comment = communityBiz.getComment(commentNo);
+
+	        // 댓글의 작성자와 로그인된 사용자가 같을 경우에만 삭제 가능
+	        if (comment.getUserNo() == loginUser.getUser_no()) {
+	            int boardNo = comment.getBoardNo(); // 삭제된 댓글이 속한 게시글 번호
+
+	            // 댓글 삭제
+	            communityBiz.deleteComment(commentNo);
+
+	            // 게시글 상세 페이지로 리다이렉트
+	            return "redirect:/community/detail/" + boardNo;
+	        }
+	    
+	    }
+	    // 삭제가 완료되지 않았거나 로그인된 사용자가 없는 경우, 커뮤니티 목록 페이지로 리다이렉트
+	   
+	    return "redirect:/";
+	
+	
+	
+	
+	
+	
+	
+	
 //	@PostMapping("/comment/delete/{boardNo}/{userNo}")
 //    public String deleteComment(@PathVariable int boardNo, @PathVariable int userNo, HttpSession session) {
 //        UserDto loginUser = (UserDto) session.getAttribute("login");
