@@ -1,5 +1,6 @@
 package com.multi.fourtunes.model.biz;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -7,13 +8,19 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import com.multi.fourtunes.model.dao.PayDao;
 import com.multi.fourtunes.model.dto.ApproveDto;
+import com.multi.fourtunes.model.dto.PayDto;
 import com.multi.fourtunes.model.dto.ReadyDto;
 
 @Service
-public class KakaoPayBizImpl {
+public class KakaoPayBizImpl implements KakaoPayBiz{
+	
+	@Autowired
+	private PayDao payDao;
 	
 	// 결제 준비
+	@Override
 	public ReadyDto payReady() {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 		params.add("cid", "TC0ONETIME");
@@ -47,6 +54,7 @@ public class KakaoPayBizImpl {
 	}
 	
 	// 결제 승인 요청
+	@Override
 	public ApproveDto payApprove(String tid, String pg_token) {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 		params.add("cid", "TC0ONETIME");
@@ -64,5 +72,15 @@ public class KakaoPayBizImpl {
 		ApproveDto approveDto = template.postForObject(url, requestEntity, ApproveDto.class);
 		
 		return approveDto;
+	}
+
+	@Override
+	public int insertPayInfo(PayDto insert) {
+		return payDao.insertPayInfo(insert);
+	}
+
+	@Override
+	public int updateUserGrade(int userNo) {
+		return payDao.updateUserGrade(userNo);
 	}
 }
