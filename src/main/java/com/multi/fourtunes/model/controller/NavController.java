@@ -14,6 +14,7 @@ import com.multi.fourtunes.model.biz.CommunityBiz;
 import com.multi.fourtunes.model.biz.KeywordBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
 import com.multi.fourtunes.model.dto.CommunityDto;
+import com.multi.fourtunes.model.dto.UserDto;
 	
 	@Controller
 	@RequestMapping("/nav")
@@ -36,13 +37,23 @@ import com.multi.fourtunes.model.dto.CommunityDto;
 		public String gotoMyPage(Model model, HttpSession session) {
 		    if (session.getAttribute("login") != null) {
 		    	String[] keywordList = loginBiz.getKeyword();
-		    	model.addAttribute("keywordlist", keywordList);
-		        return "mypage_user";
+			    UserDto currentUser = (UserDto) session.getAttribute("login");
+			    System.out.println(currentUser);
+			    String[] userKeyword = loginBiz.getUserKeyword(currentUser.getUser_no());
+			    StringBuilder myKeyword = new StringBuilder();
+			    for(String str:userKeyword) {
+			    	myKeyword.append(str + " ");
+			    }
+			    model.addAttribute("keywordlist", keywordList);
+			    model.addAttribute("userkeyword", myKeyword.toString());
+			    return "mypage_user";
 		    } else {
 		        model.addAttribute("error", "로그인이 필요합니다.");
 		        return "login_login";
 		    }
 		}	
+		
+		
 		// 맞춤 추천 페이지로 이동
 		@GetMapping("/suggested")
 		public String gotoSuggested() {
@@ -62,7 +73,13 @@ import com.multi.fourtunes.model.dto.CommunityDto;
 			model.addAttribute("communityList", communityList);
 			return "community_list";
 		}
-	
+		
+		//마이페이지 활동내역
+		@RequestMapping("/communityContent")
+		public String gotocommunityList() {
+			return "mypage_community";
+		}
+		
 		// 멤버쉽 페이지로 이동
 		@GetMapping("/membership")
 		public String gotoMembership() {

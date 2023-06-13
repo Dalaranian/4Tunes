@@ -47,4 +47,9 @@ public class CommunityDaoImpl implements CommunityDao {
 	public int incrementViewCount(int boardNo) {
 		return communityMapper.incrementViewCount(boardNo);
 	}
+	
+	@Override
+	public List<CommunityDto> getUserMyContentAll(int userNo){
+		return communityMapper.getUserMyContentAll(userNo);
+	}
 }
