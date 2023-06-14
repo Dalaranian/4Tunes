@@ -52,7 +52,8 @@
 	</div>
 
 	<div id="main">
-		<h1>ooo님 안녕하세요 !</h1>
+		<h1><span th:text="${session.login.user_name}"></span>
+						님 안녕하세요 !</h1>
 
 		<div class="mypage_nav">
 			<ul>
