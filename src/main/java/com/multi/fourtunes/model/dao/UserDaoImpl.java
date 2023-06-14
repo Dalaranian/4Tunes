@@ -37,5 +37,34 @@ public class UserDaoImpl implements UserDao {
 		return userMapper.insertUser(insert);
 	}
 
+	@Override
+	public List<UserDto> selectList() {
+		return userMapper.selectList();
+	}
+
+	@Override
+	public String selectGrade(int user_no) {
+		return userMapper.selectGrade(user_no);
+	}
+
+	@Override
+	public int updateGradePaid(int user_no) {
+		return userMapper.updateGradePaid(user_no);
+	}
+
+	@Override
+	public int updateGradeFree(int user_no) {
+		return userMapper.updateGradeFree(user_no);
+	}
+
+	@Override
+	public int deleteUser(int user_no) {
+		return userMapper.deleteUser(user_no);
+	}
+
+	@Override
+	public List<UserDto> searchUser(String name) {
+		return userMapper.searchUser(name);
+	}
 
 }

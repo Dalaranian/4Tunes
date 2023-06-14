@@ -1,16 +1,10 @@
-package com.multi.fourtunes.model.dao;
+package com.multi.fourtunes.model.biz;
 
 import java.util.List;
 
 import com.multi.fourtunes.model.dto.UserDto;
 
-public interface UserDao {
-
-	public UserDto login(UserDto dto);
-	
-	public UserDto selectUserByEmailAndId(String email, String userId);
-
-	public int insertUser(UserDto insert);
+public interface AdminpageBiz {
 
 	public List<UserDto> selectList();
 
@@ -25,4 +19,3 @@ public interface UserDao {
 	public List<UserDto> searchUser(String name);
 
 }
-

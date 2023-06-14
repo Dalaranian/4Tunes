@@ -94,5 +94,11 @@ import com.multi.fourtunes.model.dto.UserDto;
 		public String gotoSearch() {
 			return "playlist_searchresult";
 		}
+		
+		// 관리자 페이지를 위한 임시페이징입니다.
+		@GetMapping("/adminpage")
+		public String gotoAdminPage() {
+			return "adminpage_main";
+		}
 	
 	}
