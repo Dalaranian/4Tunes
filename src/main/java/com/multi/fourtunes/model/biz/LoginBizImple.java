@@ -1,5 +1,8 @@
 package com.multi.fourtunes.model.biz;
 
+import com.multi.fourtunes.model.dao.RoleManageDao;
+import com.multi.fourtunes.model.jpa.entity.UserEntity;
+import com.multi.fourtunes.model.jpa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,15 @@ public class LoginBizImple implements LoginBiz {
 	@Autowired
 	private PayDao payDao;
 	
+	private RoleManageDao roleManageDao;
+
+	private final UserRepository userRepository;
+
+	@Autowired
+	public LoginBizImple(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+
 	@Override
 	public boolean checkUserExist(String email, String userId) {
 		// 방금한거
@@ -41,7 +53,13 @@ public class LoginBizImple implements LoginBiz {
 	public String[] getUserKeyword(int userNo) {
 		return keywordDao.userKeyword(userNo);
 	}
-	
+
+	@Override
+	public void insertUserRole(String userId) {
+		UserEntity user = userRepository.findByUserId(userId);
+		roleManageDao.insertUserRole(user.getUserNo());
+	}
+
 	@Override
 	public UserDto login(UserDto dto) {
 		return userDao.login(dto);
