@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.multi.fourtunes.model.dto.CommentDto;
+import com.multi.fourtunes.model.dto.CommentReportDto;
 import com.multi.fourtunes.model.dto.CommunityDto;
 import com.multi.fourtunes.model.dto.CommunityReportDto;
 import com.multi.fourtunes.model.mapper.CommunityMapper;
@@ -52,15 +53,14 @@ public class CommunityDaoImpl implements CommunityDao {
 
 	@Override
 	public List<CommentDto> getComments(int boardNo) {
-	    return communityMapper.getComments(boardNo);
+		return communityMapper.getComments(boardNo);
 	}
-	
+
 	@Override
 	public int addComment(CommentDto comment) {
 		return communityMapper.addComment(comment);
-		
-	}
 
+	}
 
 	@Override
 	public int deleteByBoardNo(int boardNo) {
@@ -70,13 +70,13 @@ public class CommunityDaoImpl implements CommunityDao {
 	@Override
 	public CommentDto getComment(int commentNo) {
 		return communityMapper.getComment(commentNo);
-		
+
 	}
 
 	@Override
 	public int deleteComment(int commentNo) {
 		return communityMapper.deleteComment(commentNo);
-		
+
 	}
 
 	@Override
@@ -87,32 +87,29 @@ public class CommunityDaoImpl implements CommunityDao {
 	@Override
 	public void incrementReportCount(int boardNo) {
 		communityMapper.incrementReportCount(boardNo);
-		
+
 	}
 
 	@Override
 	public void reportCommunity(CommunityReportDto reportDto) {
 		communityMapper.reportCommunity(reportDto);
-		
+
 	}
 
-	
+	@Override
+	public int isCommentReported(int user_no, int commentNo) {
+		return communityMapper.isCommentReported(user_no, commentNo);
+	}
 
-	
-	
-	
+	@Override
+	public void incrementCommentReportCount(int commentNo) {
+		communityMapper.incrementCommentReportCount(commentNo);
 
-	
-	
+	}
 
-//    @Override
-//    public void updateReportCount(int boardNo) {
-//        communityMapper.updateReportCount(boardNo);
-//    }
-//
-//    @Override
-//    public int checkDuplicateReport(int boardNo, int userNo) {
-//        return communityMapper.checkDuplicateReport(boardNo, userNo);
-//    }
-	
+	@Override
+	public void reportComment(CommentReportDto reportDto) {
+		communityMapper.reportComment(reportDto);
+	}
+
 }

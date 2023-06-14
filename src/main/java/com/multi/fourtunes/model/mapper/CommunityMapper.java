@@ -26,10 +26,8 @@ public interface CommunityMapper {
 			@Result(property = "boardWriteDate", column = "BOARD_WRITE_DATE"),
 			@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
 	@Result(property = "user_name", column = "USER_NAME")
-	@Select("SELECT b.*, u.USER_NAME " +
-	        "FROM COMMUNITY_BOARD b " +   
-	        "JOIN USER u ON b.USER_NO = u.USER_NO " +   
-	        "ORDER BY BOARD_WRITE_DATE DESC") 
+	@Select("SELECT b.*, u.USER_NAME " + "FROM COMMUNITY_BOARD b " + "JOIN USER u ON b.USER_NO = u.USER_NO "
+			+ "ORDER BY BOARD_WRITE_DATE DESC")
 	List<CommunityDto> getAll();
 
 	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
@@ -39,10 +37,8 @@ public interface CommunityMapper {
 			@Result(property = "boardReportCnt", column = "BOARD_REPORT_CNT"),
 			@Result(property = "boardWriteDate", column = "BOARD_WRITE_DATE"),
 			@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
-	@Select("SELECT b.BOARD_NO, b.BOARD_TITLE, b.BOARD_CONTENT, b.USER_NO, b.BOARD_REPORT_CNT, b.BOARD_WRITE_DATE, b.BOARD_VIEW_CNT, u.USER_NAME " +
-	        "FROM COMMUNITY_BOARD b " +
-	        "JOIN USER u ON b.USER_NO = u.USER_NO " +
-	        "WHERE b.BOARD_NO = #{boardNo}")
+	@Select("SELECT b.BOARD_NO, b.BOARD_TITLE, b.BOARD_CONTENT, b.USER_NO, b.BOARD_REPORT_CNT, b.BOARD_WRITE_DATE, b.BOARD_VIEW_CNT, u.USER_NAME "
+			+ "FROM COMMUNITY_BOARD b " + "JOIN USER u ON b.USER_NO = u.USER_NO " + "WHERE b.BOARD_NO = #{boardNo}")
 	CommunityDto get(int boardNo);
 
 	// 조회수
@@ -61,76 +57,61 @@ public interface CommunityMapper {
 	int insert(CommunityDto community);
 
 	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
-		@Result(property = "boardTitle", column = "BOARD_TITLE"),
-		@Result(property = "boardContent", column = "BOARD_CONTENT"),
-		@Result(property = "userNo", column = "USER_NO"),
-		@Result(property = "boardReportCnt", column = "BOARD_REPORT_CNT"),
-		@Result(property = "boardWriteDate", column = "BOARD_WRITE_DATE"),
-		@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
+			@Result(property = "boardTitle", column = "BOARD_TITLE"),
+			@Result(property = "boardContent", column = "BOARD_CONTENT"),
+			@Result(property = "userNo", column = "USER_NO"),
+			@Result(property = "boardReportCnt", column = "BOARD_REPORT_CNT"),
+			@Result(property = "boardWriteDate", column = "BOARD_WRITE_DATE"),
+			@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
 	@Update("UPDATE COMMUNITY_BOARD SET BOARD_TITLE = #{boardTitle}, BOARD_CONTENT = #{boardContent} WHERE BOARD_NO = #{boardNo}")
 	int update(CommunityDto community);
 
 	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
-		@Result(property = "boardTitle", column = "BOARD_TITLE"),
-		@Result(property = "boardContent", column = "BOARD_CONTENT"),
-		@Result(property = "userNo", column = "USER_NO"),
-		@Result(property = "boardReportCnt", column = "BOARD_REPORT_CNT"),
-		@Result(property = "boardWriteDate", column = "BOARD_WRITE_DATE"),
-		@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
+			@Result(property = "boardTitle", column = "BOARD_TITLE"),
+			@Result(property = "boardContent", column = "BOARD_CONTENT"),
+			@Result(property = "userNo", column = "USER_NO"),
+			@Result(property = "boardReportCnt", column = "BOARD_REPORT_CNT"),
+			@Result(property = "boardWriteDate", column = "BOARD_WRITE_DATE"),
+			@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
 	@Delete("DELETE FROM COMMUNITY_BOARD WHERE BOARD_NO = #{boardNo}")
 	int delete(int boardNo);
 
-	@Results({ @Result(property = "commentNo", column = "COMMENT_NO"), 
-		@Result(property = "boardNo", column = "BOARD_NO"),
-	    @Result(property = "userNo", column = "USER_NO"),
-	    @Result(property = "commentContent", column = "COMMENT_CONTENT"),
-	    @Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT"),
-	@Result(property = "user_name", column = "USER_NAME") })
-	@Select("SELECT c.COMMENT_NO, c.BOARD_NO, c.USER_NO, c.COMMENT_CONTENT, c.COMMENT_REPORT_CNT, u.USER_NAME " +
-	        "FROM COMMENT c " +
-	        "JOIN USER u ON c.USER_NO = u.USER_NO " +
-	        "WHERE c.BOARD_NO = #{boardNo}")
-	List<CommentDto> getComments(int boardNo);
-	
 	@Results({ @Result(property = "commentNo", column = "COMMENT_NO"),
-		@Result(property = "boardNo", column = "BOARD_NO"),
-	    @Result(property = "userNo", column = "USER_NO"),
-	    @Result(property = "commentContent", column = "COMMENT_CONTENT"),
-	    @Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT"),
-	@Result(property = "user_name", column = "USER_NAME") })
+			@Result(property = "boardNo", column = "BOARD_NO"), @Result(property = "userNo", column = "USER_NO"),
+			@Result(property = "commentContent", column = "COMMENT_CONTENT"),
+			@Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT"),
+			@Result(property = "user_name", column = "USER_NAME") })
+	@Select("SELECT c.COMMENT_NO, c.BOARD_NO, c.USER_NO, c.COMMENT_CONTENT, c.COMMENT_REPORT_CNT, u.USER_NAME "
+			+ "FROM COMMENT c " + "JOIN USER u ON c.USER_NO = u.USER_NO " + "WHERE c.BOARD_NO = #{boardNo}")
+	List<CommentDto> getComments(int boardNo);
+
+	@Results({ @Result(property = "commentNo", column = "COMMENT_NO"),
+			@Result(property = "boardNo", column = "BOARD_NO"), @Result(property = "userNo", column = "USER_NO"),
+			@Result(property = "commentContent", column = "COMMENT_CONTENT"),
+			@Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT"),
+			@Result(property = "user_name", column = "USER_NAME") })
 	@Insert("INSERT INTO COMMENT (COMMENT_NO, BOARD_NO, USER_NO, COMMENT_CONTENT, COMMENT_REPORT_CNT) "
-	        + "VALUES (#{commentNo}, #{boardNo}, #{userNo}, #{commentContent}, #{commentReportCnt})")
+			+ "VALUES (#{commentNo}, #{boardNo}, #{userNo}, #{commentContent}, #{commentReportCnt})")
 	int addComment(CommentDto comment);
 
-//	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
-//	    @Result(property = "userNo", column = "USER_NO"),
-//	    @Result(property = "commentContent", column = "COMMENT_CONTENT"),
-//	    @Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT"), 
-//	@Result(property = "user_name", column = "USER_NAME") })
-//	@Delete("DELETE FROM COMMENT WHERE BOARD_NO = #{boardNo} AND USER_NO = #{userNo}")
-//	int deleteComment(int boardNo, int userNo);
-
-	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
-	    @Result(property = "userNo", column = "USER_NO"),
-	    @Result(property = "commentContent", column = "COMMENT_CONTENT"),
-	    @Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT"), 
-	@Result(property = "user_name", column = "USER_NAME") })
+	@Results({ @Result(property = "boardNo", column = "BOARD_NO"), @Result(property = "userNo", column = "USER_NO"),
+			@Result(property = "commentContent", column = "COMMENT_CONTENT"),
+			@Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT"),
+			@Result(property = "user_name", column = "USER_NAME") })
 	@Delete("DELETE FROM COMMENT WHERE BOARD_NO = #{boardNo}")
 	int deleteByBoardNo(int boardNo);
 
 	@Results({ @Result(property = "commentNo", column = "COMMENT_NO"),
-		@Result(property = "boardNo", column = "BOARD_NO"),
-	    @Result(property = "userNo", column = "USER_NO"),
-	    @Result(property = "commentContent", column = "COMMENT_CONTENT"),
-	    @Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT") })
+			@Result(property = "boardNo", column = "BOARD_NO"), @Result(property = "userNo", column = "USER_NO"),
+			@Result(property = "commentContent", column = "COMMENT_CONTENT"),
+			@Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT") })
 	@Select("SELECT * FROM COMMENT WHERE COMMENT_NO = #{commentNo}")
 	CommentDto getComment(int commentNo);
-	
+
 	@Results({ @Result(property = "commentNo", column = "COMMENT_NO"),
-		@Result(property = "boardNo", column = "BOARD_NO"),
-	    @Result(property = "userNo", column = "USER_NO"),
-	    @Result(property = "commentContent", column = "COMMENT_CONTENT"),
-	    @Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT") })
+			@Result(property = "boardNo", column = "BOARD_NO"), @Result(property = "userNo", column = "USER_NO"),
+			@Result(property = "commentContent", column = "COMMENT_CONTENT"),
+			@Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT") })
 	@Delete("DELETE FROM COMMENT WHERE COMMENT_NO = #{commentNo}")
 	int deleteComment(int commentNo);
 
@@ -143,45 +124,13 @@ public interface CommunityMapper {
 	@Insert("INSERT INTO COMMUNITY_REPORT (USER_NO, BOARD_NO) VALUES (#{userNo}, #{boardNo})")
 	void reportCommunity(CommunityReportDto reportDto);
 
-	
-//	@Results({ @Result(property = "userNo", column = "USER_NO"),
-//		@Result(property = "boardNo", column = "BOARD_NO"), 
-//	    @Result(property = "userNo", column = ".count(*)") })
-//	@Select("SELECT COUNT(*) > 0 AS .count(*) FROM COMMUNITY_REPORT WHERE USER_NO = #{userNo} AND BOARD_NO = #{boardNo}")
-//	int isReported(int userNo, int boardNo);
-//
-//	@Results({ @Result(property = "userNo", column = "USER_NO"),
-//		@Result(property = "boardNo", column = "BOARD_NO") })
-//	@Update("UPDATE COMMUNITY_BOARD SET BOARD_REPORT_CNT = BOARD_REPORT_CNT + 1 WHERE BOARD_NO = #{boardNo}")
-//	int incrementReportCount(int boardNo);
-//
-//	@Results({ @Result(property = "userNo", column = "USER_NO"),
-//		@Result(property = "boardNo", column = "BOARD_NO") })
-//	@Insert("INSERT INTO COMMUNITY_REPORT (USER_NO, BOARD_NO) VALUES (#{userNo}, #{boardNo})")
-//	Object reportCommunity(CommunityReportDto reportDto);
+	@Select("SELECT COUNT(*) FROM COMMENT_REPORT WHERE USER_NO = #{user_no} AND COMMENT_NO = #{commentNo}")
+	int isCommentReported(int user_no, int commentNo);
 
-	
+	@Update("UPDATE COMMENT SET COMMENT_REPORT_CNT = COMMENT_REPORT_CNT + 1 WHERE COMMENT_NO = #{commentNo}")
+	void incrementCommentReportCount(int commentNo);
 
-	
-//	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
-//		@Result(property = "boardTitle", column = "BOARD_TITLE"),
-//		@Result(property = "boardContent", column = "BOARD_CONTENT"),
-//		@Result(property = "userNo", column = "USER_NO"),
-//		@Result(property = "boardReportCnt", column = "BOARD_REPORT_CNT"),
-//		@Result(property = "boardWriteDate", column = "BOARD_WRITE_DATE"),
-//		@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
-//	@Select("SELECT COUNT(*) FROM COMMUNITY_BOARD_REPORT WHERE BOARD_NO = #{boardNo} AND USER_NO = #{userNo}")
-//	int checkDuplicateReport(int boardNo, int userNo);
-//	
-//	@Results({ @Result(property = "boardNo", column = "BOARD_NO"),
-//		@Result(property = "boardTitle", column = "BOARD_TITLE"),
-//		@Result(property = "boardContent", column = "BOARD_CONTENT"),
-//		@Result(property = "userNo", column = "USER_NO"),
-//		@Result(property = "boardReportCnt", column = "BOARD_REPORT_CNT"),
-//		@Result(property = "boardWriteDate", column = "BOARD_WRITE_DATE"),
-//		@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT") })
-//	@Update("UPDATE COMMUNITY_BOARD SET BOARD_REPORT_CNT = BOARD_REPORT_CNT + 1 WHERE BOARD_NO = #{boardNo}")
-//	int updateReportCount(int boardNo);
+	@Insert("INSERT INTO COMMENT_REPORT (USER_NO, COMMENT_NO) VALUES (#{userNo}, #{commentNo})")
+	void reportComment(CommentReportDto reportDto);
 
-	
 }

@@ -15,16 +15,7 @@
 <body>
 
 	<script>
-		function toggleOptions(button) {
-			var options = button.nextElementSibling;
-			options.style.display = options.style.display === "none" ? "block"
-					: "none";
-		}
 		
-		
-		
-		
-
 	</script>
 
 	<div id="nav">
@@ -84,9 +75,9 @@
 				<button style="display: inline-block" id="write-btn">
 					<a href="/community/write">글 작성</a>
 				</button>
-				<form 
+				<form
 					th:action="@{/community/report/{boardNo}(boardNo=${community.boardNo})}"
-					method="post" id="report-btn">
+					method="post" id="report-form">
 					<button style="display: inline-block" id="report-btn" type="submit">
 						신고하기</button>
 				</form>
@@ -122,18 +113,21 @@
 							<form
 								th:action="@{/community/delete/comment/{commentNo}(commentNo=${comment.commentNo})}"
 								method="post">
-								<button type="submit" class="comment-dropdown" th:if="${comment.user_name == session.login?.user_name}">
-									<img src="/resources/img/down-arrow.png">
+								<button type="submit" class="comment-dropdown"
+									th:if="${comment.user_name == session.login?.user_name}">
+									<img src="/resources/img/delete.png">
+								</button>
+							</form>
+							<form
+								th:action="@{/community/report/comment/{commentNo}(commentNo=${comment.commentNo})}"
+								method="post">
+								<button type="submit" class="comment-dropdown">
+									<img src="/resources/img/report.png">
 								</button>
 							</form>
 						</div>
 					</div>
 
-					<!-- 
-        <ul class="comment-options" th:classappend="${showOptions ? 'show' : ''}">
-        <li class="option">삭제하기</li>
-        <li class="option">신고하기</li></ul>
-        -->
 
 				</div>
 
@@ -165,22 +159,7 @@
 							// 확인 버튼을 눌렀을 때 폼을 제출
 							document.getElementById("delete-form").submit();
 						}
-					});	
-			
-			   document.getElementById("report-btn").addEventListener("click", function(event) {
-			        event.preventDefault(); // 폼 제출 이벤트 중지
-
-			        // 이미 신고한 경우 경고 메시지 출력
-			        if (checkAlreadyReported()) {
-			            alert("이미 신고하셨습니다.");
-			        } else {
-			            // 최초 신고인 경우 확인 메시지 출력
-			            if (confirm("정말로 신고하시겠습니까?")) {
-			                // 확인 버튼을 눌렀을 때 폼을 제출
-			                document.getElementById("report-form").submit();
-			            }
-			        }
-			    });
+					});
 		</script>
 </body>
 

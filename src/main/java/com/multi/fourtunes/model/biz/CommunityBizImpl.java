@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.multi.fourtunes.model.dao.CommunityDao;
 import com.multi.fourtunes.model.dto.CommentDto;
+import com.multi.fourtunes.model.dto.CommentReportDto;
 import com.multi.fourtunes.model.dto.CommunityDto;
 import com.multi.fourtunes.model.dto.CommunityReportDto;
 
@@ -62,22 +63,21 @@ public class CommunityBizImpl implements CommunityBiz {
 		communityDao.addComment(comment);
 	}
 
-
 	@Override
 	public void deleteByBoardNo(int boardNo) {
 		communityDao.deleteByBoardNo(boardNo);
-		
+
 	}
 
 	@Override
 	public CommentDto getComment(int commentNo) {
-	    return communityDao.getComment(commentNo);
+		return communityDao.getComment(commentNo);
 	}
 
 	@Override
 	public void deleteComment(int commentNo) {
 		communityDao.deleteComment(commentNo);
-		
+
 	}
 
 	@Override
@@ -89,26 +89,31 @@ public class CommunityBizImpl implements CommunityBiz {
 	@Override
 	public void incrementReportCount(int boardNo) {
 		communityDao.incrementReportCount(boardNo);
-		
+
 	}
 
 	@Override
 	public void reportCommunity(CommunityReportDto reportDto) {
 		communityDao.reportCommunity(reportDto);
-		
+
 	}
 
+	@Override
+	public boolean isCommentReported(int user_no, int commentNo) {
+		int reportCount = communityDao.isCommentReported(user_no, commentNo);
+		return reportCount > 0;
+	}
 
+	@Override
+	public void incrementCommentReportCount(int commentNo) {
+		communityDao.incrementCommentReportCount(commentNo);
 
-	
+	}
 
-//	@Override
-//	public void updateReportCount(int boardNo) {
-//		communityDao.updateReportCount(boardNo);
-//	}
-//
-//	@Override
-//	public int checkDuplicateReport(int boardNo, int userNo) {
-//		return communityDao.checkDuplicateReport(boardNo, userNo);
-//	}
+	@Override
+	public void reportComment(CommentReportDto reportDto) {
+		communityDao.reportComment(reportDto);
+
+	}
+
 }
