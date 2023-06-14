@@ -23,13 +23,13 @@ import com.multi.fourtunes.model.biz.KeywordBiz;
 @Controller
 @RequestMapping("/mypage")
 public class MyPageController {
-	
+
 	@Autowired
 	private KeywordBiz keywordBiz;
 	
 	@Autowired
 	private CommunityBiz communityBiz;
-	
+
 	@RequestMapping("/communityContent")
 	public String getCommunityList(Model model, HttpSession session) {
 		UserDto currentUser = (UserDto) session.getAttribute("login");
@@ -40,7 +40,7 @@ public class MyPageController {
 		model.addAttribute("communityContent",communityContent);
 		return "mypage_community";
 	}
-	
+
 	// 상세 페이지로 이동
 		@RequestMapping("/detail/{boardNo}")
 		public String getCommunityDetail(@PathVariable int boardNo, Model model) {
@@ -64,4 +64,5 @@ public class MyPageController {
 		    return "redirect:/nav/mypage"; // 마이페이지로 리다이렉트합니다.
 		}
 
+ 
 }
