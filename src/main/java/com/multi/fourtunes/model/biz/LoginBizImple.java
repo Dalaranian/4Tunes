@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.multi.fourtunes.model.dao.KeywordDao;
+import com.multi.fourtunes.model.dao.PayDao;
 import com.multi.fourtunes.model.dao.UserDao;
 import com.multi.fourtunes.model.dto.UserDto;
+import java.util.Date;
 
 @Service
 public class LoginBizImple implements LoginBiz {
@@ -20,6 +22,8 @@ public class LoginBizImple implements LoginBiz {
 	private KeywordDao keywordDao;
 
 	@Autowired
+	private PayDao payDao;
+	
 	private RoleManageDao roleManageDao;
 
 	private final UserRepository userRepository;
@@ -70,6 +74,11 @@ public class LoginBizImple implements LoginBiz {
 	@Override
 	public int insertUser(UserDto insert) {
 		return userDao.insertUser(insert);
+	}
+
+	@Override
+	public Date getSubscriptionEndDate(int user_no) {
+		return payDao.getSubscriptionEndDate(user_no);
 	}
 	
 	

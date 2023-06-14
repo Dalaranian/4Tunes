@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.fourtunes.model.biz.CommunityBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
+
+import java.util.Date;
 import java.util.List;
 import com.multi.fourtunes.model.dto.CommunityDto;
 import com.multi.fourtunes.model.dto.UserDto;
@@ -43,12 +45,14 @@ public class InnerPagingController {
 	public String gotoMyPageUser(Model model, HttpSession session) {
 	    String[] keywordList = loginBiz.getKeyword();
 	    UserDto currentUser = (UserDto) session.getAttribute("login");
-	    System.out.println(currentUser);
+	    System.out.println(currentUser.getUser_no());
+	    Date subscriptionEndDate = loginBiz.getSubscriptionEndDate(currentUser.getUser_no());
 	    String[] userKeyword = loginBiz.getUserKeyword(currentUser.getUser_no());
 	    StringBuilder myKeyword = new StringBuilder();
 	    for(String str:userKeyword) {
 	    	myKeyword.append(str + " ");
 	    }
+	    model.addAttribute("subscriptionEndDate", subscriptionEndDate);
 	    model.addAttribute("keywordlist", keywordList);
 	    model.addAttribute("userkeyword", myKeyword.toString());
 	    return "mypage_user";

@@ -73,7 +73,7 @@
 						<div class="drop">탈퇴버튼</div>
 					</div>
 
-					<div th:each="user : ${userList}">
+					<div th:each="user : ${searchUserList}">
 						<div class="num" th:text="${user.user_no}"></div>
 						<div class="name" th:text="${user.user_name}"></div>
 						<div class="id" th:text="${user.user_id}"></div>

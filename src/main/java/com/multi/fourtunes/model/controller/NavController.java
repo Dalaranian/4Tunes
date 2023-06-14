@@ -1,6 +1,7 @@
 	package com.multi.fourtunes.model.controller;
 	
-	import java.util.List;
+	import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -40,10 +41,12 @@ import com.multi.fourtunes.model.dto.UserDto;
 			    UserDto currentUser = (UserDto) session.getAttribute("login");
 			    System.out.println(currentUser);
 			    String[] userKeyword = loginBiz.getUserKeyword(currentUser.getUser_no());
+			    Date subscriptionEndDate = loginBiz.getSubscriptionEndDate(currentUser.getUser_no());
 			    StringBuilder myKeyword = new StringBuilder();
 			    for(String str:userKeyword) {
 			    	myKeyword.append(str + " ");
 			    }
+			    model.addAttribute("subscriptionEndDate", subscriptionEndDate);
 			    model.addAttribute("keywordlist", keywordList);
 			    model.addAttribute("userkeyword", myKeyword.toString());
 			    return "mypage_user";
@@ -90,6 +93,12 @@ import com.multi.fourtunes.model.dto.UserDto;
 		@GetMapping("/search")
 		public String gotoSearch() {
 			return "playlist_searchresult";
+		}
+		
+		// 관리자 페이지를 위한 임시페이징입니다.
+		@GetMapping("/adminpage")
+		public String gotoAdminPage() {
+			return "adminpage_main";
 		}
 	
 	}
