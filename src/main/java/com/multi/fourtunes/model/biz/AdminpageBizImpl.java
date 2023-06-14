@@ -19,4 +19,29 @@ public class AdminpageBizImpl implements AdminpageBiz{
 		return userDao.selectList();
 	}
 
+	@Override
+	public String selectGrade(int user_no) {
+		return userDao.selectGrade(user_no);
+	}
+
+	@Override
+	public int updateGradePaid(int user_no) {
+		return userDao.updateGradePaid(user_no);
+	}
+
+	@Override
+	public int updateGradeFree(int user_no) {
+		return userDao.updateGradeFree(user_no);
+	}
+
+	@Override
+	public int deleteUser(int user_no) {
+		return userDao.deleteUser(user_no);
+	}
+
+	@Override
+	public List<UserDto> searchUser(String name) {
+		return userDao.searchUser(name);
+	}
+
 }
