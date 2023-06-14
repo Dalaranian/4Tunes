@@ -51,9 +51,9 @@ public class LoginBizImple implements LoginBiz {
 	}
 
 	@Override
-	public void insertUserRole(String userNo) {
-		UserEntity user = userRepository.findByUserId("yourUserId");
-		System.out.println(user.toString());
+	public void insertUserRole(String userId) {
+		UserEntity user = userRepository.findByUserId(userId);
+		roleManageDao.insertUserRole(user.getUserNo());
 	}
 
 	@Override
