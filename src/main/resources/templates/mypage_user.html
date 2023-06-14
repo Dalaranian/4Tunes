@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="/resources/css/mypage_user.css" />
 <link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
 <title>4Tunes</title>
+
 </head>
 <body>
 	<div id="nav">
@@ -51,7 +52,8 @@
 	</div>
 
 	<div id="main">
-		<h1>ooo님 안녕하세요 !</h1>
+		<h1><span th:text="${session.login.user_name}"></span>
+						님 안녕하세요 !</h1>
 
 		<div class="mypage_nav">
 			<ul>
@@ -59,12 +61,13 @@
 					정보 조회</li>
 				<li id="analysis" onclick="alert('개발중인 기능입니다. ')">내 통계 조회</li>
 				<li id="community"
-					onclick="location.href='/innerpaging/mypage/community'">내 활동
+					onclick="location.href='/innerpaging/mypage/communityContent'">내 활동
 					조회</li>
 			</ul>
 		</div>
 		<div class="mypage_contents">
 			<h1>내 정보 조회 및 수정</h1>
+			<form id="mypage_form" action="/mypage/updateuser" method="POST">
 			<div class="mypage_inf">
 				<div class="mypage">
 					<span class="mypage_title">아이디</span> <input type="text"
@@ -72,23 +75,32 @@
 				</div>
 				<div class="mypage">
 					<span class="mypage_title">이름</span> <input type="text"
-						id="mypage_name" placeholder="이름를 입력해 주세요" th:value="${session.login.user_name}" readonly	>
+						id="mypage_name" placeholder="이름를 입력해 주세요" th:value="${session.login.user_name}" readonly>
 				</div>
 				<div class="mypage">
-					<span class="mypage_title">비밀번호</span> <input type="password"
-						id="mypage_pw" placeholder="비밀번호을 입력해 주세요">
+					<span class="mypage_title">현재 비밀번호</span> <input type="password"
+						id="mypage_pw" placeholder="현재 비밀번호을 입력해 주세요">
 				</div>
 				<div class="mypage">
-					<span class="mypage_title">비밀번호 확인</span> <input type="password"
-						id="mypage_pwcheck" placeholder="비밀번호 확인을 해주세요">
+					<span class="mypage_title">새 비밀번호</span> <input type="password"
+						id="mypage_newpw" placeholder="새 비밀번호을 입력해 주세요"> 
+				</div>
+				<div class="mypage">
+					<span class="mypage_title">회원 등급</span> <input type="text"
+						id="mypage_grade" placeholder="회원 등급" th:value="${session.login.user_grade}" readonly>
+				</div>
+				<div class="mypage">
+					<span class="mypage_title" th:if="${subscriptionEndDate != null}">구독 만료일</span>
+					<input th:if="${subscriptionEndDate != null}" th:value="${subscriptionEndDate}" readonly>
 				</div>
 				<div class="mypage_kw_group">
 					<div class="mypage_keyword">
 						<p class="mypage_title">KeyWord</p>
+						<p>현재 키워드:<span th:text="${userkeyword}"></span></p>
 					</div>
 					<div class="mypage_keyword_group">
 						<div class="mypage_kw">
-							<input type="search" id="mypage_input" placeholder="키워드를 선택해주세요.">
+							<input type="search" id="search-keyword" placeholder="키워드를 선택해주세요.">
 						</div>
 						<div class="mypage_kw">
 							<select name="keyword" id="kw" multiple>
@@ -96,8 +108,8 @@
 									th:text="${keyword}"></option>
 							</select>
 						</div>
-						<div class="mypage_kw">
-							<input type="text" id="readonly" placeholder="선택된 내용 보여주기"
+						<div class="mypage_kw" name="selected_keyword">
+							<input type="text" name="selected_keyword" id="readonly" placeholder="선택된 내용 보여주기"
 								readonly>
 						</div>
 
@@ -107,9 +119,23 @@
 			<div class="mypage_kw_btn">
 				<button type="submit">수정 완료</button>
 			</div>
+			</form>
 		</div>
 	</div>
+<script>
+    document.getElementById("mypage_form").addEventListener("submit", function(event) {
+      event.preventDefault();
 
+      var userPw = [[${session.login.user_pw}]];
+      var currentPw = document.getElementById("mypage_pw").value;
+      if (userPw == currentPw) {
+        alert("비밀번호가 맞습니다");
+        document.getElementById("mypage_form").submit();
+      } else {
+        alert("비밀번호가 틀렸습니다");
+      }
+    });
+  </script>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript" src="/resources/js/keywordlist.js"></script>
 

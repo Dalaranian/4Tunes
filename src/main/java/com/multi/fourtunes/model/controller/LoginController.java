@@ -67,15 +67,11 @@ public class LoginController {
 	 */
 	@GetMapping("/join")
 	public String join(Model model) {
-		//System.out.println("join 진입");
 		String[] keywordList = loginBiz.getKeyword();
-//		for(String str:keywordList) {
-//			System.out.println("키워드 : " + str);
-//		}
 		model.addAttribute("keywordlist", keywordList);
 		return "login_join";
 	}
-
+	
 	@GetMapping("/callback")
 	public String callback() {
 		return "callback";
@@ -121,6 +117,10 @@ public class LoginController {
 					//System.out.println("키워드 insert 실패 ㅜㅜ");
 				}
 			}
+
+//			모두 insert 성공 시 USER 권한 넣기
+			loginBiz.insertUserRole(insert.getUser_id());
+
 			return "membership_join";
 		} else {
 			return "login_join";

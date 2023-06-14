@@ -23,5 +23,6 @@ public interface UserDao {
 	public int deleteUser(int user_no);
 
 	public List<UserDto> searchUser(String name);
+
 }
 

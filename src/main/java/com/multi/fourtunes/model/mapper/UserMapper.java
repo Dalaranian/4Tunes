@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -41,6 +40,4 @@ public interface UserMapper {
 	@Select(" SELECT * FROM USER WHERE USER_NAME LIKE CONCAT('%',#{name},'%') ")
 	List<UserDto> searchUser(String name);
 	
-	
-
 }
