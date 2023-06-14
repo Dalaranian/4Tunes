@@ -26,25 +26,7 @@ public class MyPageController {
 
 	@Autowired
 	private KeywordBiz keywordBiz;
-
-	@PostMapping("/updateuser")
-	@Transactional
-	public String updateUser(UserDto dto, @RequestParam("selected_keyword") List<String> selectedKeywords, HttpSession session) {
-	    // 기존 선택한 키워드 삭제
-		UserDto currentUser = (UserDto) session.getAttribute("login");
-	    keywordBiz.deleteUserKeyword(currentUser.getUser_id());
-	    // 새로 선택한 키워드 추가
-	    for (String keyword : selectedKeywords) {
-	        keywordBiz.insertKeyword(keyword, currentUser.getUser_id());
-	    }
-
-	    return "redirect:/nav/mypage"; // 마이페이지로 리다이렉트합니다.
-	}
-
-@Controller
-@RequestMapping("/communityContent")
-public class MyPageController {
-
+	
 	@Autowired
 	private CommunityBiz communityBiz;
 
@@ -68,6 +50,19 @@ public class MyPageController {
 			return "community_detail";
 		}
 
+		@PostMapping("/updateuser")
+		@Transactional
+		public String updateUser(UserDto dto, @RequestParam("selected_keyword") List<String> selectedKeywords, HttpSession session) {
+		    // 기존 선택한 키워드 삭제
+			UserDto currentUser = (UserDto) session.getAttribute("login");
+		    keywordBiz.deleteUserKeyword(currentUser.getUser_id());
+		    // 새로 선택한 키워드 추가
+		    for (String keyword : selectedKeywords) {
+		        keywordBiz.insertKeyword(keyword, currentUser.getUser_id());
+		    }
+		    
+		    return "redirect:/nav/mypage"; // 마이페이지로 리다이렉트합니다.
+		}
 
  
 }
