@@ -1,20 +1,14 @@
 package com.multi.fourtunes.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-// lombok 을 이용한 DTO 생성
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@Data
 public class SongDto {
-	private int songNo;
+
+	private Integer songNo;
 	private String songTitle;
 	private String songArtist;
 	private String songLink;
+	private String songId;
 }
+
