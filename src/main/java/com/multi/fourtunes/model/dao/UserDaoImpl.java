@@ -37,4 +37,5 @@ public class UserDaoImpl implements UserDao {
 		return userMapper.insertUser(insert);
 	}
 
+
 }
