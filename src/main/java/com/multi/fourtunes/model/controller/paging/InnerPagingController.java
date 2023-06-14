@@ -57,7 +57,7 @@ public class InnerPagingController {
 
 	//내 활동내역 조회
 	@GetMapping("/mypage/communityContent")
-	public String gotoMyPageUser(Model model, HttpSession session) {
+	public String gotoMyPageCommunity(Model model, HttpSession session) {
 		UserDto currentUser = (UserDto) session.getAttribute("login");
 		List<CommunityDto> communityContent = communityBiz.getUserMyContentAll(currentUser.getUser_no());
 		model.addAttribute("communityContent",communityContent);
