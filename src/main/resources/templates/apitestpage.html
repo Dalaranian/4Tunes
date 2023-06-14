@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-<meta charset="UTF-8">
-<title>API TEST</title>
-<style>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>API TEST</title>
+    <style>
 @font-face {
 	font-family: 'DOSPilgiMedium';
 	src:
@@ -22,46 +22,76 @@
 body {
 	background-color: grey;
 }
-</style>
+
+    </style>
 </head>
 <body>
-	<div align="center">
-		<h1>API 테스트를 위한 페이지입니다.</h1>
-		<h2>작성자 : 조장</h2>
-		<table class="table table-hover">
-			<tr>
-				<td>
-					<div align="center">
-						<iframe src="https://giphy.com/embed/zOvBKUUEERdNm" width="480"
-							height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<div align="center">
-						<p>
-							<a href="https://giphy.com/gifs/coding-zOvBKUUEERdNm">via
-								GIPHY</a>
-						</p>
-					</div>
-				</td>
-			</tr>
-		</table>
-		<!-- 여기부터 TEST COMPONENT -->
-		<div>
-			<!-- <label>유튭 테스트</label>
-			<button onclick="location.href='/YoutubeData'" class="btn btn-dark btn-lg">Youtube</button> -->
-			<form action="/YoutubeData" method="GET">
-				<fieldset>
-					<label>Singer</label>
-					<input type="text" name="singer">
-					<label>Title</label>
-					<input type="text" name="title">
-					<input type="submit">
-				</fieldset>
-			</form>
-		</div>
-	</div>
+<div align="center">
+    <h1>API 테스트를 위한 페이지입니다.</h1>
+    <h2>작성자 : 조장</h2>
+    <table class="table table-hover">
+        <tr>
+            <td>
+                <div align="center">
+                    <iframe src="https://giphy.com/embed/zOvBKUUEERdNm" width="480"
+                            height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div align="center">
+                    <p>
+                        <a href="https://giphy.com/gifs/coding-zOvBKUUEERdNm">via
+                            GIPHY</a>
+                    </p>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <!-- 여기부터 TEST COMPONENT -->
+    <div>
+        <!-- <label>유튭 테스트</label>
+        <button onclick="location.href='/YoutubeData'" class="btn btn-dark btn-lg">Youtube</button> -->
+        <form action="/YoutubeData" method="GET">
+            <h3>Youtube API TEST</h3>
+            <fieldset>
+                <label>Singer</label>
+                <input type="text" name="singer">
+                <label>Title</label>
+                <input type="text" name="title">
+                <input type="submit">
+            </fieldset>
+        </form>
+    </div>
+    <br>
+    <div>
+        <form action="/ManiaDB" method="get">
+            <h3>ManiaDb API TEST</h3>
+            <fieldset>
+                <label>Query</label>
+                <input name="query" type="text">
+                <input type="submit">
+            </fieldset>
+        </form>
+    </div>
+    <br>
+    <div>
+        <form action="/api/jpatest">
+            <h3>RestJPA TEST</h3>
+            <fieldset>
+                <label>Query</label>
+                <input name="query" type="text">
+                <input type="submit">
+            </fieldset>
+        </form>
+    </div>
+</div>
+<br>
+<footer>
+    <div class="d-grid gap-2">
+        <button class="btn btn-secondary btn-lg" type="button" onclick="location.href='swagger-ui/'">Swagger</button>
+    </div>
+</footer>
 </body>
 </html>
