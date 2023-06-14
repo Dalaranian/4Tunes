@@ -134,22 +134,31 @@ public interface CommunityMapper {
 	@Delete("DELETE FROM COMMENT WHERE COMMENT_NO = #{commentNo}")
 	int deleteComment(int commentNo);
 
-	
-	@Results({ @Result(property = "userNo", column = "USER_NO"),
-		@Result(property = "boardNo", column = "BOARD_NO"), 
-	    @Result(property = "userNo", column = ".count(*)") })
-	@Select("SELECT COUNT(*) > 0 AS .count(*) FROM COMMUNITY_REPORT WHERE USER_NO = #{userNo} AND BOARD_NO = #{boardNo}")
-	int isReported(int userNo, int boardNo);
+	@Select("SELECT COUNT(*) FROM COMMUNITY_REPORT WHERE USER_NO = #{user_no} AND BOARD_NO = #{boardNo}")
+	int isReported(int user_no, int boardNo);
 
-	@Results({ @Result(property = "userNo", column = "USER_NO"),
-		@Result(property = "boardNo", column = "BOARD_NO") })
 	@Update("UPDATE COMMUNITY_BOARD SET BOARD_REPORT_CNT = BOARD_REPORT_CNT + 1 WHERE BOARD_NO = #{boardNo}")
-	int incrementReportCount(int boardNo);
+	void incrementReportCount(int boardNo);
 
-	@Results({ @Result(property = "userNo", column = "USER_NO"),
-		@Result(property = "boardNo", column = "BOARD_NO") })
 	@Insert("INSERT INTO COMMUNITY_REPORT (USER_NO, BOARD_NO) VALUES (#{userNo}, #{boardNo})")
-	Object reportCommunity(CommunityReportDto reportDto);
+	void reportCommunity(CommunityReportDto reportDto);
+
+	
+//	@Results({ @Result(property = "userNo", column = "USER_NO"),
+//		@Result(property = "boardNo", column = "BOARD_NO"), 
+//	    @Result(property = "userNo", column = ".count(*)") })
+//	@Select("SELECT COUNT(*) > 0 AS .count(*) FROM COMMUNITY_REPORT WHERE USER_NO = #{userNo} AND BOARD_NO = #{boardNo}")
+//	int isReported(int userNo, int boardNo);
+//
+//	@Results({ @Result(property = "userNo", column = "USER_NO"),
+//		@Result(property = "boardNo", column = "BOARD_NO") })
+//	@Update("UPDATE COMMUNITY_BOARD SET BOARD_REPORT_CNT = BOARD_REPORT_CNT + 1 WHERE BOARD_NO = #{boardNo}")
+//	int incrementReportCount(int boardNo);
+//
+//	@Results({ @Result(property = "userNo", column = "USER_NO"),
+//		@Result(property = "boardNo", column = "BOARD_NO") })
+//	@Insert("INSERT INTO COMMUNITY_REPORT (USER_NO, BOARD_NO) VALUES (#{userNo}, #{boardNo})")
+//	Object reportCommunity(CommunityReportDto reportDto);
 
 	
 

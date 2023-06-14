@@ -81,8 +81,9 @@ public class CommunityBizImpl implements CommunityBiz {
 	}
 
 	@Override
-	public int isReported(int userNo, int boardNo) {
-		return communityDao.isReported(userNo, boardNo);
+	public boolean isReported(int user_no, int boardNo) {
+		int reportCount = communityDao.isReported(user_no, boardNo);
+		return reportCount > 0;
 	}
 
 	@Override
@@ -96,6 +97,8 @@ public class CommunityBizImpl implements CommunityBiz {
 		communityDao.reportCommunity(reportDto);
 		
 	}
+
+
 
 	
 

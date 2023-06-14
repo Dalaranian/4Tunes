@@ -29,11 +29,14 @@ public interface CommunityBiz {
 
 	void deleteComment(int commentNo);
 
-	int isReported(int userNo, int boardNo);
+	boolean isReported(int user_no, int boardNo);
 
 	void incrementReportCount(int boardNo);
 
 	void reportCommunity(CommunityReportDto reportDto);
+
+	
+	
 
 	
 

@@ -29,11 +29,12 @@ public interface CommunityDao {
 
 	int deleteComment(int commentNo);
 
-	int isReported(int userNo, int boardNo);
+	public int isReported(int user_no, int boardNo);
 
-	int incrementReportCount(int boardNo);
+	public void incrementReportCount(int boardNo);
 
 	public void reportCommunity(CommunityReportDto reportDto);
+
 
 
 	

@@ -80,13 +80,14 @@ public class CommunityDaoImpl implements CommunityDao {
 	}
 
 	@Override
-	public int isReported(int userNo, int boardNo) {
-		return communityMapper.isReported(userNo, boardNo);
+	public int isReported(int user_no, int boardNo) {
+		return communityMapper.isReported(user_no, boardNo);
 	}
 
 	@Override
-	public int incrementReportCount(int boardNo) {
-		return communityMapper.incrementReportCount(boardNo);
+	public void incrementReportCount(int boardNo) {
+		communityMapper.incrementReportCount(boardNo);
+		
 	}
 
 	@Override
@@ -94,6 +95,8 @@ public class CommunityDaoImpl implements CommunityDao {
 		communityMapper.reportCommunity(reportDto);
 		
 	}
+
+	
 
 	
 	

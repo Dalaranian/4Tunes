@@ -169,11 +169,9 @@ public class CommunityController {
         // 로그인된 사용자가 있을 경우에만 신고 가능
         if (loginUser != null) {
             // 해당 게시글에 대한 신고 여부 확인
-            int isReported = communityBiz.isReported(loginUser.getUser_no(), boardNo);
-            if (isReported == 0) {
+            if (!communityBiz.isReported(loginUser.getUser_no(), boardNo)) {
                 // 게시글 신고 카운트 증가
                 communityBiz.incrementReportCount(boardNo);
-
 
                 // COMMUNITY_REPORT에 신고 정보 저장
                 CommunityReportDto reportDto = new CommunityReportDto();
@@ -189,7 +187,6 @@ public class CommunityController {
         // 로그인되지 않았거나 이미 신고한 경우, 상세 페이지로 리다이렉트
         return "redirect:/community/detail/" + boardNo;
     }
-
 	
 	
 	
