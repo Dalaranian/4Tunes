@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="UTF-8" />
@@ -9,10 +9,16 @@
 <link rel="stylesheet" href="/resources/css/globalfont.css" />
 <link rel="stylesheet" href="/resources/css/community_detail.css" />
 <link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <title>4Tunes</title>
 </head>
 
 <body>
+	<script>
+   
+	</script>
+
 	<div id="nav">
 		<div class="banner">
 			<a href="/"><img src="/resources/img/banner.png" /></a>
@@ -53,20 +59,29 @@
 	<div id="main">
 
 		<div class="detail">
-			<h1 class="detail-title">글 제목</h1>
+			<h1 class="detail-title" th:text="${community.boardTitle}"></h1>
 			<div class="detail-btns">
-				<button style="display: inline-block" id="update-btn">
-					<a href="/community/write">수정하기</a>
+				<button style="display: inline-block" id="update-btn" th:if="${session.login?.user_name == community.user_name}">
+					<a
+						th:href="@{/community/update/{boardNo}(boardNo=${community.boardNo})}">수정하기</a>
 				</button>
-				<button style="display: inline-block" id="delete-btn">
-					<a href="/">삭제하기</a>
+				<button style="display: inline-block" id="delete-btn" type="submit"
+					th:if="${community.user_name == session.login?.user_name}">
+					<form
+						th:action="@{/community/delete/{boardNo}(boardNo=${community.boardNo})}"
+						method="post" id="delete-form">삭제하기</form>
 				</button>
+				<!-- 삭제 버튼은 글 작성자만 보이도록 해봄 나중에 수정할 수도 -->
+
 				<button style="display: inline-block" id="write-btn">
-					<a href="/">글 작성</a>
+					<a href="/community/write">글 작성</a>
 				</button>
-				<button style="display: inline-block" id="report-btn">
-					<a href="/">신고하기</a>
-				</button>
+				<form
+					th:action="@{/community/report/{boardNo}(boardNo=${community.boardNo})}"
+					method="post" id="report-form">
+					<button style="display: inline-block" id="report-btn" type="submit" data-board-no="${community.boardNo}">
+						신고하기</button>
+				</form>
 			</div>
 
 			<div class="detail-wrap">
@@ -74,10 +89,11 @@
 					<span>&nbsp;작성자 :</span><span th:text="${community.user_name}"></span>
 				</div>
 				<div class="detail-count">
-					<span>&nbsp;조회수 :</span><span th:text="${community.boardViewCnt}"></span> 
+					<span>&nbsp;조회수 :</span><span th:text="${community.boardViewCnt}"></span>
 				</div>
 				<div class="detail-content">
-					<div class="content-box" type="text" id="content-input" th:text="${community.boardContent}"></div>
+					<div class="content-box" type="text" id="content-input"
+						th:text="${community.boardContent}"></div>
 				</div>
 			</div>
 
@@ -87,49 +103,65 @@
 
 					<h2 class="comment-title">COMMENT</h2>
 					<div class="comment-wrap">
-						<div class="comment-name">하윤지</div>
-						<div class="comment-content">
-							긴 댓글입니다. 긴 댓글입니다. 긴 댓글입니다. 긴 댓글입니다. 긴 댓글입니다. 긴 댓글입니다. 긴 댓글입니다. 긴
-							댓글입니다. 긴 댓글입니다.
-							<button class="comment-dropdown">
-								<img src="/resources/img/down-arrow.png">
-							</button>
+						<div class="comment-item" th:each="comment : ${commentList}">
+							<div class="comment-name">
+								<span th:text="${comment.user_name}"></span>
+							</div>
+							<div class="comment-content">
+								<span th:text="${comment.commentContent}"></span>
+							</div>
+							<!-- 댓글 옵션 버튼 및 목록 추가 -->
+							<form
+								th:action="@{/community/delete/comment/{commentNo}(commentNo=${comment.commentNo})}"
+								method="post">
+								<button type="submit" class="comment-dropdown"
+									th:if="${comment.user_name == session.login?.user_name}">
+									<img src="/resources/img/delete.png">
+								</button>
+							</form>
+							<form
+								th:action="@{/community/report/comment/{commentNo}(commentNo=${comment.commentNo})}"
+								method="post">
+								<button type="submit" class="comment-dropdown">
+									<img src="/resources/img/report.png">
+								</button>
+							</form>
 						</div>
 					</div>
 
-					<div class="comment-wrap">
-						<div class="comment-name">유니지</div>
-						<div class="comment-content">
-							댓글 테스트
-							<button class="comment-dropdown">
-								<img src="/resources/img/down-arrow.png">
-							</button>
-						</div>
-					</div>
-
-					<!-- 
-        <ul class="comment-options" th:classappend="${showOptions ? 'show' : ''}">
-        <li class="option">삭제하기</li>
-        <li class="option">신고하기</li></ul>
-        -->
 
 				</div>
 
 
 				<div class="comment-detailsecond">
 					<div class="comment-write">
-						<textarea name="comment-input" rows="7" cols="75"
-							placeholder="댓글을 입력해 주세요"></textarea>
+						<form
+							th:action="@{/community/comment/{boardNo}(boardNo=${community.boardNo})}"
+							method="post">
+							<textarea name="commentContent" rows="7" cols="75"
+								placeholder="댓글을 입력해 주세요"></textarea>
 					</div>
 					<div class="comment-btn">
-						<a href="/" id="commentwrite-btn">작성 완료</a>
+						<div id="commentwrite-btn">
+							<input type="submit" value="작성 완료">
+							</form>
+						</div>
 					</div>
-				</div>
 
+				</div>
 			</div>
 		</div>
-	</div>
+		<script>
+			document.getElementById("delete-btn").addEventListener("click",
+					function(event) {
+						event.preventDefault(); // 폼 제출 이벤트 중지
 
+						if (confirm("정말로 삭제하시겠습니까?")) {
+							// 확인 버튼을 눌렀을 때 폼을 제출
+							document.getElementById("delete-form").submit();
+						}
+					});
+		</script>
 </body>
 
 </html>
