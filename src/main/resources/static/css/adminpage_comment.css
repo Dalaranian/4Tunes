@@ -69,3 +69,13 @@
     border-radius: 3px;
     padding: 3px 7px;
 }
+
+#confirm:hover{
+	background-color: #5C469C;
+}
+
+/* ---------- 스크롤 ---------- */
+.comment_list{
+	overflow-y: scroll;
+	height: 500px;
+}
