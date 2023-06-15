@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="/resources/css/nav.css" />
 <link rel="stylesheet" href="/resources/css/globalfont.css" />
-<link rel="stylesheet" href="/resources/css/community_list.css" />
+<link rel="stylesheet" href="/resources/css/community_write.css" />
 <link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
 <title>4Tunes</title>
 </head>
@@ -51,38 +51,43 @@
 	</div>
 
 	<div id="main">
-
-		<h1>커뮤니티</h1>
-		<div id="list_container">
-			<div class="list-header">
-				<div class="list-headerwrap">
-					<div class="num">NO</div>
-					<div class="title">글 제목</div>
-					<div class="name">작성자</div>
-					<div class="content">내용</div>
-					<div class="date">날짜</div>
-					<div class="count">조회수</div>
+		<h1>커뮤니티 글 작성 및 수정</h1>
+		<div class="community-main">
+			<form
+				th:action="@{/community/update/{boardNo}(boardNo=${community.boardNo})}"
+				id="write-form" method="post" th:object="${community}">
+				<fieldset>
+					<div class="community-inf">
+						<span class="community-title">글 제목</span> <input type="text"
+							id="community-input" name="boardTitle"
+							th:value="${community.boardTitle}" placeholder="내용을 입력해주세요" />
+					</div>
+					<div class="community-inf">
+						<span class="community-writer">작성자</span> <input type="text"
+							id="community-input" name="author"
+							th:value="${community.user_name}" placeholder="로그인 되어있는 사용자 자동입력"
+							disabled />
+					</div>
+					<div class="community-inf">
+						<span class="community-text">내용</span>
+						<textarea cols="50" rows="10" id="community-input"
+							name="boardContent" th:text="${community.boardContent}"
+							placeholder="내용을 입력해주세요" style="resize: none;"></textarea>
+					</div>
+				</fieldset>
+				<div class="community-btn">
+					<div id="input">
+						<button type="submit">작성 완료</button>
+					</div>
+					<div id="cancel">
+						<a th:href="@{/community/detail/{boardNo}(boardNo=${community.boardNo})}">
+							<button type="button">취소</button>
+						</a>
+					</div>
 				</div>
-			</div>
-			<div class="list">
-				<div th:each="community : ${communityList}" class="list-item">
-					<div class="num" th:text="${community.boardNo}"></div>
-					<div class="title">
-					    <!-- 글 제목 클릭시 글 번호에 해당하는 디테일 페이지로 -->
-						<a th:href="@{/community/detail/{boardNo}(boardNo=${community.boardNo})}"
-						   th:text="${community.boardTitle}"></a></div>
-					<div class="name" th:text="${community.user_name}"></div>
-					<div class="content" th:text="${community.boardContent}"></div>
-					<div class="date"
-						th:text="${#dates.format(community.boardWriteDate, 'yyyy-MM-dd')}"></div>
-					<div class="count" th:text="${community.boardViewCnt}"></div>
-				</div>
-			</div>
-
-			<div class="commu-write">
-				<a href="/community/write" class="write-btn">글 작성</a>
-			</div>
+			</form>
 		</div>
 	</div>
 </body>
+
 </html>
