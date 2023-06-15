@@ -1,5 +1,6 @@
 package com.multi.fourtunes.model.mapper;
 
+import com.multi.fourtunes.model.dto.CommentDto;
 import com.multi.fourtunes.model.dto.CommunityDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
@@ -22,4 +23,16 @@ public interface MyPageMapper {
             " JOIN USER u  ON u.USER_NO = b.USER_NO " +
             " WHERE b.USER_NO = #{userNo} " )
     List<CommunityDto> getUserMyContentAll(int userNo);
+
+    @Results({@Result(property = "commentNo", column = "COMMENT_NO"),
+            @Result(property = "boardNo", column = "BOARD_NO"),
+            @Result(property = "boardTitle", column = "BOARD_TITLE"),
+            @Result(property = "userNo", column = "USER_NO"),
+            @Result(property = "commentContent", column = "COMMENT_CONTENT"),
+            @Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT"),
+            @Result(property = "user_name", column = "USER_NAME")})
+    @Select(" SELECT b.USER_NO, c.BOARD_NO, b.BOARD_TITLE, c.COMMENT_CONTENT " +
+            " FROM COMMENT  c JOIN COMMUNITY_BOARD b ON b.USER_NO = c.USER_NO " +
+            " WHERE c.USER_NO = #{userNo} ")
+    List<CommentDto> getComments(int userNo);
 }
