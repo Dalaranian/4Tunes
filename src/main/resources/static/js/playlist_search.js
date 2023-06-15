@@ -18,11 +18,11 @@ function addToPlaylist(songTitle, songArtist, songLink, songId) {
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(songDto),
-            success: function() {
-                console.log('곡이 추가되었습니다.');
+            success: function(res) {
+                alert(res);
             },
-            error: function() {
-                console.log('곡 추가 실패');
+            error: function(res) {
+                alert(res);
             }
         });
 }
