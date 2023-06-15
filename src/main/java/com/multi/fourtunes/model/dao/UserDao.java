@@ -24,5 +24,7 @@ public interface UserDao {
 
 	public List<UserDto> searchUser(String name);
 
+	public String[] getUserPlaylistNo(String userId);
+
 }
 

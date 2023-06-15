@@ -39,5 +39,8 @@ public interface UserMapper {
 
 	@Select(" SELECT * FROM USER WHERE USER_NAME LIKE CONCAT('%',#{name},'%') ")
 	List<UserDto> searchUser(String name);
-	
+
+	/** UserNo 를 활용해서, User 에 해당하는 플레이리스트 번호를 반환 */
+	@Select(" SELECT p.PLAYLIST_NO FROM `USER` u JOIN `PLAYLIST` p ON u.USER_NO = p.USER_NO WHERE u.USER_NO = #{UserNo} ")
+	String[] getUserPlatListNo(String userNo);
 }
