@@ -68,7 +68,7 @@ public class CommunityDaoImpl implements CommunityDao {
 	}
 
 	@Override
-	public CommentDto getCommnet(int commentNo) {
+	public CommentDto getComment(int commentNo) {
 		return communityMapper.getComment(commentNo);
 
 	}
