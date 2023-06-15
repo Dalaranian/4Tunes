@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.multi.fourtunes.model.biz.AdminpageBiz;
+import com.multi.fourtunes.model.dto.CommunityDto;
+import com.multi.fourtunes.model.dto.AdminCommentReportDto;
+import com.multi.fourtunes.model.dto.AdminCommunityReportDto;
 import com.multi.fourtunes.model.dto.UserDto;
 
 @Controller
@@ -59,16 +62,51 @@ public class AdminpageController {
 			return "adminpage_searchuser";
 		}
 		
+		
 		// 게시글 관리로 이동
 		@GetMapping("/community")
-		public String gotoAdminpageCommunity() {
+		public String gotoAdminpageCommunity(Model model) {
+			// 신고당한 게시글과 사용자를 조회
+			List<AdminCommunityReportDto> report = adminpageBiz.selectReport();
+			//System.out.println("report: " + report);
+			model.addAttribute("report", report);
+			
 			return "adminpage_community";
 		}
 		
+		@GetMapping("/confirm/{board_no}")
+		public String confirm(@PathVariable int board_no) {
+			//System.out.println("board_no는? : " + board_no);
+			// 관리자가 문제없음 클릭 시, 해당 게시글의 신고누적횟수를 0으로 변경
+			if(adminpageBiz.confirmReport(board_no) > 0) {
+				// COMMUNITY_REPORT 테이블에서 해당 게시글의 신고내역을 지움
+				adminpageBiz.deleteReport(board_no);
+			}
+			
+			return "redirect:/adminpage/community";
+		}
+		
+		
 		// 댓글 관리로 이동
 		@GetMapping("/comment")
-		public String gotoAdminpageComment() {
+		public String gotoAdminpageComment(Model model) {
+			// 신고당한 댓글과 사용자를 조회
+			List<AdminCommentReportDto> report = adminpageBiz.selectReportComment();
+			//System.out.println("report: " + report);
+			model.addAttribute("report", report);
 			return "adminpage_comment";
+		}
+		
+		@GetMapping("/confirmComment/{comment_no}")
+		public String confirmComment(@PathVariable int comment_no) {
+			//System.out.println("comment_no는? : " + comment_no);
+			// 관리자가 문제없음 클릭 시, 해당 댓글의 신고누적횟수를 0으로 변경
+			if(adminpageBiz.confirmReportComment(comment_no) > 0) {
+				// COMMUNITY_REPORT 테이블에서 해당 댓글의 신고내역을 지움
+				adminpageBiz.deleteReportComment(comment_no);
+			}
+			
+			return "redirect:/adminpage/comment";
 		}
 
 }
