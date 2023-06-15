@@ -23,9 +23,11 @@ public class LoginBizImple implements LoginBiz {
 
 	@Autowired
 	private PayDao payDao;
-	
+
+	@Autowired
 	private RoleManageDao roleManageDao;
 
+	@Autowired
 	private final UserRepository userRepository;
 
 	@Autowired
