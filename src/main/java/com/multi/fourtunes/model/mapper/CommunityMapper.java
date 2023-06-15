@@ -27,7 +27,7 @@ public interface CommunityMapper {
 			@Result(property = "boardViewCnt", column = "BOARD_VIEW_CNT")})
 	@Result(property = "user_name", column = "USER_NAME")
 	@Select("SELECT b.*, u.USER_NAME " + "FROM COMMUNITY_BOARD b " + "JOIN USER u ON b.USER_NO = u.USER_NO "
-			+ "ORDER BY BOARD_WRITE_DATE DESC")
+			+ "ORDER BY BOARD_NO DESC")
 	List<CommunityDto> getAll();
 
 	@Results({@Result(property = "boardNo", column = "BOARD_NO"),
