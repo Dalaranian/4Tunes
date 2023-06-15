@@ -6,11 +6,13 @@
 
 .adminpage_contents {
     width: 90%;
-    height: 80%;
+    /* height: 80%; */
     background-color: rgb(224, 224, 224);
     margin-left: 60px;
     vertical-align: top;
     padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 50px;
 }
 
 /* ---------- 검색창 ---------- */
@@ -76,7 +78,6 @@
     border-radius: 3px;
     padding: 3px 7px;
 }
-
 #drop{
     background-color: rgb(192, 57, 43);
     color: white;
@@ -84,4 +85,11 @@
     border: 0px;
     border-radius: 3px;
     padding: 3px 7px;
+}
+
+#modify:hover{
+	background-color: #5C469C;
+}
+#drop:hover{
+	background-color: #F15F5F;
 }
