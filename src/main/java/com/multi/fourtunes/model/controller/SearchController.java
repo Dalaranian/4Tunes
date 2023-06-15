@@ -30,7 +30,7 @@ public class SearchController {
 
 		ModelAndView modelAndView = new ModelAndView();
 
-		// 검색 로직
+		// query 로 검색 시작
 		mania.setPrompt(query);
 		mania.setType(false);
 		ArrayList<SongDto> result = mania.search();

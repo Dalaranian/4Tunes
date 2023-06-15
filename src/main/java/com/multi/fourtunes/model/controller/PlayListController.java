@@ -20,7 +20,7 @@ public class PlayListController {
     @Autowired
     PlaylistBiz playlist;
 
-    @PostMapping("/insertmusic")
+    @PostMapping("/insertmyplaylist")
     public ResponseEntity<String> addToPlaylist(@RequestBody SongDto songDto, HttpSession session) {
         UserDto currentUser = (UserDto) session.getAttribute("login");
         String res = playlist.insertPlaylist(songDto, currentUser);

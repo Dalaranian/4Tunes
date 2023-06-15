@@ -14,7 +14,7 @@ function addToPlaylist(songTitle, songArtist, songLink, songId) {
     console.log(songDto);
 
     $.ajax({
-            url: '/playlist/insertmusic',
+            url: '/playlist/insertmyplaylist',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(songDto),
