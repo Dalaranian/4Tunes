@@ -18,4 +18,5 @@ public class CommentDto {
 	private String commentContent;
 	private int commentReportCnt;
 	private String user_name;
+	private String boardTitle;
 }

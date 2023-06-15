@@ -116,9 +116,6 @@ public class CommunityBizImpl implements CommunityBiz {
 
 	}
 
-	@Override
-	public List<CommunityDto> getUserMyContentAll(int userNo){
-		return communityDao.getUserMyContentAll(userNo);
-	}
+
   
 }

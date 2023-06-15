@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
+	import com.multi.fourtunes.model.biz.MyPageBiz;
+	import com.multi.fourtunes.model.dto.CommentDto;
+	import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +28,9 @@ import com.multi.fourtunes.model.dto.UserDto;
 	
 		@Autowired
 		private LoginBiz loginBiz;
-		
+
+		@Autowired
+		private MyPageBiz myPageBiz;
 		// 로그인 페이지로 이동
 		@GetMapping("/login")
 		public String gotoLogin() {
@@ -75,12 +79,6 @@ import com.multi.fourtunes.model.dto.UserDto;
 			List<CommunityDto> communityList = communityBiz.getAll();
 			model.addAttribute("communityList", communityList);
 			return "community_list";
-		}
-		
-		//마이페이지 활동내역
-		@RequestMapping("/communityContent")
-		public String gotocommunityList() {
-			return "mypage_community";
 		}
 		
 		// 멤버쉽 페이지로 이동
