@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.multi.fourtunes.model.dto.CommentDto;
+import com.multi.fourtunes.model.dto.CommentReportDto;
 import com.multi.fourtunes.model.dto.CommunityDto;
+import com.multi.fourtunes.model.dto.CommunityReportDto;
 import com.multi.fourtunes.model.mapper.CommunityMapper;
 
 @Repository
@@ -47,9 +50,71 @@ public class CommunityDaoImpl implements CommunityDao {
 	public int incrementViewCount(int boardNo) {
 		return communityMapper.incrementViewCount(boardNo);
 	}
+
+	@Override
+	public List<CommentDto> getComments(int boardNo) {
+		return communityMapper.getComments(boardNo);
+	}
+
+	@Override
+	public int addComment(CommentDto comment) {
+		return communityMapper.addComment(comment);
+
+	}
+
+	@Override
+	public int deleteByBoardNo(int boardNo) {
+		return communityMapper.deleteByBoardNo(boardNo);
+	}
+
+	@Override
+	public CommentDto s(int commentNo) {
+		return communityMapper.getComment(commentNo);
+
+	}
+
+	@Override
+	public int deleteComment(int commentNo) {
+		return communityMapper.deleteComment(commentNo);
+
+	}
+
+	@Override
+	public int isReported(int user_no, int boardNo) {
+		return communityMapper.isReported(user_no, boardNo);
+	}
+
+	@Override
+	public void incrementReportCount(int boardNo) {
+		communityMapper.incrementReportCount(boardNo);
+
+	}
+
+	@Override
+	public void reportCommunity(CommunityReportDto reportDto) {
+		communityMapper.reportCommunity(reportDto);
+
+	}
+
+	@Override
+	public int isCommentReported(int user_no, int commentNo) {
+		return communityMapper.isCommentReported(user_no, commentNo);
+	}
+
+	@Override
+	public void incrementCommentReportCount(int commentNo) {
+		communityMapper.incrementCommentReportCount(commentNo);
+
+	}
+
+	@Override
+	public void reportComment(CommentReportDto reportDto) {
+		communityMapper.reportComment(reportDto);
+	}
 	
 	@Override
 	public List<CommunityDto> getUserMyContentAll(int userNo){
 		return communityMapper.getUserMyContentAll(userNo);
 	}
+
 }
