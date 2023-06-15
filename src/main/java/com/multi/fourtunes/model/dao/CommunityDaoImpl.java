@@ -68,7 +68,7 @@ public class CommunityDaoImpl implements CommunityDao {
 	}
 
 	@Override
-	public CommentDto s(int commentNo) {
+	public CommentDto getComment(int commentNo) {
 		return communityMapper.getComment(commentNo);
 
 	}
@@ -112,9 +112,6 @@ public class CommunityDaoImpl implements CommunityDao {
 		communityMapper.reportComment(reportDto);
 	}
 	
-	@Override
-	public List<CommunityDto> getUserMyContentAll(int userNo){
-		return communityMapper.getUserMyContentAll(userNo);
-	}
+
 
 }

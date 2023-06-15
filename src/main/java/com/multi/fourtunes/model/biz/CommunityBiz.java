@@ -42,6 +42,6 @@ public interface CommunityBiz {
 
 	void reportComment(CommentReportDto reportDto);
 	
-	List<CommunityDto> getUserMyContentAll(int userNo);
+
 
 }

@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.multi.fourtunes.model.biz.MyPageBiz;
+import com.multi.fourtunes.model.dao.MyPageDao;
+import com.multi.fourtunes.model.dto.CommentDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,10 +33,13 @@ public class MyPageController {
 	@Autowired
 	private CommunityBiz communityBiz;
 
+	@Autowired
+	private MyPageBiz myPageBiz;
+
 	@RequestMapping("/communityContent")
 	public String getCommunityList(Model model, HttpSession session) {
 		UserDto currentUser = (UserDto) session.getAttribute("login");
-		List<CommunityDto> communityContent = communityBiz.getUserMyContentAll(currentUser.getUser_no());
+		List<CommunityDto> communityContent = myPageBiz.getUserMyContentAll(currentUser.getUser_no());
 		for(CommunityDto dto:communityContent) {
 			System.out.println(dto);
 		}
@@ -46,6 +52,9 @@ public class MyPageController {
 		public String getCommunityDetail(@PathVariable int boardNo, Model model) {
 			CommunityDto community = communityBiz.get(boardNo);
 			communityBiz.incrementViewCount(boardNo);
+			// 댓글
+			List<CommentDto> commentList = communityBiz.getComments(boardNo);
+			model.addAttribute("commentList", commentList);
 			model.addAttribute("community", community);
 			return "community_detail";
 		}
