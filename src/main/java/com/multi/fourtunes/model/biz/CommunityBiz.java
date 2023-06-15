@@ -41,5 +41,7 @@ public interface CommunityBiz {
 	void incrementCommentReportCount(int commentNo);
 
 	void reportComment(CommentReportDto reportDto);
+	
+	List<CommunityDto> getUserMyContentAll(int userNo);
 
 }

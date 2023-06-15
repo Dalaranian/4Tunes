@@ -1,11 +1,16 @@
 package com.multi.fourtunes.model.biz;
 
+import com.multi.fourtunes.model.dao.RoleManageDao;
+import com.multi.fourtunes.model.jpa.entity.UserEntity;
+import com.multi.fourtunes.model.jpa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.multi.fourtunes.model.dao.KeywordDao;
+import com.multi.fourtunes.model.dao.PayDao;
 import com.multi.fourtunes.model.dao.UserDao;
 import com.multi.fourtunes.model.dto.UserDto;
+import java.util.Date;
 
 @Service
 public class LoginBizImple implements LoginBiz {
@@ -15,6 +20,18 @@ public class LoginBizImple implements LoginBiz {
 
 	@Autowired
 	private KeywordDao keywordDao;
+
+	@Autowired
+	private PayDao payDao;
+	
+	private RoleManageDao roleManageDao;
+
+	private final UserRepository userRepository;
+
+	@Autowired
+	public LoginBizImple(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
 	@Override
 	public boolean checkUserExist(String email, String userId) {
@@ -30,6 +47,17 @@ public class LoginBizImple implements LoginBiz {
 	public String[] getKeyword() {
 		// TODO Auto-generated method stub
 		return keywordDao.getAllList();
+	}
+	
+	@Override
+	public String[] getUserKeyword(int userNo) {
+		return keywordDao.userKeyword(userNo);
+	}
+
+	@Override
+	public void insertUserRole(String userId) {
+		UserEntity user = userRepository.findByUserId(userId);
+		roleManageDao.insertUserRole(user.getUserNo());
 	}
 
 	@Override
@@ -48,4 +76,10 @@ public class LoginBizImple implements LoginBiz {
 		return userDao.insertUser(insert);
 	}
 
+	@Override
+	public Date getSubscriptionEndDate(int user_no) {
+		return payDao.getSubscriptionEndDate(user_no);
+	}
+	
+	
 }

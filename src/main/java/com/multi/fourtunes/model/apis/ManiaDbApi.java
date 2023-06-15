@@ -1,11 +1,13 @@
-package com.multi.fourtunes.apis;
+package com.multi.fourtunes.model.apis;
 
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -13,7 +15,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.fourtunes.model.dto.SongDto;
 
-@Service
+@Component
 public class ManiaDbApi {
 
 	// ManiaDB API URL 예시
@@ -95,10 +97,18 @@ public class ManiaDbApi {
 			ObjectMapper objectMapper = new ObjectMapper();
 
 			// 원하는 데이터까지 탐색하기
-			JsonNode rootNode = objectMapper.readTree(jsonObject.toString());
-			JsonNode rssNode = rootNode.get("rss");
-			JsonNode channelNode = rssNode.get("channel");
-			JsonNode itemArrayNode = channelNode.get("item");
+			JsonNode itemArrayNode = null;
+			try {
+				JsonNode rootNode = objectMapper.readTree(jsonObject.toString());
+				JsonNode rssNode = rootNode.get("rss");
+				JsonNode channelNode = rssNode.get("channel");
+				itemArrayNode = channelNode.get("item");
+			} catch (JsonProcessingException e) {
+				System.out.println("파싱 오류");
+				return null;
+			}
+
+//			System.out.println(itemArrayNode);
 
 			// 데이터 꺼내서 DTO에 포장 후 List 에 넣기
 			for (JsonNode itemNode : itemArrayNode) {
@@ -106,6 +116,7 @@ public class ManiaDbApi {
 				String title = itemNode.get("title").asText();
 				String name = itemNode.get("maniadb:artist").get("name").asText();
 				String link = itemNode.get("link").asText();
+				String id = itemNode.get("id").asText();
 
 //				System.out.println("Title: " + title);
 //				System.out.println("Name: " + name);
@@ -115,6 +126,7 @@ public class ManiaDbApi {
 				SongDto currentMusic = new SongDto();
 				currentMusic.setSongArtist(name);
 				currentMusic.setSongTitle(title);
+				currentMusic.setSongId(id);
 
 				currentMusic.toString();
 

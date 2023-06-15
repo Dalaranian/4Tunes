@@ -69,6 +69,12 @@
     text-align: center;
     font-size: 1.1rem;
 }
+.board_list>div>div>div {
+    display: inline-block;
+    padding-top:15px;
+    text-align: center;
+    font-size: 1.1rem;
+}
 .board_list>div.top>div {
     font-weight: 600;
 }
@@ -99,6 +105,9 @@
     color: black;
     font-size: 1.1rem;
 }
+.board_list .list{
+	inline-bolck
+}
 
 /* ---------- 내가 작성한 댓글 ---------- */
 .comment_list_wrap {
@@ -117,6 +126,7 @@
     text-align: center;
     font-size: 1.1rem;
 }
+
 .comment_list>div.top>div {
     font-weight: 600;
 }
@@ -133,6 +143,7 @@
 .comment_list .comment {
     width: 50%;
 }
+
 .title>a {
     color: black;
     font-size: 1.1rem;
@@ -176,3 +187,25 @@
   min-width:760px;
 }
 }
+
+
+/* ---------- 스크롤 ---------- */
+.board_list{
+	overflow-y: scroll;
+	height: 200px;
+}
+
+.comment_list{
+	overflow-y: scroll;
+	height: 200px;
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="/resources/css/globalfont.css" />
 <link rel="stylesheet" href="/resources/css/adminpage_user.css" />
 <link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
+
 <title>4Tunes</title>
 </head>
 
@@ -32,9 +33,9 @@
 			</div>
 		</div>
 		<div class="search-container">
-			<span class="search-icon"><img
-				src="/resources/img/search.png" class="search-icon" /></span> <input
-				type="text" class="search-input" placeholder="키워드 입력" />
+			<span class="search-icon"><img src="/resources/img/search.png"
+				class="search-icon" /></span> <input type="text" class="search-input"
+				placeholder="키워드 입력" />
 		</div>
 		<div>
 			<a href="/nav/suggested">맞춤추천</a>
@@ -55,10 +56,9 @@
 
 		<div class="adminpage_contents">
 			<div>
-				<form class="search">
-					<input type="text" size="25" name="username"
-						placeholder="조회할 회원의 이름을 입력하세요."> <input type="submit"
-						id="submit" value="검색">
+				<form action="/adminpage/search" method="GET" class="search">
+					<input type="text" size="25" name="username" placeholder="조회할 회원의 이름을 입력하세요."> 
+					<input type="submit" id="submit" value="검색">
 				</form>
 			</div>
 
@@ -72,36 +72,24 @@
 						<div class="modify">수정버튼</div>
 						<div class="drop">탈퇴버튼</div>
 					</div>
-					<div>
-						<div class="num">1</div>
-						<div class="name">배정민</div>
-						<div class="id">princess@naver.com</div>
+
+					<div th:each="user : ${userList}">
+						<div class="num" th:text="${user.user_no}"></div>
+						<div class="name" th:text="${user.user_name}"></div>
+						<div class="id" th:text="${user.user_id}"></div>
 						<div class="grade">
-							<input type="text" size="10" value="free"
-								style="text-align: center;">
+							<input type="text" size="10" th:value="${user.user_grade}"
+							style="text-align: center;" readonly>
 						</div>
 						<div class="modify">
-							<input type="button" id="modify" value="수정완료" onclick="">
+							<input type="button" id="modify" value="회원등급변경" th:onclick="|location.href='@{/adminpage/update/{user_no}(user_no=${user.user_no})}'|">
 						</div>
+				
 						<div class="drop">
-							<input type="button" id="drop" value="탈퇴처리" onclick="">
+							<input type="button" id="drop" value="탈퇴처리" th:onclick="|location.href='@{/adminpage/delete/{user_no}(user_no=${user.user_no})}'|">
 						</div>
 					</div>
-					<div>
-						<div class="num">2</div>
-						<div class="name">박윤아</div>
-						<div class="id">yoonaori@naver.com</div>
-						<div class="grade">
-							<input type="text" size="10" value="paid"
-								style="text-align: center;">
-						</div>
-						<div class="modify">
-							<input type="button" id="modify" value="수정완료" onclick="">
-						</div>
-						<div class="drop">
-							<input type="button" id="drop" value="탈퇴처리" onclick="">
-						</div>
-					</div>
+
 				</div>
 			</div>
 		</div>

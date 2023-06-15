@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,11 +54,11 @@ public class CommunityController {
 		return "community_write";
 	}
 
-	@RequestMapping("/create")
-	public String communityCreate() {
-
-		return "community_detail";
-	}
+	@PostMapping("/create")
+    public String communityCreate(@ModelAttribute("community") CommunityDto community) {
+        communityBiz.insert(community);
+        return "redirect:/nav/community";
+    }
 
 	// 게시글 수정
 	@RequestMapping("/update/{boardNo}")
@@ -217,5 +218,4 @@ public class CommunityController {
 		return "redirect:/nav/community/";
 	}
 
-	
 }
