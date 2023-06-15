@@ -4,4 +4,5 @@ import com.multi.fourtunes.model.jpa.entity.SongEntity;
 import org.springframework.data.repository.CrudRepository;
 
 public interface SongRepository extends CrudRepository<SongEntity, Integer> {
+    SongEntity findBySongId(String songId);
 }

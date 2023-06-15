@@ -56,6 +56,14 @@ public class YoutubeApi {
 	}
 
 	/**
+	 * API 호출 비용이 너무 비싸서 데모로 만들었습니당
+	 * @return 에스파 스파이시 embed
+	 */
+	public String testLinkGetter(){
+		return EMBED_LINK_PREFIX + "T0XInumvMjM";
+	}
+
+	/**
 	 * @param response
 	 * @param objMapper
 	 * @return response 를 파싱해서, embedLink 를 반환
