@@ -20,11 +20,31 @@ public class PlayListController {
     @Autowired
     PlaylistBiz playlist;
 
+    ResponseEntity<String> response;
+
+//    @PostMapping("/insertmyplaylist")
+//    public ResponseEntity<String> addToPlaylist(@RequestBody SongDto songDto, HttpSession session) {
+//        UserDto currentUser = (UserDto) session.getAttribute("login");
+//        String res = playlist.insertPlaylist(songDto, currentUser);
+//
+//        if(res.equals(" 플레이리스트 저장에 성공했습니다. ")){
+//            response = ResponseEntity.status(HttpStatus.OK).body("res");
+//        }else{
+//            response = ResponseEntity.status(HttpStatus.ACCEPTED).body("res");
+//        }
+//
+//        return response;
+//    }
+
     @PostMapping("/insertmyplaylist")
     public ResponseEntity<String> addToPlaylist(@RequestBody SongDto songDto, HttpSession session) {
         UserDto currentUser = (UserDto) session.getAttribute("login");
         String res = playlist.insertPlaylist(songDto, currentUser);
 
-        return ResponseEntity.status(HttpStatus.OK).body("곡 추가 완료");
+        if (res.equals("플레이리스트 저장에 성공했습니다.")) {
+            return ResponseEntity.ok(res);
+        } else {
+            return ResponseEntity.accepted().body(res);
+        }
     }
 }

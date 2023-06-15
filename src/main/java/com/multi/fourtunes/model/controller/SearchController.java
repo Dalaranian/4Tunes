@@ -18,36 +18,36 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/search")
 public class SearchController {
 
-	@Autowired
-	YoutubeApi youtube;
+    @Autowired
+    YoutubeApi youtube;
 
-	@Autowired
-	ManiaDbApi mania;
+    @Autowired
+    ManiaDbApi mania;
 
-	@GetMapping("/query")
-	public ModelAndView search(String query) {
-//		System.out.println(query);
+    @GetMapping("/query")
+    public ModelAndView search(String query) {
+        ModelAndView modelAndView = new ModelAndView();
 
-		ModelAndView modelAndView = new ModelAndView();
+        // query 로 검색 시작
 
-		// query 로 검색 시작
-		mania.setPrompt(query);
-		mania.setType(false);
-		ArrayList<SongDto> result = mania.search();
-//		result.stream().forEach(currentSong -> currentSong
-//				.setSongLink(youtube.embedLinkGetter(currentSong.getSongArtist(), currentSong.getSongTitle())));
+        //Mania DB 로 Embed 링크를 제외한 정보 받기
+        mania.setPrompt(query);
+        mania.setType(false);
+        ArrayList<SongDto> result = mania.search();
 
-		// test 를 위해 더미데이터 넣기
-		for(SongDto dto:result) {
-			dto.setSongLink(youtube.testLinkGetter());
-		}
+        // YoutubeApi 로 EmbedLink 넣기
+        result.stream().forEach(currentSong -> currentSong
+                .setSongLink(youtube.embedLinkGetter(currentSong.getSongArtist(), currentSong.getSongTitle())));
 
-		modelAndView.addObject("query", query);
-		modelAndView.addObject("searchresult", result);
-		modelAndView.setViewName("playlist_searchresult");
-//		model.addAttribute("query", query);
-//		model.addAttribute("searchresult", result);
+        // test 를 위해 더미데이터 넣기
+//		for(SongDto dto:result) {
+//			dto.setSongLink(youtube.testLinkGetter());
+//		}
 
-		return modelAndView;
-	}
+        modelAndView.addObject("query", query);
+        modelAndView.addObject("searchresult", result);
+        modelAndView.setViewName("playlist_searchresult");
+
+        return modelAndView;
+    }
 }
