@@ -9,13 +9,14 @@
 <link rel="stylesheet" href="/resources/css/globalfont.css" />
 <link rel="stylesheet" href="/resources/css/community_detail.css" />
 <link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <title>4Tunes</title>
 </head>
 
 <body>
-
 	<script>
-		
+   
 	</script>
 
 	<div id="nav">
@@ -60,7 +61,7 @@
 		<div class="detail">
 			<h1 class="detail-title" th:text="${community.boardTitle}"></h1>
 			<div class="detail-btns">
-				<button style="display: inline-block" id="update-btn">
+				<button style="display: inline-block" id="update-btn" th:if="${session.login?.user_name == community.user_name}">
 					<a
 						th:href="@{/community/update/{boardNo}(boardNo=${community.boardNo})}">수정하기</a>
 				</button>
@@ -78,7 +79,7 @@
 				<form
 					th:action="@{/community/report/{boardNo}(boardNo=${community.boardNo})}"
 					method="post" id="report-form">
-					<button style="display: inline-block" id="report-btn" type="submit">
+					<button style="display: inline-block" id="report-btn" type="submit" data-board-no="${community.boardNo}">
 						신고하기</button>
 				</form>
 			</div>

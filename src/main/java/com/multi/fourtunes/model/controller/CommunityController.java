@@ -7,10 +7,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.multi.fourtunes.model.biz.CommunityBiz;
 import com.multi.fourtunes.model.dto.CommentDto;
@@ -132,6 +134,7 @@ public class CommunityController {
 		return "redirect:/community/detail/" + boardNo;
 	}
 
+	// 댓글 삭제
 	@PostMapping("/delete/comment/{commentNo}")
 	public String deleteComment(@PathVariable int commentNo, HttpSession session) {
 		// 세션에서 로그인된 사용자 정보를 가져옴
@@ -157,6 +160,7 @@ public class CommunityController {
 
 	}
 
+	// 게시글 신고
 	@PostMapping("/report/{boardNo}")
 	public String reportBoard(@PathVariable int boardNo, HttpSession session) {
 		// 세션에서 로그인된 사용자 정보를 가져옴
@@ -184,6 +188,7 @@ public class CommunityController {
 		return "redirect:/nav/community/";
 	}
 
+	// 댓글 신고
 	@PostMapping("/report/comment/{commentNo}")
 	public String reportComment(@PathVariable int commentNo, HttpSession session) {
 		// 세션에서 로그인된 사용자 정보를 가져옴
@@ -212,4 +217,5 @@ public class CommunityController {
 		return "redirect:/nav/community/";
 	}
 
+	
 }
