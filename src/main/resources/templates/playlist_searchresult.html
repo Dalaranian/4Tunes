@@ -1,81 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="/resources/css/playlist_searchresult.css" />
-<link rel="stylesheet" href="/resources/css/globalfont.css" />
-<link rel="stylesheet" href="/resources/css/nav.css" />
-<link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
-<title>4Tunes</title>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/resources/css/playlist_searchresult.css"/>
+    <link rel="stylesheet" href="/resources/css/globalfont.css"/>
+    <link rel="stylesheet" href="/resources/css/nav.css"/>
+    <link rel="shortcut icon" href="/resources/img/realfavicon.ico"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/resources/js/playlist_search.js"></script>
+    <title>4Tunes</title>
+    <html xmlns:th="http://www.thymeleaf.org"/>
 </head>
 <body>
-	<div id="nav">
-		<div class="banner">
-			<a href="/"><img src="/resources/img/banner.png" /></a>
-		</div>
-		<div id="login">
-			<div>
-				<a
-					th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
-					<img class="login_img" src="/resources/img/usertest.png" /> <span
-					th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
-				</a>
-			</div>
-			<br />
-			<div>
-				<a href="/nav/mypage"><img class="mypage_img"
-					src="/resources/img/file.png" />MYPAGE</a>
-			</div>
-		</div>
-		<div class="search-container">
+<div id="nav">
+    <div class="banner">
+        <a href="/"><img src="/resources/img/banner.png"/></a>
+    </div>
+    <div id="login">
+        <div>
+            <a
+                    th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
+                <img class="login_img" src="/resources/img/usertest.png"/> <span
+                    th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
+            </a>
+        </div>
+        <br/>
+        <div>
+            <a href="/nav/mypage"><img class="mypage_img"
+                                       src="/resources/img/file.png"/>MYPAGE</a>
+        </div>
+    </div>
+    <div class="search-container">
 			<span class="search-icon"><img src="/resources/img/search.png"
-				class="search-icon" /></span> <input type="text" class="search-input"
-				placeholder="키워드 입력" />
-		</div>
-		<div>
-			<a href="/nav/suggested">맞춤추천</a>
-		</div>
-		<div>
-			<a href="/nav/chart">인기차트</a>
-		</div>
-		<div>
-			<a href="/nav/community">커뮤니티</a>
-		</div>
-		<div>
-			<a href="/nav/membership">멤버십</a>
-		</div>
-	</div>
+                                           class="search-icon"/></span> <input type="text" class="search-input"
+                                                                               placeholder="키워드 입력"/>
+    </div>
+    <div>
+        <a href="/nav/suggested">맞춤추천</a>
+    </div>
+    <div>
+        <a href="/nav/chart">인기차트</a>
+    </div>
+    <div>
+        <a href="/nav/community">커뮤니티</a>
+    </div>
+    <div>
+        <a href="/nav/membership">멤버십</a>
+    </div>
+</div>
 
-	<div id="main">
-		<h1>${search}에 대한 검색 결과</h1>
-		<div id="buttons"></div>
+<div id="main">
+    <h1><p th:text="${query}"></p> 에 대한 검색 결과</h1>
+    <div id="buttons"></div>
 
-		<!-- 재생목록이 추가될 경우 list_wrapper클래스 div를 복붙하게 할것 -->
-		<div id="MyPlayList">
-			<div th:each="song, iterStat : ${searchresult}" class="list_wrapper">
-				<div
-					th:class="${(iterStat.index % 2 == 0) ? 'list_left' : 'list_right'}">
-					<div id="video">
-						<div class="video-container">
-							<iframe th:src="@{${song.songLink}}" frameborder="0"
-								allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<h2 th:text="${song.songTitle}">노래제목</h2>
-							<br />
-							<h3 th:text="${song.songArtist}">가수 이름</h3>
-							<br />
-							<div>
-								<button style="display: inline-block">+</button>
-								<div style="display: inline-block">내 플레이리스트에서 추가</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <!-- 재생목록이 추가될 경우 list_wrapper클래스 div를 복붙하게 할것 -->
+    <div id="MyPlayList">
+        <div th:each="song, iterStat : ${searchresult}" class="list_wrapper">
+            <div th:id="${(iterStat.index % 2 == 0) ? 'list_left' : 'list_right'}">
+                <div id="video">
+                    <div class="video-container">
+                        <iframe th:src="@{${song.songLink}}" frameborder="0"
+                                allowfullscreen></iframe>
+                    </div>
+                    <div id="context">
+                        <h2 th:text="${song.songTitle}">노래제목</h2>
+                        <br/>
+                        <h3 th:text="${song.songArtist}">가수 이름</h3>
+                        <!--                        <label th:text="${song.songId}" hidden="hidden"></label>-->
+                        <br/>
+                        <div>
+                            <button style="display: inline-block"
+                                    th:attr="onclick='addToPlaylist(\'' + ${song.songTitle} + '\', \'' + ${song.songArtist} + '\', \'' + ${song.songLink} + '\', \'' + ${song.songId} + '\')'">
+                                +
+                            </button>
+                            <div style="display: inline-block">내 플레이리스트에서 추가</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
