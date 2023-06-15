@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -55,10 +57,10 @@ public class CommunityController {
 	}
 
 	@PostMapping("/create")
-    public String communityCreate(@ModelAttribute("community") CommunityDto community) {
-        communityBiz.insert(community);
-        return "redirect:/nav/community";
-    }
+	public String communityCreate(@ModelAttribute("community") CommunityDto community) {
+		communityBiz.insert(community);
+		return "redirect:/nav/community";
+	}
 
 	// 게시글 수정
 	@RequestMapping("/update/{boardNo}")
@@ -161,9 +163,37 @@ public class CommunityController {
 
 	}
 
+//	// 게시글 신고
+//	@PostMapping("/report/{boardNo}")
+//	public String reportBoard(@PathVariable int boardNo, HttpSession session) {
+//		// 세션에서 로그인된 사용자 정보를 가져옴
+//		UserDto loginUser = (UserDto) session.getAttribute("login");
+//
+//		// 로그인된 사용자가 있을 경우에만 신고 가능
+//		if (loginUser != null) {
+//			// 해당 게시글에 대한 신고 여부 확인
+//			if (!communityBiz.isReported(loginUser.getUser_no(), boardNo)) {
+//				// 게시글 신고 카운트 증가
+//				communityBiz.incrementReportCount(boardNo);
+//
+//				// COMMUNITY_REPORT에 신고 정보 저장
+//				CommunityReportDto reportDto = new CommunityReportDto();
+//				reportDto.setUserNo(loginUser.getUser_no());
+//				reportDto.setBoardNo(boardNo);
+//				communityBiz.reportCommunity(reportDto);
+//
+//				// 신고 후에는 상세 페이지로 리다이렉트
+//				return "redirect:/community/detail/" + boardNo;
+//			}
+//		}
+//
+//		// 로그인되지 않았거나 이미 신고한 경우, 리스트 페이지로 리다이렉트
+//		return "redirect:/nav/community/";
+//	}
+
 	// 게시글 신고
 	@PostMapping("/report/{boardNo}")
-	public String reportBoard(@PathVariable int boardNo, HttpSession session) {
+	public ResponseEntity<String> reportBoard(@PathVariable int boardNo, HttpSession session) {
 		// 세션에서 로그인된 사용자 정보를 가져옴
 		UserDto loginUser = (UserDto) session.getAttribute("login");
 
@@ -180,13 +210,15 @@ public class CommunityController {
 				reportDto.setBoardNo(boardNo);
 				communityBiz.reportCommunity(reportDto);
 
-				// 신고 후에는 상세 페이지로 리다이렉트
-				return "redirect:/community/detail/" + boardNo;
+				// 신고 성공 응답 반환
+				return ResponseEntity.ok("신고가 완료되었습니다.");
+			} else {
+				// 이미 신고한 경우 중복 신고 응답 반환
+				return ResponseEntity.status(HttpStatus.CONFLICT).body("이미 신고하셨습니다.");
 			}
 		}
-
-		// 로그인되지 않았거나 이미 신고한 경우, 리스트 페이지로 리다이렉트
-		return "redirect:/nav/community/";
+		// 로그인되지 않은 경우 실패 응답
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 	}
 
 	// 댓글 신고
