@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -65,30 +65,19 @@
 						<div class="reports">신고 누적 횟수</div>
 						<div class="confirm">확인 버튼</div>
 					</div>
-					<div>
-						<!-- 부적절한 댓글을 작성한 사용자의 정보 
+					<!-- 부적절한 댓글을 작성한 사용자의 정보 
                             + 해당 댓글이 작성된 게시글 제목이 출력된다 !! -->
-						<div class="num">3</div>
-						<div class="name">유지훈</div>
-						<div class="id">jihoon@google.com</div>
+					<div th:each="report : ${report}">
+						<div class="num" th:text="${report.user_no}"></div>
+						<div class="name" th:text="${report.user_name}"></div>
+						<div class="id" th:text="${report.user_id}"></div>
 						<div class="title">
-							<a href="#">반갑습니다</a>
+							<a th:href="@{/community/detail/{boardNo}(boardNo=${report.board_no})}"
+								th:text="${report.board_title}"></a>
 						</div>
-						<div class="reports">15</div>
+						<div class="reports" th:text="${report.comment_report_cnt}"></div>
 						<div class="confirm">
-							<input type="button" id="confirm" value="문제없음" onclick="">
-						</div>
-					</div>
-					<div>
-						<div class="num">4</div>
-						<div class="name">하윤지</div>
-						<div class="id">yunji@google.com</div>
-						<div class="title">
-							<a href="#">ㅎㅇㅎㅇㅎㅇ</a>
-						</div>
-						<div class="reports">11</div>
-						<div class="confirm">
-							<input type="button" id="confirm" value="문제없음" onclick="">
+							<input type="button" id="confirm" value="문제없음" th:onclick="|location.href='@{/adminpage/confirmComment/{comment_no}(comment_no=${report.comment_no})}'|">
 						</div>
 					</div>
 
