@@ -221,33 +221,106 @@ public class CommunityController {
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 	}
 
-	// 댓글 신고
-	@PostMapping("/report/comment/{commentNo}")
-	public String reportComment(@PathVariable int commentNo, HttpSession session) {
-		// 세션에서 로그인된 사용자 정보를 가져옴
-		UserDto loginUser = (UserDto) session.getAttribute("login");
+//	// 댓글 신고
+//	@PostMapping("/report/comment/{commentNo}")
+//	public String reportComment(@PathVariable int commentNo, HttpSession session) {
+//		// 세션에서 로그인된 사용자 정보를 가져옴
+//		UserDto loginUser = (UserDto) session.getAttribute("login");
+//
+//		// 로그인된 사용자가 있을 경우에만 신고 가능
+//		if (loginUser != null) {
+//			// 해당 댓글에 대한 신고 여부 확인
+//			if (!communityBiz.isCommentReported(loginUser.getUser_no(), commentNo)) {
+//				// 댓글 신고 카운트 증가
+//				communityBiz.incrementCommentReportCount(commentNo);
+//
+//				// CommentReportDto에 신고 정보 저장
+//				CommentReportDto reportDto = new CommentReportDto();
+//				reportDto.setUserNo(loginUser.getUser_no());
+//				reportDto.setCommentNo(commentNo);
+//				communityBiz.reportComment(reportDto);
+//
+//				// 신고 후에는 게시글 상세 페이지로 리다이렉트
+//				CommentDto comment = communityBiz.getComment(commentNo);
+//				return "redirect:/community/detail/" + comment.getBoardNo();
+//			}
+//		}
+//
+//		// 로그인되지 않았거나 이미 신고한 경우, 리스트 페이지로 리다이렉트
+//		return "redirect:/nav/community/";
+//	}
 
-		// 로그인된 사용자가 있을 경우에만 신고 가능
-		if (loginUser != null) {
-			// 해당 댓글에 대한 신고 여부 확인
-			if (!communityBiz.isCommentReported(loginUser.getUser_no(), commentNo)) {
-				// 댓글 신고 카운트 증가
-				communityBiz.incrementCommentReportCount(commentNo);
+//	// 댓글 신고
+//	@PostMapping("/report/comment/{commentNo}")
+//	public ResponseEntity<String> reportComment(@PathVariable int commentNo, HttpSession session) {
+//	    // 세션에서 로그인된 사용자 정보를 가져옴
+//	    UserDto loginUser = (UserDto) session.getAttribute("login");
+//
+//	    // 로그인된 사용자가 있을 경우에만 신고 가능
+//	    if (loginUser != null) {
+//	        // 해당 댓글에 대한 신고 여부 확인
+//	        if (!communityBiz.isCommentReported(loginUser.getUser_no(), commentNo)) {
+//	            // 댓글 신고 카운트 증가
+//	            communityBiz.incrementCommentReportCount(commentNo);
+//
+//	            // CommentReportDto에 신고 정보 저장
+//	            CommentReportDto reportDto = new CommentReportDto();
+//	            reportDto.setUserNo(loginUser.getUser_no());
+//	            reportDto.setCommentNo(commentNo);
+//	            communityBiz.reportComment(reportDto);
+//
+//	            // 신고 성공 응답 반환
+//	            return ResponseEntity.ok("신고가 완료되었습니다.");
+//	        } else {
+//	            // 이미 신고한 경우 중복 신고 응답 반환
+//	            return ResponseEntity.status(HttpStatus.CONFLICT).body("이미 신고하셨습니다.");
+//	        }
+//	    }
+//	    // 로그인되지 않은 경우 실패 응답
+//	    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+//	}
+	
+	// 댓글 신고 여부 확인 컨트롤러 메서드
+	@GetMapping("/check/report/comment/{commentNo}")
+	public ResponseEntity<String> checkReportedComment(@PathVariable int commentNo, HttpSession session) {
+	    UserDto loginUser = (UserDto) session.getAttribute("login");
 
-				// CommentReportDto에 신고 정보 저장
-				CommentReportDto reportDto = new CommentReportDto();
-				reportDto.setUserNo(loginUser.getUser_no());
-				reportDto.setCommentNo(commentNo);
-				communityBiz.reportComment(reportDto);
+	    if (loginUser != null) {
+	        if (communityBiz.isCommentReported(loginUser.getUser_no(), commentNo)) {
+	            return ResponseEntity.ok("reported");
+	        } else {
+	            return ResponseEntity.ok("notReported");
+	        }
+	    }
 
-				// 신고 후에는 게시글 상세 페이지로 리다이렉트
-				CommentDto comment = communityBiz.getComment(commentNo);
-				return "redirect:/community/detail/" + comment.getBoardNo();
-			}
-		}
-
-		// 로그인되지 않았거나 이미 신고한 경우, 리스트 페이지로 리다이렉트
-		return "redirect:/nav/community/";
+	    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인되지 않았습니다.");
 	}
 
+	// 댓글 신고 처리 컨트롤러 메서드
+	@PostMapping("/report/comment/{commentNo}")
+	public ResponseEntity<String> reportComment(@PathVariable int commentNo, HttpSession session) {
+	    UserDto loginUser = (UserDto) session.getAttribute("login");
+
+	    if (loginUser != null) {
+	        if (!communityBiz.isCommentReported(loginUser.getUser_no(), commentNo)) {
+	            communityBiz.incrementCommentReportCount(commentNo);
+
+	            CommentReportDto reportDto = new CommentReportDto();
+	            reportDto.setUserNo(loginUser.getUser_no());
+	            reportDto.setCommentNo(commentNo);
+	            communityBiz.reportComment(reportDto);
+
+	            CommentDto comment = communityBiz.getComment(commentNo);
+	            String redirectUrl = "/community/detail/" + comment.getBoardNo();
+
+	            return ResponseEntity.ok(redirectUrl);
+	        } else {
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이미 신고하셨습니다.");
+	        }
+	    }
+
+	    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인되지 않았습니다.");
+	}
+	
+	
 }

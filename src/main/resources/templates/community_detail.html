@@ -13,6 +13,46 @@
 	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <title>4Tunes</title>
 <script>
+$(document).ready(function() {
+	  $("#report-comment-btn").click(function(e) {
+	    e.preventDefault();
+	    var commentNo = $(this).data("comment-no");
+
+	    // AJAX 요청
+	    $.ajax({
+	      url: "/check/report/comment/" + commentNo,
+	      type: "GET",
+	      success: function(response) {
+	        if (response === "reported") {
+	          alert("이미 신고하셨습니다.");
+	        } else {
+	          if (confirm("정말 신고하시겠습니까?")) {
+	            reportComment(commentNo);
+	          }
+	        }
+	      },
+	      error: function() {
+	        alert("오류가 발생했습니다.");
+	      }
+	    });
+	  });
+
+	  // 댓글 신고 처리 함수
+	  function reportComment(commentNo) {
+	    $.ajax({
+	      url: "/report/comment/" + commentNo,
+	      type: "POST",
+	      success: function(response) {
+	        window.location.href = response; // 신고 후 페이지 리다이렉트
+	      },
+	      error: function() {
+	        alert("오류가 발생했습니다.");
+	      }
+	    });
+	  }
+	});
+
+
 	$(document).ready(function() {
 		$('#report-btn').click(function(event) {
 			event.preventDefault(); // 폼의 기본 동작인 페이지 새로고침 막기
@@ -48,6 +88,7 @@
 		});
 	});
 </script>
+
 </head>
 
 <body>
@@ -153,11 +194,13 @@
 							</form>
 							<form
 								th:action="@{/community/report/comment/{commentNo}(commentNo=${comment.commentNo})}"
-								method="post">
-								<button type="submit" class="comment-dropdown">
+								method="post" id="report-comment-form">
+								<button type="submit" class="comment-dropdown" id="report-comment-btn" data-comment-no="${comment.commentNo}">
 									<img src="/resources/img/report.png">
 								</button>
 							</form>
+							
+					
 						</div>
 					</div>
 
@@ -184,6 +227,7 @@
 			</div>
 		</div>
 		<script>
+		
 			document.getElementById("delete-btn").addEventListener("click",
 					function(event) {
 						event.preventDefault(); // 폼 제출 이벤트 중지
@@ -192,9 +236,7 @@
 							// 확인 버튼을 눌렀을 때 폼을 제출
 							document.getElementById("delete-form").submit();
 						}
-					});
-			
-		
+					});	
 		</script>
 </body>
 
