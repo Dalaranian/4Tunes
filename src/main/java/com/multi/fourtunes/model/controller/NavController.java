@@ -1,16 +1,19 @@
 package com.multi.fourtunes.model.controller;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.multi.fourtunes.model.biz.AdminpageBiz;
 import com.multi.fourtunes.model.biz.CommunityBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
 import com.multi.fourtunes.model.dto.CommunityDto;
@@ -19,6 +22,9 @@ import com.multi.fourtunes.model.dto.UserDto;
 @Controller
 @RequestMapping("/nav")
 public class NavController {
+	
+	@Autowired
+	private AdminpageBiz adminpageBiz;
 
 	@Autowired
 	private CommunityBiz communityBiz;
@@ -40,11 +46,22 @@ public class NavController {
 			UserDto currentUser = (UserDto) session.getAttribute("login");
 			System.out.println(currentUser);
 			String[] userKeyword = loginBiz.getUserKeyword(currentUser.getUser_no());
-			Date subscriptionEndDate = loginBiz.getSubscriptionEndDate(currentUser.getUser_no());
+			
+			// 결제 개월수 조회
+			int subscriptionMonth = loginBiz.getSubscriptionMonth(currentUser.getUser_no());
+			//System.out.println("month : " + subscriptionMonth);
+			LocalDate currentDate = LocalDate.now();
+			LocalDate subscriptionEndDate = currentDate.plusMonths(subscriptionMonth);
+			//System.out.println("만료날짜는: " + subscriptionEndDate);
+			
 			StringBuilder myKeyword = new StringBuilder();
 			for (String str : userKeyword) {
 				myKeyword.append(str + " ");
 			}
+			
+			// 내 회원등급 조회
+		    String grade = adminpageBiz.selectGrade(currentUser.getUser_no());
+		    model.addAttribute("grade", grade);
 			model.addAttribute("subscriptionEndDate", subscriptionEndDate);
 			model.addAttribute("keywordlist", keywordList);
 			model.addAttribute("userkeyword", myKeyword.toString());

@@ -64,7 +64,7 @@ public class KakaopayController {
 			// USER 테이블에 USER_GRADE update
 			if(kakaoPayBiz.updateUserGrade(userNo) > 0) {
 				System.out.println("UserGrade update 성공");
-				return "payTestPage";
+				return "redirect:/nav/mypage";
 			}
 		}
 		// 실패시 멤버십 안내 페이지로
