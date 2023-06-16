@@ -11,7 +11,7 @@ import java.util.List;
 
 @Mapper
 public interface MyPageMapper {
-    //내가 작성할 게시글
+    // 내가 작성할 게시글
     @Results({ @Result(property = "boardNo", column = "BOARD_NO"),
             @Result(property = "boardTitle", column = "BOARD_TITLE"),
             @Result(property = "boardContent", column = "BOARD_CONTENT"),
@@ -24,6 +24,7 @@ public interface MyPageMapper {
             " WHERE b.USER_NO = #{userNo} " )
     List<CommunityDto> getUserMyContentAll(int userNo);
 
+    // 내가 작성할 댓글
     @Results({@Result(property = "commentNo", column = "COMMENT_NO"),
             @Result(property = "boardNo", column = "BOARD_NO"),
             @Result(property = "boardTitle", column = "BOARD_TITLE"),
@@ -32,7 +33,7 @@ public interface MyPageMapper {
             @Result(property = "commentReportCnt", column = "COMMENT_REPORT_CNT"),
             @Result(property = "user_name", column = "USER_NAME")})
     @Select(" SELECT b.USER_NO, c.BOARD_NO, b.BOARD_TITLE, c.COMMENT_CONTENT " +
-            " FROM COMMENT  c JOIN COMMUNITY_BOARD b ON b.USER_NO = c.USER_NO " +
+            " FROM COMMENT c JOIN COMMUNITY_BOARD b ON b.BOARD_NO = c.BOARD_NO " +
             " WHERE c.USER_NO = #{userNo} ")
     List<CommentDto> getComments(int userNo);
 }

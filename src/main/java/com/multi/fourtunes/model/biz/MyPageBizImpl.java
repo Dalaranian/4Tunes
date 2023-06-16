@@ -1,6 +1,5 @@
 package com.multi.fourtunes.model.biz;
 
-import com.multi.fourtunes.model.dao.CommunityDao;
 import com.multi.fourtunes.model.dao.MyPageDao;
 import com.multi.fourtunes.model.dto.CommentDto;
 import com.multi.fourtunes.model.dto.CommunityDto;
@@ -13,15 +12,13 @@ import java.util.List;
 public class MyPageBizImpl implements  MyPageBiz{
     @Autowired
     private MyPageDao myPageDao;
-    @Autowired
-    private CommunityDao communityDao;
-
-    //내 활동내역 조회
+   
+    // 내 게시글 조회
     @Override
     public List<CommunityDto> getUserMyContentAll(int userNo){
         return myPageDao.getUserMyContentAll(userNo);
     }
-    //내 댓글 조회
+    // 내 댓글 조회
     @Override
     public List<CommentDto> getComments(int userNo) {
         return myPageDao.getComments(userNo);

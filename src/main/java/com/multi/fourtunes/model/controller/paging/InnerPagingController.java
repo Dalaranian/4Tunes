@@ -27,9 +27,6 @@ import com.multi.fourtunes.model.dto.UserDto;
 public class InnerPagingController {
 	
 	@Autowired
-	private CommunityBiz communityBiz;
-	
-	@Autowired
 	private LoginBiz loginBiz;
 
 	@Autowired MyPageBiz myPageBiz;
