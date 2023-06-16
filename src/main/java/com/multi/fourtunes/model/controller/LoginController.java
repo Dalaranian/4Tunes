@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,13 +27,16 @@ public class LoginController {
 
 	@Autowired
 	private LoginBiz loginBiz;
-	
+
 	@Autowired
 	private KeywordBiz keywordBiz;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	@GetMapping("/sociallogin")
 	public String socialLogin(@RequestParam("email") String email, @RequestParam("name") String name, Model model,
-			HttpSession session) {
+							  HttpSession session) {
 		System.out.println(email + " " + name);
 		boolean isUserExist = loginBiz.checkUserExist(email, name);
 		if (isUserExist) {
@@ -61,7 +65,7 @@ public class LoginController {
 
 	/**
 	 * 회원가입 페이지에, MODEL 에 키워드 배열을 담아서 전달
-	 * 
+	 *
 	 * @param model
 	 * @return 회원가입페이지로 전환
 	 */
@@ -71,18 +75,18 @@ public class LoginController {
 		model.addAttribute("keywordlist", keywordList);
 		return "login_join";
 	}
-	
+
 	@GetMapping("/callback")
 	public String callback() {
 		return "callback";
 	}
 
 	@PostMapping("/login")
-	public String login(HttpSession session, UserDto dto) {	
+	public String login(HttpSession session, UserDto dto) {
 //		System.out.println("LoginController 진입 \n" + dto.toString());
 		UserDto res = loginBiz.login(dto);
 //		System.out.println("리턴받은 dto : " + res.toString());
-		if (res != null) {
+		if (res != null && passwordEncoder.matches(dto.getUser_pw(), res.getUser_pw())) {
 			res.setUser_no(res.getUser_no());
 			session.setAttribute("login", res);
 			return "index";
@@ -91,26 +95,36 @@ public class LoginController {
 		}
 	}
 
+	/**
+	 * 회원가입을 담당하는 컨트롤러
+	 * @param email
+	 * @param password
+	 * @param name
+	 * @param selectedKeywords
+	 * @return 상술을 위한 멤버쉽 뷰 보여주기
+	 */
 	@GetMapping("/insertuser")
 	public String insertUser(@RequestParam("join-email") String email, @RequestParam("join-pw") String password,
-			@RequestParam("join-name") String name, @RequestParam("selected_keyword") List<String> selectedKeywords) {
+							 @RequestParam("join-name") String name, @RequestParam("selected_keyword") List<String> selectedKeywords) {
 		//System.out.println(email + " " + password + " " + name + " " + selectedKeywords.toString());
-		
+
 		UserDto insert = new UserDto();
 		insert.setUser_id(email);
-		insert.setUser_pw(password);
+		insert.setUser_pw(passwordEncoder.encode(password));
 		insert.setUser_name(name);
-		
+
+		System.out.println(insert);
+
 		// 회원정보(아이디, 비밀번호, 이름) 먼저 Insert하고 성공하면
 		if(loginBiz.insertUser(insert) > 0) {
 			// 선택한 Keyword Insert 처리 (회원번호 저장해야해서?)
 			String userId = insert.getUser_id();
 			//System.out.println(userId);
-			
+
 			for(Object object : selectedKeywords) {
 				String keyword = (String)object;
 				//System.out.println(keyword);
-				
+
 				if(keywordBiz.insertKeyword(keyword, userId) > 0 ) {
 					//System.out.println("키워드 insert 성공 ㅎㅎ");
 				} else {

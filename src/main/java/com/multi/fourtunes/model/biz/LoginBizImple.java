@@ -37,11 +37,9 @@ public class LoginBizImple implements LoginBiz {
 
 	@Override
 	public boolean checkUserExist(String email, String userId) {
-		// 방금한거
 		System.out.println("email : " + email + "\nuserId : " + userId);
 		UserDto userDTO = userDao.selectUserByEmailAndId(email, userId);
-		// 방금한거
-		// System.out.println("LoginBizImple " + userDTO.toString());
+
 		return (userDTO != null) ? true : false;
 	}
 
