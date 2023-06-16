@@ -67,4 +67,12 @@ public class UserDaoImpl implements UserDao {
 		return userMapper.searchUser(name);
 	}
 
+	/**
+	 * User의 고유번호를 받아서 해당하는 PlayListNo의 배열을 리턴
+	 */
+	@Override
+	public String[] getUserPlaylistNo(String userNo) {
+		return userMapper.getUserPlatListNo(userNo);
+	}
+
 }

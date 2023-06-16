@@ -50,56 +50,54 @@
     color: #5C469C;
     min-width:737px;
     min-height:36px;
+    padding-top: 15px;
 }
 
 /* ---------- 내가 작성한 게시글 ---------- */
 .board_list_wrap {
-    padding: 0px 10px 20px 10px;
+    padding: 10px 10px 20px 10px;
 }
-.board_list>div {
-    border-bottom: 1px solid #ddd;
+.communityscroll>div.list-item {
+    border-bottom: 1px solid white;
     font-size: 0;
 }
-.board_list>div.top {
+/* .board_list>div.top {
     border-bottom: 1px solid #999;
-}
-.board_list>div>div {
+} */
+.board_list>.top>div {
     display: inline-block;
-    padding-top:15px;
+    padding:10px 0;
     text-align: center;
     font-size: 1.1rem;
 }
-.board_list>div>div>div {
+.communityscroll>div>div {
     display: inline-block;
-    padding-top:15px;
+    padding: 10px 0;
     text-align: center;
     font-size: 1.1rem;
 }
+
 .board_list>div.top>div {
     font-weight: 600;
 }
 .board_list .num {
     width: 10%;
-    min-width:74px;
-    height:36.5px;
+    height: 27px;
 }
 .board_list .title {
     width: 65%;
-    min-width:479px;
-    height:36.5px;
+    height: 27px;
 }
 .board_list .title:hover {
     font-weight: bold;
 }
 .board_list .date {
     width: 15%;
-    min-width:110.5px;
-    height:36.5px;
+    height: 27px;
 }
 .board_list .count {
-    width: 10%;
-    min-width:73.7px;
-    height:36.5px;
+    width: 8%;
+    height: 27px;
 }
 .title>a {
     color: black;
@@ -111,18 +109,24 @@
 
 /* ---------- 내가 작성한 댓글 ---------- */
 .comment_list_wrap {
-    padding: 0px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
 }
-.comment_list>div {
-    border-bottom: 1px solid #ddd;
+.commentscroll>div.list-item {
+    border-bottom: 1px solid white;
     font-size: 0;
 }
-.comment_list>div.top {
+/* .comment_list>div.top {
     border-bottom: 1px solid #999;
-}
-.comment_list>div>div {
+} */
+.comment_list>.top>div {
     display: inline-block;
-    padding: 15px 0;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 1.1rem;
+}
+.commentscroll>div>div {
+    display: inline-block;
+    padding: 10px 0;
     text-align: center;
     font-size: 1.1rem;
 }
@@ -141,7 +145,7 @@
     font-weight: bold;
 }
 .comment_list .comment {
-    width: 50%;
+    width: 48%;
 }
 
 .title>a {
@@ -190,22 +194,47 @@
 
 
 /* ---------- 스크롤 ---------- */
-.board_list{
+.communityscroll{
 	overflow-y: scroll;
-	height: 200px;
+	height: 170px;
+}
+.commentscroll{
+	overflow-y: scroll;
+	height: 170px;
 }
 
-.comment_list{
-	overflow-y: scroll;
-	height: 200px;
+.top{
+	background-color: white;
 }
 
+.board_list .top .num {
+    width: 10%;
+}
+.board_list .top .title {
+    width: 63%;
+}
+.board_list .top .date {
+    width: 15%;
+}
+.board_list .top .count {
+    width: 8%;
+}
 
+.comment_list .top .num {
+    width: 10%;
+}
+.comment_list .top .title {
+    width: 39%;
+    /* text-align: left; */
+}
+.comment_list .top .comment {
+    width: 47%;
+}
 
-
-
-
-
-
-
+.list-item{
+	align-items: center;
+}
+.list-item div{
+	align-items: center;
+}
 

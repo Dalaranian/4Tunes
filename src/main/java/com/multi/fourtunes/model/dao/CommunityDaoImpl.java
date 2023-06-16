@@ -112,9 +112,6 @@ public class CommunityDaoImpl implements CommunityDao {
 		communityMapper.reportComment(reportDto);
 	}
 	
-	@Override
-	public List<CommunityDto> getUserMyContentAll(int userNo){
-		return communityMapper.getUserMyContentAll(userNo);
-	}
+
 
 }

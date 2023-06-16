@@ -33,9 +33,11 @@
 			</div>
 		</div>
 		<div class="search-container">
-			<span class="search-icon"><img src="/resources/img/search.png"
-				class="search-icon" /></span> <input type="text" class="search-input"
-				placeholder="키워드 입력" />
+			<form action="/search/query" method="GET" style="display:flex; ">
+			<span class="search-icon">
+			<input type="image" class="search-icon" src="/resources/img/search.png" alt="submit"></span>
+				<input type="text" name="query" class="search-input" placeholder="키워드 입력" />
+			</form>
 		</div>
 		<div>
 			<a href="/nav/suggested">맞춤추천</a>
@@ -52,7 +54,7 @@
 	</div>
 
 	<div id="main">
-		<h1>회원정보 조회</h1>
+		<h1>회원정보 조회</h1><br>
 
 		<div class="adminpage_contents">
 			<div>
@@ -73,20 +75,22 @@
 						<div class="drop">탈퇴버튼</div>
 					</div>
 
-					<div th:each="user : ${searchUserList}">
-						<div class="num" th:text="${user.user_no}"></div>
-						<div class="name" th:text="${user.user_name}"></div>
-						<div class="id" th:text="${user.user_id}"></div>
-						<div class="grade">
-							<input type="text" size="10" th:value="${user.user_grade}"
-							style="text-align: center;" readonly>
-						</div>
-						<div class="modify">
-							<input type="button" id="modify" value="회원등급변경" th:onclick="|location.href='@{/adminpage/update/{user_no}(user_no=${user.user_no})}'|">
-						</div>
-				
-						<div class="drop">
-							<input type="button" id="drop" value="탈퇴처리" th:onclick="|location.href='@{/adminpage/delete/{user_no}(user_no=${user.user_no})}'|">
+					<div class="userscroll">
+						<div th:each="user : ${searchUserList}">
+							<div class="num" th:text="${user.user_no}"></div>
+							<div class="name" th:text="${user.user_name}"></div>
+							<div class="id" th:text="${user.user_id}"></div>
+							<div class="grade">
+								<input type="text" size="10" th:value="${user.user_grade}"
+								style="text-align: center;" readonly>
+							</div>
+							<div class="modify">
+								<input type="button" id="modify" value="회원등급변경" th:onclick="|location.href='@{/adminpage/update/{user_no}(user_no=${user.user_no})}'|">
+							</div>
+					
+							<div class="drop">
+								<input type="button" id="drop" value="탈퇴처리" th:onclick="|location.href='@{/adminpage/delete/{user_no}(user_no=${user.user_no})}'|">
+							</div>
 						</div>
 					</div>
 

@@ -110,9 +110,11 @@
 			</div>
 		</div>
 		<div class="search-container">
-			<span class="search-icon"><img src="/resources/img/search.png"
-				class="search-icon" /></span> <input type="text" class="search-input"
-				placeholder="키워드 입력" />
+			<form action="/search/query" method="GET" style="display:flex; ">
+			<span class="search-icon">
+			<input type="image" class="search-icon" src="/resources/img/search.png" alt="submit"></span>
+				<input type="text" name="query" class="search-input" placeholder="키워드 입력" />
+			</form>
 		</div>
 		<div>
 			<a href="/nav/suggested">맞춤추천</a>
@@ -143,7 +145,6 @@
 						th:action="@{/community/delete/{boardNo}(boardNo=${community.boardNo})}"
 						method="post" id="delete-form">삭제하기</form>
 				</button>
-				<!-- 삭제 버튼은 글 작성자만 보이도록 해봄 나중에 수정할 수도 -->
 
 				<button style="display: inline-block" id="write-btn">
 					<a href="/community/write">글 작성</a>
@@ -186,7 +187,7 @@
 							<form
 								th:action="@{/community/delete/comment/{commentNo}(commentNo=${comment.commentNo})}"
 								method="post">
-								<button type="submit" class="comment-dropdown"
+								<button type="submit" class="comment-delete"
 									th:if="${comment.user_name == session.login?.user_name}">
 									<img src="/resources/img/delete.png">
 								</button>
@@ -194,16 +195,12 @@
 							<form
 								th:action="@{/community/report/comment/{commentNo}(commentNo=${comment.commentNo})}"
 								method="post" id="report-comment-form">
-								<button type="submit" class="comment-dropdown" id="report-comment-btn" data-comment-no="${comment.commentNo}">
+								<button type="submit" class="comment-report" id="report-comment-btn" data-comment-no="${comment.commentNo}"
 									<img src="/resources/img/report.png">
 								</button>
 							</form>
-							
-					
 						</div>
 					</div>
-
-
 				</div>
 
 
@@ -216,17 +213,14 @@
 								placeholder="댓글을 입력해 주세요"></textarea>
 					</div>
 					<div class="comment-btn">
-						<div id="commentwrite-btn">
 							<input type="submit" value="작성 완료">
-							</form>
-						</div>
+						</form>
 					</div>
 
 				</div>
 			</div>
 		</div>
 		<script>
-		
 			document.getElementById("delete-btn").addEventListener("click",
 					function(event) {
 						event.preventDefault(); // 폼 제출 이벤트 중지

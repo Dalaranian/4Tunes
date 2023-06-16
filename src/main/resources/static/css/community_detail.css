@@ -43,6 +43,10 @@ body{
   border: none;
 } 
 
+#delete-btn {
+	font-size: 20px;
+}
+
 #report-btn {
   color: #fff;
   background-color: red;
@@ -76,6 +80,7 @@ body{
   min-width: 1082px;
   min-height: 214px;
 }
+
 .detail-name,
 .detail-count {
   display: inline-block;
@@ -84,16 +89,18 @@ body{
   margin-top: 11px;
   margin-left: 13px;
 }
+
 .detail-name {
   margin-right: 128px;
 }
+
 .detail-name>span,
-.detail-count>span
-{
+.detail-count>span {
 	min-width:50px;
 	min-height:21px;
 	font-size:16px;
 }
+
 .detail-content {
   margin-top: 15px;
   margin-bottom: 15px;
@@ -134,7 +141,7 @@ body{
 
 .comment-detailfirst,
 .comment-detailsecond {
-  flex-basis: 50%;
+  width: 50%;
   padding: 19px;
   box-sizing: border-box;
   position: relative;
@@ -147,38 +154,64 @@ body{
 }
 
 .comment-wrap {
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  min-width:475px;
-  max-height:85px;
+  display: block;
+  white-space: normal;
+  min-width: 475px;
+  max-height: 500px;
+}
+
+.comment-item {
+	display: flex;
+}
+
+.comment-name,
+.comment-delete,
+.comment-report {
+  flex: 0 0 13%;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-right: 1px;
 }
 
 .comment-name {
   font-weight: bold;
   margin-left: 7.3px;
   margin-right: 24.2px;
-  width:50px;
+  width:20px;
   height:24px;
 }
 
 .comment-content {
   white-space: normal;
+  width: 200px;
+  padding-top: 8px;
 }
 
-.comment-dropdown {
+.comment-delete,
+.comment-report {
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
   margin-left: 7.3px;
   margin-right: 24.4px;
+  padding-top: 5px;
 }
 
-.comment-dropdown img {
+.comment-delete img {
   display: block;
   position: relative;
   top: 7px;
+  width: 17px;
+  height: 17px;
+}
+
+.comment-report img {
+  display: block;
+  position: relative;
+  top: 5px;
+  width: 21px;
+  height: 21px;
 }
 
 .comment-write {
@@ -188,24 +221,32 @@ body{
   margin-right: 6px;
 }
 
-.comment-btn {
-  float:right;
+textarea {
+	resize: none;
 }
 
-#commentwrite-btn {
+.comment-btn {
+  float: right;
+}
+
+.comment-btn input {
   color: #fff;
   background-color: #1D267D;
-  border-color: #1D267D;
-  border-radius: 15px;
   font-weight: bold;
+  font-size: 20px;
   padding: 10px 20px;
   text-decoration: none;
+  margin-right: 7px;
+  border-radius: 15px;
+  border: none;
+  box-shadow: none;
 }
     
-#commentwrite-btn:hover {
+.comment-btn input:hover {
   background-color: #5C469C;
   border-color: #5C469C;
 }
+
 @media (max-width: 1300px) {
   #nav {
     display: none;

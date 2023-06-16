@@ -42,5 +42,5 @@ public interface CommunityDao {
 
 	public void reportComment(CommentReportDto reportDto);
 	
-	public List<CommunityDto> getUserMyContentAll(int userNo);
+
 }

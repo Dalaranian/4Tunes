@@ -2,6 +2,8 @@ package com.multi.fourtunes.model.controller.paging;
 
 import javax.servlet.http.HttpSession;
 
+import com.multi.fourtunes.model.biz.MyPageBiz;
+import com.multi.fourtunes.model.dto.CommentDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,11 +27,9 @@ import com.multi.fourtunes.model.dto.UserDto;
 public class InnerPagingController {
 	
 	@Autowired
-	private CommunityBiz communityBiz;
-	
-	@Autowired
 	private LoginBiz loginBiz;
-	
+
+	@Autowired MyPageBiz myPageBiz;
 	// 로그인 페이지
 
 	// 회원가입 페이지로 전환
@@ -63,8 +63,11 @@ public class InnerPagingController {
 	@GetMapping("/mypage/communityContent")
 	public String gotoMyPageCommunity(Model model, HttpSession session) {
 		UserDto currentUser = (UserDto) session.getAttribute("login");
-		List<CommunityDto> communityContent = communityBiz.getUserMyContentAll(currentUser.getUser_no());
-		model.addAttribute("communityContent",communityContent);
+		List<CommunityDto> communityContent = myPageBiz.getUserMyContentAll(currentUser.getUser_no());
+		List<CommentDto> communityComment = myPageBiz.getComments(currentUser.getUser_no());
+		System.out.println(communityComment);
+		model.addAttribute("communityComment", communityComment);
+		model.addAttribute("communityContent", communityContent);
 		return "mypage_community";
 	}
 	
