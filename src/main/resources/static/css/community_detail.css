@@ -126,7 +126,7 @@ body{
 .content-box {
   overflow-wrap: break-word;  /* 글 내용이 박스 크기에 맞게 자동 줄바꿈 */
   min-height: 17vh;
-  max-height: 20vh;
+  max-height: 17vh;
   overflow-y: auto;
   overflow-x: auto;
 }
