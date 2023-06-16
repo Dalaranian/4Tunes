@@ -50,9 +50,15 @@ public class NavController {
 			// 결제 개월수 조회
 			int subscriptionMonth = loginBiz.getSubscriptionMonth(currentUser.getUser_no());
 			//System.out.println("month : " + subscriptionMonth);
-			LocalDate currentDate = LocalDate.now();
-			LocalDate subscriptionEndDate = currentDate.plusMonths(subscriptionMonth);
-			//System.out.println("만료날짜는: " + subscriptionEndDate);
+			if(subscriptionMonth == 0) {
+				model.addAttribute("subscriptionEndDate", null);
+			} else {
+				LocalDate currentDate = LocalDate.now();
+				LocalDate subscriptionEndDate = currentDate.plusMonths(subscriptionMonth);
+				//System.out.println("만료날짜는: " + subscriptionEndDate);
+				model.addAttribute("subscriptionEndDate", subscriptionEndDate);
+			}
+			
 			
 			StringBuilder myKeyword = new StringBuilder();
 			for (String str : userKeyword) {
@@ -62,7 +68,6 @@ public class NavController {
 			// 내 회원등급 조회
 		    String grade = adminpageBiz.selectGrade(currentUser.getUser_no());
 		    model.addAttribute("grade", grade);
-			model.addAttribute("subscriptionEndDate", subscriptionEndDate);
 			model.addAttribute("keywordlist", keywordList);
 			model.addAttribute("userkeyword", myKeyword.toString());
 			return "mypage_user";
