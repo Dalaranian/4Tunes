@@ -54,7 +54,7 @@
 	</div>
 
 	<div id="main">
-		<h1>회원정보 조회</h1>
+		<h1>회원정보 조회</h1><br>
 
 		<div class="adminpage_contents">
 			<div>
@@ -74,21 +74,23 @@
 						<div class="modify">수정버튼</div>
 						<div class="drop">탈퇴버튼</div>
 					</div>
-
-					<div th:each="user : ${userList}" class="user">
-						<div class="num" th:text="${user.user_no}"></div>
-						<div class="name" th:text="${user.user_name}"></div>
-						<div class="id" th:text="${user.user_id}"></div>
-						<div class="grade">
-							<input type="text" size="10" th:value="${user.user_grade}"
-							style="text-align: center;" readonly>
-						</div>
-						<div class="modify">
-							<input type="button" id="modify" value="회원등급변경" th:onclick="|location.href='@{/adminpage/update/{user_no}(user_no=${user.user_no})}'|">
-						</div>
-				
-						<div class="drop">
-							<input type="button" id="drop" value="탈퇴처리" th:onclick="|location.href='@{/adminpage/delete/{user_no}(user_no=${user.user_no})}'|">
+					
+					<div class="userscroll">
+						<div th:each="user : ${userList}" class="user">
+							<div class="num" th:text="${user.user_no}"></div>
+							<div class="name" th:text="${user.user_name}"></div>
+							<div class="id" th:text="${user.user_id}"></div>
+							<div class="grade">
+								<input type="text" size="10" th:value="${user.user_grade}"
+								style="text-align: center;" readonly>
+							</div>
+							<div class="modify">
+								<input type="button" id="modify" value="회원등급변경" th:onclick="|location.href='@{/adminpage/update/{user_no}(user_no=${user.user_no})}'|">
+							</div>
+					
+							<div class="drop">
+								<input type="button" id="drop" value="탈퇴처리" th:onclick="|location.href='@{/adminpage/delete/{user_no}(user_no=${user.user_no})}'|">
+							</div>
 						</div>
 					</div>
 

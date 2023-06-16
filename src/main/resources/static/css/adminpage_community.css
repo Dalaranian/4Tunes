@@ -6,11 +6,11 @@
 
 .adminpage_contents {
     width: 90%;
-    height: 80%;
+    height: 75%;
     background-color: rgb(224, 224, 224);
     margin-left: 60px;
     vertical-align: top;
-    padding-top: 30px;
+    padding-top: 15px;
 }
 
 /* ---------- 게시글 테이블 ---------- */
@@ -18,14 +18,20 @@
     padding: 0px 10px 20px 10px;
     margin-top: 30px;
 }
-.community_list>div {
+/* .community_list>div {
     border-bottom: 1px solid #ddd;
     font-size: 0;
-}
+} */
 .community_list>div.top {
     border-bottom: 1px solid #999;
 }
-.community_list>div>div {
+.community_list>div.top>div {
+    display: inline-block;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 1.1rem;
+}
+.communityscroll>div>div {
     display: inline-block;
     padding: 15px 0;
     text-align: center;
@@ -44,7 +50,7 @@
     width: 20%;
 }
 .community_list .title {
-    width: 40%;
+    width: 38%;
 }
 .community_list .reports {
     width: 10%;
@@ -75,7 +81,26 @@
 }
 
 /* ---------- 스크롤 ---------- */
-.community_list{
+.communityscroll{
 	overflow-y: scroll;
-	height: 500px;
+	height: 420px;
+}
+
+.community_list .top .num {
+    width: 10%;
+}
+.community_list .top .name {
+    width: 10%;
+}
+.community_list .top .id {
+    width: 19%;
+}
+.community_list .top .title {
+    width: 38%;
+}
+.community_list .top .reports {
+    width: 10%;
+}
+.community_list .top .confirm {
+    width: 10%;
 }

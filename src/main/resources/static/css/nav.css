@@ -44,6 +44,8 @@ body {
   height: 3vh;
   background-size: cover;
   vertical-align: middle; /* 아이콘을 수직 가운데로 정렬 */
+  margin-bottom: 2px;
+  margin-right: 3px;
 }
 a {
   display: inline-block;

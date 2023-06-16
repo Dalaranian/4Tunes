@@ -53,7 +53,7 @@
 	</div>
 
 	<div id="main">
-		<h1>댓글 관리</h1>
+		<h1>댓글 관리</h1><br>
 
 		<div class="adminpage_contents">
 
@@ -69,17 +69,19 @@
 					</div>
 					<!-- 부적절한 댓글을 작성한 사용자의 정보 
                             + 해당 댓글이 작성된 게시글 제목이 출력된다 !! -->
-					<div th:each="report : ${report}">
-						<div class="num" th:text="${report.user_no}"></div>
-						<div class="name" th:text="${report.user_name}"></div>
-						<div class="id" th:text="${report.user_id}"></div>
-						<div class="title">
-							<a th:href="@{/community/detail/{boardNo}(boardNo=${report.board_no})}"
-								th:text="${report.board_title}"></a>
-						</div>
-						<div class="reports" th:text="${report.comment_report_cnt}"></div>
-						<div class="confirm">
-							<input type="button" id="confirm" value="문제없음" th:onclick="|location.href='@{/adminpage/confirmComment/{comment_no}(comment_no=${report.comment_no})}'|">
+                    <div class="commentscroll">
+						<div th:each="report : ${report}">
+							<div class="num" th:text="${report.user_no}"></div>
+							<div class="name" th:text="${report.user_name}"></div>
+							<div class="id" th:text="${report.user_id}"></div>
+							<div class="title">
+								<a th:href="@{/community/detail/{boardNo}(boardNo=${report.board_no})}"
+									th:text="${report.board_title}"></a>
+							</div>
+							<div class="reports" th:text="${report.comment_report_cnt}"></div>
+							<div class="confirm">
+								<input type="button" id="confirm" value="문제없음" th:onclick="|location.href='@{/adminpage/confirmComment/{comment_no}(comment_no=${report.comment_no})}'|">
+							</div>
 						</div>
 					</div>
 
