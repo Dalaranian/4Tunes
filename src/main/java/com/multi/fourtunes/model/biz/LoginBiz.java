@@ -19,4 +19,6 @@ public interface LoginBiz {
 	Date getSubscriptionEndDate(int user_no);
 	
     void insertUserRole(String userNo);
+
+	int getSubscriptionMonth(int user_no);
 }

@@ -89,11 +89,11 @@
 				</div>
 				<div class="mypage">
 					<span class="mypage_title">회원 등급</span> <input type="text"
-						id="mypage_grade" placeholder="회원 등급" th:value="${session.login.user_grade}" readonly>
+						id="mypage_grade" placeholder="회원 등급" th:value="${grade}" readonly>
 				</div>
 				<div class="mypage">
     				<span class="mypage_title" th:if="${subscriptionEndDate != null}">구독 만료일</span>
-    				<input th:if="${subscriptionEndDate != null}" th:value="${#dates.format(subscriptionEndDate, 'yyyy-MM-dd')}" readonly>
+    				<input th:if="${subscriptionEndDate != null}" th:value="${subscriptionEndDate}" readonly>
 				</div>
 				<div class="mypage_kw_group">
 					<div class="mypage_keyword">

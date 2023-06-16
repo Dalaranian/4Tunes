@@ -12,4 +12,6 @@ public interface PayDao {
 
 	Date getSubscriptionEndDate(int user_no);
 
+	public int getSubscriptionMonth(int user_no);
+
 }

@@ -80,6 +80,11 @@ public class LoginBizImple implements LoginBiz {
 	public Date getSubscriptionEndDate(int user_no) {
 		return payDao.getSubscriptionEndDate(user_no);
 	}
+
+	@Override
+	public int getSubscriptionMonth(int user_no) {
+		return payDao.getSubscriptionMonth(user_no);
+	}
 	
 	
 }
