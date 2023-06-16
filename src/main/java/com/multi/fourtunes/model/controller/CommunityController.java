@@ -273,11 +273,11 @@ public class CommunityController {
 				return ResponseEntity.ok("신고가 완료되었습니다.");
 			} else {
 				// 이미 신고한 경우 중복 신고 응답 반환
-				return ResponseEntity.status(HttpStatus.CONFLICT).body("이미 신고하셨습니다.");
+				return ResponseEntity.ok("이미 신고하셨습니다.");
 			}
 		}
 		// 로그인되지 않은 경우 실패 응답
-		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		return ResponseEntity.ok("로그인 먼저 해주세요.");
 	}
 
 }
