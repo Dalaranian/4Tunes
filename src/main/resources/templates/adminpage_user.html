@@ -89,7 +89,8 @@
 							</div>
 					
 							<div class="drop">
-								<input type="button" id="drop" value="탈퇴처리" th:onclick="|location.href='@{/adminpage/delete/{user_no}(user_no=${user.user_no})}'|">
+								<!-- '@{/adminpage/delete/{user_no}(user_no=${user.user_no})}'|" -->
+								<input type="button" id="drop" value="탈퇴처리" th:onclick="deleteAlert([[${user.user_no}]])">
 							</div>
 						</div>
 					</div>
@@ -98,6 +99,13 @@
 			</div>
 		</div>
 	</div>
-
+	
+	<script type="text/javascript">
+		function deleteAlert(user_no){
+			alert("정말 해당 회원을 탈퇴 처리하시겠습니까?");
+			location.href='/adminpage/delete/' + user_no;
+		}
+	</script>
+	
 </body>
 </html>
