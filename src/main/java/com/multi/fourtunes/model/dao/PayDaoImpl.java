@@ -29,4 +29,9 @@ public class PayDaoImpl implements PayDao {
 		return payMapper.getSubscriptionEndDate(user_no);
 	}
 
+	@Override
+	public int getSubscriptionMonth(int user_no) {
+		return payMapper.getSubscriptionMonth(user_no);
+	}
+
 }

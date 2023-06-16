@@ -19,6 +19,9 @@ public interface PayMapper {
 	@Update(" UPDATE USER SET USER_GRADE='PAID' WHERE USER_NO=#{userNo} ")
 	int updateUserGrade(int userNo);
 	
-	@Select("SELECT DATE_ADD(PAY_DATE, INTERVAL 30 DAY) FROM PAY WHERE USER_NO = #{userNo}")
+	@Select(" SELECT DATE_ADD(PAY_DATE, INTERVAL 30 DAY) FROM PAY WHERE USER_NO = #{userNo} ")
 	Date getSubscriptionEndDate(int userNo);
+	
+	@Select(" SELECT COUNT(USER_NO) FROM PAY WHERE USER_NO=#{userNo} ")
+	int getSubscriptionMonth(int userNo);
 }

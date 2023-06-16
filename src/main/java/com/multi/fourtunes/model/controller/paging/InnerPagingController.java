@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.multi.fourtunes.model.biz.AdminpageBiz;
 import com.multi.fourtunes.model.biz.CommunityBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
 
@@ -25,6 +26,9 @@ import com.multi.fourtunes.model.dto.UserDto;
 @Controller
 @RequestMapping("/innerpaging")
 public class InnerPagingController {
+	
+	@Autowired
+	private AdminpageBiz adminpageBiz;
 	
 	@Autowired
 	private LoginBiz loginBiz;
@@ -52,6 +56,10 @@ public class InnerPagingController {
 	    for(String str:userKeyword) {
 	    	myKeyword.append(str + " ");
 	    }
+	    
+	    // 내 회원등급 조회
+	    String grade = adminpageBiz.selectGrade(currentUser.getUser_no());
+	    model.addAttribute("grade", grade);
 	    model.addAttribute("subscriptionEndDate", subscriptionEndDate);
 	    model.addAttribute("keywordlist", keywordList);
 	    model.addAttribute("userkeyword", myKeyword.toString());
