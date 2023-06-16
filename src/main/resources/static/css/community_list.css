@@ -72,6 +72,12 @@
   text-overflow: ellipsis;
 }
 
+.list-item .title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @keyframes blink {
   0% {
     opacity: 1;
