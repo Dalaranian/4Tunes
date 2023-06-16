@@ -33,9 +33,11 @@
 			</div>
 		</div>
 		<div class="search-container">
-			<span class="search-icon"><img
-				src="/resources/img/search.png" class="search-icon" /></span> <input
-				type="text" class="search-input" placeholder="키워드 입력" />
+			<form action="/search/query" method="GET" style="display:flex; ">
+			<span class="search-icon">
+			<input type="image" class="search-icon" src="/resources/img/search.png" alt="submit"></span>
+				<input type="text" name="query" class="search-input" placeholder="키워드 입력" />
+			</form>
 		</div>
 		<div>
 			<a href="/nav/suggested">맞춤추천</a>
