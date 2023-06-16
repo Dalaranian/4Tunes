@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -11,7 +11,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/resources/js/playlist_search.js"></script>
     <title>4Tunes</title>
-    <html xmlns:th="http://www.thymeleaf.org"/>
 </head>
 <body>
 <div id="nav">
@@ -54,7 +53,7 @@
 </div>
 
 <div id="main">
-    <h1><span th:text="${query}"></span> 에 대한 검색 결과</h1>
+    <h1>[ <span id="header-query" th:text="${query}"></span> ] 에 대한 검색 결과</h1>
     <div id="buttons"></div>
 
     <!-- 재생목록이 추가될 경우 list_wrapper클래스 div를 복붙하게 할것 -->
@@ -73,11 +72,11 @@
                         <!--                        <label th:text="${song.songId}" hidden="hidden"></label>-->
                         <br/>
                         <div style="width:200px;">
-                            <button style="display: inline-block; padding:0 5px;"
+                            <button id="plus" style="display: inline-block; padding:0 5px;"
                                     th:attr="onclick='addToPlaylist(\'' + ${song.songTitle} + '\', \'' + ${song.songArtist} + '\', \'' + ${song.songLink} + '\', \'' + ${song.songId} + '\')'">
-                                +
+                                <img id="plusimg" src="/resources/img/add.png">
                             </button>
-                            <div style="display: inline-block;">내 플레이리스트에서 추가</div>
+                            <div style="display: inline-block;">내 플레이리스트에 추가</div>
                         </div>
                     </div>
                 </div>
