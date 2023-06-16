@@ -1,8 +1,8 @@
 #main > h1 {
-  color: #d4adfc;
+  color: white;
   position: relative;
-  top: 10%;
-  left: 10%;
+  top: 6%;
+  left: 6%;
 }
 #buttons {
   display: flex;
@@ -90,3 +90,40 @@ h3 {
     padding-top: 23.08%;
   }
 }
+
+/* 검색어 강조 */
+@keyframes blink{
+	0%{
+		opacity: 1;
+	}
+	50%{
+		opacity: 0;
+	}
+	100%{
+		opacity: 1;
+	}
+}
+
+#header-query{
+	animation: blink 3s infinite;
+	color: #D4ADFC;
+}
+
+#plus{
+	background-color: transparent;
+	border: none;
+	vertical-align: middle;
+	height: 21px;
+}
+
+#plusimg{
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+
+
+
+
+
