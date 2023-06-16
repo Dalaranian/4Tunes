@@ -52,7 +52,7 @@
 </div>
 
 <div id="main">
-    <h1><p th:text="${query}"></p> 에 대한 검색 결과</h1>
+    <h1><span th:text="${query}"></span> 에 대한 검색 결과</h1>
     <div id="buttons"></div>
 
     <!-- 재생목록이 추가될 경우 list_wrapper클래스 div를 복붙하게 할것 -->
@@ -70,12 +70,12 @@
                         <h3 th:text="${song.songArtist}">가수 이름</h3>
                         <!--                        <label th:text="${song.songId}" hidden="hidden"></label>-->
                         <br/>
-                        <div>
-                            <button style="display: inline-block"
+                        <div style="width:200px;">
+                            <button style="display: inline-block; padding:0 5px;"
                                     th:attr="onclick='addToPlaylist(\'' + ${song.songTitle} + '\', \'' + ${song.songArtist} + '\', \'' + ${song.songLink} + '\', \'' + ${song.songId} + '\')'">
                                 +
                             </button>
-                            <div style="display: inline-block">내 플레이리스트에서 추가</div>
+                            <div style="display: inline-block;">내 플레이리스트에서 추가</div>
                         </div>
                     </div>
                 </div>

@@ -25,4 +25,5 @@ function addToPlaylist(songTitle, songArtist, songLink, songId) {
                 alert(res);
             }
         });
+       
 }

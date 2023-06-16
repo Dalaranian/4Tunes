@@ -29,15 +29,14 @@
 
 .list_wrapper {
   display: flex;
-  width: 90%;
 }
 
-#List_left {
+.List_left {
   width: 550px;
   display:flex;
 }
 
-#List_right {
+.List_right {
   width: 550px;
   display:flex;
 }
@@ -73,8 +72,12 @@ iframe {
 
 h2,
 h3 {
+  width:200px;
   margin: 0;
   padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;	
 }
 @media screen and (min-width: 768px) {
   #video-container {

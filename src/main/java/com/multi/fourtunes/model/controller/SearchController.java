@@ -39,7 +39,7 @@ public class SearchController {
 //        result.stream().forEach(currentSong -> currentSong
 //                .setSongLink(youtube.embedLinkGetter(currentSong.getSongArtist(), currentSong.getSongTitle())));
 
-//      test 를 위해 더미데이터 넣기
+        // test 를 위해 더미데이터 넣기
 		for(SongDto dto:result) {
 			dto.setSongLink(youtube.testLinkGetter());
 		}
