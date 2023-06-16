@@ -113,7 +113,7 @@ public class ManiaDbApi {
 			// 데이터 꺼내서 DTO에 포장 후 List 에 넣기
 			for (JsonNode itemNode : itemArrayNode) {
 //				System.out.println(itemNode.toString());
-				String title = itemNode.get("title").asText();
+				String title = itemNode.get("title").asText().replaceAll("&nbsp;", " ");
 				String name = itemNode.get("maniadb:artist").get("name").asText();
 				String link = itemNode.get("link").asText();
 				String id = itemNode.get("id").asText();
