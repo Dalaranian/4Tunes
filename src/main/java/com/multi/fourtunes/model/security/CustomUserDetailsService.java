@@ -1,9 +1,22 @@
 package com.multi.fourtunes.model.security;
 
+import com.multi.fourtunes.model.jpa.entity.UserEntity;
+import com.multi.fourtunes.model.jpa.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.stream.Collectors;
+
+import static java.util.Arrays.stream;
+
+@Service
 public class CustomUserDetailsService implements UserDetailsService {
     /**
      * Locates the user based on the username. In the actual implementation, the search
@@ -15,10 +28,27 @@ public class CustomUserDetailsService implements UserDetailsService {
      * @param username the username identifying the user whose data is required.
      * @return a fully populated user record (never <code>null</code>)
      * @throws UsernameNotFoundException if the user could not be found or the user has no
-     *                                   GrantedAuthority
+     * GrantedAuthority
      */
+
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+
+        UserEntity user = userRepository.findByUserId(userId);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        return new org.springframework.security.core.userdetails.User(user.getUserId(), user.getUserPw(), true, true, true, true, getAuthorities("USER"));
+    }
+
+    // String 으로 된 권한을 GrandAuthority 로 변환
+    private Collection<? extends GrantedAuthority> getAuthorities(String roleString) {
+        String[] roleArray = {roleString};
+        return Arrays.stream(roleArray).map(role -> new SimpleGrantedAuthority(role.trim())).collect(Collectors.toList());
     }
 }
