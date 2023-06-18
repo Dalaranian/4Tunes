@@ -7,5 +7,5 @@ public interface PlaylistBiz {
 
     String insertPlaylist(SongDto song, UserDto user);
 
-    String insertJoinPlaylist(String playlistName, UserDto user, String playlistVisibility);
+    int insertJoinPlaylist(String playlistName, int user, String playlistVisibility);
 }

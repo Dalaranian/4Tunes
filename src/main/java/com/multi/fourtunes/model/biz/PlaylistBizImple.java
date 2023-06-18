@@ -2,6 +2,8 @@ package com.multi.fourtunes.model.biz;
 
 import com.multi.fourtunes.model.dao.PlaylistDao;
 import com.multi.fourtunes.model.dao.SongDao;
+import com.multi.fourtunes.model.dao.UserDao;
+import com.multi.fourtunes.model.dto.PlaylistDto;
 import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.dto.UserDto;
 import com.multi.fourtunes.model.jpa.entity.SongEntity;
@@ -9,8 +11,6 @@ import com.multi.fourtunes.model.jpa.repository.SongRepository;
 import com.multi.fourtunes.model.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpSession;
 
 @Service
 public class PlaylistBizImple implements PlaylistBiz{
@@ -26,6 +26,9 @@ public class PlaylistBizImple implements PlaylistBiz{
 
     @Autowired
     PlaylistDao playlistDao;
+
+    @Autowired
+    UserDao userDao;
 
     @Override
     public String insertPlaylist(SongDto song, UserDto user) {
@@ -70,8 +73,7 @@ public class PlaylistBizImple implements PlaylistBiz{
     }
 
     @Override
-    public String insertJoinPlaylist(String playlistName, UserDto user, String playlistVisibility) {
-
+    public int insertJoinPlaylist(String playlistName, int user, String playlistVisibility) {
         return playlistDao.insertJoinPlaylist(playlistName, user ,playlistVisibility);
     }
 
