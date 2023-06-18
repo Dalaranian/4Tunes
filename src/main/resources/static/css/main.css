@@ -1,37 +1,80 @@
-#playlist {
-  width: 30vw;
-  height: 38vw;
-  float: left;
-  position: relative;
-  left: 10%;
-  top: 15%;
-}
-.playlist {
-  display: inline-block;
-  padding: 2vh;
-}
-.playlist img {
-  display: flex;
-  width: 10vw;
-  height: 10vw;
+html{
+  overflow-y:hidden;
 }
 h1 {
   color: #d4adfc;
   font-weight: normal;
+  padding-left: 20px;
 }
-#today {
-  width: 30vw;
-  float: left;
-  position: relative;
-  left: 13%;
-  top: 15%;
-}
-.today {
-  display: inline-block;
-  padding: 2vh;
+.playlist img {
+  width: 250px;
+  height: 250px;
+  margin: 10px;
 }
 .today img {
+  width: 250px;
+  height: 250px;
+  margin: 10px;
+}
+.playlists {
   display: flex;
-  width: 10vw;
-  height: 10vw;
+  align-items:center;
+  justify-content: center;
+}
+.playlists a{
+  align-items:center;
+  display:flex;
+}
+.playlists>a{
+  width:70px;
+  height:100px;
+}
+.todays {
+  display: flex;
+  align-items:center;
+  justify-content: center;
+}
+.todays a{
+  display:flex;
+}
+.todays>a{
+  width:70px;
+  height:100px;
+}
+#playlist{
+
+}
+#today {
+
+}
+#playlist h1{
+  margin:35px 0 0 35px;
+}
+#today h1{
+  margin:35px 0 0 35px;
+}
+.left,
+.right{
+  width:70px;
+  height:100px;
+  filter: invert(74%) sepia(7%) saturate(1901%) hue-rotate(223deg) brightness(97%) contrast(104%);
+}
+.left:hover,
+.right:hover{
+  filter: invert(28%) sepia(39%) saturate(995%) hue-rotate(215deg) brightness(98%) contrast(91%);
+}
+@media (max-width: 1500px) {
+  #nav {
+  	display: none !important;
+  }
+  #main {
+    width: 110vw !important;
+    background-color: #424242 !important;
+    overflow-x: scroll !important;
+  }
+  h1{
+    text-align:center !important;
+    padding: 0 !important;
+    margin-right:0 !important;
+  }
 }
