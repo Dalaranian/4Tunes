@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import com.multi.fourtunes.model.biz.PlaylistBiz;
+import com.multi.fourtunes.model.dto.PlaylistDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -33,6 +35,9 @@ public class LoginController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private PlaylistBiz playlistBiz;
 
 	@GetMapping("/sociallogin")
 	public String socialLogin(@RequestParam("email") String email, @RequestParam("name") String name, Model model,
@@ -134,6 +139,7 @@ public class LoginController {
 
 //			모두 insert 성공 시 USER 권한 넣기
 			loginBiz.insertUserRole(insert.getUser_id());
+			playlistBiz.in
 
 			return "membership_join";
 		} else {

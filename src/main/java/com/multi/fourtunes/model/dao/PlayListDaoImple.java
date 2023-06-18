@@ -14,4 +14,9 @@ public class PlayListDaoImple implements PlaylistDao{
     public int insertPlaylist(String playListNo, String songNo) {
         return manageSongMapper.insertSong(playListNo, songNo);
     }
+
+    @Override
+    public int insertJoinPlaylist(String playlistName, int userNo, String playlistVisibility) {
+        return manageSongMapper.insertJoinPlayList(playlistName,userNo,playlistVisibility);
+    }
 }

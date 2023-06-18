@@ -7,4 +7,6 @@ public interface PlaylistDao {
 
     int insertPlaylist(String playListNo, String songNo);
 
+    int insertJoinPlaylist(String playlistName, int userNo, String playlistVisibility);
+
 }

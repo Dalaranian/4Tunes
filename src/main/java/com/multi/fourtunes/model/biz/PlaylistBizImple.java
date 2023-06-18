@@ -68,4 +68,11 @@ public class PlaylistBizImple implements PlaylistBiz{
 
         return result;
     }
+
+    @Override
+    public String insertJoinPlaylist(String playlistName, UserDto user, String playlistVisibility) {
+
+        return playlistDao.insertJoinPlaylist(playlistName, user ,playlistVisibility);
+    }
+
 }
