@@ -7,4 +7,5 @@ public interface PlaylistBiz {
 
     String insertPlaylist(SongDto song, UserDto user);
 
+    void allocatePlaylist(String userId);
 }

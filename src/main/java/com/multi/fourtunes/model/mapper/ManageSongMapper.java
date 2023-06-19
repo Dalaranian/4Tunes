@@ -8,4 +8,7 @@ public interface ManageSongMapper {
 
     @Insert(" INSERT INTO MANAGE_SONG VALUES(#{playlistNo}, #{userNo}) ")
     int insertSong(String playlistNo, String userNo);
+
+
 }
+
