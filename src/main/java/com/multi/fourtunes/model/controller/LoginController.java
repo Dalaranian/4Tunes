@@ -118,8 +118,6 @@ public class LoginController {
 		insert.setUser_pw(passwordEncoder.encode(password));
 		insert.setUser_name(name);
 
-		PlaylistDto playlistDto = new PlaylistDto();
-		System.out.println(insert);
 
 		// 회원정보(아이디, 비밀번호, 이름) 먼저 Insert하고 성공하면
 		if(loginBiz.insertUser(insert) > 0) {
@@ -140,8 +138,9 @@ public class LoginController {
 
 //			모두 insert 성공 시 USER 권한 넣기
 			loginBiz.insertUserRole(insert.getUser_id());
-			//플레이리스트 하나 추가
-			playlistBiz.insertJoinPlaylist(playlistDto.getPlaylistName(),playlistDto.getUserNo(),playlistDto.getPlaylistVisibility());
+			// insert 성공 시 플레이리스트 하나 추가
+
+			playlistBiz.allocatePlaylist(insert.getUser_id());
 
 			return "membership_join";
 		} else {

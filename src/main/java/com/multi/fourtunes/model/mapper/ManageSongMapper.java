@@ -9,8 +9,6 @@ public interface ManageSongMapper {
     @Insert(" INSERT INTO MANAGE_SONG VALUES(#{playlistNo}, #{userNo}) ")
     int insertSong(String playlistNo, String userNo);
 
-    @Insert(" INSERT INTO PLAYLIST VALUES(NULL, #{playlistName}, #{userNo}, #{playlistVisibility}) ")
-    int insertJoinPlayList(String playlistName, int userNo, String playlistVisibility);
 
 }
 

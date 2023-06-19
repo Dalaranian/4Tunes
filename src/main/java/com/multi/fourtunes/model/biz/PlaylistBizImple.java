@@ -1,13 +1,12 @@
 package com.multi.fourtunes.model.biz;
 
 import com.multi.fourtunes.model.dao.PlaylistDao;
-import com.multi.fourtunes.model.dao.SongDao;
-import com.multi.fourtunes.model.dao.UserDao;
-import com.multi.fourtunes.model.dto.PlaylistDto;
 import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.dto.UserDto;
 import com.multi.fourtunes.model.jpa.entity.SongEntity;
+import com.multi.fourtunes.model.jpa.entity.UserEntity;
 import com.multi.fourtunes.model.jpa.repository.SongRepository;
+import com.multi.fourtunes.model.jpa.repository.UserRepository;
 import com.multi.fourtunes.model.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,19 +15,23 @@ import org.springframework.stereotype.Service;
 public class PlaylistBizImple implements PlaylistBiz{
 
     @Autowired
-    SongDao songDao;
-
+    UserRepository userRepository;
     @Autowired
     SongRepository songRepository;
-
     @Autowired
     UserMapper userMapper;
 
     @Autowired
     PlaylistDao playlistDao;
 
-    @Autowired
-    UserDao userDao;
+    /**
+     *
+     * SongDto 를 받아서, 유저의 첫번째 PlayList 에 저장함.
+     *
+     * @param song 저장할 SongDto
+     * @param user 저장할 User
+     * @return 성공여부에 대해서, alert 로 띄워줄 Message
+     */
 
     @Override
     public String insertPlaylist(SongDto song, UserDto user) {
@@ -61,7 +64,7 @@ public class PlaylistBizImple implements PlaylistBiz{
             String[] userPlayList = userMapper.getUserPlatListNo(Integer.toString(user.getUser_no()));
 
             // 첫 번째 PlayList 에 노래 넣기
-            playlistDao.insertPlaylist(userPlayList[0], Long.toString(selectSong.getSongNo()));
+            int res = playlistDao.insertPlaylist(userPlayList[0], Long.toString(selectSong.getSongNo()));
 
             result = " 플레이리스트 저장에 성공했습니다. ";
         } catch (Exception e) {
@@ -73,8 +76,8 @@ public class PlaylistBizImple implements PlaylistBiz{
     }
 
     @Override
-    public int insertJoinPlaylist(String playlistName, int user, String playlistVisibility) {
-        return playlistDao.insertJoinPlaylist(playlistName, user ,playlistVisibility);
+    public void allocatePlaylist(String userId) {
+        UserEntity user = userRepository.findByUserId(userId);
+        playlistDao.allocatePlaylist(user.getUserNo());
     }
-
 }
