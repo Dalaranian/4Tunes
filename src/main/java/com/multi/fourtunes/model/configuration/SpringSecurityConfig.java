@@ -23,8 +23,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SpringSecurityConfig {
 
-    @Autowired
     private CustomUserDetailsService userDetailsService;
+
+    @Autowired
+    public SpringSecurityConfig(CustomUserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -41,15 +45,11 @@ public class SpringSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-                // 인증되지 않은 사용자
                 .authorizeRequests()
-                    .antMatchers("/").permitAll()
-                    .anyRequest().authenticated()
-                    .and()
-                // 로그인한 사용자에게 모든 페이지 조회 가능
-                .authorizeRequests()
-                    .antMatchers("/**")
-                    .hasAuthority("USER")
+                // 인증되지 않은 사용자는, Index 까지만 접근 가능
+                .antMatchers("/").permitAll()
+                // 인증된 사용자는, 모든 페이지 접근 가능
+                .antMatchers("/**").hasAuthority("USER")
                 .and()
                 // 로그인 페이지 지정
                 .formLogin()
