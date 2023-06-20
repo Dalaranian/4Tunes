@@ -4,6 +4,7 @@ import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.jpa.entity.SongEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,5 +48,10 @@ public class ApiTestRestController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("index");
         return mav;
+    }
+
+    @GetMapping("/gpt")
+    public ResponseEntity<String> openAi(){
+        return null;
     }
 }
