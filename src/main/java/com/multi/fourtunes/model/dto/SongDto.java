@@ -2,6 +2,7 @@ package com.multi.fourtunes.model.dto;
 
 import lombok.Data;
 
+
 @Data
 public class SongDto {
 

@@ -9,13 +9,13 @@ import com.multi.fourtunes.model.dao.ChartDao;
 import com.multi.fourtunes.model.dto.SongDto;
 
 @Service
-public class ChartBizImpl {
+public class ChartBizImpl implements ChartBiz {
 
 	@Autowired
 	private ChartDao chartDao;
 
-	public List<SongDto> getTopSongs() {
-		List<SongDto> topSongs = chartDao.getTopSongsByPopularity(10);
-		return topSongs;
-	}
+	@Override
+    public List<SongDto> getTop10Chart() {
+        return chartDao.getTop10Chart();
+    }
 }

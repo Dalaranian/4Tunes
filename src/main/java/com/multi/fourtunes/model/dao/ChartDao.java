@@ -6,6 +6,5 @@ import com.multi.fourtunes.model.dto.SongDto;
 
 public interface ChartDao {
 
-	List<SongDto> getTopSongsByPopularity(int i);
-
+	List<SongDto> getTop10Chart();
 }
