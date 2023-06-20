@@ -1,17 +1,12 @@
 package com.multi.fourtunes.model.configuration;
 
-
-import com.multi.fourtunes.model.security.CustomUserDetailsService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -52,7 +47,7 @@ public class SpringSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http
+        http.csrf().disable()
                 .authorizeRequests()
                 // 인증되지 않은 사용자는, Index 까지만 접근 가능
                 .antMatchers("/").permitAll()
@@ -62,7 +57,7 @@ public class SpringSecurityConfig {
                 // 로그인 페이지 지정
                 .formLogin()
                     .permitAll()
-                    .loginPage("/nav/login")
+//                    .loginPage("/nav/login")
                     .and()
                 // 로그아웃 세팅
                 .logout()
