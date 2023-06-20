@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="/resources/css/nav.css" />
 <link rel="stylesheet" href="/resources/css/globalfont.css" />
 <link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <title>4Tunes</title>
 </head>
 <body>
@@ -62,45 +63,72 @@
 
 	<div id="main">
       <div id="playlist">
-        <h1>플레이리스트</h1>
-        <div class="playlists">
-        <a href=""><img class="right" src="/resources/img/left.png"></a>
-          <div class="playlist">
-            <a href="/innerpaging/playlist/mine"><img src="" alt="" /></a>
-          </div>
-          <div class="playlist">
-            <a href="/innerpaging/playlist/public"><img src="" alt="" /></a>
-          </div>
-          <div class="playlist">
-            <a href=""><img src="" alt="" /></a>
-          </div>
-          <div class="playlist">
-            <a href=""><img src="" alt="" /></a>
-          </div>
-          <a href=""><img class="left" src="/resources/img/right.png"></a>
-        </div>
-      </div>
+    <h1>플레이리스트</h1>
+    <div class="playlists">
+        <a href=""><img class="left" src="/resources/img/left.png"></a>
+        <div id="playlistsContainer"></div>
+        <a href=""><img class="right" src="/resources/img/right.png"></a>
+    </div>
+</div>
 
       <div id="today">
         <h1>오늘의 선곡</h1>
+        <div class="btn">
+        <a href=""><img class="left" src="/resources/img/left.png"></a>
         <div class="todays">
-        <a href=""><img class="right" src="/resources/img/left.png"></a>
           <div class="today">
-            <a href="innerpaging/playlist/suggested"><img src="/resources/img/love.png" style=""alt="" /></a>
+            <a href="innerpaging/playlist/suggested"><img src="/resources/img/love.png" alt="" /></a>
           </div>
           <div class="today">
             <a href=""><img src="/resources/img/relax.png" alt="" /></a>
           </div>
-          <div class="today"></div>
           <div class="today">
             <a href=""><img src="/resources/img/exercise.png" alt="" /></a>
           </div>
           <div class="today">
             <a href=""><img src="/resources/img/travel.png" alt="" /></a>
           </div>
-          <a href=""><img class="left" src="/resources/img/right.png"></a>
+          <div class="today">
+            <a href=""><img src="/resources/img/baby.png" alt="" /></a>
+          </div>
+          <div class="today">
+            <a href=""><img src="/resources/img/cafe.png" alt="" /></a>
+          </div>
+          <div class="today">
+            <a href=""><img src="/resources/img/gohome.png" alt="" /></a>
+          </div>
+          <div class="today">
+            <a href=""><img src="/resources/img/party.png" alt="" /></a>
+          </div>
+      </div>
+      <a href=""><img class="right" src="/resources/img/right.png"></a>
         </div>
       </div>
-    </div>
+	</div>
+      <script>
+      $(document).ready(function() {
+    	  $.ajax({
+    	    url: '/playlist/getmyplaylist',
+    	    method: 'GET',
+    	    success: function(data) {
+    	      console.log(data); // Ajax 요청에 성공한 경우 응답 데이터를 콘솔에 출력
+    	      var playlistsDiv = $('#playlistsContainer');
+    	      $.each(data, function(index, playlist) {
+    	        var playlistDiv = $('<div class="playlist"></div>');
+    	        var a = $('<a></a>').attr('href', '/innerpaging/playlist/' + playlist.playlistName);
+    	        a.text(playlist.playlistName);
+    	        playlistDiv.append(a);
+    	        playlistsDiv.append(playlistDiv);
+    	      });
+    	    },
+    	    error: function(data) {
+    	    	console.log(data);
+    	      // Ajax 요청에 실패한 경우 에러 메시지를 콘솔에 출력
+    	    }
+    	  });
+    	});
+</script>
+  	  <script src="/resources/js/slider.js"></script>
+      <script src="/resources/js/hover_radius.js"></script>
 </body>
 </html>
