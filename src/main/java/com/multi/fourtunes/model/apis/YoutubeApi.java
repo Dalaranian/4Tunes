@@ -15,6 +15,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.Random;
+
 @Component
 public class YoutubeApi {
 
@@ -60,7 +62,35 @@ public class YoutubeApi {
 	 * @return 에스파 스파이시 embed
 	 */
 	public String testLinkGetter(){
-		return EMBED_LINK_PREFIX + "T0XInumvMjM";
+
+		String code;
+
+		Random r = new Random();
+
+		switch (r.nextInt(5)+1){
+			case 0:
+				code = "T0XInumvMjM";
+				break;
+			case 1:
+				code = "rVXeArOQIs4";
+				break;
+			case 2:
+				code = "r0Hk2XFEpRQ";
+				break;
+			case 3:
+				code = "HlEuo9aR7Qo";
+				break;
+			case 4:
+				code ="eu5lv2Umn3M";
+				break;
+			case 5:
+				code = "oRdxUFDoQe0";
+				break;
+			default:
+				code = "ekzHIouo8Q4";
+				break;
+		}
+		return EMBED_LINK_PREFIX + code;
 	}
 
 	/**
