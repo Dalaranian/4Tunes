@@ -46,13 +46,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
 
-        System.out.println("LoadUserByName 진입");
+//        System.out.println("LoadUserByName 진입");
 
         UserEntity user = userRepository.findByUserId(userId);
 
         String userRole = userDao.getUserRoleByUserNo(user.getUserNo());
 
-        System.out.println(user.toString() + "\n" + userRole);
+//        System.out.println(user.toString() + "\n" + userRole);
 
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
