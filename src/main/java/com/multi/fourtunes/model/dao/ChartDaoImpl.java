@@ -13,8 +13,9 @@ public class ChartDaoImpl implements ChartDao {
     @Autowired
 	private ChartMapper chartMapper;
 
+
     @Override
-    public List<SongDto> getTop10Chart() {
-        return chartMapper.getTop10Chart();
+    public List<SongDto> getTop10Songs() {
+        return chartMapper.getTop10Songs();
     }
 }

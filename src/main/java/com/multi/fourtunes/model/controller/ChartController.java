@@ -19,12 +19,10 @@ public class ChartController {
 	@Autowired
 	private ChartBiz chartBiz;
 
-	@GetMapping("/chart/top10")
-    public String getTop10Chart(Model model) {
-        List<SongDto> top10Songs = chartBiz.getTop10Chart();
-
-        model.addAttribute("songs", top10Songs);
-        return "chartpage_main";
-    }
+	  @GetMapping("/top10songs")
+	    public ResponseEntity<List<SongDto>> getTop10Songs() {
+	        List<SongDto> topSongs = chartBiz.getTop10Songs();
+	        return ResponseEntity.ok(topSongs);
+	    }
 
 }

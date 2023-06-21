@@ -56,21 +56,21 @@
 
 		<!-- 재생목록이 추가될 경우 list_wrapper클래스 div를 복붙하게 할것 -->
 		<div id="MyPlayList">
-			<div th:each="song, iterStat : ${topSongs}" class="list_wrapper">
-				<div>
-					<div id="video">
-						<div class="video-container">
-							<iframe th:src="@{'https://www.youtube.com/embed/' + ${song.songLink}}" frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<span th:text="${iterStat.index + 1 + '위'}"></span>
-							<h2 th:text="${song.songTitle}"></h2>
-							<br/>
-							<h3 th:text="${song.songArtist}"></h3>
-							<br/>
-							<div>
-								<button class="plus_btn" style="display: inline-block">+</button>
-								<div style="display: inline-block">내 플레이리스트에서 추가</div>
+    <div th:each="song, iterStat : ${topSongs}" class="list_wrapper">
+           <div th:id="${(iterStat.index % 2 == 0) ? 'list_left' : 'list_right'}">
+            <div id="video">
+                <div class="video-container">
+                    <iframe th:src="${song.songLink}}" frameborder="0" allowfullscreen></iframe> 
+                </div>
+                <div id="context">
+                    <span th:text="${iterStat.index + 1} + '위'"></span>
+                    <h2 th:text="${song.songTitle}"></h2>
+                    <br/>
+                    <h3 th:text="${song.songArtist}"></h3>
+                    <br/>
+                    <div>
+                        <button class="plus_btn" style="display: inline-block">+</button>
+                        <div style="display: inline-block">내 플레이리스트에서 추가</div>
 							</div>
 						</div>
 					</div>

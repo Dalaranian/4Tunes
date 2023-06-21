@@ -11,5 +11,6 @@ public class SongDto {
     private String songArtist;
     private String songLink;
     private String songId;
+    private Integer playlistNo;
 }
 

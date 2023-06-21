@@ -8,15 +8,18 @@ import javax.servlet.http.HttpSession;
 
 import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.fourtunes.model.biz.AdminpageBiz;
+import com.multi.fourtunes.model.biz.ChartBiz;
 import com.multi.fourtunes.model.biz.CommunityBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
 import com.multi.fourtunes.model.dto.CommunityDto;
+import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.dto.UserDto;
 
 @Controller
@@ -32,6 +35,9 @@ public class NavController {
 	@Autowired
 	private LoginBiz loginBiz;
 
+	@Autowired
+	private ChartBiz chartBiz;
+	
 	// 로그인 페이지로 이동
 	@GetMapping("/login")
 	public String gotoLogin() {
@@ -85,9 +91,10 @@ public class NavController {
 
 	// 인기 차트 페이지로 이동
 	@GetMapping("/chart")
-	public String gotoChart() {
-		return "chartpage_main";
-	}
+    public ResponseEntity<List<SongDto>> getTop10Songs() {
+        List<SongDto> topSongs = chartBiz.getTop10Songs();
+        return ResponseEntity.ok(topSongs);
+    }
 
 	// 커뮤니티 페이지로 이동
 	@RequestMapping("/community")
