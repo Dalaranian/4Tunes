@@ -54,6 +54,7 @@ public class PlaylistBizImple implements PlaylistBiz{
                 selectSong.setSongLink(song.getSongLink());
                 selectSong.setSongTitle(song.getSongTitle());
                 selectSong.setSongId(song.getSongId());
+                selectSong.setSongAlbumart(song.getSongAlbumArt());
                 // entity 저장
                 songRepository.save(selectSong);
                 // 저장되어서, Auto Increment 값이 반영된 새로운 엔티티 불러오기
