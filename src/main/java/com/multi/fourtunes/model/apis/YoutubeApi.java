@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 public class YoutubeApi {
@@ -59,12 +60,11 @@ public class YoutubeApi {
 
 	/**
 	 * API 호출 비용이 너무 비싸서 데모로 만들었습니당
-	 * @return 에스파 스파이시 embed
+	 * @return 임의의 test용 링크
 	 */
 	public String testLinkGetter(){
 
 		String code;
-
 		Random r = new Random();
 
 		switch (r.nextInt(5)+1){
@@ -72,16 +72,16 @@ public class YoutubeApi {
 				code = "T0XInumvMjM";
 				break;
 			case 1:
-				code = "rVXeArOQIs4";
+				code = "AKg_9dn_VmA";
 				break;
 			case 2:
-				code = "r0Hk2XFEpRQ";
+				code = "cU0JrSAyy7o";
 				break;
 			case 3:
 				code = "HlEuo9aR7Qo";
 				break;
 			case 4:
-				code ="eu5lv2Umn3M";
+				code = "N8VRaGe3Cqs";
 				break;
 			case 5:
 				code = "oRdxUFDoQe0";

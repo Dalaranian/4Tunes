@@ -29,4 +29,7 @@ public class SongEntity {
 
     @Column(name = "SONG_ID", unique = true)
     private String songId;
+
+    @Column(name = "SONG_ALBUMART", nullable = true)
+    private String songAlbumart;
 }
