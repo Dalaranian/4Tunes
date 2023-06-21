@@ -42,6 +42,7 @@ public class PlayListController {
 
     @PostMapping("/insertmyplaylist")
     public ResponseEntity<String> addToPlaylist(@RequestBody SongDto songDto, HttpSession session) {
+        System.out.println(songDto);
         UserDto currentUser = (UserDto) session.getAttribute("login");
         String res = playlist.insertPlaylist(songDto, currentUser);
 
