@@ -59,7 +59,7 @@ public class SpringSecurityConfig {
         http.csrf().disable()
                 .authorizeRequests()
                 // 인증되지 않은 사용자는, Index 까지만 접근 가능
-                .antMatchers("/", "/favicon.ico").permitAll()
+                .antMatchers("/", "/favicon.ico", "/search/query", "/login/**").permitAll()
                 // 인증된 사용자는, 모든 페이지 접근 가능
                 .antMatchers("/**").hasAuthority("USER")
                 .and()
