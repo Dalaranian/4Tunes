@@ -1,5 +1,6 @@
 package com.multi.fourtunes.model.configuration;
 
+import com.multi.fourtunes.model.security.CustomAuthenticationSuccessHandler;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -8,11 +9,20 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Autor JMBAE
@@ -24,10 +34,9 @@ public class SpringSecurityConfig {
 
     private UserDetailsService userDetailsService;
 
-//    @Autowired
-//    public SpringSecurityConfig(CustomUserDetailsService userDetailsService) {
-//        this.userDetailsService = userDetailsService;
-//    }
+    @Autowired
+    private CustomAuthenticationSuccessHandler authenticationSuccessHandler;
+
 
     /**
      * @param auth
@@ -50,14 +59,29 @@ public class SpringSecurityConfig {
         http.csrf().disable()
                 .authorizeRequests()
                 // 인증되지 않은 사용자는, Index 까지만 접근 가능
-                .antMatchers("/").permitAll()
+                .antMatchers("/", "/favicon.ico").permitAll()
                 // 인증된 사용자는, 모든 페이지 접근 가능
                 .antMatchers("/**").hasAuthority("USER")
                 .and()
                 // 로그인 페이지 지정
                 .formLogin()
                     .permitAll()
-//                    .loginPage("/nav/login")
+                    .loginPage("/nav/login")
+                    .defaultSuccessUrl("/")
+                    .failureUrl("/nav/login")
+                    .usernameParameter("user_id")
+                    .passwordParameter("user_pw")
+                    .loginProcessingUrl("/security/login")
+                    .successHandler(authenticationSuccessHandler)
+                    .failureHandler(
+                            new AuthenticationFailureHandler() {
+                                @Override
+                                public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+                                    System.out.println("exception : " + exception.getMessage());
+                                    response.sendRedirect("/nav/login");
+                                }
+                            }
+                    )
                     .and()
                 // 로그아웃 세팅
                 .logout()
