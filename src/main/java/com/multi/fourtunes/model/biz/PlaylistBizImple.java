@@ -1,6 +1,12 @@
 package com.multi.fourtunes.model.biz;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.multi.fourtunes.model.dao.PlaylistDao;
+import com.multi.fourtunes.model.dto.PlaylistDto;
 import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.dto.UserDto;
 import com.multi.fourtunes.model.jpa.entity.SongEntity;
@@ -8,8 +14,6 @@ import com.multi.fourtunes.model.jpa.entity.UserEntity;
 import com.multi.fourtunes.model.jpa.repository.SongRepository;
 import com.multi.fourtunes.model.jpa.repository.UserRepository;
 import com.multi.fourtunes.model.mapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class PlaylistBizImple implements PlaylistBiz{
@@ -80,4 +84,9 @@ public class PlaylistBizImple implements PlaylistBiz{
         UserEntity user = userRepository.findByUserId(userId);
         playlistDao.allocatePlaylist(user.getUserNo());
     }
+    
+    public List<PlaylistDto> getAllPlaylists() {
+        return playlistDao.selectAll();
+    }
+    
 }

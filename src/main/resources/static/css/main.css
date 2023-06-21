@@ -15,6 +15,8 @@ h1 {
   width: 250px;
   height: 250px;
   margin: 10px;
+  border-radius:50% 50% 36% 64% / 55% 44% 56% 45%  ;
+  box-shadow: 7px 7px 6px -2px rgba(225,117,208,0.49);
 }
 .playlists {
   display: flex;
@@ -31,8 +33,11 @@ h1 {
 }
 .todays {
   display: flex;
-  align-items:center;
-  justify-content: center;
+  align-items: center;
+  justify-content: flex-start; 
+  overflow: hidden; /* 추가: 넘치는 요소 감추기 */
+  position: relative;
+  width:1080px;
 }
 .todays a{
   display:flex;
@@ -62,6 +67,14 @@ h1 {
 .left:hover,
 .right:hover{
   filter: invert(28%) sepia(39%) saturate(995%) hue-rotate(215deg) brightness(98%) contrast(91%);
+}
+.hidden {
+    display: none;
+  }
+.btn{
+  display:flex;
+  justify-content: center;
+  align-items:center;
 }
 @media (max-width: 1500px) {
   #nav {
