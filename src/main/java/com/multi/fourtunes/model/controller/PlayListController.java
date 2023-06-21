@@ -1,17 +1,21 @@
 package com.multi.fourtunes.model.controller;
 
-import com.multi.fourtunes.model.biz.PlaylistBiz;
-import com.multi.fourtunes.model.dto.SongDto;
-import com.multi.fourtunes.model.dto.UserDto;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpSession;
+import com.multi.fourtunes.model.biz.PlaylistBiz;
+import com.multi.fourtunes.model.dto.PlaylistDto;
+import com.multi.fourtunes.model.dto.SongDto;
+import com.multi.fourtunes.model.dto.UserDto;
 
 @RestController
 @RequestMapping("/playlist")
@@ -38,6 +42,7 @@ public class PlayListController {
 
     @PostMapping("/insertmyplaylist")
     public ResponseEntity<String> addToPlaylist(@RequestBody SongDto songDto, HttpSession session) {
+        System.out.println(songDto);
         UserDto currentUser = (UserDto) session.getAttribute("login");
         String res = playlist.insertPlaylist(songDto, currentUser);
 
@@ -46,5 +51,11 @@ public class PlayListController {
         } else {
             return ResponseEntity.accepted().body(res);
         }
+    }
+    
+    @GetMapping("/getmyplaylist")
+    public ResponseEntity<List<PlaylistDto>> home() {
+        List<PlaylistDto> playlists = playlist.getAllPlaylists();
+        return ResponseEntity.ok(playlists);
     }
 }
