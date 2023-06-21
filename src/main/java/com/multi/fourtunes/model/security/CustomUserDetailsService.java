@@ -1,5 +1,6 @@
 package com.multi.fourtunes.model.security;
 
+import com.multi.fourtunes.model.dao.UserDao;
 import com.multi.fourtunes.model.jpa.entity.UserEntity;
 import com.multi.fourtunes.model.jpa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Autowired
+    UserDao userDao;
+
+    @Autowired
     public CustomUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -46,13 +50,15 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         UserEntity user = userRepository.findByUserId(userId);
 
-        System.out.println(user.toString());
+        String userRole = userDao.getUserRoleByUserNo(user.getUserNo());
+
+        System.out.println(user.toString() + "\n" + userRole);
 
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
 
-        return new org.springframework.security.core.userdetails.User(user.getUserId(), user.getUserPw(), true, true, true, true, getAuthorities("USER"));
+        return new org.springframework.security.core.userdetails.User(user.getUserId(), user.getUserPw(), true, true, true, true, getAuthorities(userRole));
     }
 
     // String 으로 된 권한을 GrandAuthority 로 변환
