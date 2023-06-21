@@ -1,10 +1,10 @@
 package com.multi.fourtunes.model.apis;
 
 import com.multi.fourtunes.model.dto.SongDto;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,9 +21,6 @@ public class OpenAiApi {
     RestTemplate restTemplate;
     final String url = "https://api.openai.com/v1/chat/completions";
 
-    JSONObject requestBodyContent;
-
-
     public ArrayList<SongDto> suggestedSong(String[] keyword){
 
         restTemplate = new RestTemplate();
@@ -32,8 +29,14 @@ public class OpenAiApi {
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(apiKey);
         headers.setContentType(MediaType.APPLICATION_JSON);
-        
-        
+
+        HttpEntity<String> entity = new HttpEntity<>(setBody(keyword).toString(), headers);
+
+        System.out.println("entity is : " + entity.toString());
+
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+
+        System.out.println("response is : \n" + response.toString());
 
         return null;
     }
@@ -42,26 +45,58 @@ public class OpenAiApi {
      * RequestBody 에 담을 Json 생성하기
      * @param keyword
      */
-    public void setMessage(String keyword[]){
+    private JSONObject setBody(String keyword[]){
         // 키워드외 갯수를 확인
-        countKeyword = keyword.length;
+        JSONObject jsonObject = new JSONObject();
 
-        // JSON 루트 노드 생성
-        JSONObject rootNode = new JSONObject();
+        jsonObject.put("model", "gpt-3.5-turbo-0613");
 
-        // JSON 그 다음 노드 생성
-        JSONObject messages = new JSONObject();
-        JSONObject functions = new JSONObject();
+        JSONArray messagesArray = new JSONArray();
+        JSONObject messageObject = new JSONObject();
+        messageObject.put("role", "user");
+        messageObject.put("content", "내 아내, 어머니 및 두 아들과 딸을 위해 본에서 암스테르담으로 여행을 예약해야 합니다. 저도 함께 갈 것입니다. 항공사는 직항편이어야 합니다.");
+        messagesArray.put(messageObject);
+        jsonObject.put("messages", messagesArray);
 
-        rootNode.append("model", "gpt-3.5-turbo-0613");
-        messages.append("role", "USER");
-        messages.append("content", getContentByKeyword(keyword));
+        JSONArray functionsArray = new JSONArray();
+        JSONObject functionObject = new JSONObject();
+        functionObject.put("name", "travel_reservation");
+        functionObject.put("description", "여행 예약하기");
 
-//        functions.append();
+        JSONObject parametersObject = new JSONObject();
+        parametersObject.put("type", "object");
 
-        rootNode.append("messages", messages);
+        JSONObject propertiesObject = new JSONObject();
 
+        JSONObject destinationObject = new JSONObject();
+        destinationObject.put("type", "string");
+        destinationObject.put("description", "여행 목적지");
+        propertiesObject.put("destination", destinationObject);
 
+        JSONObject departureObject = new JSONObject();
+        departureObject.put("type", "string");
+        departureObject.put("description", "출발지");
+        propertiesObject.put("departure", departureObject);
+
+        JSONObject numberPeopleObject = new JSONObject();
+        numberPeopleObject.put("type", "string");
+        numberPeopleObject.put("description", "여행하는 사람 수");
+        propertiesObject.put("number_people", numberPeopleObject);
+
+        JSONObject travelModeObject = new JSONObject();
+        travelModeObject.put("type", "string");
+        travelModeObject.put("description", "여행 모드");
+        propertiesObject.put("travel_mode", travelModeObject);
+
+        parametersObject.put("properties", propertiesObject);
+        functionObject.put("parameters", parametersObject);
+
+        functionsArray.put(functionObject);
+        jsonObject.put("functions", functionsArray);
+
+        System.out.println(jsonObject.toString());
+
+        return jsonObject;
     }
 
     /**
