@@ -62,6 +62,8 @@ public class SpringSecurityConfig {
                 .antMatchers("/", "/favicon.ico", "/search/query", "/login/**").permitAll()
                 // 인증된 사용자는, 모든 페이지 접근 가능
                 .antMatchers("/**").hasAuthority("USER")
+                // ADMIN 도 모든 페이지 접근 가능
+                .antMatchers("/**").hasAuthority("ADMIN")
                 .and()
                 // 로그인 페이지 지정
                 .formLogin()
