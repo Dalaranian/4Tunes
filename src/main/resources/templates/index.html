@@ -118,8 +118,8 @@
     	      $.each(data, function(index, playlist) {
     	        var playlistDiv = $('<div class="playlist"></div>');
     	        
-    	        var a = $('<a></a>').attr('href', '/innerpaging/playlist/' + playlist.playlistName);
-    	        a.text(playlist.playlistName);
+    	        var a = $('<a></a>').attr('href', '/innerpaging/playlist/public?userNo=' + playlist.userNo);
+    	        a.text(playlist.userName+"님의 플레이리스트");
 
     	        var img = $('<img>').attr('src', playlist.albumArt);
     	        
@@ -134,13 +134,13 @@
     	      const itemCount2 = $sliderItems2.length;
     	      let currentPosition2 = 0;
 
-    	      $("#playlist .right").on("click", function (e) {  // 수정된 부분
+    	      $("#playlist .right").on("click", function (e) { 
     	        e.preventDefault();
     	        $slider2.append($sliderItems2.eq(currentPosition2).detach());
     	        currentPosition2 = (currentPosition2 + 1) % itemCount2;
     	      });
 
-    	      $("#playlist .left").on("click", function (e) {  // 수정된 부분
+    	      $("#playlist .left").on("click", function (e) {  
     	        e.preventDefault();
     	        currentPosition2 = (currentPosition2 - 1 + itemCount2) % itemCount2;
     	        $slider2.prepend($sliderItems2.eq(currentPosition2).detach());
