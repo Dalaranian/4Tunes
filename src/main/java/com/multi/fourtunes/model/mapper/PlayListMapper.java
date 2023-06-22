@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
 import com.multi.fourtunes.model.dto.PlaylistDto;
+import com.multi.fourtunes.model.dto.SongDto;
 
 @Mapper
 public interface PlayListMapper {
@@ -19,8 +20,23 @@ public interface PlayListMapper {
         @Result(property = "playlistNo", column = "PLAYLIST_NO"),
         @Result(property = "playlistName", column = "PLAYLIST_NAME"),
         @Result(property = "userNo", column = "USER_NO"),
-        @Result(property = "playlistVisibility", column = "PLAYLIST_VISIBILITY") 
+        @Result(property = "playlistVisibility", column = "PLAYLIST_VISIBILITY"),
+        @Result(property = "albumImage", column = "SONG_ALBUMART")
       })
-    @Select("SELECT * FROM PLAYLIST")
+    @Select("SELECT * FROM PLAYLIST WHERE PLAYLIST_VISIBILITY = 'Y'")
     List<PlaylistDto> selectAllPlaylists();
+    
+    @Results({
+        @Result(property = "songNo", column = "SONG_NO"),
+        @Result(property = "songTitle", column = "SONG_TITLE"),
+        @Result(property = "songArtist", column = "SONG_ARTIST"),
+        @Result(property = "songLink", column = "SONG_LINK"),
+        @Result(property = "songId", column = "SONG_ID"),
+        @Result(property = "songAlbumArt", column = "SONG_ALBUMART")
+    })
+    @Select("SELECT SONG.* FROM MANAGE_SONG " +
+            "INNER JOIN SONG ON MANAGE_SONG.SONG_NO = SONG.SONG_NO " +
+            "WHERE MANAGE_SONG.PLAYLIST_NO = #{playlistNo} " +
+            "ORDER BY MANAGE_SONG.SONG_NO DESC LIMIT 1")
+    SongDto selectMostRecentSongAlbumArtInPlaylist(int playlistNo);
 }
