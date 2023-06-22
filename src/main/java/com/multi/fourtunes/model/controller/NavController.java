@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.multi.fourtunes.model.apis.OpenAiApi;
 import com.multi.fourtunes.model.biz.AdminpageBiz;
 import com.multi.fourtunes.model.biz.CommunityBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
@@ -31,6 +32,9 @@ public class NavController {
 
 	@Autowired
 	private LoginBiz loginBiz;
+	
+	@Autowired
+    OpenAiApi openAiApi;
 
 	// 로그인 페이지로 이동
 	@GetMapping("/login")
@@ -79,8 +83,29 @@ public class NavController {
 
 	// 맞춤 추천 페이지로 이동
 	@GetMapping("/suggested")
-	public String gotoSuggested() {
-		return "playlist_suggested";
+	public String gotoSuggested(HttpSession session, Model model) {
+		// 로그인 되어있으면 해당 회원의 키워드 불러오기
+		if (session.getAttribute("login") != null) {
+			UserDto user = (UserDto)session.getAttribute("login");
+			String[] userKeyword = loginBiz.getUserKeyword(user.getUser_no());
+			
+			StringBuilder myKeyword = new StringBuilder();
+			for (String str : userKeyword) {
+				//System.out.println("String[] : " + str);
+				myKeyword.append(str + " ");
+			}
+
+			model.addAttribute("userkeyword", myKeyword.toString());
+			
+			// GPT에게 노래추천받기
+			openAiApi.suggestedSong(userKeyword);
+			
+			//return "redirect:/api/gpt";
+			return "playlist_suggested";
+			
+		} else {
+			return "login_login";
+		}	
 	}
 
 	// 인기 차트 페이지로 이동

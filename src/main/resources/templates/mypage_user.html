@@ -79,14 +79,14 @@
 					<span class="mypage_title">이름</span> <input type="text"
 						id="mypage_name" placeholder="이름를 입력해 주세요" th:value="${session.login.user_name}" readonly>
 				</div>
-				<div class="mypage">
+				<!-- <div class="mypage">
 					<span class="mypage_title">현재 비밀번호</span> <input type="password"
 						id="mypage_pw" placeholder="현재 비밀번호을 입력해 주세요">
 				</div>
 				<div class="mypage">
 					<span class="mypage_title">새 비밀번호</span> <input type="password"
 						id="mypage_newpw" placeholder="새 비밀번호을 입력해 주세요"> 
-				</div>
+				</div> -->
 				<div class="mypage">
 					<span class="mypage_title">회원 등급</span> <input type="text"
 						id="mypage_grade" placeholder="회원 등급" th:value="${grade}" readonly>
@@ -98,7 +98,7 @@
 				<div class="mypage_kw_group">
 					<div class="mypage_keyword">
 						<p class="mypage_title">KeyWord</p>
-						<p>현재 키워드:<span th:text="${userkeyword}"></span></p>
+						<p>현재 키워드 : <span th:text="${userkeyword}"></span></p>
 					</div>
 					<div class="mypage_keyword_group">
 						<div class="mypage_kw">
@@ -124,7 +124,7 @@
 			</form>
 		</div>
 	</div>
-<script>
+<!-- <script>
     document.getElementById("mypage_form").addEventListener("submit", function(event) {
       event.preventDefault();
 
@@ -137,7 +137,7 @@
         alert("비밀번호가 틀렸습니다");
       }
     });
-  </script>
+  </script> -->
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript" src="/resources/js/keywordlist.js"></script>
 

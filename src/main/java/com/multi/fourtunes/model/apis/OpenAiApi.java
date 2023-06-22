@@ -6,18 +6,22 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class OpenAiApi {
 
-    private int countKeyword;
-
+    // application.properties에 저장되어있는 APIKey
     @Value("${openAiKey}")
     private String apiKey;
 
+    // Open AI API와 통신할 RestTemplate 선언
     RestTemplate restTemplate;
     final String url = "https://api.openai.com/v1/chat/completions";
 
@@ -27,76 +31,51 @@ public class OpenAiApi {
 
         // 통신하기 위해, RestTamplate 에 담을 header 생성
         HttpHeaders headers = new HttpHeaders();
+        
+        // BearerAuth 인증방식으로, OpenAI에 계정 인증
         headers.setBearerAuth(apiKey);
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpEntity<String> entity = new HttpEntity<>(setBody(keyword).toString(), headers);
+        // Body에 넣을 JSON 준비
+        Map<String, Object> messageMap = new HashMap<>();
+        messageMap.put("role", "user");
+        
+        String message = getContentByKeyword(keyword);
+        messageMap.put("content", message);
+        
+        Map<String, Object> requestBody = new HashMap<>();
 
-        System.out.println("entity is : " + entity.toString());
+        // 위에서 만든 messageMap 을 리퀘스트바디에 넣음
+        // Arrays.asList() -> 배열을 리스트로 만들어주는 애
+        requestBody.put("messages", Arrays.asList(messageMap));
+        System.out.println("리스트로 바꾸면: " + Arrays.asList(messageMap).toString());
 
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+        // Open Ai 자연어 처리 모델을 지정
+        // gpt-3.5 turbo 가 가장 가성비 좋음
+        requestBody.put("model", "gpt-3.5-turbo-0613");
 
-        System.out.println("response is : \n" + response.toString());
+        // 위에서 만들어놓은 Http Request에 들어갈 내용을 HttpRequest 에 담음
+        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);
 
-        return null;
-    }
+        try {
 
-    /**
-     * RequestBody 에 담을 Json 생성하기
-     * @param keyword
-     */
-    private JSONObject setBody(String keyword[]){
-        // 키워드외 갯수를 확인
-        JSONObject jsonObject = new JSONObject();
+            // 아까 만들어놓은 HttpRequest를 RestTamlate 에 담아 OpenAi API와 통신하고, 결과값을 responseEntity에 저장
+            ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
 
-        jsonObject.put("model", "gpt-3.5-turbo-0613");
-
-        JSONArray messagesArray = new JSONArray();
-        JSONObject messageObject = new JSONObject();
-        messageObject.put("role", "user");
-        messageObject.put("content", "내 아내, 어머니 및 두 아들과 딸을 위해 본에서 암스테르담으로 여행을 예약해야 합니다. 저도 함께 갈 것입니다. 항공사는 직항편이어야 합니다.");
-        messagesArray.put(messageObject);
-        jsonObject.put("messages", messagesArray);
-
-        JSONArray functionsArray = new JSONArray();
-        JSONObject functionObject = new JSONObject();
-        functionObject.put("name", "travel_reservation");
-        functionObject.put("description", "여행 예약하기");
-
-        JSONObject parametersObject = new JSONObject();
-        parametersObject.put("type", "object");
-
-        JSONObject propertiesObject = new JSONObject();
-
-        JSONObject destinationObject = new JSONObject();
-        destinationObject.put("type", "string");
-        destinationObject.put("description", "여행 목적지");
-        propertiesObject.put("destination", destinationObject);
-
-        JSONObject departureObject = new JSONObject();
-        departureObject.put("type", "string");
-        departureObject.put("description", "출발지");
-        propertiesObject.put("departure", departureObject);
-
-        JSONObject numberPeopleObject = new JSONObject();
-        numberPeopleObject.put("type", "string");
-        numberPeopleObject.put("description", "여행하는 사람 수");
-        propertiesObject.put("number_people", numberPeopleObject);
-
-        JSONObject travelModeObject = new JSONObject();
-        travelModeObject.put("type", "string");
-        travelModeObject.put("description", "여행 모드");
-        propertiesObject.put("travel_mode", travelModeObject);
-
-        parametersObject.put("properties", propertiesObject);
-        functionObject.put("parameters", parametersObject);
-
-        functionsArray.put(functionObject);
-        jsonObject.put("functions", functionsArray);
-
-        System.out.println(jsonObject.toString());
-
-        return jsonObject;
+            // 통신에 성공하면?
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                String responseBody = responseEntity.getBody();
+                // Body 의 내용을 출력함
+                System.out.println("Response: " + responseBody);
+            } else {
+                // 통신에 실패시, 실패 코드를 출력
+                System.err.println("Failed to make the request. Status code: " + responseEntity.getStatusCodeValue());
+            }
+        } catch (HttpClientErrorException ex) {
+            System.err.println("Error: " + ex.getMessage());
+        }
+        
+		return null;
     }
 
     /**
@@ -111,8 +90,9 @@ public class OpenAiApi {
         for(String str:keyword){
             content.append(str + ",");
         }
-        content.append(" includes title, artist");
-
+        content.append(" and return to JSON including only title and artist.");
+        // 한글 버전 : ㅇㅇ에 관한 노래 5곡을 추천하고, title과 artist만 포함한 JSON으로 반환해줘. 단, 한국 노래는 음원제목 그대로 추천해줘.
+        // 영어 버전 : Please recommend 5 songs about KPOP,여자가수,아이돌, and return to JSON including only korean_title and artist.
         return content.toString();
     }
 

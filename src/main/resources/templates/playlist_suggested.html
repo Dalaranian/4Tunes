@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -52,9 +52,10 @@
 
 	<div id="main">
 		<div id="main-container">
-			<h1>{search}에 대한 검색 결과</h1>
+			<h1>[ <span th:text="${session.login.user_name}"></span> ] 님을 위한 맞춤추천 음악</h1>
+			<h2>현재 키워드는 <span th:text="${userkeyword}"></span> 입니다.</h2>
 			<div id="buttons">
-				<div>키워드 수정</div>
+				<input type="button" id="modify" value="키워드 수정" onclick="location.href='/nav/mypage'">
 			</div>
 
 			<!-- 재생목록이 추가될 경우 list_wrapper클래스 div를 복붙하게 할것 -->

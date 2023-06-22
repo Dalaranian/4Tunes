@@ -1,7 +1,22 @@
 #main div > h1 {
-  color: #d4adfc;
+  color: white;
   position: relative;
-  margin: 40px 0 40px 5.5vw;
+  margin: 40px 0 20px 0;
+  top: 7%;
+  left: 6%;
+}
+#main-container h1 span{
+	color: #d4adfc;
+}
+#main div > h2 {
+	color: white;
+	position: relative;
+	margin: 0 0 40px 0;
+	top: 8%;
+	left: 6%;
+}
+#main-container h2 span{
+	color: #d4adfc;
 }
 #main-container {
   width: 80vw;
@@ -12,14 +27,16 @@
 #buttons {
   display: flex;
   position: absolute;
-  top: 10%;
+  top: 14%;
   right: 10%;
+  margin-top: 4px;
 }
-#buttons > div {
+#modify {
   font-size: 16px;
   color: white;
-  padding: 2px;
+  padding: 6px;
   background-color: #5c469c;
+  border: 0px;
   border-radius: 10px;
   margin-right: 1vw;
   cursor: pointer;
