@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/resources/css/main.css"/>
+    <link rel="stylesheet" href="/resources/css/nav.css"/>
+    <link rel="stylesheet" href="/resources/css/globalfont.css"/>
+    <link rel="shortcut icon" href="/resources/img/realfavicon.ico"/>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <title>4Tunes</title>
+</head>
+<body>
+<div id="nav">
+    <div class="banner">
+        <a href="/"><img src="/resources/img/banner.png"/></a>
+    </div>
+    <div id="login">
+        <div>
+            <a
+                    th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
+                <img class="login_img" src="/resources/img/usertest.png"/> <span
+                    th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
+            </a>
+        </div>
+        <br/>
+        <div>
+            <a href="/nav/mypage"><img class="mypage_img"
+                                       src="/resources/img/file.png"/>MYPAGE</a>
+        </div>
+    </div>
+    <div class="search-container">
+        <form action="/search/query" method="GET" style="display:flex; ">
+			<span class="search-icon">
+			<input type="image" class="search-icon" src="/resources/img/search.png" alt="submit"></span>
+            <input type="text" name="query" class="search-input" placeholder="키워드 입력"/>
+        </form>
+    </div>
+    <div>
+        <a href="/nav/suggested">맞춤추천</a>
+    </div>
+    <div>
+        <a href="/nav/chart">인기차트</a>
+    </div>
+    <div>
+        <a href="/nav/community">커뮤니티</a>
+    </div>
+    <div>
+        <a href="/nav/membership">멤버십</a>
+    </div>
+    <!-- API 테스트를 위한 임시 페이징입니다.  -->
+    <div th:if="${#session.getAttribute('login') != null and #session.getAttribute('login').user_id == 'ADMIN'}">
+        <a href="/gototestpage">API TEST</a>
+    </div>
+	<!-- 관리자 페이지를 위한 임시 페이징입니다. -->
+	<div th:if="${#session.getAttribute('login') != null and #session.getAttribute('login').user_id == 'ADMIN'}">
+		<a href="/nav/adminpage">ADMINPAGE</a>
+	</div>
+</div>
+
+<div id="main">
+    <div id="playlist">
+        <h1>플레이리스트</h1>
+        <div class="playlists">
+            <a href=""><img class="left" src="/resources/img/left.png"></a>
+            <div id="playlistsContainer"></div>
+            <a href=""><img class="right" src="/resources/img/right.png"></a>
+        </div>
+    </div>
+
+    <div id="today">
+        <h1>오늘의 선곡</h1>
+        <div class="btn">
+            <a href=""><img class="left" src="/resources/img/left.png"></a>
+            <div class="todays">
+                <div class="today">
+                    <a href="innerpaging/playlist/suggested"><img src="/resources/img/love.png" alt=""/></a>
+                </div>
+                <div class="today">
+                    <a href=""><img src="/resources/img/relax.png" alt=""/></a>
+                </div>
+                <div class="today">
+                    <a href=""><img src="/resources/img/exercise.png" alt=""/></a>
+                </div>
+                <div class="today">
+                    <a href=""><img src="/resources/img/travel.png" alt=""/></a>
+                </div>
+                <div class="today">
+                    <a href=""><img src="/resources/img/baby.png" alt=""/></a>
+                </div>
+                <div class="today">
+                    <a href=""><img src="/resources/img/cafe.png" alt=""/></a>
+                </div>
+                <div class="today">
+                    <a href=""><img src="/resources/img/gohome.png" alt=""/></a>
+                </div>
+                <div class="today">
+                    <a href=""><img src="/resources/img/party.png" alt=""/></a>
+                </div>
+            </div>
+            <a href=""><img class="right" src="/resources/img/right.png"></a>
+        </div>
+    </div>
+</div>
+<script>
+      $(document).ready(function() {
+    	  $.ajax({
+    	    url: '/playlist/getmyplaylist',
+    	    method: 'GET',
+    	    success: function(data) {
+    	      console.log(data); // Ajax 요청에 성공한 경우 응답 데이터를 콘솔에 출력
+    	      var playlistsDiv = $('#playlistsContainer');
+    	      $.each(data, function(index, playlist) {
+    	        var playlistDiv = $('<div class="playlist"></div>');
+    	        var a = $('<a></a>').attr('href', '/innerpaging/playlist/' + playlist.playlistName);
+    	        a.text(playlist.playlistName);
+    	        playlistDiv.append(a);
+    	        playlistsDiv.append(playlistDiv);
+    	      });
+    	    },
+    	    error: function(data) {
+    	    	console.log(data);
+    	      // Ajax 요청에 실패한 경우 에러 메시지를 콘솔에 출력
+    	    }
+    	  });
+    	});
+
+</script>
+<script src="/resources/js/slider.js"></script>
+<script src="/resources/js/hover_radius.js"></script>
+</body>
+</html>
