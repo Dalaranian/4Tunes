@@ -47,24 +47,24 @@ public class SpringSecurityConfig {
         auth.userDetailsService(userDetailsService).passwordEncoder(getPasswordEncoder());
     }
 
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        // 정적 파일 필터링 방지
-        return (web) -> web.ignoring().antMatchers("/resources/css/**", "/resources/js/**", "/resources/img/**").requestMatchers(PathRequest.toStaticResources().atCommonLocations());
-    }
+//    @Bean
+//    public WebSecurityCustomizer webSecurityCustomizer() {
+//        // 정적 파일 필터링 방지
+//        return (web) -> web.ignoring().antMatchers("/resources/css/**", "/resources/js/**", "/resources/img/**").requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+//    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.csrf().disable()
                 .authorizeRequests()
-                // 인증되지 않은 사용자는, Index 까지만 접근 가능
-                .antMatchers("/", "/favicon.ico", "/search/query", "/login/**").permitAll()
-                // 인증된 사용자는, 모든 페이지 접근 가능
-                .antMatchers("/**").hasAuthority("USER")
-                // ADMIN 도 모든 페이지 접근 가능
-                .antMatchers("/**").hasAuthority("ADMIN")
-                .and()
+                    // 인증되지 않은 사용자는, Index 까지만 접근 가능
+                    .antMatchers("/", "/favicon.ico", "/search/query", "/login/**", "/resources/css/**", "/resources/js/**", "/resources/img/**").permitAll()
+                    // 인증된 사용자는, 모든 페이지 접근 가능
+                    .antMatchers("/**").hasAuthority("USER")
+                    // ADMIN 도 모든 페이지 접근 가능
+                    .antMatchers("/**").hasAuthority("ADMIN")
+                    .and()
                 // 로그인 페이지 지정
                 .formLogin()
                     .permitAll()
@@ -89,6 +89,7 @@ public class SpringSecurityConfig {
                 .logout()
                     .permitAll()
                     .logoutRequestMatcher(new AntPathRequestMatcher("/login/logout"))
+                    .logoutSuccessUrl("/")
                     .deleteCookies("JESSIONID")
                     .invalidateHttpSession(true)
                     .clearAuthentication(true);
