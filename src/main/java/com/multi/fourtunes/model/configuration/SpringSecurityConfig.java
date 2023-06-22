@@ -28,7 +28,7 @@ import java.io.IOException;
  * Autor JMBAE
  */
 
-@EnableWebSecurity
+@EnableWebSecurity(debug = false)
 @AllArgsConstructor
 public class SpringSecurityConfig {
 
@@ -37,11 +37,6 @@ public class SpringSecurityConfig {
     @Autowired
     private CustomAuthenticationSuccessHandler authenticationSuccessHandler;
 
-
-    /**
-     * @param auth
-     * @throws Exception
-     */
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(getPasswordEncoder());
@@ -59,14 +54,14 @@ public class SpringSecurityConfig {
         http.csrf().disable()
                 .authorizeRequests()
                     // 인증되지 않은 사용자는, Index 까지만 접근 가능
-//                    .antMatchers("/", "/favicon.ico", "/search/query", "/login/**", "/resources/css/**", "/resources/js/**", "/resources/img/**").permitAll()
-                    .antMatchers("/", "/favicon.ico", "/search/query", "/login/**").permitAll()
-                // 인증된 사용자는, 모든 페이지 접근 가능
-                    .antMatchers("/**").hasAuthority("USER")
+                    .antMatchers("/", "/favicon.ico", "/search/query", "/login/**", "/error", "/playlist/getmyplaylist").permitAll()
+                    // 인증된 사용자는, 모든 페이지 접근 가능
+                    .antMatchers("/**").hasAnyAuthority("USER", "ADMIN")
                     // ADMIN 도 모든 페이지 접근 가능
-                    .antMatchers("/**").hasAuthority("ADMIN")
+//                    .antMatchers("/**").hasAuthority("ADMIN")
+                    .anyRequest().authenticated()
                     .and()
-                // 로그인 페이지 지정
+                // 로그인 세팅
                 .formLogin()
                     .permitAll()
                     .loginPage("/nav/login")
