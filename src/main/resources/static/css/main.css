@@ -46,8 +46,10 @@ h1 {
   width:70px;
   height:100px;
 }
-#playlist{
-
+#playlistsContainer{
+  display:flex;
+  width: 1080px; 
+  overflow: hidden;
 }
 #today {
 
@@ -71,6 +73,11 @@ h1 {
 .hidden {
     display: none;
   }
+.playlist_btn{
+  display:flex;
+  justify-content: center;
+  align-items:center;
+}
 .btn{
   display:flex;
   justify-content: center;
