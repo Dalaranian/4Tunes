@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.multi.fourtunes.model.dao.ChartDao;
 import com.multi.fourtunes.model.dto.SongDto;
-import com.multi.fourtunes.model.mapper.ChartMapper;
 
 @Service
 public class ChartBizImpl implements ChartBiz {
@@ -15,9 +14,9 @@ public class ChartBizImpl implements ChartBiz {
 	@Autowired
 	private ChartDao chartDao;
 
-	 @Override
-	    public List<SongDto> getTop10Songs() {
-	        return chartDao.getTop10Songs();
-	    }
+	@Override
+	public List<SongDto> getTop10Songs() {
+		return chartDao.getTop10Songs();
+	}
 
 }

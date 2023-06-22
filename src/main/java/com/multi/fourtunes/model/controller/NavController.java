@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -88,13 +87,14 @@ public class NavController {
 	public String gotoSuggested() {
 		return "playlist_suggested";
 	}
-
+	
 	// 인기 차트 페이지로 이동
 	@GetMapping("/chart")
-    public ResponseEntity<List<SongDto>> getTop10Songs() {
-        List<SongDto> topSongs = chartBiz.getTop10Songs();
-        return ResponseEntity.ok(topSongs);
-    }
+	public String gotoChart(Model model) {
+		List<SongDto> topSongs = chartBiz.getTop10Songs();
+		model.addAttribute("topSongs", topSongs);
+		return "chartpage_main";
+	}
 
 	// 커뮤니티 페이지로 이동
 	@RequestMapping("/community")
