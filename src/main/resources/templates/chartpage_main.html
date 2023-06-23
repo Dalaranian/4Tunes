@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -30,10 +30,11 @@
 			</div>
 		</div>
 		<div class="search-container">
-			<form action="/search/query" method="GET" style="display:flex; ">
-			<span class="search-icon">
-			<input type="image" class="search-icon" src="/resources/img/search.png" alt="submit"></span>
-				<input type="text" name="query" class="search-input" placeholder="키워드 입력" />
+			<form action="/search/query" method="GET" style="display: flex;">
+				<span class="search-icon"> <input type="image"
+					class="search-icon" src="/resources/img/search.png" alt="submit"></span>
+				<input type="text" name="query" class="search-input"
+					placeholder="키워드 입력" />
 			</form>
 		</div>
 		<div>
@@ -56,128 +57,21 @@
 
 		<!-- 재생목록이 추가될 경우 list_wrapper클래스 div를 복붙하게 할것 -->
 		<div id="MyPlayList">
-			<div class="list_wrapper">
-				<div id="List_left">
+			<div th:each="song, iterStat : ${topSongs}" class="list_wrapper">
+				<div th:id="${(iterStat.index % 2 == 0) ? 'list_left' : 'list_right'}">
+					<div class="rank">
+						<span th:text="${iterStat.index + 1} + '위' + ${song.playlistCount}"></span></div>
 					<div id="video">
 						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
+							<iframe th:src="@{${song.songLink}}" frameborder="0" allowfullscreen></iframe>
 						</div>
-						<div id="context">
-							<span>1위</span>
-							<h2>겁나긴노래제목겁나긴노래제목겁나긴노래제목</h2>
+						<div id="context">	
+							<h2 th:text="${song.songTitle}"></h2>
 							<br />
-							<h3>겁나 긴 가수 이름겁나 긴 가수 이름겁나 긴 가수 이름겁나 긴 가수 이름</h3>
+							<h3 th:text="${song.songArtist}"></h3>
 							<br />
 							<div>
-								<button class="plus_btn" style="display: inline-block">
-									+</button>
-								<div style="display: inline-block">내 플레이리스트에서 추가</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="List_right">
-					<div id="video">
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<span>2위</span>
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button class="plus_btn" style="display: inline-block">
-									+</button>
-								<div style="display: inline-block">내 플레이리스트에서 추가</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="list_wrapper">
-				<div id="List_left">
-					<div id="video">
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<span>3위</span>
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button class="plus_btn" style="display: inline-block">
-									+</button>
-								<div style="display: inline-block">내 플레이리스트에서 추가</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="List_right">
-					<div id="video">
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<span>4위</span>
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button class="plus_btn" style="display: inline-block">
-									+</button>
-								<div style="display: inline-block">내 플레이리스트에서 추가</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="list_wrapper">
-				<div id="List_left">
-					<div id="video">
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<span>5위</span>
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button class="plus_btn" style="display: inline-block">
-									+</button>
-								<div style="display: inline-block">내 플레이리스트에서 추가</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="List_right">
-					<div id="video">
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<span>6위</span>
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button class="plus_btn" style="display: inline-block">
-									+</button>
+								<button class="plus_btn" style="display: inline-block">+</button>
 								<div style="display: inline-block">내 플레이리스트에서 추가</div>
 							</div>
 						</div>

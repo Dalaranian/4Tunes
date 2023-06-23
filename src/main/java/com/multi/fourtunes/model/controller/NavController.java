@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.fourtunes.model.biz.AdminpageBiz;
+import com.multi.fourtunes.model.biz.ChartBiz;
 import com.multi.fourtunes.model.biz.CommunityBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
 import com.multi.fourtunes.model.dto.CommunityDto;
+import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.dto.UserDto;
 
 @Controller
@@ -32,6 +34,9 @@ public class NavController {
 	@Autowired
 	private LoginBiz loginBiz;
 
+	@Autowired
+	private ChartBiz chartBiz;
+	
 	// 로그인 페이지로 이동
 	@GetMapping("/login")
 	public String gotoLogin() {
@@ -82,10 +87,20 @@ public class NavController {
 	public String gotoSuggested() {
 		return "playlist_suggested";
 	}
-
+	
 	// 인기 차트 페이지로 이동
 	@GetMapping("/chart")
-	public String gotoChart() {
+	public String gotoChart(Model model) {
+		List<SongDto> topSongs = chartBiz.getTop10Songs();
+
+		// 전체 플레이리스트 횟수 정보 추가
+		for (SongDto song : topSongs) {
+			int playlistCount = chartBiz.getPlaylistCount(song.getSongNo());
+			song.setPlaylistCount(playlistCount);
+
+		}
+
+		model.addAttribute("topSongs", topSongs);
 		return "chartpage_main";
 	}
 

@@ -31,12 +31,12 @@
   display: flex;
 }
 
-.List_left {
+.list_left {
   width: 550px;
   display:flex;
 }
 
-.List_right {
+.list_right {
   width: 550px;
   display:flex;
 }
