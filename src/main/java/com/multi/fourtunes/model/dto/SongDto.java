@@ -11,5 +11,5 @@ public class SongDto {
     private String songAlbumArt;
     private String songLink;
     private String songId;
+    private int playlistCount;
 }
-
