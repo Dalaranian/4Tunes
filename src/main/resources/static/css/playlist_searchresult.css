@@ -29,6 +29,7 @@
 
 .list_wrapper {
   display: flex;
+  margin-right: 80px;
 }
 
 .list_left {
@@ -79,6 +80,7 @@ h3 {
   overflow: hidden;
   text-overflow: ellipsis;	
 }
+
 @media screen and (min-width: 768px) {
   #video-container {
     padding-top: 30%;
@@ -88,6 +90,39 @@ h3 {
 @media screen and (min-width: 1200px) {
   #video-container {
     padding-top: 23.08%;
+  }
+}
+
+@media (max-width: 1160px) {
+  #nav {
+    display: none !important;
+  }
+  #main {
+    width: 110vw !important;
+    background-color: #424242 !important;
+    overflow-x: scroll !important;
+  }
+  #main div > h1 {
+    margin-left: 55.8px;
+  }
+  #MyPlayList {
+    margin-top: 10px;
+  }
+  #video {
+    display: block;
+    margin-bottom: 0;
+  }
+  .video-container {
+    min-width: 340px;
+    min-height: 140px;
+  }
+  #buttons {
+    position: relative;
+    display: flex;
+    float: right;
+    min-width: 90px;
+    min-height: 28px;
+    margin-bottom: 35px;
   }
 }
 
@@ -121,9 +156,4 @@ h3 {
 	height: 20px;
 	cursor: pointer;
 }
-
-
-
-
-
 

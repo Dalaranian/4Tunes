@@ -36,6 +36,7 @@
 
 .list_wrapper {
   display: flex;
+  margin-right: 80px;
 }
 
 .list_left {
@@ -64,6 +65,9 @@
 
 .rank {
 	display: flex;
+	font-size: 30px;
+	font-weight: bold;
+	color: white;
 }
 
 iframe {
@@ -95,6 +99,8 @@ h3 {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+
 
 @media (max-width: 1160px) {
   #nav {
@@ -129,3 +135,32 @@ h3 {
   }
 }
 
+#plus{
+	background-color: transparent;
+	border: none;
+	vertical-align: middle;
+	height: 21px;
+}
+
+#plusimg{
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+@keyframes blink{
+	0%{
+		opacity: 1;
+	}
+	50%{
+		opacity: 0;
+	}
+	100%{
+		opacity: 1;
+	}
+}
+
+#header-query{
+	animation: blink 3s infinite;
+	color: white;
+}
