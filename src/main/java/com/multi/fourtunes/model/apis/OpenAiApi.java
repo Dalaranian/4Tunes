@@ -1,8 +1,15 @@
 package com.multi.fourtunes.model.apis;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.fourtunes.model.dto.SongDto;
-import org.json.JSONArray;
+
 import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -64,16 +71,59 @@ public class OpenAiApi {
 
             // 통신에 성공하면?
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                String responseBody = responseEntity.getBody();
-                // Body 의 내용을 출력함
-                System.out.println("Response: " + responseBody);
+				/*
+				 * String responseBody = responseEntity.getBody(); 
+				 * // Body 의 내용을 출력함
+				 * System.out.println("Response: " + responseBody);
+				 */
+                JSONObject responseBody = new JSONObject(responseEntity.getBody());
+                
+                // title과 artist 뽑아오기
+                ObjectMapper objMapper = new ObjectMapper();
+                
+                JsonNode rootNode = objMapper.readTree(responseBody.toString());
+                //System.out.println(rootNode.toPrettyString());
+                
+                JsonNode choicesNode = rootNode.get("choices");
+                //System.out.println(choicesNode.toPrettyString());
+                
+                JsonNode messageNode = choicesNode.get(0);
+                //System.out.println("message는 : " + messageNode);
+                
+                JsonNode messageNodeRes = messageNode.get("message");
+                //System.out.println("message res는 : " + messageNodeRes);
+                
+                JsonNode contentNode = messageNodeRes.get("content");
+                //System.out.println("content는 : " + contentNode);
+                
+                String contentString = contentNode.toString().replace("\\n", "").replace("\\", "").replace(" ", "");
+                System.out.println("contentString은 : " + contentString);
+                
+                JSONObject songs = new JSONObject(contentString);
+                System.out.println("결과 : " + songs);
+				/*
+				 * JSONParser parser = new JSONParser(); Object obj =
+				 * parser.parse(contentString); JSONArray jsonObj= (JSONArray)obj;
+				 * System.out.println("parse 결과 : " + jsonObj);
+				 */
+                
+                
+             
+                
+                
+                
+                
             } else {
                 // 통신에 실패시, 실패 코드를 출력
                 System.err.println("Failed to make the request. Status code: " + responseEntity.getStatusCodeValue());
             }
         } catch (HttpClientErrorException ex) {
             System.err.println("Error: " + ex.getMessage());
-        }
+        } catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} 
         
 		return null;
     }
@@ -86,11 +136,11 @@ public class OpenAiApi {
     private String getContentByKeyword(String[] keyword) {
         StringBuffer content = new StringBuffer();
 
-        content.append("Please recommend 5 songs about ");
+        //content.append("Please recommend 5 songs about ");
         for(String str:keyword){
-            content.append(str + ",");
+            content.append(" " + str);
         }
-        content.append(" and return to JSON including only title and artist.");
+        content.append("에 관한 노래 10곡을 추천하고, title과 artist만 포함한 JSON으로 반환해줘.");
         // 한글 버전 : ㅇㅇ에 관한 노래 5곡을 추천하고, title과 artist만 포함한 JSON으로 반환해줘. 단, 한국 노래는 음원제목 그대로 추천해줘.
         // 영어 버전 : Please recommend 5 songs about KPOP,여자가수,아이돌, and return to JSON including only korean_title and artist.
         return content.toString();
