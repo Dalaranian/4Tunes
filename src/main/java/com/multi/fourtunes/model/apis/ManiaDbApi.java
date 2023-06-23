@@ -91,7 +91,7 @@ public class ManiaDbApi {
 		// XML 을 JSON 으로 파싱
 		JSONObject jsonObject = XML.toJSONObject(responseBodyByXML);
 
-		System.out.println("불러온 JSON : " + jsonObject.toString());
+//		System.out.println("불러온 JSON : " + jsonObject.toString());
 
 		try {
 			ObjectMapper objectMapper = new ObjectMapper();
