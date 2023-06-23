@@ -2,6 +2,7 @@ package com.multi.fourtunes.model.dao;
 
 import java.util.List;
 
+import com.multi.fourtunes.model.mapper.RoleManagerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +15,9 @@ public class UserDaoImpl implements UserDao {
 
 	@Autowired
 	private UserMapper userMapper;
+
+	@Autowired
+	private RoleManagerMapper roleManagerMapper;
 
 	@Autowired
 	private KeywordMapper keywordMapper;
@@ -73,6 +77,11 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public String[] getUserPlaylistNo(String userNo) {
 		return userMapper.getUserPlatListNo(userNo);
+	}
+
+	@Override
+	public String getUserRoleByUserNo(int userNo) {
+		return roleManagerMapper.getUserRoleByUserNo(userNo);
 	}
 
 }

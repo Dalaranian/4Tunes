@@ -105,5 +105,22 @@ public class PlaylistBizImple implements PlaylistBiz{
         return playlists;
     }
 
+    @Override
+    public List<PlaylistDto> getMyPlaylist(int myno) {
+        List<PlaylistDto> myPlaylists = playListMapper.selectMine(myno);
+        
+        // 각 PlaylistDto의 albumImage 설정
+        for(PlaylistDto playlist : myPlaylists) {
+            SongDto song = playListMapper.selectMostRecentSongAlbumArtInPlaylist(playlist.getPlaylistNo());
+            if (song == null) {
+                playlist.setAlbumArt("https://images.unsplash.com/photo-1682687980918-3c2149a8f110?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80");
+            } else {
+                playlist.setAlbumArt(song.getSongAlbumArt());
+            }
+        }
+        
+        return myPlaylists;
+    }
+
     
 }

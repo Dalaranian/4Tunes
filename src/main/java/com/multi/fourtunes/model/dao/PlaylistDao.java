@@ -12,4 +12,5 @@ public interface PlaylistDao {
     void allocatePlaylist(int userNo);
     
     List<PlaylistDto> selectAll();
+    List<PlaylistDto> selectMine(int userNo);
 }
