@@ -12,7 +12,7 @@ function addToPlaylist(songTitle, songArtist, songLink, songId, songAlbumArt) {
         songAlbumArt    : songAlbumArt
     };
 
-    console.log(songDto);
+//    console.log(songDto);
 
     $.ajax({
             url: '/playlist/insertmyplaylist',
@@ -20,7 +20,12 @@ function addToPlaylist(songTitle, songArtist, songLink, songId, songAlbumArt) {
             contentType: 'application/json',
             data: JSON.stringify(songDto),
             success: function(res) {
-                alert(res);
+                console.log(typeof res);
+                if(res.indexOf("<html lang=") != -1) {
+                    location.href="/nav/login";
+                }else{
+                    alert(res);
+                }
             },
             error: function(res) {
                 alert(res);
