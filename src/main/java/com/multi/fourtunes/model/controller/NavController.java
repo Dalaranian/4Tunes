@@ -92,6 +92,14 @@ public class NavController {
 	@GetMapping("/chart")
 	public String gotoChart(Model model) {
 		List<SongDto> topSongs = chartBiz.getTop10Songs();
+
+		// 전체 플레이리스트 횟수 정보 추가
+		for (SongDto song : topSongs) {
+			int playlistCount = chartBiz.getPlaylistCount(song.getSongNo());
+			song.setPlaylistCount(playlistCount);
+
+		}
+
 		model.addAttribute("topSongs", topSongs);
 		return "chartpage_main";
 	}

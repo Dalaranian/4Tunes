@@ -17,4 +17,10 @@ public class ChartDaoImpl implements ChartDao {
 	public List<SongDto> getTop10Songs() {
 		return chartMapper.getTop10Songs();
 	}
+
+	@Override
+	public int getPlaylistCount(int songNo) {
+		return chartMapper.getPlaylistCount(songNo);
+	}
+
 }

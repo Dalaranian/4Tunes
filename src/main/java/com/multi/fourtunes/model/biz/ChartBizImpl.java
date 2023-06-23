@@ -19,4 +19,9 @@ public class ChartBizImpl implements ChartBiz {
 		return chartDao.getTop10Songs();
 	}
 
+	@Override
+	public int getPlaylistCount(int songNo) {
+		return chartDao.getPlaylistCount(songNo);
+	}
+
 }
