@@ -1,5 +1,6 @@
 package com.multi.fourtunes.model.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -7,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,15 +44,25 @@ public class PlayListController {
     @GetMapping("/getmyplaylist")
     public ResponseEntity<List<PlaylistDto>> getMyPlaylist(HttpSession session) {
         UserDto currentUser = (UserDto) session.getAttribute("login");
-        List<PlaylistDto> playlists;
+        List<PlaylistDto> myPlaylists = new ArrayList<>();
+        List<PlaylistDto> allPlaylists = new ArrayList<>();
 
-        if(currentUser != null) {
-            playlists = playlist.getMyPlaylist(currentUser.getUser_no());
-            playlists.addAll(playlist.getAllPlaylists());
-        } else {
-            playlists = playlist.getAllPlaylists();
+        if (currentUser != null) {
+            myPlaylists = playlist.getMyPlaylist(currentUser.getUser_no());
+            allPlaylists = playlist.getAllPlaylists();
+
+            // myPlaylists에 이미 있는 플레이리스트 제외
+            allPlaylists.removeAll(myPlaylists);
+        }else {
+            allPlaylists = playlist.getAllPlaylists();
         }
 
+        // myPlaylists와 allPlaylists 병합
+        List<PlaylistDto> playlists = new ArrayList<>();
+        playlists.addAll(myPlaylists);
+        playlists.addAll(allPlaylists);
+        
+        
         return ResponseEntity.ok(playlists);
     }
 }

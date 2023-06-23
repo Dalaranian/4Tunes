@@ -1,160 +1,114 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="/resources/css/main.css"/>
-    <link rel="stylesheet" href="/resources/css/nav.css"/>
-    <link rel="stylesheet" href="/resources/css/globalfont.css"/>
-    <link rel="shortcut icon" href="/resources/img/realfavicon.ico"/>
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<!--	<script src="/resources/securityLogout.js"></script>-->
-	<title>4Tunes</title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/resources/css/main.css" />
+<link rel="stylesheet" href="/resources/css/nav.css" />
+<link rel="stylesheet" href="/resources/css/globalfont.css" />
+<link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<title>4Tunes</title>
 </head>
 <body>
-<div id="nav">
-    <div class="banner">
-        <a href="/"><img src="/resources/img/banner.png"/></a>
-    </div>
-    <div id="login">
-        <div>
-            <a
-                    th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
-                <img class="login_img" src="/resources/img/usertest.png"/> <span
-                    th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
-            </a>
-        </div>
-        <br/>
-        <div>
-            <a href="/nav/mypage"><img class="mypage_img"
-                                       src="/resources/img/file.png"/>MYPAGE</a>
-        </div>
-    </div>
-    <div class="search-container">
-        <form action="/search/query" method="GET" style="display:flex; ">
+	<div id="nav">
+		<div class="banner">
+			<a href="/"><img src="/resources/img/banner.png" /></a>
+		</div>
+		<div id="login">
+			<div>
+				<a
+					th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
+					<img class="login_img" src="/resources/img/usertest.png" /> <span
+					th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
+				</a>
+			</div>
+			<br />
+			<div>
+				<a href="/nav/mypage"><img class="mypage_img"
+					src="/resources/img/file.png" />MYPAGE</a>
+			</div>
+			
+			<!-- 관리자 페이지를 위한 임시 페이징입니다. -->
+			<div>
+				<a href="/nav/adminpage">ADMINPAGE</a>
+			</div>
+		</div>
+		<div class="search-container">
+		<form action="/search/query" method="GET" style="display:flex; ">
 			<span class="search-icon">
 			<input type="image" class="search-icon" src="/resources/img/search.png" alt="submit"></span>
-            <input type="text" name="query" class="search-input" placeholder="키워드 입력"/>
-        </form>
+			<input type="text" name="query" class="search-input" placeholder="키워드 입력" />
+		</form>
+		</div>
+		<div>
+			<a href="/nav/suggested">맞춤추천</a>
+		</div>
+		<div>
+			<a href="/nav/chart">인기차트</a>
+		</div>
+		<div>
+			<a href="/nav/community">커뮤니티</a>
+		</div>
+		<div>
+			<a href="/nav/membership">멤버십</a>
+		</div>
+		<!-- API 테스트를 위한 임시 페이징입니다.  -->
+		<div>
+			<a href="/gototestpage">API TEST</a>
+		</div>
+		
+	</div>
+
+	<div id="main">
+      <div id="playlist">
+    <h1>플레이리스트</h1>
+    <div class="playlist_btn">
+    <a href=""><img class="left" src="/resources/img/left.png"></a>
+    <div class="playlists">
+        <div id="playlistsContainer"></div>
     </div>
-    <div>
-        <a href="/nav/suggested">맞춤추천</a>
-    </div>
-    <div>
-        <a href="/nav/chart">인기차트</a>
-    </div>
-    <div>
-        <a href="/nav/community">커뮤니티</a>
-    </div>
-    <div>
-        <a href="/nav/membership">멤버십</a>
-    </div>
-    <div sec:authorize="hasAuthority('ADMIN')">
-        <a href="/gototestpage">API TEST</a>
-        <br>
-        <a href="/nav/adminpage">ADMINPAGE</a>
+    <a href=""><img class="right" src="/resources/img/right.png"></a>
     </div>
 </div>
 
-<div id="main">
-    <div id="playlist">
-        <h1>플레이리스트</h1>
-        <div class="playlist_btn">
-            <a href=""><img class="left" src="/resources/img/left.png"></a>
-            <div class="playlists">
-                <div id="playlistsContainer"></div>
-            </div>
-            <a href=""><img class="right" src="/resources/img/right.png"></a>
-        </div>
-    </div>
-
-    <div id="today">
+      <div id="today">
         <h1>오늘의 선곡</h1>
         <div class="btn">
-            <a href=""><img class="left" src="/resources/img/left.png"></a>
-            <div class="todays">
-                <div class="today">
-                    <a href="innerpaging/playlist/suggested"><img src="/resources/img/love.png" alt=""/></a>
-                </div>
-                <div class="today">
-                    <a href=""><img src="/resources/img/relax.png" alt=""/></a>
-                </div>
-                <div class="today">
-                    <a href=""><img src="/resources/img/exercise.png" alt=""/></a>
-                </div>
-                <div class="today">
-                    <a href=""><img src="/resources/img/travel.png" alt=""/></a>
-                </div>
-                <div class="today">
-                    <a href=""><img src="/resources/img/baby.png" alt=""/></a>
-                </div>
-                <div class="today">
-                    <a href=""><img src="/resources/img/cafe.png" alt=""/></a>
-                </div>
-                <div class="today">
-                    <a href=""><img src="/resources/img/gohome.png" alt=""/></a>
-                </div>
-                <div class="today">
-                    <a href=""><img src="/resources/img/party.png" alt=""/></a>
-                </div>
-            </div>
-            <a href=""><img class="right" src="/resources/img/right.png"></a>
+        <a href=""><img class="left" src="/resources/img/left.png"></a>
+        <div class="todays">
+          <div class="today">
+            <a href="innerpaging/playlist/suggested"><img src="/resources/img/love.png" alt="" /></a>
+          </div>
+          <div class="today">
+            <a href=""><img src="/resources/img/relax.png" alt="" /></a>
+          </div>
+          <div class="today">
+            <a href=""><img src="/resources/img/exercise.png" alt="" /></a>
+          </div>
+          <div class="today">
+            <a href=""><img src="/resources/img/travel.png" alt="" /></a>
+          </div>
+          <div class="today">
+            <a href=""><img src="/resources/img/baby.png" alt="" /></a>
+          </div>
+          <div class="today">
+            <a href=""><img src="/resources/img/cafe.png" alt="" /></a>
+          </div>
+          <div class="today">
+            <a href=""><img src="/resources/img/gohome.png" alt="" /></a>
+          </div>
+          <div class="today">
+            <a href=""><img src="/resources/img/party.png" alt="" /></a>
+          </div>
+      </div>
+      <a href=""><img class="right" src="/resources/img/right.png"></a>
         </div>
-    </div>
-    <p th:text="${#authentication.name}"></p>
-    <p th:text="${#authentication.authorities}"></p>
-    <p th:text="${#authentication.authenticated}"></p>
-</div>
-<script>
-      $(document).ready(function() {
-    	  $.ajax({
-    	    url: '/playlist/getmyplaylist',
-    	    method: 'GET',
-    	    success: function(data) {
-    	      console.log(data); 
-    	      var playlistsDiv = $('#playlistsContainer');
-    	      $.each(data, function(index, playlist) {
-    	        var playlistDiv = $('<div class="playlist"></div>');
-    	        
-    	        var a = $('<a></a>').attr('href', '/innerpaging/playlist/public?userNo=' + playlist.userNo);
-    	        a.text(playlist.userName+"님의 플레이리스트");
-
-    	        var img = $('<img>').attr('src', playlist.albumArt);
-    	        
-    	        playlistDiv.append(a);
-    	        playlistDiv.append(img);
-    	        
-    	        playlistsDiv.append(playlistDiv);
-    	      });
-    	      
-    	      const $slider2 = $("#playlistsContainer");
-    	      const $sliderItems2 = $slider2.find(".playlist");
-    	      const itemCount2 = $sliderItems2.length;
-    	      let currentPosition2 = 0;
-
-    	      $("#playlist .right").on("click", function (e) { 
-    	        e.preventDefault();
-    	        $slider2.append($sliderItems2.eq(currentPosition2).detach());
-    	        currentPosition2 = (currentPosition2 + 1) % itemCount2;
-    	      });
-
-    	      $("#playlist .left").on("click", function (e) {  
-    	        e.preventDefault();
-    	        currentPosition2 = (currentPosition2 - 1 + itemCount2) % itemCount2;
-    	        $slider2.prepend($sliderItems2.eq(currentPosition2).detach());
-    	      });
-    	    },
-    	    error: function(data) {
-    	      console.log(data);
-    	    }
-    	  });
-    	});
-
-
-
-</script>
-<script src="/resources/js/slider.js"></script>
-<script src="/resources/js/hover_radius.js"></script>
+      </div>
+	</div>
+      <script src="/resources/js/index_playlist.js"></script>
+  	  <script src="/resources/js/slider.js"></script>
+      <script src="/resources/js/hover_radius.js"></script>
 </body>
 </html>
