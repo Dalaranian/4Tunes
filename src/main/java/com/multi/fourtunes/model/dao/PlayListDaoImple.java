@@ -31,4 +31,9 @@ public class PlayListDaoImple implements PlaylistDao{
     public List<PlaylistDto> selectAll() {
         return playListMapper.selectAllPlaylists();
     }
+
+	@Override
+	public List<PlaylistDto> selectMine(int userNo) {
+		return playListMapper.selectMine(userNo);
+	}
 }

@@ -55,8 +55,17 @@ public class PlayListController {
     }
     
     @GetMapping("/getmyplaylist")
-    public ResponseEntity<List<PlaylistDto>> home() {
-        List<PlaylistDto> playlists = playlist.getAllPlaylists();
+    public ResponseEntity<List<PlaylistDto>> getMyPlaylist(HttpSession session) {
+        UserDto currentUser = (UserDto) session.getAttribute("login");
+        List<PlaylistDto> playlists;
+
+        if(currentUser != null) {
+            playlists = playlist.getMyPlaylist(currentUser.getUser_no());
+            playlists.addAll(playlist.getAllPlaylists());
+        } else {
+            playlists = playlist.getAllPlaylists();
+        }
+
         return ResponseEntity.ok(playlists);
     }
 }

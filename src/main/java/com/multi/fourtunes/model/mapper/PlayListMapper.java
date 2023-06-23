@@ -21,9 +21,12 @@ public interface PlayListMapper {
         @Result(property = "playlistName", column = "PLAYLIST_NAME"),
         @Result(property = "userNo", column = "USER_NO"),
         @Result(property = "playlistVisibility", column = "PLAYLIST_VISIBILITY"),
-        @Result(property = "albumImage", column = "SONG_ALBUMART")
+        @Result(property = "albumImage", column = "SONG_ALBUMART"),
+        @Result(property = "userName", column = "USER_NAME")
       })
-    @Select("SELECT * FROM PLAYLIST WHERE PLAYLIST_VISIBILITY = 'Y'")
+    @Select("SELECT PLAYLIST.*, USER.USER_NAME FROM PLAYLIST " +
+            "JOIN USER ON PLAYLIST.USER_NO = USER.USER_NO " +
+            "WHERE PLAYLIST_VISIBILITY = 'Y'")
     List<PlaylistDto> selectAllPlaylists();
     
     @Results({
@@ -39,4 +42,17 @@ public interface PlayListMapper {
             "WHERE MANAGE_SONG.PLAYLIST_NO = #{playlistNo} " +
             "ORDER BY MANAGE_SONG.SONG_NO DESC LIMIT 1")
     SongDto selectMostRecentSongAlbumArtInPlaylist(int playlistNo);
+    
+    @Results({
+        @Result(property = "playlistNo", column = "PLAYLIST_NO"),
+        @Result(property = "playlistName", column = "PLAYLIST_NAME"),
+        @Result(property = "userNo", column = "USER_NO"),
+        @Result(property = "playlistVisibility", column = "PLAYLIST_VISIBILITY"),
+        @Result(property = "userName", column = "USER_NAME")
+    })
+    @Select("SELECT PLAYLIST.*, USER.USER_NAME FROM PLAYLIST " +
+            "JOIN USER ON PLAYLIST.USER_NO = USER.USER_NO " +
+            "WHERE PLAYLIST.USER_NO = #{userNo}")
+    List<PlaylistDto> selectMine(int userNo);
+    
 }
