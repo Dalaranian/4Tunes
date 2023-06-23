@@ -1,6 +1,6 @@
 package com.multi.fourtunes.model.configuration;
 
-import com.multi.fourtunes.intercepter.SessionInvalidationInterceptor;
+import com.multi.fourtunes.model.intercepter.SessionInvalidationInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
