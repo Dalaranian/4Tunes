@@ -18,5 +18,6 @@ public class UserDto {
 	private String user_name;
 	private String user_pw;
 	private String user_grade;
-	
+
+
 }

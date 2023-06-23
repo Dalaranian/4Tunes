@@ -5,11 +5,11 @@ import lombok.Data;
 @Data
 public class SongDto {
 
-	private Integer songNo;
-	private String songTitle;
-	private String songArtist;
-	private String songLink;
-	private String songId;
-	private int playlistCount;
-
+    private Integer songNo;
+    private String songTitle;
+    private String songArtist;
+    private String songAlbumArt;
+    private String songLink;
+    private String songId;
+    private int playlistCount;
 }

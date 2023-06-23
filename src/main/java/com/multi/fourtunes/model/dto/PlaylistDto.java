@@ -8,4 +8,6 @@ public class PlaylistDto {
 	private String playlistName;
 	private int userNo;
 	private String playlistVisibility; // 플레이리스트 공개여부
+	private String albumArt;
+	private String userName;
 }

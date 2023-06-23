@@ -115,8 +115,8 @@ public class ManiaDbApi {
 //				System.out.println(itemNode.toString());
 				String title = itemNode.get("title").asText().replaceAll("&nbsp;", " ");
 				String name = itemNode.get("maniadb:artist").get("name").asText();
-				String link = itemNode.get("link").asText();
 				String id = itemNode.get("id").asText();
+				String albumArt = itemNode.get("maniadb:album").get("image").asText();
 
 //				System.out.println("Title: " + title);
 //				System.out.println("Name: " + name);
@@ -127,8 +127,7 @@ public class ManiaDbApi {
 				currentMusic.setSongArtist(name);
 				currentMusic.setSongTitle(title);
 				currentMusic.setSongId(id);
-
-				currentMusic.toString();
+				currentMusic.setSongAlbumArt(albumArt);
 
 				// 다 불러온 친구를 저장
 				result.add(currentMusic);

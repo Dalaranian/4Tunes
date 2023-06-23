@@ -1,6 +1,8 @@
 package com.multi.fourtunes.model.dao;
 
-import org.springframework.stereotype.Repository;
+import java.util.List;
+
+import com.multi.fourtunes.model.dto.PlaylistDto;
 
 
 public interface PlaylistDao {
@@ -8,5 +10,7 @@ public interface PlaylistDao {
     int insertPlaylist(String playListNo, String songNo);
 
     void allocatePlaylist(int userNo);
-
+    
+    List<PlaylistDto> selectAll();
+    List<PlaylistDto> selectMine(int userNo);
 }

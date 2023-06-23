@@ -1,15 +1,20 @@
 package com.multi.fourtunes.model.biz;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.multi.fourtunes.model.dao.PlaylistDao;
+import com.multi.fourtunes.model.dto.PlaylistDto;
 import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.dto.UserDto;
 import com.multi.fourtunes.model.jpa.entity.SongEntity;
 import com.multi.fourtunes.model.jpa.entity.UserEntity;
 import com.multi.fourtunes.model.jpa.repository.SongRepository;
 import com.multi.fourtunes.model.jpa.repository.UserRepository;
+import com.multi.fourtunes.model.mapper.PlayListMapper;
 import com.multi.fourtunes.model.mapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class PlaylistBizImple implements PlaylistBiz{
@@ -20,7 +25,8 @@ public class PlaylistBizImple implements PlaylistBiz{
     SongRepository songRepository;
     @Autowired
     UserMapper userMapper;
-
+    @Autowired
+    PlayListMapper playListMapper;
     @Autowired
     PlaylistDao playlistDao;
 
@@ -54,6 +60,7 @@ public class PlaylistBizImple implements PlaylistBiz{
                 selectSong.setSongLink(song.getSongLink());
                 selectSong.setSongTitle(song.getSongTitle());
                 selectSong.setSongId(song.getSongId());
+                selectSong.setSongAlbumart(song.getSongAlbumArt());
                 // entity 저장
                 songRepository.save(selectSong);
                 // 저장되어서, Auto Increment 값이 반영된 새로운 엔티티 불러오기
@@ -80,4 +87,40 @@ public class PlaylistBizImple implements PlaylistBiz{
         UserEntity user = userRepository.findByUserId(userId);
         playlistDao.allocatePlaylist(user.getUserNo());
     }
+    
+    @Override
+    public List<PlaylistDto> getAllPlaylists() {
+        List<PlaylistDto> playlists = playlistDao.selectAll();
+        
+        // 각 PlaylistDto의 albumImage 설정
+        for(PlaylistDto playlist : playlists) {
+            SongDto song = playListMapper.selectMostRecentSongAlbumArtInPlaylist(playlist.getPlaylistNo());
+            if (song == null) {
+                playlist.setAlbumArt("https://images.unsplash.com/photo-1682687980918-3c2149a8f110?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80");
+            } else {
+                playlist.setAlbumArt(song.getSongAlbumArt());
+            }
+        }
+        
+        return playlists;
+    }
+
+    @Override
+    public List<PlaylistDto> getMyPlaylist(int myno) {
+        List<PlaylistDto> myPlaylists = playListMapper.selectMine(myno);
+        
+        // 각 PlaylistDto의 albumImage 설정
+        for(PlaylistDto playlist : myPlaylists) {
+            SongDto song = playListMapper.selectMostRecentSongAlbumArtInPlaylist(playlist.getPlaylistNo());
+            if (song == null) {
+                playlist.setAlbumArt("https://images.unsplash.com/photo-1682687980918-3c2149a8f110?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80");
+            } else {
+                playlist.setAlbumArt(song.getSongAlbumArt());
+            }
+        }
+        
+        return myPlaylists;
+    }
+
+    
 }
