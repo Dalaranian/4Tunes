@@ -26,5 +26,6 @@ public interface UserDao {
 
 	public String[] getUserPlaylistNo(String userId);
 
+    String getUserRoleByUserNo(int userNo);
 }
 
