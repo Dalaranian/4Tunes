@@ -1,6 +1,7 @@
 package com.multi.fourtunes.model.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import com.multi.fourtunes.model.biz.AdminpageBiz;
 import com.multi.fourtunes.model.biz.ChartBiz;
 import com.multi.fourtunes.model.biz.CommunityBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
+import com.multi.fourtunes.model.biz.SuggestBiz;
 import com.multi.fourtunes.model.dto.CommunityDto;
 import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.dto.UserDto;
@@ -37,6 +39,9 @@ public class NavController {
 	
 	@Autowired
     OpenAiApi openAiApi;
+	
+	@Autowired
+	SuggestBiz suggestBiz;
 
 	@Autowired
 	private ChartBiz chartBiz;
@@ -103,7 +108,10 @@ public class NavController {
 			model.addAttribute("userkeyword", myKeyword.toString());
 			
 			// GPT에게 노래추천받기
-			openAiApi.suggestedSong(userKeyword);
+			ArrayList<SongDto> song = openAiApi.suggestedSong(userKeyword);
+			
+			ArrayList<SongDto> finalRes = suggestBiz.searchSuggestedSong(song);
+			model.addAttribute("suggestResult", finalRes);
 			
 			//return "redirect:/api/gpt";
 			return "playlist_suggested";

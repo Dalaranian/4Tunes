@@ -44,6 +44,7 @@ public class CommunityController {
 		CommunityDto community = communityBiz.get(boardNo);
 		communityBiz.incrementViewCount(boardNo);
 		model.addAttribute("community", community);
+
 		// 댓글
 		List<CommentDto> commentList = communityBiz.getComments(boardNo);
 		model.addAttribute("commentList", commentList);

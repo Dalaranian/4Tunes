@@ -8,8 +8,7 @@ import com.multi.fourtunes.model.dto.SongDto;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -33,6 +32,8 @@ public class OpenAiApi {
     final String url = "https://api.openai.com/v1/chat/completions";
 
     public ArrayList<SongDto> suggestedSong(String[] keyword){
+    	
+    	ArrayList<SongDto> result = new ArrayList<>();
 
         restTemplate = new RestTemplate();
 
@@ -71,52 +72,23 @@ public class OpenAiApi {
 
             // 통신에 성공하면?
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
-				/*
-				 * String responseBody = responseEntity.getBody(); 
-				 * // Body 의 내용을 출력함
-				 * System.out.println("Response: " + responseBody);
-				 */
-                JSONObject responseBody = new JSONObject(responseEntity.getBody());
+            	
+                JSONArray songsArray = parsingJson(responseEntity);
                 
-                // title과 artist 뽑아오기
-                ObjectMapper objMapper = new ObjectMapper();
-                
-                JsonNode rootNode = objMapper.readTree(responseBody.toString());
-                //System.out.println(rootNode.toPrettyString());
-                
-                JsonNode choicesNode = rootNode.get("choices");
-                //System.out.println(choicesNode.toPrettyString());
-                
-                JsonNode messageNode = choicesNode.get(0);
-                //System.out.println("message는 : " + messageNode);
-                
-                JsonNode messageNodeRes = messageNode.get("message");
-                //System.out.println("message res는 : " + messageNodeRes);
-                
-                JsonNode contentNode = messageNodeRes.get("content");
-                //System.out.println("content는 : " + contentNode);
-                
-                String contentString = contentNode.toString().replace("\\n", "").replace("\\", "").replace(" ", "");
-                System.out.println("contentString은 : " + contentString);
-                
-                JSONObject songs = new JSONObject(contentString);
-                System.out.println("결과 : " + songs);
-				/*
-				 * JSONParser parser = new JSONParser(); Object obj =
-				 * parser.parse(contentString); JSONArray jsonObj= (JSONArray)obj;
-				 * System.out.println("parse 결과 : " + jsonObj);
-				 */
-                
-                
-             
-                
-                
-                
+                for(int i=0; i<=songsArray.length()-1; i++) {
+                	SongDto current = new SongDto();
+                	JSONObject tmp = songsArray.getJSONObject(i);
+                	current.setSongArtist(tmp.getString("artist"));
+                	current.setSongTitle(tmp.getString("title"));
+                	System.out.println(current);
+                	result.add(current);
+                }
                 
             } else {
                 // 통신에 실패시, 실패 코드를 출력
                 System.err.println("Failed to make the request. Status code: " + responseEntity.getStatusCodeValue());
             }
+            
         } catch (HttpClientErrorException ex) {
             System.err.println("Error: " + ex.getMessage());
         } catch (JsonMappingException e) {
@@ -125,8 +97,31 @@ public class OpenAiApi {
 			e.printStackTrace();
 		} 
         
-		return null;
+		return result;
     }
+
+	private JSONArray parsingJson(ResponseEntity<String> responseEntity)
+			throws JSONException, JsonProcessingException, JsonMappingException {
+		JSONObject responseBody = new JSONObject(responseEntity.getBody());
+		
+		// title과 artist 뽑아오기
+		ObjectMapper objMapper = new ObjectMapper();
+		
+		JsonNode rootNode = objMapper.readTree(responseBody.toString());
+		JsonNode choicesNode = rootNode.get("choices");
+		JsonNode messageNode = choicesNode.get(0);
+		JsonNode messageNodeRes = messageNode.get("message");
+		JsonNode contentNode = messageNodeRes.get("content");
+
+		String contentString = contentNode.toString().replace("\\n", "").replace("\\", "").replace(" ", "");
+		
+		String[] str = contentString.trim().split("\"", 2);
+		
+		JSONObject songs = new JSONObject(str[1]);
+		
+		JSONArray songsArray = songs.getJSONArray("songs");
+		return songsArray;
+	}
 
     /**
      * OpenAi 에 보낼 질문(Content) 를 생성하는 method
