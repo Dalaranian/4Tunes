@@ -25,7 +25,7 @@ import java.util.Map;
 public class OpenAiApi {
 
     // application.properties에 저장되어있는 APIKey
-    @Value("${openAi.Key}")
+    @Value("${openAiKey}")
     private String apiKey;
 
     // Open AI API와 통신할 RestTemplate 선언
@@ -67,16 +67,17 @@ public class OpenAiApi {
         try {
 
             // 아까 만들어놓은 HttpRequest를 RestTamlate 에 담아 OpenAi API와 통신하고, 결과값을 responseEntity에 저장
+            ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
 
             // 통신에 성공하면?
-            if (true) {
-                /*
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+				/*
 				 * String responseBody = responseEntity.getBody(); 
 				 * // Body 의 내용을 출력함
 				 * System.out.println("Response: " + responseBody);
 				 */
-                JSONObject responseBody = new JSONObject("{\"created\":1687493714,\"usage\":{\"completion_tokens\":230,\"prompt_tokens\":49,\"total_tokens\":279},\"model\":\"gpt-3.5-turbo-0613\",\"id\":\"chatcmpl-7USUU7xfcZ58eG7CdddBLC5YRGf3M\",\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"songs\\\": [\\n    {\\n      \\\"title\\\": \\\"Dalla Dalla\\\",\\n      \\\"artist\\\": \\\"ITZY\\\"\\n    },\\n    {\\n      \\\"title\\\": \\\"Fancy\\\",\\n      \\\"artist\\\": \\\"TWICE\\\"\\n    },\\n    {\\n      \\\"title\\\": \\\"Kill This Love\\\",\\n      \\\"artist\\\": \\\"BLACKPINK\\\"\\n    },\\n    {\\n      \\\"title\\\": \\\"Red Flavor\\\",\\n      \\\"artist\\\": \\\"Red Velvet\\\"\\n    },\\n    {\\n      \\\"title\\\": \\\"Wannabe\\\",\\n      \\\"artist\\\": \\\"ITZY\\\"\\n    },\\n    {\\n      \\\"title\\\": \\\"Cheer Up\\\",\\n      \\\"artist\\\": \\\"TWICE\\\"\\n    },\\n    {\\n      \\\"title\\\": \\\"DDU-DU DDU-DU\\\",\\n      \\\"artist\\\": \\\"BLACKPINK\\\"\\n    },\\n    {\\n      \\\"title\\\": \\\"Psycho\\\",\\n      \\\"artist\\\": \\\"Red Velvet\\\"\\n    },\\n    {\\n      \\\"title\\\": \\\"What is Love?\\\",\\n      \\\"artist\\\": \\\"TWICE\\\"\\n    },\\n    {\\n      \\\"title\\\": \\\"Ice Cream\\\",\\n      \\\"artist\\\": \\\"BLACKPINK (feat. Selena Gomez)\\\"\\n    }\\n  ]\\n}\"}}],\"object\":\"chat.completion\"}\n");
-
+                JSONObject responseBody = new JSONObject(responseEntity.getBody());
+                
                 // title과 artist 뽑아오기
                 ObjectMapper objMapper = new ObjectMapper();
                 
@@ -97,35 +98,34 @@ public class OpenAiApi {
                 
                 String contentString = contentNode.toString().replace("\\n", "").replace("\\", "").replace(" ", "");
                 System.out.println("contentString은 : " + contentString);
-
-                String[] str = contentString.trim().split("\"", 2);
-                System.out.println(str.length);
-                for (String tmp:str){
-                    System.out.println("---------");
-                    System.out.println(tmp);
-                    System.out.println("---------");
-                }
                 
-                JSONObject songs = new JSONObject(str[1]);
+                JSONObject songs = new JSONObject(contentString);
                 System.out.println("결과 : " + songs);
-                /*
+				/*
 				 * JSONParser parser = new JSONParser(); Object obj =
 				 * parser.parse(contentString); JSONArray jsonObj= (JSONArray)obj;
 				 * System.out.println("parse 결과 : " + jsonObj);
 				 */
+                
+                
+             
+                
+                
+                
+                
             } else {
                 // 통신에 실패시, 실패 코드를 출력
-//                System.err.println("Failed to make the request. Status code: " + responseEntity.getStatusCodeValue());
+                System.err.println("Failed to make the request. Status code: " + responseEntity.getStatusCodeValue());
             }
         } catch (HttpClientErrorException ex) {
             System.err.println("Error: " + ex.getMessage());
         } catch (JsonMappingException e) {
-            e.printStackTrace();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} 
+        
+		return null;
     }
 
     /**
