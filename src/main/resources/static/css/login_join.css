@@ -177,6 +177,13 @@ body {
   min-height:32px;
   cursor:pointer;
 }
+
+#verify-btn{
+  background-color: #d4adfc;
+  border-radius: 10px 10px;
+  height: 30px;
+  }
+
 @media (max-width: 700px) {
   #nav {
     display: none;

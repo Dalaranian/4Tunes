@@ -85,6 +85,11 @@ public class LoginBizImple implements LoginBiz {
 	public int getSubscriptionMonth(int user_no) {
 		return payDao.getSubscriptionMonth(user_no);
 	}
-	
-	
+
+	@Override
+	public boolean isValidEmail(String joinEmail) {
+		return userRepository.findByUserId(joinEmail) == null;
+	}
+
+
 }
