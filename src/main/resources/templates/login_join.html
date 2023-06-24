@@ -59,8 +59,8 @@
 				<fieldset>
 					<h2>JOIN</h2>
 					<div class="join">
-						<span class="join-title">ID</span> <input type="text"
-							name="join-email" id="join-email" placeholder="Email를 입력해 주세요" />
+						<span class="join-title">ID</span> <input type="text" name="join-email" id="join-email" placeholder="Email를 입력해 주세요" />
+						<button onclick="verifyEmail()" type="button" id="verify-btn">✔</button>
 					</div>
 					<div class="join">
 						<span class="join-title">PW</span> <input type="password"
@@ -89,7 +89,7 @@
 				</fieldset>
 				<div class="join-btn">
 					<div id="find_join">
-						<button type="submit">Join</button>
+						<button type="submit" disabled id="btn_join">Join</button>
 					</div>
 					<div id="find_cancel">
 						<button type="button" onclick="location.href='/nav/login'">Cancel</button>
@@ -98,5 +98,35 @@
 			</form>
 		</div>
 	</div>
+	<script type="text/javascript">
+		function verifyEmail() {
+			var joinEmail = document.getElementById("join-email").value;
+			var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/; // 이메일 형식 확인 정규표현식
+
+			if(emailRegex.test(joinEmail)) {
+				$.ajax({
+					url: "/login/verifyemailid",
+					method: "POST",
+					data: {
+					  joinEmail: joinEmail
+					},
+					success: function(response) {
+					if(response.status=="sucess"){
+						  console.log("success" + response);
+						  document.getElementById("btn_join").disabled = false;
+					}else{
+						  alert("중복되었습니다");
+					}
+					},
+					error: function(xhr, status, error) {
+					  // Handle error
+					  console.error("error" + error);
+					}
+			  });
+			} else {
+  				alert("잘못된 이메일 형식입니다.");
+			}
+		}
+	</script>
 </body>
 </html>
