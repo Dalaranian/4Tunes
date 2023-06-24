@@ -6,6 +6,6 @@ import com.multi.fourtunes.model.dto.SongDto;
 
 public interface SuggestBiz {
 
-	ArrayList<SongDto> searchSuggestedSong(ArrayList<SongDto> song);
+	ArrayList<SongDto> searchSuggestedSong(ArrayList<SongDto> songs);
 
 }

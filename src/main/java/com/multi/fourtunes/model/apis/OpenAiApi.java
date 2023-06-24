@@ -33,6 +33,7 @@ public class OpenAiApi {
 
     public ArrayList<SongDto> suggestedSong(String[] keyword){
     	
+    	// 추천결과 10곡을 담을 result 변수 선언
     	ArrayList<SongDto> result = new ArrayList<>();
 
         restTemplate = new RestTemplate();
@@ -44,48 +45,60 @@ public class OpenAiApi {
         headers.setBearerAuth(apiKey);
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        // Body에 넣을 JSON 준비
-        Map<String, Object> messageMap = new HashMap<>();
-        messageMap.put("role", "user");
+        // requestBody에 넣을 JSON 준비
+        // messagesMap : role + content을 포함
+        // -> role: GPT의 역할을 지정(system/assistant/user)
+        // -> content: GPT에게 던질 질문
+        Map<String, Object> messagesMap = new HashMap<>();
         
+        // GPT의 역할을 user로 지정
+        messagesMap.put("role", "user");
+        
+        // 매개변수로 받아온 keyword 배열을 토대로, GPT에게 던질 질문 생성하여 content에 저장
         String message = getContentByKeyword(keyword);
-        messageMap.put("content", message);
+        messagesMap.put("content", message);
         
         Map<String, Object> requestBody = new HashMap<>();
 
-        // 위에서 만든 messageMap 을 리퀘스트바디에 넣음
-        // Arrays.asList() -> 배열을 리스트로 만들어주는 애
-        requestBody.put("messages", Arrays.asList(messageMap));
-        System.out.println("리스트로 바꾸면: " + Arrays.asList(messageMap).toString());
+        // 위에서 만든 messageMap 을 requestBody에 넣음
+        // Arrays.asList() -> 배열을 리스트로 만들어주는 역할
+        requestBody.put("messages", Arrays.asList(messagesMap));
+        System.out.println("messages : " + Arrays.asList(messagesMap).toString());
 
-        // Open Ai 자연어 처리 모델을 지정
-        // gpt-3.5 turbo 가 가장 가성비 좋음
+        // OpenAI 자연어 처리 모델을 지정
+        // gpt-3.5-turbo 가 가장 가성비 좋음
         requestBody.put("model", "gpt-3.5-turbo-0613");
 
-        // 위에서 만들어놓은 Http Request에 들어갈 내용을 HttpRequest 에 담음
+        // 위에서 만들어놓은 Http Request(HttpHeaders, requestBody)를 HttpEntity 에 담음
         HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);
 
         try {
-
-            // 아까 만들어놓은 HttpRequest를 RestTamlate 에 담아 OpenAi API와 통신하고, 결과값을 responseEntity에 저장
+            // 요청 내용을 담은 HttpEntity(requestEntity)를 RestTamlate에 담아 OpenAI API와 통신하고, 결과값을 responseEntity에 저장
+        	// -> exchange(요청 url, 요청방식 지정, 요청내용, 응답내용 타입 지정)
             ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
 
-            // 통신에 성공하면?
+            // OpenAI API와 통신 성공한 경우
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
             	
+            	// 응답받은 내용(responseEntity) 파싱 작업
+            	// 파싱 완료되면, 제목과 가수만 포함한 노래 10곡의 JSON 배열이 반환된다.
                 JSONArray songsArray = parsingJson(responseEntity);
                 
+                // 노래 한곡씩 SongDto에 담아, ArrayList(result)에 10곡 모두 넣어줌
                 for(int i=0; i<=songsArray.length()-1; i++) {
+                	// ArrayList<SongDto> result에 10곡의 정보를 담기위한 SongDto 선언
                 	SongDto current = new SongDto();
-                	JSONObject tmp = songsArray.getJSONObject(i);
-                	current.setSongArtist(tmp.getString("artist"));
-                	current.setSongTitle(tmp.getString("title"));
-                	System.out.println(current);
+                	
+                	JSONObject oneSong = songsArray.getJSONObject(i);
+                	//getString("") : ""키의 값을 리턴
+                	current.setSongArtist(oneSong.getString("artist"));
+                	current.setSongTitle(oneSong.getString("title"));
+                	
+                	// result에는 10곡의 SongDto가 모두 담겨짐
                 	result.add(current);
                 }
                 
-            } else {
-                // 통신에 실패시, 실패 코드를 출력
+            } else {  // OpenAI API와 통신 실패한 경우
                 System.err.println("Failed to make the request. Status code: " + responseEntity.getStatusCodeValue());
             }
             
@@ -102,24 +115,34 @@ public class OpenAiApi {
 
 	private JSONArray parsingJson(ResponseEntity<String> responseEntity)
 			throws JSONException, JsonProcessingException, JsonMappingException {
-		JSONObject responseBody = new JSONObject(responseEntity.getBody());
 		
-		// title과 artist 뽑아오기
+		// ResponseEntity의 Body 추출
+		JSONObject responseBody = new JSONObject(responseEntity.getBody());
+		System.out.println("응답: " + responseBody);
+		
+		// responseBody에서 노래 제목과 가수만 추출하는 파싱 작업
+		// ObjectMapper : JSON을 JAVA객체로 역직렬화하는 Jackson의 클래스
 		ObjectMapper objMapper = new ObjectMapper();
 		
+		// readTree() : JSON 문자열을 JsonNode로 변환
 		JsonNode rootNode = objMapper.readTree(responseBody.toString());
 		JsonNode choicesNode = rootNode.get("choices");
 		JsonNode messageNode = choicesNode.get(0);
 		JsonNode messageNodeRes = messageNode.get("message");
 		JsonNode contentNode = messageNodeRes.get("content");
 
+		// content에 포함되어있는 \n, \, 공백(" ") 삭제
 		String contentString = contentNode.toString().replace("\\n", "").replace("\\", "").replace(" ", "");
 		
+		// 맨앞 큰따옴표(") 삭제
+		// trim(): 앞뒤 공백 삭제 / split(a, b): a를 기준으로 b개로 쪼개기
 		String[] str = contentString.trim().split("\"", 2);
 		
 		JSONObject songs = new JSONObject(str[1]);
 		
+		// getJSONArray("songs")를 통해 키 songs의 JSON 배열 추출
 		JSONArray songsArray = songs.getJSONArray("songs");
+		
 		return songsArray;
 	}
 

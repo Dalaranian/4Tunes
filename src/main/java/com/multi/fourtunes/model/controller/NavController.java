@@ -94,23 +94,26 @@ public class NavController {
 	// 맞춤 추천 페이지로 이동
 	@GetMapping("/suggested")
 	public String gotoSuggested(HttpSession session, Model model) {
-		// 로그인 되어있으면 해당 회원의 키워드 불러오기
+		// 현재 로그인 되어있는 회원의 키워드 조회하기
 		if (session.getAttribute("login") != null) {
 			UserDto user = (UserDto)session.getAttribute("login");
 			String[] userKeyword = loginBiz.getUserKeyword(user.getUser_no());
 			
+			// StringBuilder : String을 합치는 역할, append()를 통해 문자열을 합쳐준다.
 			StringBuilder myKeyword = new StringBuilder();
 			for (String str : userKeyword) {
-				//System.out.println("String[] : " + str);
 				myKeyword.append(str + " ");
 			}
 
+			// 조회한 해당 회원의 키워드를 model에 담아줌
 			model.addAttribute("userkeyword", myKeyword.toString());
 			
-			// GPT에게 노래추천받기
-			ArrayList<SongDto> song = openAiApi.suggestedSong(userKeyword);
+			// OpenAI 에게 노래추천받기 (키워드가 담겨있는 String 배열을 매개변수로 전달)
+			// 추천받은 노래 10곡을 songs에 담아 ManiaDB에 검색
+			ArrayList<SongDto> songs = openAiApi.suggestedSong(userKeyword);
 			
-			ArrayList<SongDto> finalRes = suggestBiz.searchSuggestedSong(song);
+			// ManiaDB에 추천받은 노래 검색 (노래 10곡의 SongDto가 담겨있는 ArrayList를 매개변수로 전달)
+			ArrayList<SongDto> finalRes = suggestBiz.searchSuggestedSong(songs);
 			model.addAttribute("suggestResult", finalRes);
 			
 			//return "redirect:/api/gpt";
