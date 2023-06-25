@@ -3,6 +3,7 @@ package com.multi.fourtunes.model.biz;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import com.multi.fourtunes.model.dao.PlaylistDao;
@@ -74,8 +75,9 @@ public class PlaylistBizImple implements PlaylistBiz{
             int res = playlistDao.insertPlaylist(userPlayList[0], Long.toString(selectSong.getSongNo()));
 
             result = " 플레이리스트 저장에 성공했습니다. ";
-        } catch (Exception e) {
-//            e.printStackTrace();
+        } catch (DuplicateKeyException e) {
+            result = song.getSongTitle() + " 는 이미 저장된 노래입니다. ";
+        } catch (Exception e){
             result = " 플레이리스트 저장에 실패했습니다. 다시 시도해주세요 ";
         }
 
