@@ -32,8 +32,6 @@ public class PlayListController {
         UserDto currentUser = (UserDto) session.getAttribute("login");
         String res = playlist.insertPlaylist(songDto, currentUser);
 
-        System.out.println(" 여기서 에러 나오겠지? \n" + res);
-
         if (res.equals("플레이리스트 저장에 성공했습니다.")) {
             return ResponseEntity.ok(res);
         } else {
