@@ -1,26 +1,24 @@
 package com.multi.fourtunes.model.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import com.multi.fourtunes.model.biz.PlaylistBiz;
-import com.multi.fourtunes.model.dto.PlaylistDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.multi.fourtunes.model.biz.KeywordBiz;
+import com.multi.fourtunes.model.biz.KeywordChartBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
+import com.multi.fourtunes.model.biz.PlaylistBiz;
+import com.multi.fourtunes.model.dto.KeywordChartDto;
 import com.multi.fourtunes.model.dto.UserDto;
 
 @Controller
@@ -38,6 +36,9 @@ public class LoginController {
 
 	@Autowired
 	private PlaylistBiz playlistBiz;
+	
+	@Autowired
+	private KeywordChartBiz keywordChartBiz;
 
 	@GetMapping("/sociallogin")
 	public String socialLogin(@RequestParam("email") String email, @RequestParam("name") String name, Model model,
@@ -78,6 +79,8 @@ public class LoginController {
 	public String join(Model model) {
 		String[] keywordList = loginBiz.getKeyword();
 		model.addAttribute("keywordlist", keywordList);
+		 List<KeywordChartDto> keywordCounts = keywordChartBiz.getKeywordChart();
+	    model.addAttribute("keywordCounts", keywordCounts);
 		return "login_join";
 	}
 

@@ -1,132 +1,186 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="/resources/css/nav.css" />
-<link rel="stylesheet" href="/resources/css/globalfont.css" />
-<link rel="stylesheet" href="/resources/css/login_join.css" />
-<link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
-<title>4Tunes</title>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="/resources/js/keywordlist.js"></script>
-</head>
-
-<body>
-	<div id="nav">
-		<div class="banner">
-			<a href="/"><img src="/resources/img/banner.png" /></a>
-		</div>
-		<div id="login">
-			<div>
-				<a
-					th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
-					<img class="login_img" src="/resources/img/usertest.png" /> <span
-					th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
-				</a>
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="/resources/css/nav.css" />
+	<link rel="stylesheet" href="/resources/css/globalfont.css" />
+	<link rel="stylesheet" href="/resources/css/login_join.css" />
+	<link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<title>4Tunes</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="/resources/js/keywordlist.js"></script>
+	</head>
+	
+	<body>
+		<div id="nav">
+			<div class="banner">
+				<a href="/"><img src="/resources/img/banner.png" /></a>
 			</div>
-			<br />
-			<div>
-				<a href="/nav/mypage"><img class="mypage_img"
-					src="/resources/img/file.png" />MYPAGE</a>
-			</div>
-		</div>
-		<div class="search-container">
-			<form action="/search/query" method="GET" style="display:flex; ">
-			<span class="search-icon">
-			<input type="image" class="search-icon" src="/resources/img/search.png" alt="submit"></span>
-				<input type="text" name="query" class="search-input" placeholder="키워드 입력" />
-			</form>
-		</div>
-		<div>
-			<a href="/nav/suggested">맞춤추천</a>
-		</div>
-		<div>
-			<a href="/nav/chart">인기차트</a>
-		</div>
-		<div>
-			<a href="/nav/community">커뮤니티</a>
-		</div>
-		<div>
-			<a href="/nav/membership">멤버십</a>
-		</div>
-	</div>
-	<div class="main">
-		<!-- 로그인 시작하는 부분 -->
-		<div class="loginbox">
-			<form action="/login/insertuser" method="GET">
-				<fieldset>
-					<h2>JOIN</h2>
-					<div class="join">
-						<span class="join-title">ID</span> <input type="text" name="join-email" id="join-email" placeholder="Email를 입력해 주세요" />
-						<button onclick="verifyEmail()" type="button" id="verify-btn">✔</button>
-					</div>
-					<div class="join">
-						<span class="join-title">PW</span> <input type="password"
-							name="join-pw" id="join-pw" placeholder="비밀번호를 입력해 주세요" />
-					</div>
-					<div class="join">
-						<span class="join-title">이름</span> <input type="text"
-							name="join-name" id="join-name" placeholder="이름을 입력해 주세요" />
-					</div>
-					<div class="join-keyword">
-						<p class="join-title">KeyWord</p>
-					</div>
-					<div class="join-kw">
-						<input type="search" id="search-keyword" placeholder="키워드를 선택해주세요." />
-					</div>
-					<div class="join-kw">
-						<select name="keyword" id="kw" multiple>
-							<option th:each="keyword : ${keywordlist}" th:value="${keyword}"
-								th:text="${keyword}"></option>
-						</select>
-					</div>
-					<div class="join-kw" id="selected_keyword">
-						<input type="text" id="readonly" placeholder="선택된 내용 보여주기"
-							name="selected_keyword" readonly />
-					</div>
-				</fieldset>
-				<div class="join-btn">
-					<div id="find_join">
-						<button type="submit" disabled id="btn_join">Join</button>
-					</div>
-					<div id="find_cancel">
-						<button type="button" onclick="location.href='/nav/login'">Cancel</button>
-					</div>
+			<div id="login">
+				<div>
+					<a
+						th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
+						<img class="login_img" src="/resources/img/usertest.png" /> <span
+						th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
+					</a>
 				</div>
-			</form>
+				<br />
+				<div>
+					<a href="/nav/mypage"><img class="mypage_img"
+						src="/resources/img/file.png" />MYPAGE</a>
+				</div>
+			</div>
+			<div class="search-container">
+				<form action="/search/query" method="GET" style="display:flex; ">
+				<span class="search-icon">
+				<input type="image" class="search-icon" src="/resources/img/search.png" alt="submit"></span>
+					<input type="text" name="query" class="search-input" placeholder="키워드 입력" />
+				</form>
+			</div>
+			<div>
+				<a href="/nav/suggested">맞춤추천</a>
+			</div>
+			<div>
+				<a href="/nav/chart">인기차트</a>
+			</div>
+			<div>
+				<a href="/nav/community">커뮤니티</a>
+			</div>
+			<div>
+				<a href="/nav/membership">멤버십</a>
+			</div>
 		</div>
-	</div>
+		<div class="main">
+			<!-- 로그인 시작하는 부분 -->
+			<div class="loginbox">
+				<form action="/login/insertuser" method="GET">
+					<fieldset>
+						<h2>JOIN</h2>
+						<div class="join">
+							<span class="join-title">ID</span> <input type="text" name="join-email" id="join-email" placeholder="Email를 입력해 주세요" />
+							<button onclick="verifyEmail()" type="button" id="verify-btn">✔</button>
+						</div>
+						<div class="join">
+							<span class="join-title">PW</span> <input type="password"
+								name="join-pw" id="join-pw" placeholder="비밀번호를 입력해 주세요" />
+						</div>
+						<div class="join">
+							<span class="join-title">이름</span> <input type="text"
+								name="join-name" id="join-name" placeholder="이름을 입력해 주세요" />
+						</div>
+						<div class="join-keyword">
+							<p class="join-title">KeyWord</p><img class="i" src="/resources/img/i.png"></img>
+						</div>
+						<div class="join-kw">
+							<input type="search" id="search-keyword" placeholder="키워드를 선택해주세요." />
+						</div>
+						<div class="join-kw">
+							<select name="keyword" id="kw" multiple>
+								<option th:each="keyword : ${keywordlist}" th:value="${keyword}"
+									th:text="${keyword}"></option>
+							</select>
+						</div>
+						<div class="join-kw" id="selected_keyword">
+							<input type="text" id="readonly" placeholder="선택된 내용 보여주기"
+								name="selected_keyword" readonly />
+						</div>
+					</fieldset>
+					<div class="join-btn">
+						<div id="find_join">
+							<button type="submit" disabled id="btn_join">Join</button>
+						</div>
+						<div id="find_cancel">
+							<button type="button" onclick="location.href='/nav/login'">Cancel</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+		<div class="chart-back">
+		<h1>전체 유저의 키워드 통계</h1>
+	    <canvas id="chart" style="width: 500px; height: 500px; margin: 0 auto;"></canvas>
+	    <div>
+	    <input class="chart-button" type="button" value="확인">
+	    </div>
+	    </div>
 	<script type="text/javascript">
-		function verifyEmail() {
-			var joinEmail = document.getElementById("join-email").value;
-			var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/; // 이메일 형식 확인 정규표현식
-
-			if(emailRegex.test(joinEmail)) {
-				$.ajax({
-					url: "/login/verifyemailid",
-					method: "POST",
-					data: {
-					  joinEmail: joinEmail
-					},
-					success: function(response) {
-					if(response.status=="sucess"){
-						  console.log("success" + response);
-						  document.getElementById("btn_join").disabled = false;
-					}else{
-						  alert("중복되었습니다");
-					}
-					},
-					error: function(xhr, status, error) {
-					  // Handle error
-					  console.error("error" + error);
-					}
-			  });
-			} else {
-  				alert("잘못된 이메일 형식입니다.");
+			function verifyEmail() {
+				var joinEmail = document.getElementById("join-email").value;
+				var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/; // 이메일 형식 확인 정규표현식
+	
+				if(emailRegex.test(joinEmail)) {
+					$.ajax({
+						url: "/login/verifyemailid",
+						method: "POST",
+						data: {
+						  joinEmail: joinEmail
+						},
+						success: function(response) {
+						if(response.status=="sucess"){
+							  console.log("success" + response);
+							  document.getElementById("btn_join").disabled = false;
+						}else{
+							  alert("중복되었습니다");
+						}
+						},
+						error: function(xhr, status, error) {
+						  // Handle error
+						  console.error("error" + error);
+						}
+				  });
+				} else {
+	  				alert("잘못된 이메일 형식입니다.");
+				}
 			}
-		}
+		</script>
+	<script>
+	$(document).ready(function() {
+	    $('.i').click(function() {
+	      $('.chart-back').toggle();
+	    });
+
+	    $('.chart-button').click(function() {
+	      $('.chart-back').hide();
+	    });
+	  });
 	</script>
-</body>
-</html>
+		<script th:inline="javascript">
+		var ctx = document.getElementById('chart').getContext('2d');
+		var data = /*[[${keywordCounts}]]*/ 'default';
+		var labels = data.map(function(e) { return e.keywordName; });
+		var counts = data.map(function(e) { return e.count; });
+	
+		var getRandomColor = function() {
+		  var letters = '0123456789ABCDEF';
+		  var color = '#';
+		  for (var i = 0; i < 6; i++) {
+		    color += letters[Math.floor(Math.random() * 16)];
+		  }
+		  return color;
+		};
+	
+		var backgroundColors = data.map(function(e) {
+		  return getRandomColor();
+		});
+	
+		var chart = new Chart(ctx, {
+		  type: 'doughnut',
+		  data: {
+		    labels: labels,
+		    datasets: [{
+		      data: counts,
+		      backgroundColor: backgroundColors,
+		    }]
+		  },
+		  options: {
+		    maintainAspectRatio: false,
+		    responsive: false,
+		  }
+		});	
+	</script>
+	</body>
+	</html>
