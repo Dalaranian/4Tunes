@@ -1,4 +1,4 @@
-package com.multi.fourtunes.intercepter;
+package com.multi.fourtunes.model.intercepter;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 

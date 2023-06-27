@@ -155,4 +155,14 @@ public class LoginController {
 		}
 		return "index";
 	}
+
+	@PostMapping("/verifyemailid")
+	@ResponseBody
+	public String verifyEmail(@RequestParam("joinEmail") String joinEmail) {
+		if (loginBiz.isValidEmail(joinEmail)) {
+			return "{\"status\": \"success\", \"message\": \"Email verification successful\"}";
+		} else {
+			return "{\"status\": \"error\", \"message\": \"Invalid email format\"}";
+		}
+	}
 }

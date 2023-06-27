@@ -21,4 +21,6 @@ public interface LoginBiz {
     void insertUserRole(String userNo);
 
 	int getSubscriptionMonth(int user_no);
+
+    boolean isValidEmail(String joinEmail);
 }
