@@ -33,13 +33,13 @@ $(document).ready(function () {
       const itemCount2 = $sliderItems2.length;
       let currentPosition2 = 0;
 
-      $("#playlist .right").on("click", function (e) {
+      $(".playlist_right").on("click", function (e) {
         e.preventDefault();
         $slider2.append($sliderItems2.eq(currentPosition2).detach());
         currentPosition2 = (currentPosition2 + 1) % itemCount2;
       });
 
-      $("#playlist .left").on("click", function (e) {
+      $(".playlist_left").on("click", function (e) {
         e.preventDefault();
         currentPosition2 = (currentPosition2 - 1 + itemCount2) % itemCount2;
         $slider2.prepend($sliderItems2.eq(currentPosition2).detach());
