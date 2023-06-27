@@ -68,6 +68,8 @@
 	font-size: 30px;
 	font-weight: bold;
 	color: white;
+	color: #fff;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080, 0 0 30px #ff0080, 0 0 40px #ff0080, 0 0 55px #ff0080, 0 0 75px #ff0080;
 }
 
 iframe {
@@ -99,7 +101,6 @@ h3 {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 
 
 @media (max-width: 1160px) {
@@ -148,19 +149,3 @@ h3 {
 	cursor: pointer;
 }
 
-@keyframes blink{
-	0%{
-		opacity: 1;
-	}
-	50%{
-		opacity: 0;
-	}
-	100%{
-		opacity: 1;
-	}
-}
-
-#header-query{
-	animation: blink 3s infinite;
-	color: white;
-}
