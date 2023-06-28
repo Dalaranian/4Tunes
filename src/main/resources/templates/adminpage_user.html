@@ -33,10 +33,11 @@
 			</div>
 		</div>
 		<div class="search-container">
-			<form action="/search/query" method="GET" style="display:flex; ">
-			<span class="search-icon">
-			<input type="image" class="search-icon" src="/resources/img/search.png" alt="submit"></span>
+			<form action="/search/query" method="GET" style="display: flex;">
 				<input type="text" name="query" class="search-input" placeholder="키워드 입력" />
+				<span class="search-icon">
+					<input type="image" class="search-icon" src="/resources/img/search.png" alt="submit">
+				</span>				
 			</form>
 		</div>
 		<div>
@@ -100,14 +101,7 @@
 		</div>
 	</div>
 	
-	<script type="text/javascript">
-		function deleteAlert(user_no){
-			if(confirm("정말 해당 회원을 탈퇴 처리하시겠습니까?")){
-				alert(user_no + " 번 회원 탈퇴되었습니다. ")
-				location.href='/adminpage/delete/' + user_no;
-			}
-		}
-	</script>
+	<script type="text/javascript" src="/resources/js/deleteAlert.js"></script>
 	
 </body>
 </html>

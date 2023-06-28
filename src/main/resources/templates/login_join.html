@@ -34,12 +34,13 @@
 				</div>
 			</div>
 			<div class="search-container">
-				<form action="/search/query" method="GET" style="display:flex; ">
+			<form action="/search/query" method="GET" style="display: flex;">
+				<input type="text" name="query" class="search-input" placeholder="키워드 입력" />
 				<span class="search-icon">
-				<input type="image" class="search-icon" src="/resources/img/search.png" alt="submit"></span>
-					<input type="text" name="query" class="search-input" placeholder="키워드 입력" />
-				</form>
-			</div>
+					<input type="image" class="search-icon" src="/resources/img/search.png" alt="submit">
+				</span>				
+			</form>
+		</div>
 			<div>
 				<a href="/nav/suggested">맞춤추천</a>
 			</div>
@@ -107,47 +108,8 @@
 	    <input class="chart-button" type="button" value="확인">
 	    </div>
 	    </div>
-	<script type="text/javascript">
-			function verifyEmail() {
-				var joinEmail = document.getElementById("join-email").value;
-				var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/; // 이메일 형식 확인 정규표현식
-	
-				if(emailRegex.test(joinEmail)) {
-					$.ajax({
-						url: "/login/verifyemailid",
-						method: "POST",
-						data: {
-						  joinEmail: joinEmail
-						},
-						success: function(response) {
-						if(response.status=="sucess"){
-							  console.log("success" + response);
-							  document.getElementById("btn_join").disabled = false;
-						}else{
-							  alert("중복되었습니다");
-						}
-						},
-						error: function(xhr, status, error) {
-						  // Handle error
-						  console.error("error" + error);
-						}
-				  });
-				} else {
-	  				alert("잘못된 이메일 형식입니다.");
-				}
-			}
-		</script>
-	<script>
-	$(document).ready(function() {
-	    $('.i').click(function() {
-	      $('.chart-back').toggle();
-	    });
-
-	    $('.chart-button').click(function() {
-	      $('.chart-back').hide();
-	    });
-	  });
-	</script>
+	 <script type="text/javascript" src="/resources/js/verifyEmail.js"></script>
+	 <script type="text/javascript" src="/resources/js/join_i.js"></script>
 		<script th:inline="javascript">
 		var ctx = document.getElementById('chart').getContext('2d');
 		var data = /*[[${keywordCounts}]]*/ 'default';

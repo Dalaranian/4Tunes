@@ -106,10 +106,11 @@
 			</div>
 		</div>
 		<div class="search-container">
-			<form action="/search/query" method="GET" style="display:flex; ">
-			<span class="search-icon">
-			<input type="image" class="search-icon" src="/resources/img/search.png" alt="submit"></span>
+			<form action="/search/query" method="GET" style="display: flex;">
 				<input type="text" name="query" class="search-input" placeholder="키워드 입력" />
+				<span class="search-icon">
+					<input type="image" class="search-icon" src="/resources/img/search.png" alt="submit">
+				</span>				
 			</form>
 		</div>
 		<div>
@@ -216,17 +217,7 @@
 				</div>
 			</div>
 		</div>
-		<script>
-			document.getElementById("delete-btn").addEventListener("click",
-					function(event) {
-						event.preventDefault(); // 폼 제출 이벤트 중지
-
-						if (confirm("정말로 삭제하시겠습니까?")) {
-							// 확인 버튼을 눌렀을 때 폼을 제출
-							document.getElementById("delete-form").submit();
-						}
-					});	
-		</script>
+		<script type="text/javascript" src="/resources/js/detail_delete.js"></script>
 </body>
 
 </html>
