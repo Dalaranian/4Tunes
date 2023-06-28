@@ -14,7 +14,7 @@ public interface LoginBiz {
 
 	public int insertUser(UserDto insert);
 
-	String[] getUserKeyword(int userNo);
+	String getUserKeyword(int userNo);
 
 	Date getSubscriptionEndDate(int user_no);
 	

@@ -51,18 +51,15 @@ public class InnerPagingController {
 	    UserDto currentUser = (UserDto) session.getAttribute("login");
 	    System.out.println(currentUser.getUser_no());
 	    Date subscriptionEndDate = loginBiz.getSubscriptionEndDate(currentUser.getUser_no());
-	    String[] userKeyword = loginBiz.getUserKeyword(currentUser.getUser_no());
+	    String userKeyword = loginBiz.getUserKeyword(currentUser.getUser_no());
 	    StringBuilder myKeyword = new StringBuilder();
-	    for(String str:userKeyword) {
-	    	myKeyword.append(str + " ");
-	    }
 	    
 	    // 내 회원등급 조회
 	    String grade = adminpageBiz.selectGrade(currentUser.getUser_no());
 	    model.addAttribute("grade", grade);
 	    model.addAttribute("subscriptionEndDate", subscriptionEndDate);
 	    model.addAttribute("keywordlist", keywordList);
-	    model.addAttribute("userkeyword", myKeyword.toString());
+	    model.addAttribute("userkeyword", userKeyword);
 	    return "mypage_user";
 	}
 	

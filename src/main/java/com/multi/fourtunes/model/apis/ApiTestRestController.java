@@ -60,7 +60,7 @@ public class ApiTestRestController {
 
         System.out.println(Arrays.toString(keyword));
 
-        openAiApi.suggestedSong(new String[] {"kpop"});
+        //openAiApi.suggestedSong(new String[] {"kpop"});
 
         return null;
     }

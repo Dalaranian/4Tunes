@@ -58,7 +58,7 @@ public class SuggestBizImpl implements SuggestBiz {
 					filterRes.add(res);
 				}
 				else if (res.getSongArtist().replace(" ", "").contains(suggest.getSongArtist())
-							&& res.getSongTitle().replace(" ", "").contains(suggest.getSongTitle())) {
+							&& res.getSongTitle().replace(" ", "").toUpperCase().contains(suggest.getSongTitle().toUpperCase())) {
 					res.setSongLink(youtubeApi.testLinkGetter());
 					// embedLinkGetter(res.getSongArtist(), res.getSongTitle())
 					filterRes.add(res);
