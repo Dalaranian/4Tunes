@@ -6,6 +6,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -37,7 +38,7 @@ public class YoutubeApi {
 	 * @param title  (노래 제목)
 	 * @return EmebedLink by String
 	 */
-	public String embedLinkGetter(String singer, String title) {
+	public String embedLinkGetter(String singer, String title) throws HttpClientErrorException {
 
 		restTemplate = new RestTemplate();
 
