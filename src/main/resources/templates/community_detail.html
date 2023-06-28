@@ -142,6 +142,14 @@
 						th:action="@{/community/delete/{boardNo}(boardNo=${community.boardNo})}"
 						method="post" id="delete-form">삭제하기</form>
 				</button>
+				<button style="display: inline-block" id="delete-btn" type="submit"
+					th:unless="${community.user_name == session.login?.user_name}"
+					sec:authorize="hasAuthority('ADMIN')">
+					<form
+						th:action="@{/community/delete/{boardNo}(boardNo=${community.boardNo})}"
+						method="post" id="delete-form">삭제하기</form>
+				</button>
+			
 
 				<button style="display: inline-block" id="write-btn">
 					<a href="/community/write">글 작성</a>
@@ -186,6 +194,15 @@
 								method="post">
 								<button type="submit" class="comment-delete"
 									th:if="${comment.user_name == session.login?.user_name}">
+									<img src="/resources/img/delete.png">
+								</button>
+							</form>
+							<form
+								th:action="@{/community/delete/comment/{commentNo}(commentNo=${comment.commentNo})}"
+								method="post">
+								<button type="submit" class="comment-delete"
+									th:unless="${comment.user_name == session.login?.user_name}"
+                                    sec:authorize="hasAuthority('ADMIN')">
 									<img src="/resources/img/delete.png">
 								</button>
 							</form>

@@ -36,6 +36,7 @@
 
 .list_wrapper {
   display: flex;
+  margin-right: 80px;
 }
 
 .list_left {
@@ -64,6 +65,11 @@
 
 .rank {
 	display: flex;
+	font-size: 30px;
+	font-weight: bold;
+	color: white;
+	color: #fff;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080, 0 0 30px #ff0080, 0 0 40px #ff0080, 0 0 55px #ff0080, 0 0 75px #ff0080;
 }
 
 iframe {
@@ -95,6 +101,7 @@ h3 {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 
 @media (max-width: 1160px) {
   #nav {
@@ -128,4 +135,25 @@ h3 {
     margin-bottom: 35px;
   }
 }
+
+#plus{
+	background-color: transparent;
+	border: none;
+	vertical-align: middle;
+	height: 21px;
+}
+
+#plusimg{
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+
+
+
+
+
+
+
 
