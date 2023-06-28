@@ -36,13 +36,13 @@ public class SearchController {
         ArrayList<SongDto> result = mania.search();
 
         // YoutubeApi 로 EmbedLink 넣기
-//        result.stream().forEach(currentSong -> currentSong
-//                .setSongLink(youtube.embedLinkGetter(currentSong.getSongArtist(), currentSong.getSongTitle())));
+        result.stream().forEach(currentSong -> currentSong
+                .setSongLink(youtube.embedLinkGetter(currentSong.getSongArtist(), currentSong.getSongTitle())));
 
         // test 를 위해 더미데이터 넣기
-		for(SongDto dto:result) {
-			dto.setSongLink(youtube.testLinkGetter());
-		}
+//		for(SongDto dto:result) {
+//			dto.setSongLink(youtube.testLinkGetter());
+//		}
 
         modelAndView.addObject("query", query);
         modelAndView.addObject("searchresult", result);
