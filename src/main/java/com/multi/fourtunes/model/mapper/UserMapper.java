@@ -19,7 +19,7 @@ public interface UserMapper {
 	@Select("SELECT * FROM USER WHERE USER_ID = #{email} AND USER_NAME = #{userId}")
 	UserDto selectUserByEmailAndId(String email, String userId);
 
-	@Insert(" INSERT INTO USER VALUES(NULL, #{user_id}, #{user_name}, #{user_pw}, 'FREE', NULL) ")
+	@Insert(" INSERT INTO USER VALUES(NULL, #{user_id}, #{user_name}, #{user_pw}, 'FREE', '0') ")
 	int insertUser(UserDto insert);
 
 	@Select(" SELECT * FROM USER ")
