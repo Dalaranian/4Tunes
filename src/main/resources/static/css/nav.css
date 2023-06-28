@@ -57,7 +57,7 @@ a {
   position: relative;
   display: flex;
   align-items: center;
-  width: 12.7vw;
+  width: 165px;
   border-radius: 5px;
   background-color: #1d267d;
   min-width: 160px;
@@ -69,7 +69,7 @@ a {
   font-size: 18px;
   text-align: center;
   min-width: 130px;
-}
+  border-radius: 5px 0 0 5px;}
 .search-icon {
   height: 21px;
   width: 21px;
