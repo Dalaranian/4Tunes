@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -175,10 +177,19 @@ public class LoginController {
 	@PostMapping("/verifyemailid")
 	@ResponseBody
 	public String verifyEmail(@RequestParam("joinEmail") String joinEmail) {
+//		String rowJsonString;
+//		if (loginBiz.isValidEmail(joinEmail)) {
+//			rowJsonString = "{\"status\": \"success\", \"message\": \"Email verification successful\"}";
+//		} else {
+//			rowJsonString = "{\"status\": \"error\", \"message\": \"Invalid email format\"}";
+//		}
+
 		if (loginBiz.isValidEmail(joinEmail)) {
 			return "{\"status\": \"success\", \"message\": \"Email verification successful\"}";
 		} else {
 			return "{\"status\": \"error\", \"message\": \"Invalid email format\"}";
 		}
+
+//		return ResponseEntity.ok().body(new JSONObject(rowJsonString));
 	}
 }

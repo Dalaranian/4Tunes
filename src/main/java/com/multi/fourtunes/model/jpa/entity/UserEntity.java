@@ -30,4 +30,7 @@ public class UserEntity {
 
     @Column(name = "USER_GRADE", nullable = false)
     private String userGrade;
+
+    @Column(name = "USER_SUGGESTCOUNT", nullable = false)
+    private Integer userSuggestCount;
 }

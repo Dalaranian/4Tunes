@@ -10,16 +10,20 @@ function verifyEmail() {
         joinEmail: joinEmail,
       },
       success: function (response) {
-        if (response.status == "sucess") {
-          console.log("success" + response);
+        console.log("success", response);
+        var parsedResponse = JSON.parse(response);
+        console.log(parsedResponse.status)
+        if (parsedResponse.status === "success") {
+          console.log("Email verification successful");
           document.getElementById("btn_join").disabled = false;
+          alert("사용할 수 있는 Email 입니다. ")
         } else {
+          console.log("Invalid email format");
           alert("중복되었습니다");
         }
       },
       error: function (xhr, status, error) {
-        // Handle error
-        console.error("error" + error);
+        console.error("error", error);
       },
     });
   } else {
