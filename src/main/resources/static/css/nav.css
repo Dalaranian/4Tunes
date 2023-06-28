@@ -55,9 +55,8 @@ a {
 }
 .search-container {
   position: relative;
-  display: flex;
   align-items: center;
-  width: 165px;
+  width: 170px;
   border-radius: 5px;
   background-color: #1d267d;
   min-width: 160px;
@@ -65,15 +64,16 @@ a {
 }
 
 .search-input {
-  width: 10.5vw;
+  width: 9vw;
   font-size: 18px;
   text-align: center;
   min-width: 130px;
-  border-radius: 5px 0 0 5px;}
+  border-radius: 5px 0 0 5px;
+}
 .search-icon {
   height: 21px;
   width: 21px;
-  padding: 1px 2.5px;
+  padding: 2px 2.5px;
   background-size: cover;
   vertical-align: middle;
 }
