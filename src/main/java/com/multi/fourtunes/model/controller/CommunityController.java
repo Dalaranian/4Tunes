@@ -103,8 +103,8 @@ public class CommunityController {
 		if (loginUser != null) {
 			CommunityDto community = communityBiz.get(boardNo);
 
-			// 작성자와 로그인된 사용자가 같을 경우에만 삭제 가능
-			if (community.getUser_name().equals(loginUser.getUser_name())) {
+			// 댓글의 작성자와 로그인된 사용자가 같을 경우 또는 관리자인 경우에만 삭제 가능
+			if (community.getUser_name().equals(loginUser.getUser_name()) || "ADMIN".equals(loginUser.getUser_name())) {
 
 				// 먼저 해당 게시글에 달린 댓글들을 삭제
 				communityBiz.deleteByBoardNo(boardNo);
@@ -147,8 +147,8 @@ public class CommunityController {
 		if (loginUser != null) {
 			CommentDto comment = communityBiz.getComment(commentNo);
 
-			// 댓글의 작성자와 로그인된 사용자가 같을 경우에만 삭제 가능
-			if (comment.getUserNo() == loginUser.getUser_no()) {
+			// 댓글의 작성자와 로그인된 사용자가 같을 경우 또는 관리자인 경우에만 삭제 가능
+			if (comment.getUserNo() == loginUser.getUser_no() || "ADMIN".equals(loginUser.getUser_name())) {
 				int boardNo = comment.getBoardNo(); // 삭제된 댓글이 속한 게시글 번호
 
 				// 댓글 삭제
