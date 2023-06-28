@@ -50,8 +50,16 @@ public class LoginBizImple implements LoginBiz {
 	}
 	
 	@Override
-	public String[] getUserKeyword(int userNo) {
-		return keywordDao.userKeyword(userNo);
+	public String getUserKeyword(int userNo) {
+		String[] userKeyword = keywordDao.userKeyword(userNo);
+		
+		// StringBuilder : String을 합치는 역할, append()를 통해 문자열을 합쳐준다.
+		StringBuilder myKeyword = new StringBuilder();
+		for (String str : userKeyword) {
+			myKeyword.append(str + " ");
+		}
+		
+		return myKeyword.toString();
 	}
 
 	@Override

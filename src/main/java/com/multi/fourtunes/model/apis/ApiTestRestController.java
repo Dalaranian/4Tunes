@@ -4,11 +4,14 @@ import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.jpa.entity.SongEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -23,6 +26,9 @@ public class ApiTestRestController {
 
     @Autowired
     ApiTestService service;
+
+    @Autowired
+    OpenAiApi openAiApi;
 
     @GetMapping("/jpatest")
     public ModelAndView testJpa(String query) {
@@ -47,5 +53,15 @@ public class ApiTestRestController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("index");
         return mav;
+    }
+
+    @GetMapping("/gpt")
+    public ResponseEntity<String> openAi(String[] keyword){
+
+        System.out.println(Arrays.toString(keyword));
+
+        //openAiApi.suggestedSong(new String[] {"kpop"});
+
+        return null;
     }
 }

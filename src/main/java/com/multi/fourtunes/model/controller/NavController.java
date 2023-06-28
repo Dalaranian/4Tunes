@@ -1,6 +1,7 @@
 package com.multi.fourtunes.model.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,10 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.multi.fourtunes.model.apis.OpenAiApi;
 import com.multi.fourtunes.model.biz.AdminpageBiz;
 import com.multi.fourtunes.model.biz.ChartBiz;
 import com.multi.fourtunes.model.biz.CommunityBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
+import com.multi.fourtunes.model.biz.SuggestBiz;
 import com.multi.fourtunes.model.dto.CommunityDto;
 import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.dto.UserDto;
@@ -33,6 +36,12 @@ public class NavController {
 
 	@Autowired
 	private LoginBiz loginBiz;
+	
+	@Autowired
+    OpenAiApi openAiApi;
+	
+	@Autowired
+	SuggestBiz suggestBiz;
 
 	@Autowired
 	private ChartBiz chartBiz;
@@ -50,7 +59,7 @@ public class NavController {
 			String[] keywordList = loginBiz.getKeyword();
 			UserDto currentUser = (UserDto) session.getAttribute("login");
 			System.out.println(currentUser);
-			String[] userKeyword = loginBiz.getUserKeyword(currentUser.getUser_no());
+			String userKeyword = loginBiz.getUserKeyword(currentUser.getUser_no());
 			
 			// 결제 개월수 조회
 			int subscriptionMonth = loginBiz.getSubscriptionMonth(currentUser.getUser_no());
@@ -64,17 +73,11 @@ public class NavController {
 				model.addAttribute("subscriptionEndDate", subscriptionEndDate);
 			}
 			
-			
-			StringBuilder myKeyword = new StringBuilder();
-			for (String str : userKeyword) {
-				myKeyword.append(str + " ");
-			}
-			
 			// 내 회원등급 조회
 		    String grade = adminpageBiz.selectGrade(currentUser.getUser_no());
 		    model.addAttribute("grade", grade);
 			model.addAttribute("keywordlist", keywordList);
-			model.addAttribute("userkeyword", myKeyword.toString());
+			model.addAttribute("userkeyword", userKeyword);
 			return "mypage_user";
 		} else {
 			model.addAttribute("error", "로그인이 필요합니다.");
@@ -84,8 +87,38 @@ public class NavController {
 
 	// 맞춤 추천 페이지로 이동
 	@GetMapping("/suggested")
-	public String gotoSuggested() {
-		return "playlist_suggested";
+	public String gotoSuggested(HttpSession session, Model model) {
+		// 현재 로그인 되어있는 회원의 키워드 조회하기
+		if (session.getAttribute("login") != null) {
+			UserDto user = (UserDto)session.getAttribute("login");
+			String userKeyword = loginBiz.getUserKeyword(user.getUser_no());
+			
+			// StringBuilder : String을 합치는 역할, append()를 통해 문자열을 합쳐준다.
+			/*
+			 * StringBuilder myKeyword = new StringBuilder(); for (String str : userKeyword)
+			 * { myKeyword.append(str + " "); }
+			 */
+
+			// 조회한 해당 회원의 키워드를 model에 담아줌
+			model.addAttribute("userkeyword", userKeyword);
+			
+			// OpenAI 에게 노래추천받기 (키워드가 담겨있는 String 배열을 매개변수로 전달)
+			// 추천받은 노래 10곡을 songs에 담아줌
+			ArrayList<SongDto> songs = openAiApi.suggestedSong(userKeyword);
+			if(songs.size() == 0) {
+				model.addAttribute("suggestResult", "검색 결과가 없습니다.");
+			} else {
+				// ManiaDB에 추천받은 노래 검색 (노래 10곡의 SongDto가 담겨있는 ArrayList를 매개변수로 전달)
+				ArrayList<SongDto> finalRes = suggestBiz.searchSuggestedSong(songs);
+				model.addAttribute("suggestResult", finalRes);
+			}
+			
+			//return "redirect:/api/gpt";
+			return "playlist_suggested";
+			
+		} else {
+			return "login_login";
+		}	
 	}
 	
 	// 인기 차트 페이지로 이동
