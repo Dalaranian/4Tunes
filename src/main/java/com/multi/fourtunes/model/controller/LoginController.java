@@ -1,10 +1,16 @@
 package com.multi.fourtunes.model.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,6 +61,13 @@ public class LoginController {
 
 			UserDto res = loginBiz.socialLogin(loginUser);
 			session.setAttribute("login", res);
+
+			// 권한 리스트 생성
+			List<GrantedAuthority> authorities = new ArrayList<>();
+			authorities.add(new SimpleGrantedAuthority("USER"));
+
+			Authentication auth = new UsernamePasswordAuthenticationToken(email, null, authorities);
+			SecurityContextHolder.getContext().setAuthentication(auth);
 
 			return "index"; // 로그인 후 이동할 페이지
 		} else {
