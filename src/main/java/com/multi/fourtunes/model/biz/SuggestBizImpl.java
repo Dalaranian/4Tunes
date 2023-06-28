@@ -10,6 +10,7 @@ import com.multi.fourtunes.model.apis.YoutubeApi;
 import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.jpa.entity.SongEntity;
 import com.multi.fourtunes.model.jpa.repository.SongRepository;
+import org.springframework.web.client.HttpClientErrorException;
 
 @Service
 public class SuggestBizImpl implements SuggestBiz {
@@ -60,10 +61,16 @@ public class SuggestBizImpl implements SuggestBiz {
 				}
 				else if (res.getSongArtist().replace(" ", "").contains(suggest.getSongArtist())
 							&& res.getSongTitle().replace(" ", "").toUpperCase().contains(suggest.getSongTitle().toUpperCase())) {
-					res.setSongLink(youtubeApi.testLinkGetter());
+					try {
+						res.setSongLink(youtubeApi.embedLinkGetter(res.getSongArtist(), res.getSongTitle()));
+						filterRes.add(res);
+					} catch (HttpClientErrorException e) {
+						e.printStackTrace();
+//						throw new RuntimeException(e);
+					}
 					// embedLinkGetter(res.getSongArtist(), res.getSongTitle())
 					// testLinkGetter()
-					filterRes.add(res);
+//					filterRes.add(res);
 				}
 			}
 
