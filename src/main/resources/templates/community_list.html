@@ -68,8 +68,8 @@
 				</div>
 			</div>
 			<div class="list">
-				<div th:each="community : ${communityList}" class="list-item">
-					<div class="num" th:text="${community.boardNo}"></div>
+				<div th:each="community, iterStat : ${communityList}" class="list-item">
+					<div class="num" th:text="${iterStat.count}"></div>
 					<div class="title">
 					    <!-- 글 제목 클릭시 글 번호에 해당하는 디테일 페이지로 -->
 						<a th:href="@{/community/detail/{boardNo}(boardNo=${community.boardNo})}"
