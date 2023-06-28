@@ -18,8 +18,8 @@ h1 {
   width: 240px;
   height: 240px;
   margin: 10px;
-  border-radius:50% 50% 36% 64% / 55% 44% 56% 45%  ;
-  box-shadow: 7px 7px 6px -2px rgba(225,117,208,0.49);
+  border-radius:50%;
+  background:white;
 }
 .playlists {	
   display: flex;
@@ -131,11 +131,9 @@ h1 {
   transform: rotateY(180deg);
   width: 250px;
   display: block;
-  background: white;
   height: 250px;
   margin: 10px;
-  border-radius: 50% 50% 36% 64% / 55% 44% 56% 45%;
-  box-shadow: 7px 7px 6px -2px rgba(225,117,208,0.49);
+  border-radius:50%;
   position: relative;
 }
 .today_card_back p{

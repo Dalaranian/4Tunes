@@ -94,10 +94,9 @@ body {
   float: left;
   height: 32px;
   width: 55px;
-  align-items: center;
   background-size: cover;
   border: 0.015625vw;
-  display:flex;
+  display:inline-block;
   font-size: 14px;
   font-weight: bold;
   text-align: center;
@@ -106,7 +105,8 @@ body {
 
 .join-keyword {
   position: relative;
-  display: flex;
+  display: inline-block;
+  float:right;
   align-items: center;
   width: 100%;
   border-radius: 5px;
@@ -115,7 +115,6 @@ body {
   margin-left: 5px;
   min-height:32px;
 }
-
 .join-kw {
   position: relative;
   display: flex;
@@ -190,6 +189,8 @@ body {
 .i{
   width: 16px; 
   height: 16px;
+  display: inline-block;
+  float: right;
 }
 .chart-back {
   display: none;
