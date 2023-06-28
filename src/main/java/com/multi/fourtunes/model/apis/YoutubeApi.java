@@ -123,6 +123,8 @@ public class YoutubeApi {
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (NullPointerException e){
+			return "INwM8rfPHRU";
 		}
 		return "undefine";
 	}
