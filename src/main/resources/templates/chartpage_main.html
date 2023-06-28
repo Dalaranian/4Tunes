@@ -61,10 +61,17 @@
 		<!-- 재생목록이 추가될 경우 list_wrapper클래스 div를 복붙하게 할것 -->
 		<div id="MyPlayList">
 			<div th:each="song, iterStat : ${topSongs}" class="list_wrapper">
-				<div th:id="${(iterStat.index % 2 == 0) ? 'list_left' : 'list_right'}">
+					<div th:id="${(iterStat.index % 2 == 0) ? 'list_left' : 'list_right'}">
 					<div class="rank">
-						<span th:text="${iterStat.index + 1} + '위' + ${song.playlistCount}"></span></div>
 
+						<span
+							th:text="${iterStat.index + 1} + '위' + ${song.playlistCount}"></span>
+						<button id="popupButton_{{iterStat.index}}"
+							style="display: inline-block; padding: 0 5px;"
+							th:attr="onclick='createPopup(event, \'' + ${song.playlistCount} + '\', \'' + iterStat.index + '\')'">
+							<img id="questionimg" src="/resources/img/question.png">
+						</button>
+					</div>
 
 
 					<div id="video">
@@ -87,13 +94,43 @@
 				</div>
 			</div>
 			<!-- list_wrapper닫는 div-->
+			
+					<div style="display: inline-block;"></div>
+					<div id="popupLayer" style="display: none;">
+						<div id="popupLayer_{{iterStat.index}}">
+							<div id="playlistCount_{{iterStat.index}}"></div>
+							<button id="closeButton">닫기</button>
+						</div>
+					</div>
 		</div>
 	</div>
 	</div>
 <script>
+function createPopup(event, playlistCount, index) {
+	  const button = event.target;
+	  if (button.disabled) {
+	    return; // 이미 버튼이 비활성화된 경우 함수 종료
+	  }
 
-</script>  
-	
+	  button.disabled = true; // 버튼 비활성화
+
+	  const popupLayer = document.getElementById("popupLayer_" + index);
+	  if (popupLayer && popupLayer.style.display !== "none") {
+	    return; // 이미 해당 인덱스의 팝업이 열려 있는 경우 함수 종료
+	  }
+
+	  const playlistCountElement = document.getElementById("playlistCount_" + index);
+	  playlistCountElement.textContent = playlistCount + "명의 4tunes 회원에게 선택받은 곡입니다.";
+
+	  const closeButton = document.getElementById("closeButton");
+	  closeButton.addEventListener("click", function () {
+	    popupLayer.style.display = "none";
+	    button.disabled = false; // 팝업 닫을 때 버튼 활성화
+	  });
+
+	  popupLayer.style.display = "block";
+	}
+</script>
  
 </body>
 </html>
