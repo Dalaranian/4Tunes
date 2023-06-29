@@ -8,9 +8,8 @@ import com.multi.fourtunes.model.dto.PlaylistDto;
 public interface PlaylistDao {
 
     int insertPlaylist(String playListNo, String songNo);
-
     void allocatePlaylist(int userNo);
-    
     List<PlaylistDto> selectAll();
     List<PlaylistDto> selectMine(int userNo);
+    int[] getPlayListNo(String userNo);
 }

@@ -17,6 +17,7 @@ import com.multi.fourtunes.model.biz.PlaylistBiz;
 import com.multi.fourtunes.model.dto.PlaylistDto;
 import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.dto.UserDto;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("/playlist")
@@ -62,5 +63,35 @@ public class PlayListController {
         
         
         return ResponseEntity.ok(playlists);
+    }
+
+    /**
+     *
+     * @param userNo 조회할 PlayList의 UserNo
+     * @param session 세션에 담긴 로그인한 유저의 정보 불러오기
+     * @return Public / Mine 의 플레이리스트 페이지를, SongDto 가 담긴 ArrayList에 담아서 전송
+     */
+    @GetMapping("/gotoplaylistdetail")
+    public ModelAndView gotoPlayListDetail(String userNo, HttpSession session){
+        ModelAndView modelAndView = new ModelAndView();
+
+        // 세션의 UserDto 불러오기
+        UserDto currentUser = (UserDto) session.getAttribute("login");
+
+        // 현재 유저 소유의 플레이리스트인지, 아니면 타인의 플레이리스트인지 확인하여 return 할 view 결정
+        if(Integer.parseInt(userNo) == currentUser.getUser_no()){
+            modelAndView.setViewName("playlist_mine");
+//            System.out.println("내꺼");
+        }else{
+            modelAndView.setViewName("playlist_public");
+//            System.out.println("남꺼");
+        }
+
+        // PlayList에 담겨있는 Song을 addobject 함
+        List<SongDto> songs = playlist.getPlayListSongs(userNo);
+
+        modelAndView.addObject("songs", songs);
+
+        return modelAndView;
     }
 }

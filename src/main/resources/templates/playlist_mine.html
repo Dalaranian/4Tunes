@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -57,165 +57,33 @@
 			<div>재생목록 선택</div>
 			<div>재생목록 공개</div>
 		</div>
-
 		<!-- 재생목록이 추가될 경우 list_wrapper클래스 div를 복붙하게 할것 -->
 		<div id="MyPlayList">
-			<div class="list_wrapper">
-				<div id="List_left">
+			<div th:each="song, iterStat : ${songs}" class="list_wrapper">
+				<div th:id="${(iterStat.index % 2 == 0) ? 'list_left' : 'list_right'}">
 					<div id="video">
 						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
+							<iframe th:src="@{${song.songLink}}" frameborder="0"
+									allowfullscreen></iframe>
 						</div>
 						<div id="context">
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button style="display: inline-block">-</button>
-								<div style="display: inline-block">내 플레이리스트에서 제거</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="List_right">
-					<div id="video">
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button style="display: inline-block">-</button>
-								<div style="display: inline-block">내 플레이리스트에서 제거</div>
+							<h2 th:text="${song.songTitle}">노래제목</h2>
+							<br/>
+							<h3 th:text="${song.songArtist}">가수 이름</h3>
+							<!--                        <label th:text="${song.songId}" hidden="hidden"></label>-->
+							<br/>
+							<div style="width:200px;">
+<!--								지훈이형 미안한데 혹시 요친구 마이너스 이미지로 바꿔주실 수있어요? 제가 건들면 뭔가 뭔가 이상해질가같음...-->
+								<button id="plus" style="display: inline-block; padding:0 5px;"
+										th:attr="onclick='deleteToPlaylist(\'' + ${song.songTitle} + '\', \'' + ${song.songArtist} + '\', \'' + ${song.songLink} + '\', \'' + ${song.songId} + '\', \'' + ${song.songAlbumArt} + '\')'">
+									<img id="plusimg" src="/resources/img/add.png">
+								</button>
+								<div style="display: inline-block;">내 플레이리스트에 제거</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
-			<div class="list_wrapper">
-				<div id="List_left">
-					<div id="video">
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button style="display: inline-block">-</button>
-								<div style="display: inline-block">내 플레이리스트에서 제거</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="List_right">
-					<div id="video">
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button style="display: inline-block">-</button>
-								<div style="display: inline-block">내 플레이리스트에서 제거</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="list_wrapper">
-				<div id="List_left">
-					<div id="video">
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button style="display: inline-block">-</button>
-								<div style="display: inline-block">내 플레이리스트에서 제거</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="List_right">
-					<div id="video">
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button style="display: inline-block">-</button>
-								<div style="display: inline-block">내 플레이리스트에서 제거</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="list_wrapper">
-				<div id="List_left">
-					<div id="video">
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button style="display: inline-block">-</button>
-								<div style="display: inline-block">내 플레이리스트에서 제거</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="List_right">
-					<div id="video">
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button style="display: inline-block">-</button>
-								<div style="display: inline-block">내 플레이리스트에서 제거</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- list_wrapper닫는 div-->
 		</div>
 	</div>
 </body>

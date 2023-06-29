@@ -1,7 +1,9 @@
 package com.multi.fourtunes.model.biz;
 
+import java.util.Arrays;
 import java.util.List;
 
+import com.multi.fourtunes.model.dao.SongDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,9 @@ public class PlaylistBizImple implements PlaylistBiz{
     PlayListMapper playListMapper;
     @Autowired
     PlaylistDao playlistDao;
+    @Autowired
+    SongDao songDao;
+
 
     /**
      *
@@ -124,5 +129,19 @@ public class PlaylistBizImple implements PlaylistBiz{
         return myPlaylists;
     }
 
-    
+    @Override
+    public List<SongDto> getPlayListSongs(String userNo) {
+
+        int[] playListNo = playlistDao.getPlayListNo(userNo);
+
+        List<SongDto> songs = songDao.selectSongListByPlayListNo(playListNo[0], Integer.parseInt(userNo));
+
+//        System.out.println(songs);
+
+//        System.out.println(Arrays.toString(playListNo));
+
+        return songs;
+    }
+
+
 }

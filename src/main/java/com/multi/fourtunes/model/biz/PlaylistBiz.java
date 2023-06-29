@@ -15,4 +15,6 @@ public interface PlaylistBiz {
     List<PlaylistDto> getAllPlaylists();
     
     List<PlaylistDto> getMyPlaylist(int myno);
+
+    List<SongDto> getPlayListSongs(String userNo);
 }

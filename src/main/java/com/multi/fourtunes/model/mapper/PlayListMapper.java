@@ -54,5 +54,7 @@ public interface PlayListMapper {
             "JOIN USER ON PLAYLIST.USER_NO = USER.USER_NO " +
             "WHERE PLAYLIST.USER_NO = #{userNo}")
     List<PlaylistDto> selectMine(int userNo);
-    
+
+    @Select(" SELECT PLAYLIST_NO FROM PLAYLIST WHERE USER_NO = #{userNo} ")
+    int[] getPlayListNo(String userNo);
 }

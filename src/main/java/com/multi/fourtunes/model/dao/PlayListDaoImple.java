@@ -36,4 +36,13 @@ public class PlayListDaoImple implements PlaylistDao{
 	public List<PlaylistDto> selectMine(int userNo) {
 		return playListMapper.selectMine(userNo);
 	}
+
+    /**
+     * @param userNo
+     * @return userNo 에 해당하는 playListno 의 배열을 리턴
+     */
+    @Override
+    public int[] getPlayListNo(String userNo) {
+        return playListMapper.getPlayListNo(userNo);
+    }
 }
