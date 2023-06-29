@@ -16,4 +16,6 @@ public interface PlaylistDao {
     int deleteMyPlayList(String playListNo, Long songNo);
 
     String getPlayListVisibility(int userNo);
+
+    void setPlayListVisible(String isEnable, String playListNo);
 }

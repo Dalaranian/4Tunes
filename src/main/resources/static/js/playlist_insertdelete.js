@@ -12,7 +12,7 @@ function addToPlaylist(songTitle, songArtist, songLink, songId, songAlbumArt) {
         songAlbumArt    : songAlbumArt
     };
 
-//    console.log(songDto);
+    console.log(songDto);
 
     $.ajax({
             url: '/playlist/insertmyplaylist',

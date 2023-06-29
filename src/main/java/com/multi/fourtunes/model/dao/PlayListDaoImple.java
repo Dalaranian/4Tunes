@@ -56,4 +56,9 @@ public class PlayListDaoImple implements PlaylistDao{
     public String getPlayListVisibility(int userNo) {
         return playListMapper.getPlayListVisibility(userNo);
     }
+
+    @Override
+    public void setPlayListVisible(String isEnable, String playListNo) {
+        playListMapper.setPlayListVisible(isEnable, playListNo);
+    }
 }

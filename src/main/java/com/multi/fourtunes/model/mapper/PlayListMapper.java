@@ -59,4 +59,7 @@ public interface PlayListMapper {
 
     @Select(" SELECT PLAYLIST_VISIBILITY FROM PLAYLIST WHERE USER_NO = #{userNo} ")
     String getPlayListVisibility(int userNo);
+
+    @Update(" UPDATE PLAYLIST SET PLAYLIST_VISIBILITY = #{isEnable} WHERE PLAYLIST_NO = #{playListNo} ")
+    void setPlayListVisible(String isEnable, String playListNo);
 }

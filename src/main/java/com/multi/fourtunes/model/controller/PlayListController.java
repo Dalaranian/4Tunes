@@ -6,9 +6,13 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.multi.fourtunes.model.jpa.entity.SongEntity;
+import com.multi.fourtunes.model.jpa.entity.UserEntity;
+import com.multi.fourtunes.model.jpa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +32,8 @@ public class PlayListController {
     @Autowired
     PlaylistBiz playlist;
 
+    @Autowired
+    UserRepository userRepository;
 
     @PostMapping("/insertmyplaylist")
     public ResponseEntity<String> addToPlaylist(@RequestBody SongDto songDto, HttpSession session) {
@@ -85,7 +91,9 @@ public class PlayListController {
             modelAndView.setViewName("playlist_mine");
 //            System.out.println("내꺼");
         }else{
+            UserEntity owner = userRepository.findByUserNo(Integer.parseInt(userNo));
             modelAndView.setViewName("playlist_public");
+            modelAndView.addObject("name", owner.getUserName());
 //            System.out.println("남꺼");
         }
 
@@ -111,5 +119,20 @@ public class PlayListController {
         String res = playlist.deleteMyPlaylist(song, currentUser);
 
         return (res.equals("success"))?"삭제 성공":"삭제 실패";
+    }
+
+    /**
+     * 플레이스트
+     * @param request 공개를 요청했을때 True, 비공개를 요청했을때 False
+     * @return
+     */
+    @PostMapping("/managevisibility")
+    public ResponseEntity<String> manageVisibility(@RequestBody boolean request, HttpSession session) {
+        UserDto currentLogin = (UserDto) session.getAttribute("login");
+
+        String res = playlist.visibilityManage(currentLogin, request);
+
+        // 요청에 대한 응답 반환
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }

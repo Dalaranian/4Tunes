@@ -163,5 +163,43 @@ public class PlaylistBizImple implements PlaylistBiz{
         return (res == 1)?"success":"fail";
     }
 
+    /**
+     *
+     * @param currentLogin 현재 로그인한 유저
+     * @param request 공개요청일때 true, 비공개요정일때 false
+     * @return 처리 message
+     */
+    @Override
+    public String visibilityManage(UserDto currentLogin, boolean request) {
+
+        System.out.println(currentLogin + "\n" + request);
+
+        String res = "";
+
+        // User의 플레이리스트 No 를 불러옴
+        String[] userPlayList = userMapper.getUserPlatListNo(Integer.toString(currentLogin.getUser_no()));
+
+        // 공개중이면 Y, 비공개중일때 N
+        String isVisibility = playlistDao.getPlayListVisibility(currentLogin.getUser_no());
+
+        if(isVisibility.equals("Y") && request){
+            // 공개중, 공개요청했을때
+            res = "이미 공개중인 플레이리스트입니다. ";
+        } else if (isVisibility.equals("N") && !request) {
+            // 비공개중, 비공개요정했을때
+            res = "이미 비공개중인 플레이리스트입니다. ";
+        } else if (isVisibility.equals("N") && request) {
+            // 비공개중일떄, 공개하기
+            playlistDao.setPlayListVisible("Y", userPlayList[0]);
+            res = "공개되었습니다. ";
+        } else if (isVisibility.equals("Y") && !request) {
+            // 공개중일때, 비공개요청하기
+            playlistDao.setPlayListVisible("N", userPlayList[0]);
+            res = "비공개되었습니다. ";
+        }
+
+        return res;
+    }
+
 
 }

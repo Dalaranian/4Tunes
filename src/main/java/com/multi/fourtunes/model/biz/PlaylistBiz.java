@@ -20,4 +20,6 @@ public interface PlaylistBiz {
     List<SongDto> getPlayListSongs(String userNo);
 
     String deleteMyPlaylist(SongEntity song, UserDto currentUser);
+
+    String visibilityManage(UserDto currentLogin, boolean request);
 }

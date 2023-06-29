@@ -6,9 +6,10 @@ function manageVisibility(isVisible){
       },
       body: isVisible
     })
-    .then(response => {
+    .then(response => response.text())
+    .then(data => {
       // 응답 처리
-      console.log('요청이 성공적으로 전송되었습니다.');
+      alert(data);
     })
     .catch(error => {
       // 오류 처리
