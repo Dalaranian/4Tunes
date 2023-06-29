@@ -59,8 +59,9 @@
 			<form action="/community/create" id="write-form" method="post">
 				<fieldset>
 					<div class="community-inf">
-						<span class="community-title">글 제목</span> <input type="text"
-							id="community-input" name="boardTitle" placeholder="내용을 입력해주세요" maxlength="35" />
+						<span class="community-title">글 제목</span> 
+						<input type="text" id="community-input" name="boardTitle" placeholder="내용을 입력해주세요" maxlength="35" required/>
+						<span id="title-error" style="color: red; display: none;">제목을 입력해주세요.</span>
 					</div>
 					<div class="community-inf">	
 						<span class="community-writer">작성자</span> 
@@ -86,6 +87,7 @@
 			</form>
 		</div>
 	</div>
+	<script type="text/javascript" src="/resources/js/write_title.js"></script>
 </body>
 
 </html>
