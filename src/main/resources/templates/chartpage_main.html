@@ -66,12 +66,13 @@
 
 						<span
 							th:text="${iterStat.index + 1} + '위' + ${song.playlistCount}"></span>
-						<button id="popupButton_{{iterStat.index}}"
-							style="display: inline-block; padding: 0 5px;"
-							th:attr="onclick='createPopup(event, \'' + ${song.playlistCount} + '\', \'' + iterStat.index + '\')'">
-							<img id="questionimg" src="/resources/img/question.png">
-						</button>
-					</div>
+					 <button id="popupButton_${iterStat.index}"
+          style="display: inline-block; padding: 0 5px;"
+          th:attr="onclick='createPopup(event, \'' + ${song.playlistCount} + '\', \'' + iterStat.index + '\')'">
+          <img id="questionimg" src="/resources/img/question.png">
+        </button>
+      </div>
+      <div style="display: inline-block;"></div>
 
 
 					<div id="video">
@@ -95,13 +96,12 @@
 			</div>
 			<!-- list_wrapper닫는 div-->
 			
-					<div style="display: inline-block;"></div>
 					<div id="popupLayer" style="display: none;">
-						<div id="popupLayer_{{iterStat.index}}">
-							<div id="playlistCount_{{iterStat.index}}"></div>
-							<button id="closeButton">닫기</button>
-						</div>
-					</div>
+  <div id="popupContent">
+    <div id="playlistCount"></div>
+    <button id="closeButton">닫기</button>
+  </div>
+</div>
 		</div>
 	</div>
 	</div>
@@ -114,13 +114,9 @@ function createPopup(event, playlistCount, index) {
 
 	  button.disabled = true; // 버튼 비활성화
 
-	  const popupLayer = document.getElementById("popupLayer_" + index);
-	  if (popupLayer && popupLayer.style.display !== "none") {
-	    return; // 이미 해당 인덱스의 팝업이 열려 있는 경우 함수 종료
-	  }
-
-	  const playlistCountElement = document.getElementById("playlistCount_" + index);
-	  playlistCountElement.textContent = playlistCount + "명의 4tunes 회원에게 선택받은 곡입니다.";
+	  const popupLayer = document.getElementById("popupLayer");
+	  const playlistCountElement = document.getElementById("playlistCount");
+	  playlistCountElement.textContent = playlistCount + "명의 회원이 플레이리스트에 담았습니다.";
 
 	  const closeButton = document.getElementById("closeButton");
 	  closeButton.addEventListener("click", function () {
