@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="/resources/css/nav.css" />
+<link rel="stylesheet" href="/resources/css/globalfont.css" />
+<link rel="stylesheet" href="/resources/css/adminpage_todaypick.css" />
+<link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
+<title>4Tunes</title>
+</head>
+
+<body>
+	<div id="nav">
+		<div class="banner">
+			<a href="/"><img src="/resources/img/banner.png" /></a>
+		</div>
+		<div id="login">
+			<div>
+				<a
+					th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
+					<img class="login_img" src="/resources/img/usertest.png" /> <span
+					th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
+				</a>
+			</div>
+			<br />
+			<div>
+				<a href="/nav/mypage"><img class="mypage_img"
+					src="/resources/img/file.png" />MYPAGE</a>
+			</div>
+		</div>
+		<div class="search-container">
+			<form action="/search/query" method="GET" style="display: flex;">
+				<input type="text" name="query" class="search-input" placeholder="키워드 입력" />
+				<span class="search-icon">
+					<input type="image" class="search-icon" src="/resources/img/search.png" alt="submit">
+				</span>				
+			</form>
+		</div>
+		<div>
+			<a href="/nav/suggested">맞춤추천</a>
+		</div>
+		<div>
+			<a href="/nav/chart">인기차트</a>
+		</div>
+		<div>
+			<a href="/nav/community">커뮤니티</a>
+		</div>
+		<div>
+			<a href="/nav/membership">멤버십</a>
+		</div>
+	</div>
+
+	<div id="main">
+		<h1>4Tunes 선곡 관리</h1><br>
+
+		<div class="adminpage_contents">
+			<div>
+				<form action="/adminpage/searchsong" method="GET" class="search">
+					<span id="title">TITLE</span><input type="text" size="25" name="title" placeholder="조회할 음악의 제목을 입력하세요."> 
+					<span id="artist">ARTIST</span><input type="text" size="25" name="artist" placeholder="조회할 음악의 가수명을 입력하세요."> 
+					<input type="submit" id="submit" value="검색">
+				</form>
+			</div>
+			
+			<div th:each="searchRes : ${searchRes}" class="search_content">
+				<div th:text="${searchRes.songTitle}" class="search_title"></div>
+				 - <div th:text="${searchRes.songArtist}" class="search_artist"></div>
+				 <div>
+				 	<form action="/adminpage/insertsong" method="GET">
+					 	<select name="playlist" id="playlist">
+						    <option value="">--플레이리스트 선택--</option>
+						    <option value="study">공부할때</option>
+						    <option value="travel">여행할때</option>
+						    <option value="sad">우울할때</option>
+						    <option value="drive">운전할때</option>
+						    <option value="sports">운동할때</option>
+						    <option value="rest">휴식할때</option>
+							<option value="love">사랑할때</option>
+							<option value="enjoy">신났을때</option>
+						</select>
+					 	<input type="submit" id="add" value="추가">
+				 	</form>
+				 </div>
+			</div>
+			
+	
+		</div>
+	</div>
+
+</body>
+</html>

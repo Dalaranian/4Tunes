@@ -1,5 +1,6 @@
 package com.multi.fourtunes.model.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.multi.fourtunes.model.apis.ManiaDbApi;
 import com.multi.fourtunes.model.biz.AdminpageBiz;
 import com.multi.fourtunes.model.dto.CommunityDto;
+import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.dto.AdminCommentReportDto;
 import com.multi.fourtunes.model.dto.AdminCommunityReportDto;
 import com.multi.fourtunes.model.dto.UserDto;
@@ -22,6 +25,9 @@ public class AdminpageController {
 	
 		@Autowired
 		private AdminpageBiz adminpageBiz;
+		
+		@Autowired
+		ManiaDbApi mania;
 		
 		// 회원정보 조회로 이동
 		@GetMapping("/user")
@@ -108,5 +114,39 @@ public class AdminpageController {
 			
 			return "redirect:/adminpage/comment";
 		}
-
+		
+		// 4Tunes 선곡 관리로 이동
+		@GetMapping("/todaypick")
+		public String gotoAdminpageTodaypick() {
+			return "adminpage_todaypick";
+		}
+		
+		// 관리자가 입력한 노래를 ManiaDB에 검색
+		@GetMapping("/searchsong")
+		public String searchSong(@RequestParam("title") String title, @RequestParam("artist") String artist, Model model) {
+			mania.setPrompt(title);
+			mania.setType(false);
+			
+			ArrayList<SongDto> searchResult = mania.search();
+			//System.out.println("검색 결과: " + searchResult);
+			
+			//****SongLink 넣어줘야함(adminpageBiz에 하기)
+			//ArrayList<SongDto> finalResult = adminpageBiz.setSonglink(searchResult, title, artist);
+			
+			model.addAttribute("searchRes", searchResult);
+			
+			return "adminpage_todaypick";
+		}
+		
+		// 관리자가 선택한 노래를 DB에 저장 (구현해야함 / form 태그 수정해야할듯)
+		@GetMapping("/insertsong")
+		public String insertSong() {
+			
+			return "";
+		}
 }
+
+
+
+
+

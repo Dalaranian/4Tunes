@@ -1,9 +1,11 @@
 package com.multi.fourtunes.model.biz;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.multi.fourtunes.model.dto.AdminCommentReportDto;
 import com.multi.fourtunes.model.dto.AdminCommunityReportDto;
+import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.dto.UserDto;
 
 public interface AdminpageBiz {
@@ -31,5 +33,7 @@ public interface AdminpageBiz {
 	public int confirmReportComment(int comment_no);
 
 	public int deleteReportComment(int comment_no);
+
+	public ArrayList<SongDto> setSonglink(ArrayList<SongDto> searchResult, String title, String artist);
 
 }
