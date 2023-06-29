@@ -51,4 +51,9 @@ public class PlayListDaoImple implements PlaylistDao{
 //        System.out.println("playlist : " + playListNo + " " + "songNo : " + songNo);
         return playListMapper.deleteMyPlayList(playListNo, songNo);
     }
+
+    @Override
+    public String getPlayListVisibility(int userNo) {
+        return playListMapper.getPlayListVisibility(userNo);
+    }
 }

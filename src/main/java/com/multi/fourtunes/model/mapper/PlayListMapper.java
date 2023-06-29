@@ -56,4 +56,7 @@ public interface PlayListMapper {
 
     @Delete(" DELETE FROM MANAGE_SONG WHERE PLAYLIST_NO = #{playListNo} AND SONG_NO = #{songNo}; ")
     int deleteMyPlayList(String playListNo, Long songNo);
+
+    @Select(" SELECT PLAYLIST_VISIBILITY FROM PLAYLIST WHERE USER_NO = #{userNo} ")
+    String getPlayListVisibility(int userNo);
 }

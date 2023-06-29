@@ -14,4 +14,6 @@ public interface PlaylistDao {
     int[] getPlayListNo(String userNo);
 
     int deleteMyPlayList(String playListNo, Long songNo);
+
+    String getPlayListVisibility(int userNo);
 }
