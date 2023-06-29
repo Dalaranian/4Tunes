@@ -1,6 +1,5 @@
 package com.multi.fourtunes.model.biz;
 
-import java.util.Arrays;
 import java.util.List;
 
 import com.multi.fourtunes.model.dao.SongDao;
@@ -141,6 +140,27 @@ public class PlaylistBizImple implements PlaylistBiz{
 //        System.out.println(Arrays.toString(playListNo));
 
         return songs;
+    }
+
+    /**
+     * 화면에서 불러온, SongNo 가 없는 entity에서, DB 에 저장된 Entity 를 불러와,<br>
+     * SongNo 와 UserNo 를 활용하여, Song 삭제
+     * @param song
+     * @param currentUser
+     * @return
+     */
+    @Override
+    public String deleteMyPlaylist(SongEntity song, UserDto currentUser) {
+
+        // User의 플레이리스트 No 를 불러옴
+        String[] userPlayList = userMapper.getUserPlatListNo(Integer.toString(currentUser.getUser_no()));
+
+        // 원래 노래를 불러옴
+        SongEntity originSong = songRepository.findBySongId(song.getSongId());
+
+        int res = playlistDao.deleteMyPlayList(userPlayList[0], originSong.getSongNo());
+
+        return (res == 1)?"success":"fail";
     }
 
 

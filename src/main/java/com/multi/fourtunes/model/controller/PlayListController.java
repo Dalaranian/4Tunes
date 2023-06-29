@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.multi.fourtunes.model.jpa.entity.SongEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -93,5 +95,21 @@ public class PlayListController {
         modelAndView.addObject("songs", songs);
 
         return modelAndView;
+    }
+
+    /**
+     *
+     * @param song 삭제할 노래의 JPA Entity
+     * @param session
+     * @return 삭제 성공 여부를 String 으로 보냄
+     */
+    @PostMapping("/deletemyplaylist")
+    public String deleteMyPlaylist(@RequestBody SongEntity song, HttpSession session){
+
+        UserDto currentUser = (UserDto) session.getAttribute("login");
+
+        String res = playlist.deleteMyPlaylist(song, currentUser);
+
+        return (res.equals("success"))?"삭제 성공":"삭제 실패";
     }
 }

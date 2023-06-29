@@ -12,4 +12,6 @@ public interface PlaylistDao {
     List<PlaylistDto> selectAll();
     List<PlaylistDto> selectMine(int userNo);
     int[] getPlayListNo(String userNo);
+
+    int deleteMyPlayList(String playListNo, Long songNo);
 }

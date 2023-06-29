@@ -45,4 +45,10 @@ public class PlayListDaoImple implements PlaylistDao{
     public int[] getPlayListNo(String userNo) {
         return playListMapper.getPlayListNo(userNo);
     }
+
+    @Override
+    public int deleteMyPlayList(String playListNo, Long songNo) {
+//        System.out.println("playlist : " + playListNo + " " + "songNo : " + songNo);
+        return playListMapper.deleteMyPlayList(playListNo, songNo);
+    }
 }
