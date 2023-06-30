@@ -8,4 +8,7 @@ public interface SuggestBiz {
 
 	ArrayList<SongDto> searchSuggestedSong(ArrayList<SongDto> songs);
 
+	void addSuggestCount(Integer userNo, int count);
+
+	void seggestCountReset();
 }

@@ -52,9 +52,6 @@ public class NavController {
 	@Autowired
 	UserRepository userRepository;
 
-	final EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenceUnitName");
-	final EntityManager entityManager = emf.createEntityManager();
-
 	// 로그인 페이지로 이동
 	@GetMapping("/login")
 	public String gotoLogin() {
@@ -106,23 +103,10 @@ public class NavController {
 			// 결제 계정 조회하여, 5번이 넘었는지 확인하기
 			UserEntity userEntity = userRepository.findByUserId(user.getUser_id());
 
-			if (userEntity.getUserSuggestCount() > 5) {
-				userEntity.setUserSuggestCount(userEntity.getUserSuggestCount() + 1);
-
-				// 트랜잭션 시작
-				entityManager.getTransaction().begin();
-
-				try {
-					// 업데이트된 엔티티 영속성 컨텍스트에 저장
-					entityManager.merge(userEntity);
-
-					// 트랜잭션 커밋
-					entityManager.getTransaction().commit();
-				} catch (Exception e) {
-					// 예외 발생 시 롤백
-					entityManager.getTransaction().rollback();
-					throw e;
-				}
+			if (userEntity.getUserSuggestCount() <= 5) {
+				suggestBiz.addSuggestCount(userEntity.getUserNo(), userEntity.getUserSuggestCount()+1);
+			}else if(userEntity.getUserGrade().equals("FREE") && userEntity.getUserSuggestCount() > 5){
+				return "membership_join";
 			}
 
 			// 조회한 해당 회원의 키워드를 model에 담아줌
