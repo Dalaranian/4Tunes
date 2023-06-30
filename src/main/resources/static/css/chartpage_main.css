@@ -1,189 +1,203 @@
 #main  h1 {
-  color: #d4adfc;
-  position: relative;
-  top:7%;
-  left:6%;
+	color: #d4adfc;
+	position: relative;
+	top: 7%;
+	left: 6%;
 }
+
 #main-container {
-  width: 80vw;
-  margin: 0 auto;
-  min-width: 960px;
-  min-height: 700px;
+	width: 80vw;
+	margin: 0 auto;
+	min-width: 960px;
+	min-height: 700px;
 }
+
 #buttons {
-  display: flex;
-  position: absolute;
-  top: 10%;
-  right: 10%;
+	display: flex;
+	position: absolute;
+	top: 10%;
+	right: 10%;
 }
-#buttons > div {
-  font-size: 16px;
-  color: white;
-  padding: 2px;
-  background-color: #5c469c;
-  border-radius: 10px;
-  margin-right: 1vw;
-  cursor: pointer;
+
+#buttons>div {
+	font-size: 16px;
+	color: white;
+	padding: 2px;
+	background-color: #5c469c;
+	border-radius: 10px;
+	margin-right: 1vw;
+	cursor: pointer;
 }
+
 #MyPlayList {
-  width: fit-content;
-  position: relative;
-  top: 10%;
-  left: 6%;
-  display: flex;
-  flex-wrap: wrap;
+	width: fit-content;
+	position: relative;
+	top: 10%;
+	left: 6%;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .list_wrapper {
-  display: flex;
-  margin-right: 80px;
+	display: flex;
+	margin-right: 80px;
 }
 
 .list_left {
-  width: 550px;
-  display:flex;
+	width: 550px;
+	display: flex;
 }
 
 .list_right {
-  width: 550px;
-  display:flex;
+	width: 550px;
+	display: flex;
 }
 
 #video {
-  display: flex;
-  margin-bottom: 5vh;
-  width: 34vw;
+	display: flex;
+	margin-bottom: 5vh;
+	width: 34vw;
 }
 
 .video-container {
-  display: inline-block;
-  width: 100%;
-  /* padding-top: calc(100% / (1.3 * 1.6)); */
-  padding-top: 30%;
-  position: relative;
+	display: inline-block;
+	width: 100%;
+	/* padding-top: calc(100% / (1.3 * 1.6)); */
+	padding-top: 30%;
+	position: relative;
 }
 
 .rank {
 	display: flex;
-	font-size: 30px;
+	font-size: 28px;
 	font-weight: bold;
-	color: white;
 	color: #fff;
-  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080, 0 0 30px #ff0080, 0 0 40px #ff0080, 0 0 55px #ff0080, 0 0 75px #ff0080;
+	/* pink: #ff0080 */
+	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #a31acb, 0 0 30px
+		#a31acb, 0 0 40px #a31acb, 0 0 55px #a31acb, 0 0 75px #a31acb;
 }
 
 iframe {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  min-width: 165px;
-  min-height: 155px;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	min-width: 165px;
+	min-height: 155px;
 }
 
 #context {
-  display: inline-block;
-  width: 70%;
-  padding: 2%;
-  color: white;
-  min-width: 225px;
-  min-height: 154px;
+	display: inline-block;
+	width: 70%;
+	padding: 2%;
+	color: white;
+	min-width: 225px;
+	min-height: 154px;
 }
+
 .plus_btn {
-  padding: 0 4px;
-}
-h2,
-h3 {
-  margin: 0;
-  padding: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+	padding: 0 4px;
 }
 
-
-@media (max-width: 1160px) {
-  #nav {
-    display: none !important;
-  }
-  #main {
-    width: 110vw !important;
-    background-color: #424242 !important;
-    overflow-x: scroll !important;
-  }
-  #main div > h1 {
-    margin-left: 55.8px;
-  }
-  #MyPlayList {
-    margin-top: 10px;
-  }
-  #video {
-    display: block;
-    margin-bottom: 0;
-  }
-  .video-container {
-    min-width: 340px;
-    min-height: 140px;
-  }
-  #buttons {
-    position: relative;
-    display: flex;
-    float: right;
-    min-width: 90px;
-    min-height: 28px;
-    margin-bottom: 35px;
-  }
+h2, h3 {
+	margin: 0;
+	padding: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
-#plus{
+@media ( max-width : 1160px) {
+	#nav {
+		display: none !important;
+	}
+	#main {
+		width: 110vw !important;
+		background-color: #424242 !important;
+		overflow-x: scroll !important;
+	}
+	#main div>h1 {
+		margin-left: 55.8px;
+	}
+	#MyPlayList {
+		margin-top: 10px;
+	}
+	#video {
+		display: block;
+		margin-bottom: 0;
+	}
+	.video-container {
+		min-width: 340px;
+		min-height: 140px;
+	}
+	#buttons {
+		position: relative;
+		display: flex;
+		float: right;
+		min-width: 90px;
+		min-height: 28px;
+		margin-bottom: 35px;
+	}
+}
+
+#plus {
 	background-color: transparent;
 	border: none;
 	vertical-align: middle;
 	height: 21px;
 }
 
-#plusimg{
+#plusimg {
 	width: 20px;
 	height: 20px;
 	cursor: pointer;
 }
 
-
 #popupLayer {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  z-index: 9999;
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50.7%;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	padding: 22px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	z-index: 9999;
+	animation: fadein 0.73s;
+	border-radius: 25px;
+}
+
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 #popupContent {
-  text-align: center;
+	text-align: center;
 }
 
 #playlistCount {
-  margin-bottom: 10px;
+	margin-bottom: 30px;
+	margin-top: 20px;
 }
 
 #closeButton {
-  background-color: #ccc;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
+	background-color: #ccc;
+	border: none;
+	padding: 5px 10px;
+	cursor: pointer;
 }
 
-#questionimg {
-  height: 16px;
-  width: 16px;
+#popupButton {
+	display: inline-block;
+	padding: 0 5px;
+	background-color: transparent;
+	border: none;
+	margin-left: 4px;
+	margin-top: 5px;
 }
-
-
-
-
-
-
