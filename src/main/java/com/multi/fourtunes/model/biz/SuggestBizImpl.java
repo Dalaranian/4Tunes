@@ -2,6 +2,7 @@ package com.multi.fourtunes.model.biz;
 
 import java.util.ArrayList;
 
+import com.multi.fourtunes.model.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,9 @@ public class SuggestBizImpl implements SuggestBiz {
 	
 	@Autowired
 	YoutubeApi youtubeApi;
+
+	@Autowired
+	UserDao userDao;
 
 	/**
 	 * Chat GPT 에서 받은 결과(artist, title) 를 토대로, 해당 정보를 ManiaDb 에 검색한다. <br>
@@ -48,7 +52,7 @@ public class SuggestBizImpl implements SuggestBiz {
 			
 			// ManiaDB를 통해 검색 결과 10개가 담겨있는 searchResult를 받아옴
 			ArrayList<SongDto> searchResult = mania.search();
-			System.out.println("검색 결과: " + searchResult);
+//			System.out.println("검색 결과: " + searchResult);
 
 			
 			for (SongDto res : searchResult) {
@@ -79,12 +83,26 @@ public class SuggestBizImpl implements SuggestBiz {
 				//System.out.println("걸러진 친구들 은 \n"+filterRes);
 				finalRes.add(filterRes.get(0));
 			} catch (java.lang.IndexOutOfBoundsException e) {
-				System.out.println(suggest.getSongTitle() + "에 관한 결과 없음");
+//				System.out.println(suggest.getSongTitle() + "에 관한 결과 없음");
 				continue;
 			}
-			System.out.println("**최종 결과: " + finalRes);
+//			System.out.println("**최종 결과: " + finalRes);
 		}
 		return finalRes;
+	}
+
+	/**
+	 * @param userNo suggestCount 에 +1 할 유저의 번호
+	 * @param count update 할 suggestCount
+	 */
+	@Override
+	public void addSuggestCount(Integer userNo, int count) {
+		userDao.addSuggestCount(userNo, count);
+	}
+
+	@Override
+	public void seggestCountReset() {
+		userDao.suggestCountReset();
 	}
 
 }
