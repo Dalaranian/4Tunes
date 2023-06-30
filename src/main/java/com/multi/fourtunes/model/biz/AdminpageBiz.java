@@ -34,6 +34,8 @@ public interface AdminpageBiz {
 
 	public int deleteReportComment(int comment_no);
 
-	public ArrayList<SongDto> setSonglink(ArrayList<SongDto> searchResult, String title, String artist);
+	public ArrayList<SongDto> setSonglink(ArrayList<SongDto> searchResult, String title);
+
+	public int insertSong(Long songNo, String playlist);
 
 }

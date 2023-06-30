@@ -6,7 +6,7 @@
 
 .adminpage_contents {
     width: 90%;
-    height: 75%;
+    height: 80%;
     background-color: rgb(224, 224, 224);
     margin-left: 60px;
     vertical-align: top;
@@ -17,17 +17,12 @@
 	margin-right: 5px;
 }
 
-#artist{
-	margin-right: 5px;
-	margin-left: 10px;
-}
-
 /* ---------- 검색창 ---------- */
 .search{
     margin-left: 30px;
     margin-top: 10px;
     text-align: left;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 /* ---------- 검색내용 ---------- */
@@ -66,6 +61,7 @@
     border: 0px;
     border-radius: 3px;
     padding: 3px 5px;
+    margin-left: 10px;
 }
 
 #add:hover{
