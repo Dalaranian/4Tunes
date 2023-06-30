@@ -5,8 +5,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.multi.fourtunes.model.jpa.entity.SongEntity;
+import com.multi.fourtunes.model.jpa.entity.UserEntity;
+import com.multi.fourtunes.model.jpa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +23,7 @@ import com.multi.fourtunes.model.biz.PlaylistBiz;
 import com.multi.fourtunes.model.dto.PlaylistDto;
 import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.dto.UserDto;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("/playlist")
@@ -25,6 +32,8 @@ public class PlayListController {
     @Autowired
     PlaylistBiz playlist;
 
+    @Autowired
+    UserRepository userRepository;
 
     @PostMapping("/insertmyplaylist")
     public ResponseEntity<String> addToPlaylist(@RequestBody SongDto songDto, HttpSession session) {
@@ -62,5 +71,68 @@ public class PlayListController {
         
         
         return ResponseEntity.ok(playlists);
+    }
+
+    /**
+     *
+     * @param userNo 조회할 PlayList의 UserNo
+     * @param session 세션에 담긴 로그인한 유저의 정보 불러오기
+     * @return Public / Mine 의 플레이리스트 페이지를, SongDto 가 담긴 ArrayList에 담아서 전송
+     */
+    @GetMapping("/gotoplaylistdetail")
+    public ModelAndView gotoPlayListDetail(String userNo, HttpSession session){
+        ModelAndView modelAndView = new ModelAndView();
+
+        // 세션의 UserDto 불러오기
+        UserDto currentUser = (UserDto) session.getAttribute("login");
+
+        // 현재 유저 소유의 플레이리스트인지, 아니면 타인의 플레이리스트인지 확인하여 return 할 view 결정
+        if(Integer.parseInt(userNo) == currentUser.getUser_no()){
+            modelAndView.setViewName("playlist_mine");
+//            System.out.println("내꺼");
+        }else{
+            UserEntity owner = userRepository.findByUserNo(Integer.parseInt(userNo));
+            modelAndView.setViewName("playlist_public");
+            modelAndView.addObject("name", owner.getUserName());
+//            System.out.println("남꺼");
+        }
+
+        // PlayList에 담겨있는 Song을 addobject 함
+        List<SongDto> songs = playlist.getPlayListSongs(userNo);
+
+        modelAndView.addObject("songs", songs);
+
+        return modelAndView;
+    }
+
+    /**
+     *
+     * @param song 삭제할 노래의 JPA Entity
+     * @param session
+     * @return 삭제 성공 여부를 String 으로 보냄
+     */
+    @PostMapping("/deletemyplaylist")
+    public String deleteMyPlaylist(@RequestBody SongEntity song, HttpSession session){
+
+        UserDto currentUser = (UserDto) session.getAttribute("login");
+
+        String res = playlist.deleteMyPlaylist(song, currentUser);
+
+        return (res.equals("success"))?"삭제 성공":"삭제 실패";
+    }
+
+    /**
+     * 플레이스트
+     * @param request 공개를 요청했을때 True, 비공개를 요청했을때 False
+     * @return
+     */
+    @PostMapping("/managevisibility")
+    public ResponseEntity<String> manageVisibility(@RequestBody boolean request, HttpSession session) {
+        UserDto currentLogin = (UserDto) session.getAttribute("login");
+
+        String res = playlist.visibilityManage(currentLogin, request);
+
+        // 요청에 대한 응답 반환
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }
