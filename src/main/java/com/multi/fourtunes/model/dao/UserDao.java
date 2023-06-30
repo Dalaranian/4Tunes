@@ -27,5 +27,9 @@ public interface UserDao {
 	public String[] getUserPlaylistNo(String userId);
 
     String getUserRoleByUserNo(int userNo);
+
+    void addSuggestCount(Integer userNo, int count);
+
+	void suggestCountReset();
 }
 

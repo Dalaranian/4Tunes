@@ -84,4 +84,15 @@ public class UserDaoImpl implements UserDao {
 		return roleManagerMapper.getUserRoleByUserNo(userNo);
 	}
 
+	@Override
+	public void addSuggestCount(Integer userNo, int count) {
+//		System.out.println(userNo + " " + count);
+		userMapper.addSuggestCount(userNo, count);
+	}
+
+	@Override
+	public void suggestCountReset() {
+		userMapper.suggestCountReset();
+	}
+
 }

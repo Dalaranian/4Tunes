@@ -64,10 +64,9 @@ a {
 }
 
 .search-input {
-  width: 9vw;
+  width: 131px;
   font-size: 18px;
   text-align: center;
-  min-width: 130px;
   border-radius: 5px 0 0 5px;
 }
 .search-icon {

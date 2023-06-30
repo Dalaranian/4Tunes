@@ -43,4 +43,10 @@ public interface UserMapper {
 	/** UserNo 를 활용해서, User 에 해당하는 플레이리스트 번호를 반환 */
 	@Select(" SELECT p.PLAYLIST_NO FROM `USER` u JOIN `PLAYLIST` p ON u.USER_NO = p.USER_NO WHERE u.USER_NO = #{UserNo} ")
 	String[] getUserPlatListNo(String userNo);
+
+	@Update(" UPDATE USER SET USER_SUGGESTCOUNT = #{count} WHERE USER_NO = #{userNo} ")
+    void addSuggestCount(Integer userNo, int count);
+
+	@Update(" UPDATE USER SET USER_SUGGESTCOUNT = '0' ")
+	void suggestCountReset();
 }
