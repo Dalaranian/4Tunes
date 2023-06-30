@@ -87,16 +87,16 @@
                                 allowfullscreen></iframe>
                     </div>
                     <div id="context">
-                        <h2 th:text="${song.songTitle}">노래제목</h2>
+                        <span class="song_title"  th:text="${song.songTitle}">노래제목</span>
                         <br/>
-                        <h3 th:text="${song.songArtist}">가수 이름</h3>
+                        <span class="song_singer" th:text="${song.songArtist}">가수 이름</span>
                         <!--                        <label th:text="${song.songId}" hidden="hidden"></label>-->
                         <br/>
                         <div style="width:200px;">
                             <!--								지훈이형 미안한데 혹시 요친구 마이너스 이미지로 바꿔주실 수있어요? 제가 건들면 뭔가 뭔가 이상해질가같음...-->
                             <button id="plus" style="display: inline-block; padding:0 5px;"
                                     th:attr="onclick='deleteToPlaylist(\'' + ${song.songTitle} + '\', \'' + ${song.songArtist} + '\', \'' + ${song.songLink} + '\', \'' + ${song.songId} + '\', \'' + ${song.songAlbumArt} + '\')'">
-                                <img id="plusimg" src="/resources/img/add.png">
+                                <img id="plusimg" src="/resources/img/minus.png">
                             </button>
                             <div style="display: inline-block;">내 플레이리스트에 제거</div>
                         </div>
