@@ -33,10 +33,16 @@
   display: flex;
   flex-wrap: wrap;
 }
-
+#plus{
+  background: none;
+  border: 0;
+}
+#plusimg{
+  width:21px;
+  height:21px;
+}
 .list_wrapper {
   display: flex;
-  width: 90%;
 }
 
 #List_left {
@@ -72,9 +78,8 @@ iframe {
   min-width: 165px;
   min-height: 155px;
 }
-
 #context {
-  display: inline-block;
+  display: block;
   width: 70%;
   padding: 2%;
   color: white;
@@ -84,6 +89,16 @@ iframe {
 #context div button{
   display: inline-block;
   padding: 0 5px;
+}
+.song_title{
+  font-size: 22px;
+  height: 64px;
+  display: block;
+}
+.song_singer{
+  font-size: 20px;
+  height: 40px;
+  display: block;
 }
 .plus_btn {
   padding: 0 4px;

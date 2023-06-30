@@ -36,7 +36,6 @@
 
 .list_wrapper {
   display: flex;
-  width: 90%;
 }
 
 #List_left {
@@ -84,6 +83,10 @@ iframe {
 #context div button{
   display: inline-block;
   padding: 0 5px;
+}
+#plus{
+  background:none;
+  border:0;
 }
 .plus_btn {
   padding: 0 4px;
