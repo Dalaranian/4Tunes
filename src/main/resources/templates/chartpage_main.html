@@ -8,12 +8,12 @@
 <link rel="stylesheet" href="/resources/css/chartpage_main.css" />
 <link rel="stylesheet" href="/resources/css/nav.css" />
 <link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/resources/js/playlist_search.js"></script>
 <title>4Tunes</title>
 </head>
 <body>
-
 	<div id="nav">
 		<div class="banner">
 			<a href="/"><img src="/resources/img/banner.png" /></a>
@@ -34,10 +34,11 @@
 		</div>
 		<div class="search-container">
 			<form action="/search/query" method="GET" style="display: flex;">
-				<input type="text" name="query" class="search-input" placeholder="키워드 입력" />
-				<span class="search-icon">
-					<input type="image" class="search-icon" src="/resources/img/search.png" alt="submit">
-				</span>				
+				<input type="text" name="query" class="search-input"
+					placeholder="키워드 입력" /> <span class="search-icon"> <input
+					type="image" class="search-icon" src="/resources/img/search.png"
+					alt="submit">
+				</span>
 			</form>
 		</div>
 		<div>
@@ -61,49 +62,49 @@
 		<!-- 재생목록이 추가될 경우 list_wrapper클래스 div를 복붙하게 할것 -->
 		<div id="MyPlayList">
 			<div th:each="song, iterStat : ${topSongs}" class="list_wrapper">
-					<div th:id="${(iterStat.index % 2 == 0) ? 'list_left' : 'list_right'}">
+				<div
+					th:id="${(iterStat.index % 2 == 0) ? 'list_left' : 'list_right'}">
 					<div class="rank">
 
-						<span
-							th:text="${iterStat.index + 1} + '위' + ${song.playlistCount}"></span>
-						<button id="popupButton_{{iterStat.index}}"
-							style="display: inline-block; padding: 0 5px;"
+						<span th:text="${iterStat.index + 1} + '위'"></span>
+						<button id="popupButton"
 							th:attr="onclick='createPopup(event, \'' + ${song.playlistCount} + '\', \'' + iterStat.index + '\')'">
 							<img id="questionimg" src="/resources/img/question.png">
 						</button>
 					</div>
+					<div style="display: inline-block;"></div>
 
 
 					<div id="video">
 						<div class="video-container">
-							<iframe th:src="@{${song.songLink}}" frameborder="0" allowfullscreen></iframe>
+							<iframe th:src="@{${song.songLink}}" frameborder="0"
+								allowfullscreen></iframe>
 						</div>
-						<div id="context">	
+						<div id="context">
 							<h2 th:text="${song.songTitle}"></h2>
 							<br />
 							<h3 th:text="${song.songArtist}"></h3>
 							<br />
-							<div style="width:200px;">
-                            <button id="plus" style="display: inline-block; padding:0 5px;"
-                                    th:attr="onclick='addToPlaylist(\'' + ${song.songTitle} + '\', \'' + ${song.songArtist} + '\', \'' + ${song.songLink} + '\', \'' + ${song.songId} + '\', \'' + ${song.songAlbumArt} + '\')'">
-                                <img id="plusimg" src="/resources/img/add.png">
-                            </button>
-                            <div style="display: inline-block;">내 플레이리스트에 추가</div>
+							<div style="width: 200px;">
+								<button id="plus" style="display: inline-block; padding: 0 5px;"
+									th:attr="onclick='addToPlaylist(\'' + ${song.songTitle} + '\', \'' + ${song.songArtist} + '\', \'' + ${song.songLink} + '\', \'' + ${song.songId} + '\', \'' + ${song.songAlbumArt} + '\')'">
+									<img id="plusimg" src="/resources/img/add.png">
+								</button>
+								<div style="display: inline-block;">내 플레이리스트에 추가</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<!-- list_wrapper닫는 div-->
-			
-					<div style="display: inline-block;"></div>
-					<div id="popupLayer" style="display: none;">
-						<div id="popupLayer_{{iterStat.index}}">
-							<div id="playlistCount_{{iterStat.index}}"></div>
-							<button id="closeButton">닫기</button>
-						</div>
+				<!-- list_wrapper닫는 div-->
+				
+				<div id="popupLayer" style="display: none;">
+					<div id="popupContent">
+						<div id="playlistCount"></div>
+						<button id="closeButton">닫기</button>
 					</div>
+				</div>
+			</div>
 		</div>
-	</div>
 	</div>
 <script>
 function createPopup(event, playlistCount, index) {
@@ -114,13 +115,9 @@ function createPopup(event, playlistCount, index) {
 
 	  button.disabled = true; // 버튼 비활성화
 
-	  const popupLayer = document.getElementById("popupLayer_" + index);
-	  if (popupLayer && popupLayer.style.display !== "none") {
-	    return; // 이미 해당 인덱스의 팝업이 열려 있는 경우 함수 종료
-	  }
-
-	  const playlistCountElement = document.getElementById("playlistCount_" + index);
-	  playlistCountElement.textContent = playlistCount + "명의 4tunes 회원에게 선택받은 곡입니다.";
+	  const popupLayer = document.getElementById("popupLayer");
+	  const playlistCountElement = document.getElementById("playlistCount");
+	  playlistCountElement.textContent = playlistCount + "명의 회원이 플레이리스트에 담은 노래입니다 :)";
 
 	  const closeButton = document.getElementById("closeButton");
 	  closeButton.addEventListener("click", function () {
@@ -131,6 +128,6 @@ function createPopup(event, playlistCount, index) {
 	  popupLayer.style.display = "block";
 	}
 </script>
- 
+
 </body>
 </html>
