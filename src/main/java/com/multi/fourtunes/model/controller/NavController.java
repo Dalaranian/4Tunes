@@ -2,12 +2,15 @@ package com.multi.fourtunes.model.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.internal.build.AllowSysOut;
+import com.multi.fourtunes.model.jpa.entity.UserEntity;
+import com.multi.fourtunes.model.jpa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +30,7 @@ import com.multi.fourtunes.model.dto.UserDto;
 @Controller
 @RequestMapping("/nav")
 public class NavController {
-	
+
 	@Autowired
 	private AdminpageBiz adminpageBiz;
 
@@ -36,16 +39,22 @@ public class NavController {
 
 	@Autowired
 	private LoginBiz loginBiz;
-	
+
 	@Autowired
     OpenAiApi openAiApi;
-	
+
 	@Autowired
 	SuggestBiz suggestBiz;
 
 	@Autowired
 	private ChartBiz chartBiz;
-	
+
+	@Autowired
+	UserRepository userRepository;
+
+	final EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenceUnitName");
+	final EntityManager entityManager = emf.createEntityManager();
+
 	// 로그인 페이지로 이동
 	@GetMapping("/login")
 	public String gotoLogin() {
@@ -60,7 +69,7 @@ public class NavController {
 			UserDto currentUser = (UserDto) session.getAttribute("login");
 			System.out.println(currentUser);
 			String userKeyword = loginBiz.getUserKeyword(currentUser.getUser_no());
-			
+
 			// 결제 개월수 조회
 			int subscriptionMonth = loginBiz.getSubscriptionMonth(currentUser.getUser_no());
 			//System.out.println("month : " + subscriptionMonth);
@@ -72,7 +81,7 @@ public class NavController {
 				//System.out.println("만료날짜는: " + subscriptionEndDate);
 				model.addAttribute("subscriptionEndDate", subscriptionEndDate);
 			}
-			
+
 			// 내 회원등급 조회
 		    String grade = adminpageBiz.selectGrade(currentUser.getUser_no());
 		    model.addAttribute("grade", grade);
@@ -88,20 +97,37 @@ public class NavController {
 	// 맞춤 추천 페이지로 이동
 	@GetMapping("/suggested")
 	public String gotoSuggested(HttpSession session, Model model) {
+
 		// 현재 로그인 되어있는 회원의 키워드 조회하기
 		if (session.getAttribute("login") != null) {
 			UserDto user = (UserDto)session.getAttribute("login");
 			String userKeyword = loginBiz.getUserKeyword(user.getUser_no());
-			
-			// StringBuilder : String을 합치는 역할, append()를 통해 문자열을 합쳐준다.
-			/*
-			 * StringBuilder myKeyword = new StringBuilder(); for (String str : userKeyword)
-			 * { myKeyword.append(str + " "); }
-			 */
+
+			// 결제 계정 조회하여, 5번이 넘었는지 확인하기
+			UserEntity userEntity = userRepository.findByUserId(user.getUser_id());
+
+			if (userEntity.getUserSuggestCount() > 5) {
+				userEntity.setUserSuggestCount(userEntity.getUserSuggestCount() + 1);
+
+				// 트랜잭션 시작
+				entityManager.getTransaction().begin();
+
+				try {
+					// 업데이트된 엔티티 영속성 컨텍스트에 저장
+					entityManager.merge(userEntity);
+
+					// 트랜잭션 커밋
+					entityManager.getTransaction().commit();
+				} catch (Exception e) {
+					// 예외 발생 시 롤백
+					entityManager.getTransaction().rollback();
+					throw e;
+				}
+			}
 
 			// 조회한 해당 회원의 키워드를 model에 담아줌
 			model.addAttribute("userkeyword", userKeyword);
-			
+
 			// OpenAI 에게 노래추천받기 (키워드가 담겨있는 String 배열을 매개변수로 전달)
 			// 추천받은 노래 10곡을 songs에 담아줌
 			ArrayList<SongDto> songs = openAiApi.suggestedSong(userKeyword);
@@ -112,15 +138,15 @@ public class NavController {
 				ArrayList<SongDto> finalRes = suggestBiz.searchSuggestedSong(songs);
 				model.addAttribute("suggestResult", finalRes);
 			}
-			
+
 			//return "redirect:/api/gpt";
 			return "playlist_suggested";
-			
+
 		} else {
 			return "login_login";
-		}	
+		}
 	}
-	
+
 	// 인기 차트 페이지로 이동
 	@GetMapping("/chart")
 	public String gotoChart(Model model) {
