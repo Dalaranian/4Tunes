@@ -36,4 +36,29 @@ public class PlayListDaoImple implements PlaylistDao{
 	public List<PlaylistDto> selectMine(int userNo) {
 		return playListMapper.selectMine(userNo);
 	}
+
+    /**
+     * @param userNo
+     * @return userNo 에 해당하는 playListno 의 배열을 리턴
+     */
+    @Override
+    public int[] getPlayListNo(String userNo) {
+        return playListMapper.getPlayListNo(userNo);
+    }
+
+    @Override
+    public int deleteMyPlayList(String playListNo, Long songNo) {
+//        System.out.println("playlist : " + playListNo + " " + "songNo : " + songNo);
+        return playListMapper.deleteMyPlayList(playListNo, songNo);
+    }
+
+    @Override
+    public String getPlayListVisibility(int userNo) {
+        return playListMapper.getPlayListVisibility(userNo);
+    }
+
+    @Override
+    public void setPlayListVisible(String isEnable, String playListNo) {
+        playListMapper.setPlayListVisible(isEnable, playListNo);
+    }
 }

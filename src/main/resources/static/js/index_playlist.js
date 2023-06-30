@@ -19,7 +19,7 @@ $(document).ready(function () {
         var anchorWithImage = $("<a></a>")
           .attr(
             "href",
-            "/innerpaging/playlist/public?userNo=" + playlist.userNo
+            "/playlist/gotoplaylistdetail?userNo=" + playlist.userNo
           )
           .append(img);
 
