@@ -12,21 +12,36 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.multi.fourtunes.model.apis.AnalysisApi;
+import com.multi.fourtunes.model.apis.OpenAiApi;
 import com.multi.fourtunes.model.biz.AdminpageBiz;
 import com.multi.fourtunes.model.biz.CommunityBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import com.multi.fourtunes.model.dto.CommunityDto;
 import com.multi.fourtunes.model.dto.UserDto;
+import com.multi.fourtunes.model.jpa.entity.PlaylistEntity;
+import com.multi.fourtunes.model.jpa.entity.SongEntity;
+import com.multi.fourtunes.model.jpa.entity.UserEntity;
+import com.multi.fourtunes.model.jpa.repository.PlaylistRepository;
+import com.multi.fourtunes.model.jpa.repository.UserRepository;
 
 // 프론트 작성의 편의를 위한 임시 페이징 클래스입니다. 
 
 @Controller
 @RequestMapping("/innerpaging")
 public class InnerPagingController {
+	@Autowired
+    private PlaylistRepository playlistRepository;
 	
+	@Autowired
+    AnalysisApi analysisApi;
+
 	@Autowired
 	private AdminpageBiz adminpageBiz;
 	
@@ -111,4 +126,36 @@ public class InnerPagingController {
 	public String gotoPlayListSuggested() {
 		return "playlist_todaypick";
 	}
+	
+	
+	@GetMapping("/mypage/analysis")
+	public String gotoSuggested(HttpSession session, Model model) throws JsonMappingException, JsonProcessingException {
+		// 현재 로그인 되어있는 회원의 플레이리스트의 모든 노래 목록 조회하기
+		if (session.getAttribute("login") != null) {
+			UserDto user = (UserDto) session.getAttribute("login");
+			int userNo = user.getUser_no();
+
+			PlaylistEntity playlist = playlistRepository.findPlaylistByUserNo(userNo);
+	        if (playlist != null) {
+	            List<SongEntity> songs = playlistRepository.findAllSongsByPlaylistNo(playlist.getPlaylistNo());
+	            List<String> playlistSongsAndArtists = new ArrayList<>();
+	            for (SongEntity song : songs) {
+	                String songAndArtist = song.getSongTitle() + "-" + song.getSongArtist();
+	                playlistSongsAndArtists.add(songAndArtist);
+	            }
+	            // 조회한 해당 회원의 모든 노래를 "노래제목-가수" 형식으로 목록에 담음
+	            
+	            // 노래 목록 콘솔 출력
+	            for (String song : playlistSongsAndArtists) {
+	                System.out.println(song);
+	            }
+	            
+	            model.addAttribute("playlistSongsAndArtists", playlistSongsAndArtists);
+	            return "mypage_analysis";
+			}
+		}
+		return "login_login";
+	}
+
+	
 }
