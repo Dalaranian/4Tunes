@@ -104,11 +104,10 @@ public class NavController {
 			// 결제 계정 조회하여, 5번이 넘었는지 확인하기
 			UserEntity userEntity = userRepository.findByUserId(user.getUser_id());
 
-			if (userEntity.getUserSuggestCount() <= 5) {
-				model.addAttribute("suggestCout", user);
-				suggestBiz.addSuggestCount(userEntity.getUserNo(), userEntity.getUserSuggestCount()+1);
-			}else if(userEntity.getUserGrade().equals("FREE") && (userEntity.getUserSuggestCount()+1) > 5){
+			if (userEntity.getUserGrade().equals("FREE") && (userEntity.getUserSuggestCount()+1) > 5) {
 				return "membership_join";
+			}else {
+				suggestBiz.addSuggestCount(userEntity.getUserNo(), userEntity.getUserSuggestCount()+1);
 			}
 
 			// 조회한 해당 회원의 키워드를 model에 담아줌
