@@ -14,7 +14,6 @@ public class SuggestCountResseter {
     // 매월 1일 0시 0분 실행
     @Scheduled(cron = "0 0 0 1 * ?")
     public void executeTask() {
-        // 여기에 실행할 로직을 작성
         System.out.println("모든 유저의 SuggestCount 를 초기화합니다. ");
 
         suggestBiz.seggestCountReset();
