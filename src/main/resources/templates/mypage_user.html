@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="UTF-8">
@@ -95,6 +95,10 @@
 				<div class="mypage">
     				<span class="mypage_title" th:if="${subscriptionEndDate != null}">구독 만료일</span>
     				<input th:if="${subscriptionEndDate != null}" th:value="${subscriptionEndDate}" readonly>
+				</div>
+				<div th:if="${#session.getAttribute('login').user_grade eq 'FREE'}" class="mypage">
+					<span class = "mypage_title">이번달 추천받은 횟수</span>
+					<input th:value="${#session.getAttribute('login').user_suggestcount}">
 				</div>
 				<div class="mypage_kw_group">
 					<div class="mypage_keyword">
