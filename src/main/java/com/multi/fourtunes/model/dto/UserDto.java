@@ -12,12 +12,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class UserDto {
-	
 	private int user_no;
 	private String user_id;
 	private String user_name;
 	private String user_pw;
 	private String user_grade;
-
-
+	private Integer user_suggestcount;
 }

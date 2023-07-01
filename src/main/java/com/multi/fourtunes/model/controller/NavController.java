@@ -64,7 +64,8 @@ public class NavController {
 		if (session.getAttribute("login") != null) {
 			String[] keywordList = loginBiz.getKeyword();
 			UserDto currentUser = (UserDto) session.getAttribute("login");
-			System.out.println(currentUser);
+			currentUser.setUser_suggestcount(userRepository.findByUserId(currentUser.getUser_id()).getUserSuggestCount());
+//			System.out.println(currentUser);
 			String userKeyword = loginBiz.getUserKeyword(currentUser.getUser_no());
 
 			// 결제 개월수 조회
@@ -95,7 +96,7 @@ public class NavController {
 	@GetMapping("/suggested")
 	public String gotoSuggested(HttpSession session, Model model) {
 
-		// 현재 로그인 되어있는 회원의 키워드 조회하기
+		// 현재 로그인 되어있는 회원의 키워드 조회하기 및 무료회원 / 유료회원 검증
 		if (session.getAttribute("login") != null) {
 			UserDto user = (UserDto)session.getAttribute("login");
 			String userKeyword = loginBiz.getUserKeyword(user.getUser_no());
@@ -103,10 +104,10 @@ public class NavController {
 			// 결제 계정 조회하여, 5번이 넘었는지 확인하기
 			UserEntity userEntity = userRepository.findByUserId(user.getUser_id());
 
-			if (userEntity.getUserSuggestCount() <= 5) {
-				suggestBiz.addSuggestCount(userEntity.getUserNo(), userEntity.getUserSuggestCount()+1);
-			}else if(userEntity.getUserGrade().equals("FREE") && userEntity.getUserSuggestCount() > 5){
+			if (userEntity.getUserGrade().equals("FREE") && (userEntity.getUserSuggestCount()+1) > 5) {
 				return "membership_join";
+			}else {
+				suggestBiz.addSuggestCount(userEntity.getUserNo(), userEntity.getUserSuggestCount()+1);
 			}
 
 			// 조회한 해당 회원의 키워드를 model에 담아줌
