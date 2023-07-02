@@ -15,15 +15,20 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 public class PlaylistEntity implements Serializable {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PLAYLIST_NO", nullable = false, unique = true)
-	private int playlistNo;
+	private Integer playlistNo;
 
-	@OneToMany(mappedBy = "playlist")
-	private List<ManageSongEntity> manageSongs;
+	@Column(name = "PLAYLIST_NAME", nullable = false)
+	private String playlistName;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_no")
+	@JoinColumn(name = "USER_NO")
 	private UserEntity user;
+
+	@OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<ManageSongEntity> manageSongs;
+
 }

@@ -30,6 +30,7 @@ import com.multi.fourtunes.model.jpa.entity.SongEntity;
 import com.multi.fourtunes.model.jpa.entity.UserEntity;
 import com.multi.fourtunes.model.jpa.repository.PlaylistRepository;
 import com.multi.fourtunes.model.jpa.repository.UserRepository;
+import com.multi.fourtunes.model.mapper.KeywordMapper;
 
 // 프론트 작성의 편의를 위한 임시 페이징 클래스입니다. 
 
@@ -47,6 +48,9 @@ public class InnerPagingController {
 	
 	@Autowired
 	private LoginBiz loginBiz;
+	
+	@Autowired
+	private KeywordMapper keywordMapper;
 
 	@Autowired MyPageBiz myPageBiz;
 	// 로그인 페이지
@@ -130,12 +134,12 @@ public class InnerPagingController {
 	
 	@GetMapping("/mypage/analysis")
 	public String gotoSuggested(HttpSession session, Model model) throws JsonMappingException, JsonProcessingException {
-		// 현재 로그인 되어있는 회원의 플레이리스트의 모든 노래 목록 조회하기
-		if (session.getAttribute("login") != null) {
-			UserDto user = (UserDto) session.getAttribute("login");
-			int userNo = user.getUser_no();
+	    // 현재 로그인 되어있는 회원의 플레이리스트의 모든 노래 목록 조회하기
+	    if (session.getAttribute("login") != null) {
+	        UserDto user = (UserDto) session.getAttribute("login");
+	        int userNo = user.getUser_no();
 
-			PlaylistEntity playlist = playlistRepository.findPlaylistByUserNo(userNo);
+	        PlaylistEntity playlist = playlistRepository.findPlaylistByUserNo(userNo);
 	        if (playlist != null) {
 	            List<SongEntity> songs = playlistRepository.findAllSongsByPlaylistNo(playlist.getPlaylistNo());
 	            List<String> playlistSongsAndArtists = new ArrayList<>();
@@ -149,12 +153,21 @@ public class InnerPagingController {
 	            for (String song : playlistSongsAndArtists) {
 	                System.out.println(song);
 	            }
+	            String[] keywords = keywordMapper.getAllKeyword();
 	            
+	            // 키워드 목록 콘솔 출력
+	            System.out.println("Keywords:");
+	            for (String keyword : keywords) {
+	                System.out.println(keyword);
+	            }
+
 	            model.addAttribute("playlistSongsAndArtists", playlistSongsAndArtists);
+	            model.addAttribute("keywords", keywords);
+
 	            return "mypage_analysis";
-			}
-		}
-		return "login_login";
+	        }
+	    }
+	    return "login_login";
 	}
 
 	

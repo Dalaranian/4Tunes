@@ -2,6 +2,8 @@ package com.multi.fourtunes.model.jpa.entity;
 
 import lombok.*;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,16 +13,21 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ManageSongEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ManageSongEntity implements Serializable {
+	
+	@Id
+	@Column(name = "PLAYLIST_NO", nullable = false)
+	private Integer playlistNo;
 
-    @ManyToOne
-    @JoinColumn(name = "playlist_no")
-    private PlaylistEntity playlist;
+	@Id
+	@Column(name = "SONG_NO", nullable = false)
+	private Integer songNo;
 
-    @ManyToOne
-    @JoinColumn(name = "song_no")
-    private SongEntity song;
+	@ManyToOne
+	@JoinColumn(name = "PLAYLIST_NO", insertable = false, updatable = false)
+	private PlaylistEntity playlist;
+
+	@ManyToOne
+	@JoinColumn(name = "SONG_NO", insertable = false, updatable = false)
+	private SongEntity song;
 }
