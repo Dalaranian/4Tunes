@@ -133,7 +133,7 @@ public class InnerPagingController {
 	
 	
 	@GetMapping("/mypage/analysis")
-	public String gotoSuggested(HttpSession session, Model model) throws JsonMappingException, JsonProcessingException {
+	public String gotoAnalysis(HttpSession session, Model model) {
 	    // 현재 로그인 되어있는 회원의 플레이리스트의 모든 노래 목록 조회하기
 	    if (session.getAttribute("login") != null) {
 	        UserDto user = (UserDto) session.getAttribute("login");
@@ -164,11 +164,29 @@ public class InnerPagingController {
 	            model.addAttribute("playlistSongsAndArtists", playlistSongsAndArtists);
 	            model.addAttribute("keywords", keywords);
 
+	            
+	            try {
+	                // API 호출
+	                List<Double> ratios = analysisApi.getKeywordRatios(playlistSongsAndArtists.toArray(new String[0]));
+
+	                // 키워드 비율 콘솔 출력
+	                System.out.println("Keyword Ratios:");
+	                for (int i = 0; i < keywords.length; i++) {
+	                    System.out.println(keywords[i] + ": " + ratios.get(i));
+	                }
+
+	                model.addAttribute("ratios", ratios);
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	            
 	            return "mypage_analysis";
 	        }
 	    }
 	    return "login_login";
 	}
+
+	
 
 	
 }

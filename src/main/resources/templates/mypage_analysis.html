@@ -71,11 +71,12 @@
 			</ul>
 		</div>
 		<div class="mypage_contents">
-			<ul>
-				<#list ratios as ratio>
-				<li>${ratio}</li>
-				</#list>
-			</ul>
+			<tbody>
+        <tr th:each="keywordAndRatio : ${keywordAndRatios}">
+            <td th:text="${keywordAndRatio.keyword}"></td>
+            <td th:text="${keywordAndRatio.ratio}"></td>
+        </tr>
+            </tbody>
 		</div>
 	</div>
 
