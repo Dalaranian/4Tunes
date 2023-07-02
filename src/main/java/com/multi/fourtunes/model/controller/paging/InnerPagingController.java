@@ -169,13 +169,13 @@ public class InnerPagingController {
 	                // API 호출
 	                List<Double> ratios = analysisApi.getKeywordRatios(playlistSongsAndArtists.toArray(new String[0]));
 
-	                // 키워드 비율 콘솔 출력
-	                System.out.println("Keyword Ratios:");
-	                for (int i = 0; i < keywords.length; i++) {
-	                    System.out.println(keywords[i] + ": " + ratios.get(i));
-	                }
-
-	                model.addAttribute("ratios", ratios);
+//	                // 키워드 비율 콘솔 출력
+//	                System.out.println("Keyword Ratios:");
+//	                for (int i = 0; i < keywords.length; i++) {
+//	                    System.out.println(keywords[i] + ": " + ratios.get(i));
+//	                }
+//
+//	                model.addAttribute("ratios", ratios);
 	            } catch (Exception e) {
 	                e.printStackTrace();
 	            }

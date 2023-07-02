@@ -61,12 +61,12 @@ public class AnalysisApi {
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
                 System.out.println("API Response: " + responseEntity.getBody()); // API 응답을 콘솔에 출력
 
-                JSONArray keywordAndRatios = parseKeywordAndRatios(responseEntity);
-                for (int i = 0; i < keywordAndRatios.length(); i++) {
-                    JSONObject keywordAndRatio = keywordAndRatios.getJSONObject(i);
-                    double ratio = keywordAndRatio.getDouble("ratio");
-                    ratios.add(ratio);
-                }
+//                JSONArray keywordAndRatios = parseKeywordAndRatios(responseEntity);
+//                for (int i = 0; i < keywordAndRatios.length(); i++) {
+//                    JSONObject keywordAndRatio = keywordAndRatios.getJSONObject(i);
+//                    double ratio = keywordAndRatio.getDouble("ratio");
+//                    ratios.add(ratio);
+//                }
             } else {
                 System.err.println("Failed to make the request. Status code: " + responseEntity.getStatusCodeValue());
             }
@@ -88,24 +88,24 @@ public class AnalysisApi {
 
         content.append("이 노래 전체가 키워드 ");
         content.append(keywords.length);
-        content.append("개 중에서 어떤 장르에 가까운지 상위 3개의 비율을 보여줘. 비율은 전체 100% 기준이고, 3개의 키워드가 합쳐서 100%가 되야해. JSON 형식으로 줘.");
+        content.append("중에서 어떤 장르에 가까운지 상위 3개의 키워드와 비율만 보여줘. 비율은 상위 3개의 키워드가 합쳐서 100%가 되야해. JSON 형식으로 줘.");
 
         return content.toString();
     }
 
-    private JSONArray parseKeywordAndRatios(ResponseEntity<String> responseEntity) {
-        try {
-            JSONObject responseObject = new JSONObject(responseEntity.getBody());
-            JSONArray choices = responseObject.getJSONArray("choices");
-            JSONObject choice = choices.getJSONObject(0);
-            JSONObject output = choice.getJSONObject("message").getJSONObject("output");
-            JSONArray keywordAndRatios = output.getJSONArray("keywords_and_ratios");
-            return keywordAndRatios;
-        } catch (JSONException e) {
-            System.err.println("Failed to parse the response: " + e.getMessage());
-            return new JSONArray();
-        }
-    }
+//    private JSONArray parseKeywordAndRatios(ResponseEntity<String> responseEntity) {
+//        try {
+//            JSONObject responseObject = new JSONObject(responseEntity.getBody());
+//            JSONArray choices = responseObject.getJSONArray("choices");
+//            JSONObject choice = choices.getJSONObject(0);
+//            JSONObject output = choice.getJSONObject("message").getJSONObject("output");
+//            JSONArray keywordAndRatios = output.getJSONArray("keywords_and_ratios");
+//            return keywordAndRatios;
+//        } catch (JSONException e) {
+//            System.err.println("Failed to parse the response: " + e.getMessage());
+//            return new JSONArray();
+//        }
+//    }
 }
 		
 //	public List<Double> parseKeywordAndRatios(ResponseEntity<String> responseEntity) {
