@@ -32,4 +32,7 @@ public class SongEntity {
 
     @Column(name = "SONG_ALBUMART", nullable = true)
     private String songAlbumart;
+    
+    @Column(name = "SONG_AIKEYWORD", nullable = true)
+    private String songAikeyword;
 }

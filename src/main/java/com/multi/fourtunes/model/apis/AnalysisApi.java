@@ -79,6 +79,8 @@ public class AnalysisApi {
 
     private String getContentByPlaylistSongs(String[] playlistSongsAndArtists, String[] keywords) {
         StringBuilder content = new StringBuilder();
+        
+        content.append(" ");
 
         // 플레이리스트에 포함된 노래들을 질문에 포함
         for (String song : playlistSongsAndArtists) {
@@ -86,10 +88,17 @@ public class AnalysisApi {
         }
         content.delete(content.length() - 2, content.length());
 
-        content.append("이 노래 전체가 키워드 ");
-        content.append(keywords.length);
-        content.append("중에서 어떤 장르에 가까운지 상위 3개의 키워드와 비율만 보여줘. 비율은 상위 3개의 키워드가 합쳐서 100%가 되야해. JSON 형식으로 줘.");
-
+        
+        content.append(" Among the given list of songs, ");
+        
+        content.append(" <keywords: ");
+      
+        for (String keyword : keywords) {
+        	content.append(keyword).append(" ");
+        }
+        content.append(">  determine the top 3 keywords that are closest to the genres of these songs from the provided list of keywords. Show the top 3 keywords and their corresponding ratios. Please ensure that the sum of the ratios for the top 3 keywords amounts to 100. Please provide the response in JSON format.");
+        // 중에서 어떤 keyword에 가까운지 상위 3개의 keyword와 ratio만 보여줘. ratio는 상위 3개의 keyword가 합쳐서 100%가 되야해. JSON 형식으로 줘
+        System.out.println(content.toString());
         return content.toString();
     }
 

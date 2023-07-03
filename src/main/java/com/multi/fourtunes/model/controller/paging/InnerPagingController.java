@@ -154,9 +154,10 @@ public class InnerPagingController {
 	                System.out.println(song);
 	            }
 	            String[] keywords = keywordMapper.getAllKeyword();
+	         
 	            
 	            // 키워드 목록 콘솔 출력
-	            System.out.println("Keywords:");
+	            
 	            for (String keyword : keywords) {
 	                System.out.println(keyword);
 	            }
