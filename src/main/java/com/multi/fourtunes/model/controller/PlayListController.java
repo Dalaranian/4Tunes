@@ -46,7 +46,7 @@ public class PlayListController {
             return ResponseEntity.accepted().body(res);
         }
     }
-    
+
     @GetMapping("/getmyplaylist")
     public ResponseEntity<List<PlaylistDto>> getMyPlaylist(HttpSession session) {
         UserDto currentUser = (UserDto) session.getAttribute("login");
@@ -59,7 +59,7 @@ public class PlayListController {
 
             // myPlaylists에 이미 있는 플레이리스트 제외
             allPlaylists.removeAll(myPlaylists);
-        }else {
+        } else {
             allPlaylists = playlist.getAllPlaylists();
         }
 
@@ -67,29 +67,28 @@ public class PlayListController {
         List<PlaylistDto> playlists = new ArrayList<>();
         playlists.addAll(myPlaylists);
         playlists.addAll(allPlaylists);
-        
-        
+
+
         return ResponseEntity.ok(playlists);
     }
 
     /**
-     *
-     * @param userNo 조회할 PlayList의 UserNo
+     * @param userNo  조회할 PlayList의 UserNo
      * @param session 세션에 담긴 로그인한 유저의 정보 불러오기
      * @return Public / Mine 의 플레이리스트 페이지를, SongDto 가 담긴 ArrayList에 담아서 전송
      */
     @GetMapping("/gotoplaylistdetail")
-    public ModelAndView gotoPlayListDetail(String userNo, HttpSession session){
+    public ModelAndView gotoPlayListDetail(String userNo, HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
 
         // 세션의 UserDto 불러오기
         UserDto currentUser = (UserDto) session.getAttribute("login");
 
         // 현재 유저 소유의 플레이리스트인지, 아니면 타인의 플레이리스트인지 확인하여 return 할 view 결정
-        if(Integer.parseInt(userNo) == currentUser.getUser_no()){
+        if (Integer.parseInt(userNo) == currentUser.getUser_no()) {
             modelAndView.setViewName("playlist_mine");
 //            System.out.println("내꺼");
-        }else{
+        } else {
             UserEntity owner = userRepository.findByUserNo(Integer.parseInt(userNo));
             modelAndView.setViewName("playlist_public");
             modelAndView.addObject("name", owner.getUserName());
@@ -105,31 +104,31 @@ public class PlayListController {
 
         // 화면에 보여줄 SongDto 8개짜리 List를 만듬
         List<SongDto> finalResult = new ArrayList<>();
-        for(int i = 0;i < 8;i++){
-         finalResult.add(songs.get(i));
+        for (int i = 0; i < 8; i++) {
+            finalResult.add(songs.get(i));
         }
         modelAndView.addObject("songs", finalResult);
         return modelAndView;
     }
 
     /**
-     *
-     * @param song 삭제할 노래의 JPA Entity
+     * @param song    삭제할 노래의 JPA Entity
      * @param session
      * @return 삭제 성공 여부를 String 으로 보냄
      */
     @PostMapping("/deletemyplaylist")
-    public String deleteMyPlaylist(@RequestBody SongEntity song, HttpSession session){
+    public String deleteMyPlaylist(@RequestBody SongEntity song, HttpSession session) {
 
         UserDto currentUser = (UserDto) session.getAttribute("login");
 
         String res = playlist.deleteMyPlaylist(song, currentUser);
 
-        return (res.equals("success"))?"삭제 성공":"삭제 실패";
+        return (res.equals("success")) ? "삭제 성공" : "삭제 실패";
     }
 
     /**
      * 플레이스트
+     *
      * @param request 공개를 요청했을때 True, 비공개를 요청했을때 False
      * @return
      */
@@ -142,17 +141,28 @@ public class PlayListController {
         // 요청에 대한 응답 반환
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
+//
+//    @PostMapping("getmoresong")
+//    public ResponseEntity<String> getMoreSongs(
+//            @RequestParam("pageNo") int pageNo,
+//            @RequestParam("pageSize") int pageSize,
+//            @RequestParam("userNo") long userNo) {
+//        System.out.println(pageNo + " " + pageSize + userNo);
+//        return new ResponseEntity<>("true", HttpStatus.OK);
+//
+//    }
 
-    @PostMapping("/getmoresong")
-    public ResponseEntity<List<SongDto>> getMoreSong(@RequestParam("pageNo") String pageNo,
-                                                     @RequestParam("pageSize") String pageSize,
-                                                     @RequestParam("userNo") String userNo){
-        System.out.println(pageNo + " " + pageSize + " " + userNo);
-        List<SongDto> result = new ArrayList<>();
+    @PostMapping("getmoresong")
+    public ResponseEntity<List<SongDto>> getMoreSongs(@RequestBody String str) {
 
-        SongEntity entity = songRepository.findBySongId(Integer.toString(2));
+        List<SongDto> dtos = new ArrayList<>();
+        SongDto dto = new SongDto(500, "TempTitle", "TempArtist", "TempAlbumArt", "https://www.youtube.com/embed/Os_heh8vPfs", "8595622", 100);
 
-        result.add(new SongDto(1, "tmp", "tmp", "http://i.maniadb.com/images/album/742/742576_1_f.jpg", "https://www.youtube.com/embed/BzYnNdJhZQw", "7345385", 3));
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        for(int i = 0;i<8;i++){
+            dtos.add(dto);
+        }
+
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
+
 }

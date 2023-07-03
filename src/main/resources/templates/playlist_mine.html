@@ -138,9 +138,43 @@ $(document).ready(function() {
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(request),
-                success: function(data){
-                    alert(data);
-                },
+                success: function (data) {
+        var songs = data;
+        for (var i = 0; i < songs.length; i++) {
+            var song = songs[i];
+
+            // 각 요소를 동적으로 생성합니다.
+            var listWrapper = $("<div class='list_wrapper'></div>");
+            var listInner = $("<div></div>").attr("id", (i % 2 === 0) ? "list_left" : "list_right");
+            var video = $("<div id='video'></div>");
+            var videoContainer = $("<div class='video-container'></div>");
+            var iframe = $("<iframe>").attr({"src": song.songLink, "frameborder": "0", "allowfullscreen": true});
+
+            videoContainer.append(iframe);
+
+            var context = $("<div id='context'></div>");
+            var songTitle = $("<span class='song_title'>" + song.songTitle + "</span>");
+            var songSinger = $("<span class='song_singer'>" + song.songArtist + "</span>");
+
+            var removeDiv = $("<div style='width:200px;'></div>");
+            var removeButton = $("<button id='plus' style='display: inline-block; padding:0 5px;'></button>").attr("onclick", "deleteToPlaylist('" + song.songTitle + "','" + song.songArtist + "','" + song.songLink + "','" + song.songId + "','" + song.songAlbumArt + "')");
+            var removeImage = $("<img id='plusimg' src='/resources/img/minus.png'>");
+            var removeText = $("<div style='display: inline-block;'>내 플레이리스트에 제거</div>");
+
+            removeButton.append(removeImage);
+            removeDiv.append(removeButton).append(removeText);
+
+            context.append(songTitle).append("<br/>").append(songSinger).append("<br/>").append(removeDiv);
+
+            video.append(videoContainer).append(context);
+
+            listInner.append(video);
+            listWrapper.append(listInner);
+
+            // 최종적으로 생성된 요소를 MyPlayList에 추가합니다.
+            $("#MyPlayList").append(listWrapper);
+        }
+    },
                 error: function(err){
                     console.log('Error:', err);
                 }
