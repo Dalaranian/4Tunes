@@ -136,46 +136,10 @@ $(document).ready(function() {
             $.ajax({
                 url: "/playlist/getmoresong",
                 type: 'POST',
-                contentType:'application.json',
+                contentType: 'application/json',
                 data: JSON.stringify(request),
                 success: function(data){
-                    var songs = data.songs;
-                    for (var i = 0; i < songs.length; i++) {
-                        var song = songs[i];
-                        //추가되는 데이터 형식
-                        var newSongItem = `
-                            <div class="list_wrapper">
-                                <div id="${(i % 2 == 0) ? 'list_left' : 'list_right'}">
-                                    <div id="video">
-                                        <div class="video-container">
-                                            <iframe src="${song.songLink}" frameborder="0"
-                                                    allowfullscreen></iframe>
-                                        </div>
-                                        <div id="context">
-                                            <span class="song_title">${song.songTitle}</span>
-                                            <br/>
-                                            <span class="song_singer">${song.songArtist}</span>
-                                            <br/>
-                                            <div style="width:200px;">
-                                                <button id="plus" style="display: inline-block; padding:0 5px;"
-                                                        onclick="deleteToPlaylist('${song.songTitle}', '${song.songArtist}', '${song.songLink}', '${song.songId}', '${song.songAlbumArt}')">
-                                                    <img id="plusimg" src="/resources/img/minus.png">
-                                                </button>
-                                                <div style="display: inline-block;">내 플레이리스트에 제거</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                        $("#MyPlayList").append(newSongItem);
-                    }
-                    if(songs.length > 0) {
-                        pageNo += 1;
-                    } else {
-                        // 더 이상 불러올 노래가 없다면 스크롤 이벤트 리스너를 제거
-                    	$(window).off('scroll', onScroll);
-                    }
+                    alert(data);
                 },
                 error: function(err){
                     console.log('Error:', err);
