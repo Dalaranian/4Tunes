@@ -1,23 +1,19 @@
 package com.multi.fourtunes.model.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import com.multi.fourtunes.model.jpa.entity.SongEntity;
 import com.multi.fourtunes.model.jpa.entity.UserEntity;
+import com.multi.fourtunes.model.jpa.repository.SongRepository;
 import com.multi.fourtunes.model.jpa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.multi.fourtunes.model.biz.PlaylistBiz;
 import com.multi.fourtunes.model.dto.PlaylistDto;
@@ -34,6 +30,9 @@ public class PlayListController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    SongRepository songRepository;
 
     @PostMapping("/insertmyplaylist")
     public ResponseEntity<String> addToPlaylist(@RequestBody SongDto songDto, HttpSession session) {
@@ -97,11 +96,19 @@ public class PlayListController {
 //            System.out.println("남꺼");
         }
 
-        // PlayList에 담겨있는 Song을 addobject 함
+        // PlayList에 담겨있는 모든 노래를 페이징을 위해 세션에 저장함
         List<SongDto> songs = playlist.getPlayListSongs(userNo);
+        HashMap<String, List<SongDto>> currentPlayList = new HashMap<>();
+        currentPlayList.put(userNo, songs);
+        session.setAttribute("currentPlayList", currentPlayList);
+//        modelAndView.addObject("songs", songs);
 
-        modelAndView.addObject("songs", songs);
-
+        // 화면에 보여줄 SongDto 8개짜리 List를 만듬
+        List<SongDto> finalResult = new ArrayList<>();
+        for(int i = 0;i < 8;i++){
+         finalResult.add(songs.get(i));
+        }
+        modelAndView.addObject("songs", finalResult);
         return modelAndView;
     }
 
@@ -134,5 +141,18 @@ public class PlayListController {
 
         // 요청에 대한 응답 반환
         return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @PostMapping("/getmoresong")
+    public ResponseEntity<List<SongDto>> getMoreSong(@RequestParam("pageNo") String pageNo,
+                                                     @RequestParam("pageSize") String pageSize,
+                                                     @RequestParam("userNo") String userNo){
+        System.out.println(pageNo + " " + pageSize + " " + userNo);
+        List<SongDto> result = new ArrayList<>();
+
+        SongEntity entity = songRepository.findBySongId(Integer.toString(2));
+
+        result.add(new SongDto(1, "tmp", "tmp", "http://i.maniadb.com/images/album/742/742576_1_f.jpg", "https://www.youtube.com/embed/BzYnNdJhZQw", "7345385", 3));
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

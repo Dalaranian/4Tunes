@@ -126,12 +126,20 @@ $(document).ready(function() {
     // 스크롤이 페이지 끝에 도달했을 때 추가 데이터를 불러오기
     $('#main').scroll(function() {
     	 if ($('#main').scrollTop() > $('#main')[0].scrollHeight - $('#main').height() - 200) {
-        	console.log("test");
+            var request = {
+                pageNo : pageNo,
+                pageSize : pageSize,
+                userNo : [[${param.userNo}]]
+            }
+            console.log(request);
+            console.log(typeof [[${param.userNo}]]);
             $.ajax({
-                url: '/get_more_songs/' + pageNo,
-                type: 'GET',
+                url: "/playlist/getmoresong",
+                type: 'POST',
+                contentType:'application.json',
+                data: JSON.stringify(request),
                 success: function(data){
-                    var songs = data.songs; 
+                    var songs = data.songs;
                     for (var i = 0; i < songs.length; i++) {
                         var song = songs[i];
                         //추가되는 데이터 형식
@@ -160,10 +168,10 @@ $(document).ready(function() {
                                 </div>
                             </div>
                         `;
-                        $("#MyPlayList").append(newSongItem); 
+                        $("#MyPlayList").append(newSongItem);
                     }
-                    if(songs.length > 0) { 
-                        pageNo += 1; 
+                    if(songs.length > 0) {
+                        pageNo += 1;
                     } else {
                         // 더 이상 불러올 노래가 없다면 스크롤 이벤트 리스너를 제거
                     	$(window).off('scroll', onScroll);
@@ -179,5 +187,6 @@ $(document).ready(function() {
 </script>
 <script src="/resources/js/playlist_insertdelete.js"></script>
 <script src="/resources/js/myplaylistvisibilitymanage.js"></script>
+<!--<script src="/resources/js/infinitescroll.js"></script>-->
 </body>
 </html>
