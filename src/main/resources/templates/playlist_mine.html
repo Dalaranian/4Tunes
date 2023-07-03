@@ -124,8 +124,9 @@ $(document).ready(function() {
     });
 
     // 스크롤이 페이지 끝에 도달했을 때 추가 데이터를 불러오기
-    $(window).scroll(function() {
-        if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+    $('#main').scroll(function() {
+    	 if ($('#main').scrollTop() > $('#main')[0].scrollHeight - $('#main').height() - 200) {
+        	console.log("test");
             $.ajax({
                 url: '/get_more_songs/' + pageNo,
                 type: 'GET',
