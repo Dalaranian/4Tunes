@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -78,26 +79,21 @@ public class AnalysisApi {
     }
 
     private String getContentByPlaylistSongs(String[] playlistSongsAndArtists, String[] keywords) {
-        StringBuilder content = new StringBuilder();
         
-        content.append(" ");
+    	//StringBuilder content = new StringBuilder();
+        //마지막 ,를 따로 처리해주기 위한 StringJoiner
+    	
+    	StringJoiner content = new StringJoiner(" ");
 
         // 플레이리스트에 포함된 노래들을 질문에 포함
         for (String song : playlistSongsAndArtists) {
-            content.append(song).append(", ");
+        	content.add("<" + song + ">");
         }
-        content.delete(content.length() - 2, content.length());
+        content.add(", ");
+        content.add("주어진 노래 목록 모두가 ");
+        content.add("<keywords: " + String.join(" ", keywords) + ">");
+        content.add("중에서 각자 어떤 키워드에 제일 유사한지 song과 keyword는 하나만 json 형식으로 반환해줘. 없는 노래일 경우 임의로 키워드 하나를 정해서 보여줘.");
 
-        
-        content.append(" Among the given list of songs, ");
-        
-        content.append(" <keywords: ");
-      
-        for (String keyword : keywords) {
-        	content.append(keyword).append(" ");
-        }
-        content.append(">  determine the top 3 keywords that are closest to the genres of these songs from the provided list of keywords. Show the top 3 keywords and their corresponding ratios. Please ensure that the sum of the ratios for the top 3 keywords amounts to 100. Please provide the response in JSON format.");
-        // 중에서 어떤 keyword에 가까운지 상위 3개의 keyword와 ratio만 보여줘. ratio는 상위 3개의 keyword가 합쳐서 100%가 되야해. JSON 형식으로 줘
         System.out.println(content.toString());
         return content.toString();
     }
