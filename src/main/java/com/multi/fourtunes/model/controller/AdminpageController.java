@@ -159,38 +159,9 @@ public class AdminpageController {
 			System.out.println("SongDto: " + dto);
 			System.out.println("playlist: " + playlist);
 			
-			try {
-				ObjectMapper objMapper = new ObjectMapper();
-				JsonNode json = objMapper.readTree(dto);
-				
-				SongDto songDto = new SongDto();
-				songDto.setSongTitle(json.get("songTitle").asText());
-				songDto.setSongArtist(json.get("songArtist").asText());
-				songDto.setSongLink(json.get("songLink").asText());
-				songDto.setSongId(json.get("songId").asText());
-				songDto.setSongAlbumArt(json.get("songAlbumArt").asText());
-				
-				SongEntity songEntity = songRepository.findBySongId(songDto.getSongId());
-				if(songEntity == null) {
-					SongEntity song = new SongEntity();
-					song.setSongTitle(songDto.getSongTitle());
-					song.setSongArtist(songDto.getSongArtist());
-					song.setSongLink(songDto.getSongLink());
-					song.setSongId(songDto.getSongId());
-					song.setSongAlbumart(songDto.getSongAlbumArt());
-					
-					songRepository.save(song);
-				} 
-				songEntity = songRepository.findBySongId(songDto.getSongId());
-				
-				adminpageBiz.insertSong(songEntity.getSongNo(), playlist);
-				
-			} catch (JsonMappingException e) {
-				e.printStackTrace();
-			} catch (JsonProcessingException e) {
-				e.printStackTrace();
-			}
-			String res = playlist.toUpperCase() + " 플레이리스트에 추가되었습니다.";
+			// 관리자가 선택한 String 타입의 songDto와 playlist를 biz로 넘김
+			String res = adminpageBiz.insertSong(dto, playlist);
+			
 			return res;
 		}
 }

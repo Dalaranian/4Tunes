@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.fourtunes.model.apis.YoutubeApi;
 import com.multi.fourtunes.model.dao.AdminpageDao;
 import com.multi.fourtunes.model.dao.ReportDao;
@@ -137,9 +143,68 @@ public class AdminpageBizImpl implements AdminpageBiz{
 	}
 
 	@Override
-	public int insertSong(Long songNo, String playlist) {
-		return adminDao.insertSong(songNo, playlist);
+	public String insertSong(String dto, String playlist) {
+		// 결과를 리턴할 res 선언
+		String res = null;
+		
+		try {  // String 타입의 dto를 SongDto 타입으로 변환
+			ObjectMapper objMapper = new ObjectMapper();
+			JsonNode json = objMapper.readTree(dto);
+			
+			SongDto songDto = new SongDto();
+			songDto.setSongTitle(json.get("songTitle").asText());
+			songDto.setSongArtist(json.get("songArtist").asText());
+			songDto.setSongLink(json.get("songLink").asText());
+			songDto.setSongId(json.get("songId").asText());
+			songDto.setSongAlbumArt(json.get("songAlbumArt").asText());
+			
+			// 해당 노래가 DB에 있는지 확인
+			SongEntity songEntity = songRepository.findBySongId(songDto.getSongId());
+			
+			// DB에 해당 노래가 없으면, DB에 먼저 저장
+			if(songEntity == null) {
+				SongEntity song = new SongEntity();
+				song.setSongTitle(songDto.getSongTitle());
+				song.setSongArtist(songDto.getSongArtist());
+				song.setSongLink(songDto.getSongLink());
+				song.setSongId(songDto.getSongId());
+				song.setSongAlbumart(songDto.getSongAlbumArt());
+				
+				songRepository.save(song);
+			} 
+			songEntity = songRepository.findBySongId(songDto.getSongId());
+			
+			// 관리자가 선택한 플레이리스트에 해당 노래 저장
+			adminDao.insertSong(songEntity.getSongNo(), playlist);
+			
+			res = playlist.toUpperCase() + " 플레이리스트에 추가되었습니다. ";
+			
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (DuplicateKeyException e) {
+            res = playlist.toUpperCase() + " 플레이리스트에 이미 저장된 노래입니다. ";
+        } catch(DataIntegrityViolationException e) {
+        	res = " 플레이리스트를 선택해주세요. ";
+        } catch (Exception e){
+        	e.printStackTrace();
+            res = " 플레이리스트 저장에 실패했습니다. 다시 시도해주세요. ";
+        }
+		
+		return res;
 	}
 
 
 }
+
+
+
+
+
+
+
+
+
+
+

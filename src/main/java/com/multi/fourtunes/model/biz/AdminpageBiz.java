@@ -36,6 +36,6 @@ public interface AdminpageBiz {
 
 	public ArrayList<SongDto> setSonglink(ArrayList<SongDto> searchResult, String title);
 
-	public int insertSong(Long songNo, String playlist);
+	public String insertSong(String dto, String playlist);
 
 }
