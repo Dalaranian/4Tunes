@@ -37,7 +37,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         UserEntity user = userRepository.findByUserId(userDetails.getUsername());
 
-        UserDto dto = new UserDto(user.getUserNo(), user.getUserId(), user.getUserName(), "", user.getUserGrade());
+        UserDto dto = new UserDto(user.getUserNo(), user.getUserId(), user.getUserName(), "", user.getUserGrade(), user.getUserSuggestCount());
+
+//        System.out.println(dto);
 
         HttpSession session = request.getSession();
         session.setAttribute("login", dto);

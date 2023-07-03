@@ -2,11 +2,7 @@ package com.multi.fourtunes.model.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import com.multi.fourtunes.model.dto.PlaylistDto;
 import com.multi.fourtunes.model.dto.SongDto;
@@ -54,5 +50,16 @@ public interface PlayListMapper {
             "JOIN USER ON PLAYLIST.USER_NO = USER.USER_NO " +
             "WHERE PLAYLIST.USER_NO = #{userNo}")
     List<PlaylistDto> selectMine(int userNo);
-    
+
+    @Select(" SELECT PLAYLIST_NO FROM PLAYLIST WHERE USER_NO = #{userNo} ")
+    int[] getPlayListNo(String userNo);
+
+    @Delete(" DELETE FROM MANAGE_SONG WHERE PLAYLIST_NO = #{playListNo} AND SONG_NO = #{songNo}; ")
+    int deleteMyPlayList(String playListNo, Long songNo);
+
+    @Select(" SELECT PLAYLIST_VISIBILITY FROM PLAYLIST WHERE USER_NO = #{userNo} ")
+    String getPlayListVisibility(int userNo);
+
+    @Update(" UPDATE PLAYLIST SET PLAYLIST_VISIBILITY = #{isEnable} WHERE PLAYLIST_NO = #{playListNo} ")
+    void setPlayListVisible(String isEnable, String playListNo);
 }

@@ -1,222 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="/resources/css/playlist_mine.css" />
-<link rel="stylesheet" href="/resources/css/globalfont.css" />
-<link rel="stylesheet" href="/resources/css/nav.css" />
-<link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
-<title>4Tunes</title>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/resources/css/playlist_mine.css"/>
+    <link rel="stylesheet" href="/resources/css/globalfont.css"/>
+    <link rel="stylesheet" href="/resources/css/nav.css"/>
+    <link rel="shortcut icon" href="/resources/img/realfavicon.ico"/>
+    <!--bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>4Tunes</title>
+    <style>
+        .dropdown-item{
+              color: black !important;
+        }
+    </style>
 </head>
 <body>
-	<div id="nav">
-		<div class="banner">
-			<a href="/"><img src="/resources/img/banner.png" /></a>
-		</div>
-		<div id="login">
-			<div>
-				<a
-					th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
-					<img class="login_img" src="/resources/img/usertest.png" /> <span
-					th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
-				</a>
-			</div>
-			<br />
-			<div>
-				<a href="/nav/mypage"><img class="mypage_img"
-					src="/resources/img/file.png" />MYPAGE</a>
-			</div>
-		</div>
-		<div class="search-container">
-			<form action="/search/query" method="GET" style="display: flex;">
-				<input type="text" name="query" class="search-input" placeholder="키워드 입력" />
-				<span class="search-icon">
+<div id="nav">
+    <div class="banner">
+        <a href="/"><img src="/resources/img/banner.png"/></a>
+    </div>
+    <div id="login">
+        <div>
+            <a
+                    th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
+                <img class="login_img" src="/resources/img/usertest.png"/> <span
+                    th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
+            </a>
+        </div>
+        <br/>
+        <div>
+            <a href="/nav/mypage"><img class="mypage_img"
+                                       src="/resources/img/file.png"/>MYPAGE</a>
+        </div>
+    </div>
+    <div class="search-container">
+        <form action="/search/query" method="GET" style="display: flex;">
+            <input type="text" name="query" class="search-input" placeholder="키워드 입력"/>
+            <span class="search-icon">
 					<input type="image" class="search-icon" src="/resources/img/search.png" alt="submit">
-				</span>				
-			</form>
-		</div>
-		<div>
-			<a href="/nav/suggested">맞춤추천</a>
-		</div>
-		<div>
-			<a href="/nav/chart">인기차트</a>
-		</div>
-		<div>
-			<a href="/nav/community">커뮤니티</a>
-		</div>
-		<div>
-			<a href="/nav/membership">멤버십</a>
-		</div>
-	</div>
+				</span>
+        </form>
+    </div>
+    <div>
+        <a href="/nav/suggested">맞춤추천</a>
+    </div>
+    <div>
+        <a href="/nav/chart">인기차트</a>
+    </div>
+    <div>
+        <a href="/nav/community">커뮤니티</a>
+    </div>
+    <div>
+        <a href="/nav/membership">멤버십</a>
+    </div>
+</div>
 
-	<div id="main">
-		<h1>나의 재생목록</h1>
-		<div id="buttons">
-			<div>재생목록 선택</div>
-			<div>재생목록 공개</div>
-		</div>
-
-		<!-- 재생목록이 추가될 경우 list_wrapper클래스 div를 복붙하게 할것 -->
-		<div id="MyPlayList">
-			<div class="list_wrapper">
-				<div id="List_left">
-					<div id="video">
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button style="display: inline-block">-</button>
-								<div style="display: inline-block">내 플레이리스트에서 제거</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="List_right">
-					<div id="video">
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button style="display: inline-block">-</button>
-								<div style="display: inline-block">내 플레이리스트에서 제거</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="list_wrapper">
-				<div id="List_left">
-					<div id="video">
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button style="display: inline-block">-</button>
-								<div style="display: inline-block">내 플레이리스트에서 제거</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="List_right">
-					<div id="video">
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button style="display: inline-block">-</button>
-								<div style="display: inline-block">내 플레이리스트에서 제거</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="list_wrapper">
-				<div id="List_left">
-					<div id="video">
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button style="display: inline-block">-</button>
-								<div style="display: inline-block">내 플레이리스트에서 제거</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="List_right">
-					<div id="video">
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button style="display: inline-block">-</button>
-								<div style="display: inline-block">내 플레이리스트에서 제거</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="list_wrapper">
-				<div id="List_left">
-					<div id="video">
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button style="display: inline-block">-</button>
-								<div style="display: inline-block">내 플레이리스트에서 제거</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="List_right">
-					<div id="video">
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/VIDEO_ID"
-								frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div id="context">
-							<h2>노래제목</h2>
-							<br />
-							<h3>가수 이름</h3>
-							<br />
-							<div>
-								<button style="display: inline-block">-</button>
-								<div style="display: inline-block">내 플레이리스트에서 제거</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- list_wrapper닫는 div-->
-		</div>
-	</div>
+<div id="main">
+    <h1>나의 재생목록</h1>
+    <div id="buttons">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                재생목록 관리
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#" onclick="manageVisibility(true)">재생목록 공개하기</a></li>
+                <li><a class="dropdown-item" href="#" onclick="manageVisibility(false)">재생목록 비공개하기</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 재생목록이 추가될 경우 list_wrapper클래스 div를 복붙하게 할것 -->
+    <div id="MyPlayList">
+        <div th:each="song, iterStat : ${songs}" class="list_wrapper">
+            <div th:id="${(iterStat.index % 2 == 0) ? 'list_left' : 'list_right'}">
+                <div id="video">
+                    <div class="video-container">
+                        <iframe th:src="@{${song.songLink}}" frameborder="0"
+                                allowfullscreen></iframe>
+                    </div>
+                    <div id="context">
+                        <span class="song_title"  th:text="${song.songTitle}">노래제목</span>
+                        <br/>
+                        <span class="song_singer" th:text="${song.songArtist}">가수 이름</span>
+                        <!--                        <label th:text="${song.songId}" hidden="hidden"></label>-->
+                        <br/>
+                        <div style="width:200px;">
+                            <!--								지훈이형 미안한데 혹시 요친구 마이너스 이미지로 바꿔주실 수있어요? 제가 건들면 뭔가 뭔가 이상해질가같음...-->
+                            <button id="plus" style="display: inline-block; padding:0 5px;"
+                                    th:attr="onclick='deleteToPlaylist(\'' + ${song.songTitle} + '\', \'' + ${song.songArtist} + '\', \'' + ${song.songLink} + '\', \'' + ${song.songId} + '\', \'' + ${song.songAlbumArt} + '\')'">
+                                <img id="plusimg" src="/resources/img/minus.png">
+                            </button>
+                            <div style="display: inline-block;">내 플레이리스트에 제거</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/resources/js/playlist_insertdelete.js"></script>
+<script src="/resources/js/myplaylistvisibilitymanage.js"></script>
 </body>
 </html>

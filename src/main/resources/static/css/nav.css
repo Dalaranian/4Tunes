@@ -49,8 +49,8 @@ body {
 }
 a {
   display: inline-block;
-  color: white;
-  text-decoration: none;
+  color: white !important;
+  text-decoration: none !important;
   font-size: 20px;
 }
 .search-container {
@@ -64,10 +64,9 @@ a {
 }
 
 .search-input {
-  width: 9vw;
+  width: 131px;
   font-size: 18px;
   text-align: center;
-  min-width: 130px;
   border-radius: 5px 0 0 5px;
 }
 .search-icon {

@@ -12,7 +12,7 @@ function addToPlaylist(songTitle, songArtist, songLink, songId, songAlbumArt) {
         songAlbumArt    : songAlbumArt
     };
 
-//    console.log(songDto);
+    console.log(songDto);
 
     $.ajax({
             url: '/playlist/insertmyplaylist',
@@ -31,5 +31,28 @@ function addToPlaylist(songTitle, songArtist, songLink, songId, songAlbumArt) {
                 alert(res);
             }
         });
-       
 }
+
+function deleteToPlaylist(songTitle, songArtist, songLink, songId, songAlbumArt){
+    var songDto = {
+        songTitle       : songTitle,
+        songArtist      : songArtist,
+        songLink        : songLink,
+        songId          : songId,
+        songAlbumArt    : songAlbumArt
+    };
+    $.ajax({
+        url: '/playlist/deletemyplaylist',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(songDto),
+        success:function(res){
+            alert(res);
+            window.location.reload();
+        },
+        error:function(res){
+            console.log(res);
+        }
+    });
+}
+
