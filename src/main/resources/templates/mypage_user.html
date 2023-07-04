@@ -66,6 +66,7 @@
 				<li id="community"
 					onclick="location.href='/innerpaging/mypage/communityContent'">내 활동
 					조회</li>
+				<li id="continuous_play" onclick="location.href='/innerpaging/mypage/continuous_play'">연속 재생</li>
 			</ul>
 		</div>
 		<div class="mypage_contents">
@@ -97,8 +98,8 @@
     				<input th:if="${subscriptionEndDate != null}" th:value="${subscriptionEndDate}" readonly>
 				</div>
 				<div th:if="${#session.getAttribute('login').user_grade eq 'FREE'}" class="mypage">
-					<span class = "mypage_title">이번달 추천받은 횟수</span>
-					<input th:value="${#session.getAttribute('login').user_suggestcount}">
+					<span class = "mypage_title">추천받은 횟수</span>
+					<input th:value="${#session.getAttribute('login').user_suggestcount}" readonly>
 				</div>
 				<div class="mypage_kw_group">
 					<div class="mypage_keyword">
