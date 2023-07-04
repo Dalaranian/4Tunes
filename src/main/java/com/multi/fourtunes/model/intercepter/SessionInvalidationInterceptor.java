@@ -13,7 +13,7 @@ public class SessionInvalidationInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession(false);
         if (session != null && session.getAttribute("login") == null) {
             session.invalidate();
-            System.out.println("session invalidated");
+            System.out.println("Intercepter log : session invalidated");
         }
         return true;
     }
