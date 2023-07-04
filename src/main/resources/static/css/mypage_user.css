@@ -49,7 +49,7 @@ fieldset{
   min-width: 720px;
 }
 .mypage_contents > h1 {
-	padding-top:10px;
+  padding-top:10px;
   margin-left: 20px;
 }
 .mypage > * {
@@ -68,6 +68,8 @@ fieldset{
 .mypage > span {
   min-width: 90px;
   font-size:15px;
+  display: flex;
+  align-items: center;
 }
 .mypage_inf {
   display: flex;
@@ -94,6 +96,8 @@ fieldset{
   font-weight: bold;
   text-align: start;
   margin-right: 12px;
+  display: flex;
+  align-items: center;
 }
 
 
