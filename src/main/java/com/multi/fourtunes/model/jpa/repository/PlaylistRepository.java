@@ -16,4 +16,6 @@ public interface PlaylistRepository extends JpaRepository<PlaylistEntity, Intege
 
     @Query("SELECT p FROM PlaylistEntity p INNER JOIN p.user u WHERE u.userNo = :userNo")
     PlaylistEntity findPlaylistByUserNo(@Param("userNo") Integer userNo);
+
+	List<PlaylistEntity> findByUserUserNo(int userNo);
 }

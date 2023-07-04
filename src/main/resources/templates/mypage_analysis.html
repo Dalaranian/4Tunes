@@ -12,7 +12,59 @@
 <link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
 <title>4Tunes</title>
 </head>
+<style>
+.pie-chart {
+  position: relative;
+  display:inline-block;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  transition: 0.3s;
+  border-width: 30px;
+  padding: 0px;
+}
 
+span.center {
+	background: #fff;
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 100px;
+	font-size: 30px;
+	transform: translate(-50%, -50%);
+}
+</style>
+<script>
+	$(window).ready(function() {
+		draw(80, '.pie-chart1', '#ccc');
+		draw(50, '.pie-chart2', '#8b22ff');
+		draw(30, '.pie-chart3', '#ff0');
+	});
+
+	function draw(max, classname, colorname) {
+		var i = 1;
+		var func1 = setInterval(function() {
+			if (i < max) {
+				color1(i, classname, colorname);
+				i++;
+			} else {
+				clearInterval(func1);
+			}
+		}, 10);
+	}
+	function color1(i, classname, colorname) {
+		$(classname).css(
+				{
+					"background" : "conic-gradient(" + colorname + " 0% " + i
+							+ "%, #ffffff " + i + "% 100%)"
+				});
+	}
+</script>
 <body>
 	<div id="nav">
 		<div class="banner">
@@ -34,10 +86,11 @@
 		</div>
 		<div class="search-container">
 			<form action="/search/query" method="GET" style="display: flex;">
-				<input type="text" name="query" class="search-input" placeholder="키워드 입력" />
-				<span class="search-icon">
-					<input type="image" class="search-icon" src="/resources/img/search.png" alt="submit">
-				</span>				
+				<input type="text" name="query" class="search-input"
+					placeholder="키워드 입력" /> <span class="search-icon"> <input
+					type="image" class="search-icon" src="/resources/img/search.png"
+					alt="submit">
+				</span>
 			</form>
 		</div>
 		<div>
@@ -71,15 +124,24 @@
 			</ul>
 		</div>
 		<div class="mypage_contents">
-			<tbody>
-        <tr th:each="keywordAndRatio : ${keywordAndRatios}">
-            <td th:text="${keywordAndRatio.keyword}"></td>
-            <td th:text="${keywordAndRatio.ratio}"></td>
-        </tr>
-            </tbody>
-		</div>
-	</div>
+			
+					전체 노래 갯수: <span th:text="${totalSongs}"></span>
+				
+				<div th:each="keywordStat : ${top3KeywordStats}"></div>
 
+				<div class="pie-chart pie-chart1">
+					<span class="center"
+						th:text="${top3KeywordStats[0].keyword + ' (' + top3KeywordStats[0].ratio + '%)'}"></span>
+				</div>
+
+				<div class="pie-chart pie-chart2">
+					<span class="center"
+						th:text="${top3KeywordStats[1].keyword + ' (' + top3KeywordStats[1].ratio + '%)'}"></span>
+				</div>
+
+				<div class="pie-chart pie-chart3">
+					<span class="center"
+						th:text="${top3KeywordStats[2].keyword + ' (' + top3KeywordStats[2].ratio + '%)'}"></span>
+				</div>
 </body>
-
 </html>

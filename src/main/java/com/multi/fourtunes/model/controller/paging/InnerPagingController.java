@@ -3,6 +3,7 @@ package com.multi.fourtunes.model.controller.paging;
 import javax.servlet.http.HttpSession;
 
 import com.multi.fourtunes.model.biz.MyPageBiz;
+import com.multi.fourtunes.model.dto.AnalysisKeywordDto;
 import com.multi.fourtunes.model.dto.CommentDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.multi.fourtunes.model.apis.AnalysisApi;
 import com.multi.fourtunes.model.apis.OpenAiApi;
 import com.multi.fourtunes.model.biz.AdminpageBiz;
+import com.multi.fourtunes.model.biz.AnalysisBiz;
 import com.multi.fourtunes.model.biz.CommunityBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
 
@@ -51,6 +53,9 @@ public class InnerPagingController {
 	
 	@Autowired
 	private KeywordMapper keywordMapper;
+	
+	@Autowired
+	private AnalysisBiz analysisBiz;
 
 	@Autowired MyPageBiz myPageBiz;
 	// 로그인 페이지
@@ -134,54 +139,31 @@ public class InnerPagingController {
 	
 	@GetMapping("/mypage/analysis")
 	public String gotoAnalysis(HttpSession session, Model model) {
-	    // 현재 로그인 되어있는 회원의 플레이리스트의 모든 노래 목록 조회하기
-	    if (session.getAttribute("login") != null) {
-	        UserDto user = (UserDto) session.getAttribute("login");
-	        int userNo = user.getUser_no();
+		// 현재 로그인 되어있는 회원 조회
+		if (session.getAttribute("login") != null) {
+			UserDto user = (UserDto) session.getAttribute("login");
+			int userNo = user.getUser_no();
 
-	        PlaylistEntity playlist = playlistRepository.findPlaylistByUserNo(userNo);
-	        if (playlist != null) {
-	            List<SongEntity> songs = playlistRepository.findAllSongsByPlaylistNo(playlist.getPlaylistNo());
-	            List<String> playlistSongsAndArtists = new ArrayList<>();
-	            for (SongEntity song : songs) {
-	                String songAndArtist = song.getSongTitle() + "-" + song.getSongArtist();
-	                playlistSongsAndArtists.add(songAndArtist);
-	            }
-	            // 조회한 해당 회원의 모든 노래를 "노래제목-가수" 형식으로 목록에 담음
-	            
-	            // 노래 목록 콘솔 출력
-	            for (String song : playlistSongsAndArtists) {
-	                System.out.println(song);
-	            }
-	            String[] keywords = keywordMapper.getAllKeyword();
-	         
-	            
-	            // 키워드 목록 콘솔 출력
-	            
-	            for (String keyword : keywords) {
-	                System.out.println(keyword);
-	            }
+			// 회원의 플레이리스트 노래 전체 갯수 조회
+			List<PlaylistEntity> playlists = playlistRepository.findByUserUserNo(userNo);
+			int totalSongs = 0;
+			for (PlaylistEntity playlist : playlists) {
+				totalSongs += playlist.getManageSongs().size();
+			}
 
-	            model.addAttribute("playlistSongsAndArtists", playlistSongsAndArtists);
-	            model.addAttribute("keywords", keywords);
-
-	            
-	            try {
-	                // API 호출
-	                List<Double> ratios = analysisApi.getKeywordRatios(playlistSongsAndArtists.toArray(new String[0]));
-
-                model.addAttribute("ratios", ratios);
-	            } catch (Exception e) {
-	                e.printStackTrace();
-	            }
-	            
-	            return "mypage_analysis";
-	        }
-	    }
-	    return "login_login";
+			// 플레이리스트 노래 SONG_AIKEYWORD 통계 조회
+			// List<AnalysisKeywordDto> keywordStats = analysisBiz.getAIKeywordAnalysis(userNo);
+			List<AnalysisKeywordDto> top3KeywordStats = analysisBiz.getAIKeywordAnalysis(userNo);
+			  
+			// 결과 model에 추가
+			model.addAttribute("totalSongs", totalSongs);
+			// model.addAttribute("keywordStats", keywordStats);
+			model.addAttribute("top3KeywordStats", top3KeywordStats);
+			
+			return "mypage_analysis";
+		}
+		
+		return "login_login";
 	}
 
-	
-
-	
 }
