@@ -110,8 +110,13 @@ public class PlayListController {
 
         // 화면에 보여줄 SongDto 8개짜리 List를 만듬
         List<SongDto> finalResult = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            finalResult.add(songs.get(i));
+        try {
+            for (int i = 0; i < 8; i++) {
+                finalResult.add(songs.get(i));
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("log : 불러온 플레이리스트 갯수가 8개 이하");
+            e.printStackTrace();
         }
         modelAndView.addObject("songs", finalResult);
         return modelAndView;
