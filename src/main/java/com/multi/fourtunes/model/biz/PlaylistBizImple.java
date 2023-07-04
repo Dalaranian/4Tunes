@@ -1,7 +1,13 @@
 package com.multi.fourtunes.model.biz;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.fourtunes.model.dao.SongDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -18,8 +24,10 @@ import com.multi.fourtunes.model.jpa.repository.UserRepository;
 import com.multi.fourtunes.model.mapper.PlayListMapper;
 import com.multi.fourtunes.model.mapper.UserMapper;
 
+import javax.servlet.http.HttpSession;
+
 @Service
-public class PlaylistBizImple implements PlaylistBiz{
+public class PlaylistBizImple implements PlaylistBiz {
 
     @Autowired
     UserRepository userRepository;
@@ -36,7 +44,6 @@ public class PlaylistBizImple implements PlaylistBiz{
 
 
     /**
-     *
      * SongDto 를 받아서, 유저의 첫번째 PlayList 에 저장함.
      *
      * @param song 저장할 SongDto
@@ -55,7 +62,7 @@ public class PlaylistBizImple implements PlaylistBiz{
         try {
             SongEntity selectSong = songRepository.findBySongId(song.getSongId());
             // 노래가 없을시, DB 에 우선 저장
-            if(selectSong == null){
+            if (selectSong == null) {
 
                 // 빈 SongEntity 생성
                 selectSong = new SongEntity();
@@ -81,7 +88,7 @@ public class PlaylistBizImple implements PlaylistBiz{
             result = " 플레이리스트 저장에 성공했습니다. ";
         } catch (DuplicateKeyException e) {
             result = song.getSongTitle() + " 는 이미 저장된 노래입니다. ";
-        } catch (Exception e){
+        } catch (Exception e) {
             result = " 플레이리스트 저장에 실패했습니다. 다시 시도해주세요 ";
         }
 
@@ -93,13 +100,13 @@ public class PlaylistBizImple implements PlaylistBiz{
         UserEntity user = userRepository.findByUserId(userId);
         playlistDao.allocatePlaylist(user.getUserNo());
     }
-    
+
     @Override
     public List<PlaylistDto> getAllPlaylists() {
         List<PlaylistDto> playlists = playlistDao.selectAll();
-        
+
         // 각 PlaylistDto의 albumImage 설정
-        for(PlaylistDto playlist : playlists) {
+        for (PlaylistDto playlist : playlists) {
             SongDto song = playListMapper.selectMostRecentSongAlbumArtInPlaylist(playlist.getPlaylistNo());
             if (song == null) {
                 playlist.setAlbumArt("https://images.unsplash.com/photo-1682687980918-3c2149a8f110?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80");
@@ -107,16 +114,16 @@ public class PlaylistBizImple implements PlaylistBiz{
                 playlist.setAlbumArt(song.getSongAlbumArt());
             }
         }
-        
+
         return playlists;
     }
 
     @Override
     public List<PlaylistDto> getMyPlaylist(int myno) {
         List<PlaylistDto> myPlaylists = playListMapper.selectMine(myno);
-        
+
         // 각 PlaylistDto의 albumImage 설정
-        for(PlaylistDto playlist : myPlaylists) {
+        for (PlaylistDto playlist : myPlaylists) {
             SongDto song = playListMapper.selectMostRecentSongAlbumArtInPlaylist(playlist.getPlaylistNo());
             if (song == null) {
                 playlist.setAlbumArt("https://images.unsplash.com/photo-1682687980918-3c2149a8f110?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80");
@@ -124,7 +131,7 @@ public class PlaylistBizImple implements PlaylistBiz{
                 playlist.setAlbumArt(song.getSongAlbumArt());
             }
         }
-        
+
         return myPlaylists;
     }
 
@@ -145,6 +152,7 @@ public class PlaylistBizImple implements PlaylistBiz{
     /**
      * 화면에서 불러온, SongNo 가 없는 entity에서, DB 에 저장된 Entity 를 불러와,<br>
      * SongNo 와 UserNo 를 활용하여, Song 삭제
+     *
      * @param song
      * @param currentUser
      * @return
@@ -160,13 +168,12 @@ public class PlaylistBizImple implements PlaylistBiz{
 
         int res = playlistDao.deleteMyPlayList(userPlayList[0], originSong.getSongNo());
 
-        return (res == 1)?"success":"fail";
+        return (res == 1) ? "success" : "fail";
     }
 
     /**
-     *
      * @param currentLogin 현재 로그인한 유저
-     * @param request 공개요청일때 true, 비공개요정일때 false
+     * @param request      공개요청일때 true, 비공개요정일때 false
      * @return 처리 message
      */
     @Override
@@ -182,7 +189,7 @@ public class PlaylistBizImple implements PlaylistBiz{
         // 공개중이면 Y, 비공개중일때 N
         String isVisibility = playlistDao.getPlayListVisibility(currentLogin.getUser_no());
 
-        if(isVisibility.equals("Y") && request){
+        if (isVisibility.equals("Y") && request) {
             // 공개중, 공개요청했을때
             res = "이미 공개중인 플레이리스트입니다. ";
         } else if (isVisibility.equals("N") && !request) {
@@ -199,6 +206,55 @@ public class PlaylistBizImple implements PlaylistBiz{
         }
 
         return res;
+    }
+
+    @Override
+    public List<SongDto> getSongDtos(String requestJsonString, HttpSession session) {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // JSON 문자열을 JsonNode 객체로 변환
+        JsonNode jsonNode = null;
+        try {
+            jsonNode = objectMapper.readTree(requestJsonString);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        // 필요한 값을 파싱
+        int pageNo = jsonNode.get("pageNo").asInt();
+        int pageSize = jsonNode.get("pageSize").asInt();
+        JsonNode userNoNode = jsonNode.get("userNo");
+        List<Integer> userNoList = new ArrayList<>();
+        for (JsonNode userNo : userNoNode) {
+            userNoList.add(userNo.asInt());
+        }
+
+//        System.out.println("Page Number: " + pageNo);
+//        System.out.println("Page Size: " + pageSize);
+//        System.out.println("User Number List: " + userNoList);
+
+        // return 할 Dtos 생성
+        List<SongDto> dtos = new ArrayList<>();
+
+        // 세션에 있는 초기에 불러온 노래 List 꺼내오기
+        HashMap<String, List<SongDto>> currentPlayList = (HashMap<String, List<SongDto>>) session.getAttribute("currentPlayList");
+
+        Set<String> keySet = currentPlayList.keySet();
+        String firstKey = keySet.iterator().next();
+
+        List<SongDto> songs = currentPlayList.get(firstKey);
+
+        try {
+            for(int i = (pageNo * pageSize);i<=(pageNo * pageSize)+pageSize;i++){
+                dtos.add(songs.get(i));
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("index out of bounds");
+//            e.printStackTrace();
+        }
+
+
+        return dtos;
     }
 
 

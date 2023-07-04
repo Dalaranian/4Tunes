@@ -6,10 +6,15 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.fourtunes.model.jpa.entity.SongEntity;
 import com.multi.fourtunes.model.jpa.entity.UserEntity;
 import com.multi.fourtunes.model.jpa.repository.SongRepository;
 import com.multi.fourtunes.model.jpa.repository.UserRepository;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -99,6 +104,7 @@ public class PlayListController {
         List<SongDto> songs = playlist.getPlayListSongs(userNo);
         HashMap<String, List<SongDto>> currentPlayList = new HashMap<>();
         currentPlayList.put(userNo, songs);
+        session.removeAttribute("currentPlayList");
         session.setAttribute("currentPlayList", currentPlayList);
 //        modelAndView.addObject("songs", songs);
 
@@ -141,28 +147,12 @@ public class PlayListController {
         // 요청에 대한 응답 반환
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
-//
-//    @PostMapping("getmoresong")
-//    public ResponseEntity<String> getMoreSongs(
-//            @RequestParam("pageNo") int pageNo,
-//            @RequestParam("pageSize") int pageSize,
-//            @RequestParam("userNo") long userNo) {
-//        System.out.println(pageNo + " " + pageSize + userNo);
-//        return new ResponseEntity<>("true", HttpStatus.OK);
-//
-//    }
 
     @PostMapping("getmoresong")
-    public ResponseEntity<List<SongDto>> getMoreSongs(@RequestBody String str) {
+    public ResponseEntity<List<SongDto>> getMoreSongs(@RequestBody String requestJsonString, HttpSession session) throws JsonProcessingException {
 
-        List<SongDto> dtos = new ArrayList<>();
-        SongDto dto = new SongDto(500, "TempTitle", "TempArtist", "TempAlbumArt", "https://www.youtube.com/embed/Os_heh8vPfs", "8595622", 100);
-
-        for(int i = 0;i<8;i++){
-            dtos.add(dto);
-        }
+        List<SongDto> dtos = playlist.getSongDtos(requestJsonString, session);
 
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
-
 }
