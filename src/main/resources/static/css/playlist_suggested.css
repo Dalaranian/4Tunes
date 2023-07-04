@@ -6,6 +6,11 @@
 	left: 6%;
 }
 
+#noResult{
+	color: white;
+	font-size: larger;
+}
+
 #main-container h1 span {
 	color: #d4adfc;
 }
@@ -165,4 +170,22 @@ h2, h3 {
 	width: 20px;
 	height: 20px;
 	cursor: pointer;
+}
+
+/* 검색어 강조 */
+@keyframes blink{
+	0%{
+		opacity: 1;
+	}
+	50%{
+		opacity: 0;
+	}
+	100%{
+		opacity: 1;
+	}
+}
+
+#keyword{
+	animation: blink 3s infinite;
+	color: #D4ADFC;
 }

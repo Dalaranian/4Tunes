@@ -64,16 +64,16 @@
 </div>
 
 <div id="main">
-    <h1>나의 재생목록</h1>
+    <h1>내 플레이리스트</h1>
     <div id="buttons">
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                재생목록 관리
+                플레이리스트 관리
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#" onclick="manageVisibility(true)">재생목록 공개하기</a></li>
-                <li><a class="dropdown-item" href="#" onclick="manageVisibility(false)">재생목록 비공개하기</a></li>
+                <li><a class="dropdown-item" href="#" onclick="manageVisibility(true)">플레이리스트 공개하기</a></li>
+                <li><a class="dropdown-item" href="#" onclick="manageVisibility(false)">플레이리스트 비공개하기</a></li>
             </ul>
         </div>
     </div>
@@ -87,9 +87,9 @@
                                 allowfullscreen></iframe>
                     </div>
                     <div id="context">
-                        <span class="song_title"  th:text="${song.songTitle}">노래제목</span>
+                        <h2 class="song_title"  th:text="${song.songTitle}">노래제목</h2>
                         <br/>
-                        <span class="song_singer" th:text="${song.songArtist}">가수 이름</span>
+                        <h3 class="song_singer" th:text="${song.songArtist}">가수 이름</h3>
                         <!--                        <label th:text="${song.songId}" hidden="hidden"></label>-->
                         <br/>
                         <div style="width:200px;">
@@ -153,8 +153,8 @@ $(document).ready(function() {
             videoContainer.append(iframe);
 
             var context = $("<div id='context'></div>");
-            var songTitle = $("<span class='song_title'>" + song.songTitle + "</span>");
-            var songSinger = $("<span class='song_singer'>" + song.songArtist + "</span>");
+            var songTitle = $("<h2 class='song_title'>" + song.songTitle + "</h2>");
+            var songSinger = $("<h3 class='song_singer'>" + song.songArtist + "</h3>");
 
             var removeDiv = $("<div style='width:200px;'></div>");
             var removeButton = $("<button id='plus' style='display: inline-block; padding:0 5px;'></button>").attr("onclick", "deleteToPlaylist('" + song.songTitle + "','" + song.songArtist + "','" + song.songLink + "','" + song.songId + "','" + song.songAlbumArt + "')");

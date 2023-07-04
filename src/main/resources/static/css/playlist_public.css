@@ -3,6 +3,7 @@
   position: relative;
   top: 7%;
   left: 6%;
+  
 }
 #main-container {
   width: 80vw;
@@ -36,6 +37,7 @@
 
 .list_wrapper {
   display: flex;
+  margin-right: 30px;
 }
 
 #List_left {
@@ -84,10 +86,7 @@ iframe {
   display: inline-block;
   padding: 0 5px;
 }
-#plus{
-  background:none;
-  border:0;
-}
+
 .plus_btn {
   padding: 0 4px;
 }
@@ -95,6 +94,9 @@ h2,
 h3 {
   margin: 0;
   padding: 0;
+  white-space: nowrap;
+   	overflow: hidden;
+    text-overflow: ellipsis;
 }
 @media (max-width: 1160px) {
   #nav {
@@ -127,4 +129,17 @@ h3 {
     min-height: 28px;
     margin-bottom: 35px;
   }
+}
+
+#plus{
+	background-color: transparent;
+	border: none;
+	vertical-align: middle;
+	height: 21px;
+}
+
+#plusimg{
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
 }

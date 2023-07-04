@@ -25,7 +25,7 @@ public class TodayPickController {
 		
 		// todayPickNo에 해당하는 플레이리스트의 이름 받아오기
 		String playlistName = todayPickBiz.getTodayPickName(todayPickNo);
-		model.addAttribute("playlistName", playlistName);
+		model.addAttribute("playlistName", "#"+playlistName);
 		
 		// todayPickNo에 해당하는 플레이리스트 내용 받아오기
 		ArrayList<SongDto> songs = todayPickBiz.selectTodayPickList(todayPickNo);

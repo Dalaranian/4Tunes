@@ -134,7 +134,7 @@ public class PlayListController {
 
         String res = playlist.deleteMyPlaylist(song, currentUser);
 
-        return (res.equals("success")) ? "삭제 성공" : "삭제 실패";
+        return (res.equals("success")) ? "내 플레이리스트에서 삭제되었습니다." : "삭제 실패하였습니다. 다시 시도해주세요.";
     }
 
     /**
