@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+#main > h1 {
+  color: white;
+  margin-top: 40px;
+  margin-left: 40px;
+  height: 48px;
+}
+#main{
+	  overflow-x:auto;
+}
+/* ---------- 마이페이지 네비게이션 ---------- */
+.mypage_nav {
+  display: inline-block;
+  width: 15%;
+  height: 80%;
+  background-color: #1d267d;
+  color: white;
+  margin-left: 40px;
+  vertical-align: top;
+  min-width: 150px;
+}
+.mypage_nav ul {
+  padding: 0;
+  line-height: 375%;
+  /* 줄간격 조정 */
+}
+.mypage_nav ul li {
+  list-style: none;
+  font-size: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+.mypage_nav ul li:hover {
+  color: orange;
+  font-weight: bold;
+}
+/* 마이페이지 네비게이션 끝 */
+
+.mypage_contents {
+  display: inline-block;
+  width: 75%;
+  height: 80%;
+  background-color: rgb(224, 224, 224);
+  margin-left: 10px;
+  min-width: 720px;
+}
+.mypage_contents > h1 {
+	padding-top:10px;
+  margin-left: 20px;
+}
+#player-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:70%;
+}
+@media (max-width: 1140px) {
+  .mypage_nav {
+    display: none;
+  }
+  .mypage_contents {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .mypage_kw_btn button {
+    margin-right: 100px;
+  }
+}
+@media (max-width: 950px) {
+  #nav{
+  display:none;
+  }
+}
