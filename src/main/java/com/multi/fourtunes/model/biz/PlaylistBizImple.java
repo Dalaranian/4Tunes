@@ -142,9 +142,6 @@ public class PlaylistBizImple implements PlaylistBiz {
 
         List<SongDto> songs = songDao.selectSongListByPlayListNo(playListNo[0], Integer.parseInt(userNo));
 
-//        System.out.println(songs);
-
-//        System.out.println(Arrays.toString(playListNo));
 
         return songs;
     }
