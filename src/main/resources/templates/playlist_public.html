@@ -83,5 +83,84 @@
     </div>
 </div>
 <script src="/resources/js/playlist_insertdelete.js"></script>
+<script th:inline="javascript">
+var pageNo = 1;
+var pageSize = 8;
+
+$(document).ready(function() {
+    // YouTube 동영상의 플레이어 컨트롤을 제거
+    $("iframe").each(function() {
+        var src = $(this).attr('src');
+        if (src.includes('youtube')) {
+            if (src.includes('?')) {
+                $(this).attr('src', src + '&controls=0');
+            } else {
+                $(this).attr('src', src + '?controls=0');
+            }
+        }
+    });
+
+    // 스크롤이 페이지 끝에 도달했을 때 추가 데이터를 불러오기
+    $('#main').scroll(function() {
+    	 if ($('#main').scrollTop() > $('#main')[0].scrollHeight - $('#main').height() - 200) {
+            var request = {
+                pageNo : pageNo,
+                pageSize : pageSize,
+                userNo : [[${param.userNo}]]
+            }
+            console.log(request);
+            console.log(typeof [[${param.userNo}]]);
+            $.ajax({
+                url: "/playlist/getmoresong",
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(request),
+                    success: function (data) {
+        var songs = data;
+        for (var i = 0; i < songs.length; i++) {
+            var song = songs[i];
+
+            // 각 요소를 동적으로 생성합니다.
+            var listWrapper = $("<div class='list_wrapper'></div>");
+            var listInner = $("<div></div>").attr("id", (i % 2 === 0) ? "list_left" : "list_right");
+            var video = $("<div id='video'></div>");
+            var videoContainer = $("<div class='video-container'></div>");
+            var iframe = $("<iframe>").attr({"src": song.songLink, "frameborder": "0", "allowfullscreen": true});
+
+            videoContainer.append(iframe);
+
+            var context = $("<div id='context'></div>");
+            var songTitle = $("<h2>" + song.songTitle + "</h2>");
+            var songSinger = $("<h3>" + song.songArtist + "</h3>");
+
+            var addDiv = $("<div style='width:200px;'></div>");
+            var addButton = $("<button id='plus' style='display: inline-block; padding:0 5px;'></button>").attr("onclick", "addToPlaylist('" + song.songTitle + "','" + song.songArtist + "','" + song.songLink + "','" + song.songId + "','" + song.songAlbumArt + "')");
+            var addImage = $("<img id='plusimg' src='/resources/img/add.png'>");
+            var addText = $("<div style='display: inline-block; position: relative; bottom: 10px;'>내 플레이리스트에 추가</div>");
+
+            addButton.append(addImage);
+            addDiv.append(addButton).append(addText);
+
+            context.append(songTitle).append("<br/>").append(songSinger).append("<br/>").append(addDiv);
+
+            video.append(videoContainer).append(context);
+
+            listInner.append(video);
+            listWrapper.append(listInner);
+
+            // 최종적으로 생성된 요소를 MyPlayList에 추가합니다.
+            $("#MyPlayList").append(listWrapper);
+        }
+        //pageNo 증감
+        pageNo++;
+    },
+                error: function(err){
+                    console.log('Error:', err);
+                }
+            });
+        }
+    });
+});
+</script>
 </body>
 </html>

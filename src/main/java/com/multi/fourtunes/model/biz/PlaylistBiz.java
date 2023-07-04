@@ -7,6 +7,8 @@ import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.dto.UserDto;
 import com.multi.fourtunes.model.jpa.entity.SongEntity;
 
+import javax.servlet.http.HttpSession;
+
 public interface PlaylistBiz {
 
     String insertPlaylist(SongDto song, UserDto user);
@@ -22,4 +24,6 @@ public interface PlaylistBiz {
     String deleteMyPlaylist(SongEntity song, UserDto currentUser);
 
     String visibilityManage(UserDto currentLogin, boolean request);
+
+    List<SongDto> getSongDtos(String requestJsonString, HttpSession session);
 }
