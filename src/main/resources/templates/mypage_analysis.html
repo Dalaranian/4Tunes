@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="/resources/css/nav.css" />
+<link rel="stylesheet" href="/resources/css/globalfont.css" />
+<link rel="stylesheet" href="/resources/css/mypage_community.css" />
+<link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
+<title>4Tunes</title>
+</head>
+<style>
+.pie-chart {
+  position: relative;
+  display:inline-block;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  transition: 0.3s;
+  border-width: 30px;
+  padding: 0px;
+}
+
+span.center {
+	background: #fff;
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 100px;
+	font-size: 30px;
+	transform: translate(-50%, -50%);
+}
+</style>
+<script>
+	$(window).ready(function() {
+		draw(80, '.pie-chart1', '#ccc');
+		draw(50, '.pie-chart2', '#8b22ff');
+		draw(30, '.pie-chart3', '#ff0');
+	});
+
+	function draw(max, classname, colorname) {
+		var i = 1;
+		var func1 = setInterval(function() {
+			if (i < max) {
+				color1(i, classname, colorname);
+				i++;
+			} else {
+				clearInterval(func1);
+			}
+		}, 10);
+	}
+	function color1(i, classname, colorname) {
+		$(classname).css(
+				{
+					"background" : "conic-gradient(" + colorname + " 0% " + i
+							+ "%, #ffffff " + i + "% 100%)"
+				});
+	}
+</script>
+<body>
+	<div id="nav">
+		<div class="banner">
+			<a href="/"><img src="/resources/img/banner.png" /></a>
+		</div>
+		<div id="login">
+			<div>
+				<a
+					th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
+					<img class="login_img" src="/resources/img/usertest.png" /> <span
+					th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
+				</a>
+			</div>
+			<br />
+			<div>
+				<a href="/nav/mypage"><img class="mypage_img"
+					src="/resources/img/file.png" />MYPAGE</a>
+			</div>
+		</div>
+		<div class="search-container">
+			<form action="/search/query" method="GET" style="display: flex;">
+				<input type="text" name="query" class="search-input"
+					placeholder="키워드 입력" /> <span class="search-icon"> <input
+					type="image" class="search-icon" src="/resources/img/search.png"
+					alt="submit">
+				</span>
+			</form>
+		</div>
+		<div>
+			<a href="/nav/suggested">맞춤추천</a>
+		</div>
+		<div>
+			<a href="/nav/chart">인기차트</a>
+		</div>
+		<div>
+			<a href="/nav/community">커뮤니티</a>
+		</div>
+		<div>
+			<a href="/nav/membership">멤버십</a>
+		</div>
+	</div>
+
+	<div id="main">
+		<h1>
+			<span th:text="${session.login.user_name}"></span> 님 안녕하세요 !
+		</h1>
+		<br>
+		<div class="mypage_nav">
+			<ul>
+				<li id="info" onclick="location.href='/innerpaging/mypage/user'">내
+					정보 조회</li>
+				<li id="analysis"
+					onclick="location.href='/innerpaging/mypage/analysis'">내 통계 조회</li>
+				<li id="community"
+					onclick="location.href='/innerpaging/mypage/communityContent'">내
+					활동 조회</li>
+			</ul>
+		</div>
+		<div class="mypage_contents">
+			
+				<h1>내 플레이리스트에 담긴 <span th:text="${totalSongs}" ></span>곡의 취향은... </h1>
+				
+				<div th:each="keywordStat : ${top3KeywordStats}"></div>
+
+				<div class="pie-chart pie-chart1">
+					<span class="center"
+						th:text="${top3KeywordStats[0].keyword + ' (' + top3KeywordStats[0].ratio + '%)'}"></span>
+				</div>
+
+				<div class="pie-chart pie-chart2">
+					<span class="center"
+						th:text="${top3KeywordStats[1].keyword + ' (' + top3KeywordStats[1].ratio + '%)'}"></span>
+				</div>
+
+				<div class="pie-chart pie-chart3">
+					<span class="center"
+						th:text="${top3KeywordStats[2].keyword + ' (' + top3KeywordStats[2].ratio + '%)'}"></span>
+				</div>
+</body>
+</html>

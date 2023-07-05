@@ -3,6 +3,7 @@ package com.multi.fourtunes.model.controller.paging;
 import javax.servlet.http.HttpSession;
 
 import com.multi.fourtunes.model.biz.MyPageBiz;
+import com.multi.fourtunes.model.dto.AnalysisKeywordDto;
 import com.multi.fourtunes.model.biz.PlaylistBiz;
 import com.multi.fourtunes.model.dto.CommentDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.multi.fourtunes.model.apis.AnalysisApi;
+import com.multi.fourtunes.model.apis.OpenAiApi;
 import com.multi.fourtunes.model.biz.AdminpageBiz;
+import com.multi.fourtunes.model.biz.AnalysisBiz;
 import com.multi.fourtunes.model.biz.CommunityBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
 
@@ -25,18 +31,35 @@ import com.multi.fourtunes.model.dto.CommunityDto;
 import com.multi.fourtunes.model.dto.PlaylistDto;
 import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.dto.UserDto;
+import com.multi.fourtunes.model.jpa.entity.PlaylistEntity;
+import com.multi.fourtunes.model.jpa.entity.SongEntity;
+import com.multi.fourtunes.model.jpa.entity.UserEntity;
+import com.multi.fourtunes.model.jpa.repository.PlaylistRepository;
+import com.multi.fourtunes.model.jpa.repository.UserRepository;
+import com.multi.fourtunes.model.mapper.KeywordMapper;
 
 // 프론트 작성의 편의를 위한 임시 페이징 클래스입니다. 
 
 @Controller
 @RequestMapping("/innerpaging")
 public class InnerPagingController {
+	@Autowired
+    private PlaylistRepository playlistRepository;
 	
+	@Autowired
+    AnalysisApi analysisApi;
+
 	@Autowired
 	private AdminpageBiz adminpageBiz;
 	
 	@Autowired
 	private LoginBiz loginBiz;
+	
+	@Autowired
+	private KeywordMapper keywordMapper;
+	
+	@Autowired
+	private AnalysisBiz analysisBiz;
 
     @Autowired
     PlaylistBiz playlist;
@@ -131,4 +154,35 @@ public class InnerPagingController {
 	public String gotoPlayListSuggested() {
 		return "playlist_todaypick";
 	}
+	
+	
+	@GetMapping("/mypage/analysis")
+	public String gotoAnalysis(HttpSession session, Model model) {
+		// 현재 로그인 되어있는 회원 조회
+		if (session.getAttribute("login") != null) {
+			UserDto user = (UserDto) session.getAttribute("login");
+			int userNo = user.getUser_no();
+
+			// 회원의 플레이리스트 노래 전체 갯수 조회
+			List<PlaylistEntity> playlists = playlistRepository.findByUserUserNo(userNo);
+			int totalSongs = 0;
+			for (PlaylistEntity playlist : playlists) {
+				totalSongs += playlist.getManageSongs().size();
+			}
+
+			// 플레이리스트 노래 SONG_AIKEYWORD 통계 조회
+			// List<AnalysisKeywordDto> keywordStats = analysisBiz.getAIKeywordAnalysis(userNo);
+			List<AnalysisKeywordDto> top3KeywordStats = analysisBiz.getAIKeywordAnalysis(userNo);
+			  
+			// 결과 model에 추가
+			model.addAttribute("totalSongs", totalSongs);
+			// model.addAttribute("keywordStats", keywordStats);
+			model.addAttribute("top3KeywordStats", top3KeywordStats);
+			
+			return "mypage_analysis";
+		}
+		
+		return "login_login";
+	}
+
 }
