@@ -54,9 +54,9 @@ public class AnalysisApi {
 	 * @throws JsonMappingException    JSON 매핑 예외
 	 * @throws JsonProcessingException JSON 처리 예외
 	 */
-	public List<Double> suggestedAIKeyword(String[] songInfo) throws JsonMappingException, JsonProcessingException {
+	public List<String> suggestedAIKeyword(String[] songInfo) throws JsonMappingException, JsonProcessingException {
 		// 추천된 키워드를 담을 리스트 생성
-		List<Double> AIKeyword = new ArrayList<>();
+		List<String> AIKeyword = new ArrayList<>();
 		// RestTemplate 객체 생성
 		restTemplate = new RestTemplate();
 		// API 요청을 위한 헤더 설정
@@ -91,9 +91,8 @@ public class AnalysisApi {
 				// 추출된 키워드를 콘솔에 출력
 				System.out.println("Keyword: " + Finalkeyword);
 				// 추출된 키워드를 리스트에 추가
-	            AIKeyword.add(Double.parseDouble(Finalkeyword));
-				
-				
+				AIKeyword.add(Finalkeyword);
+					
 			} else {
 				System.err.println("Failed to make the request. Status code: " + responseEntity.getStatusCodeValue());
 			}
