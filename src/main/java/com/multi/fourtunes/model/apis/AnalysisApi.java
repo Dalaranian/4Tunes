@@ -124,7 +124,7 @@ public class AnalysisApi {
 		content.add(", ");
 		content.add("주어진 노래-가수가");
 		content.add("<keyword: " + String.join(", ", keywords) + ">");
-		content.add("중에서 어떤 keyword에 제일 유사한지 keyword 하나만 json 형식으로 반환해줘. 없는 노래일 경우 임의로 keyword 하나를 정해서 보여줘.");
+		content.add("중에서 어떤 keyword에 제일 유사한지 keyword 하나만 json 형식으로 반환해줘.");
 
 		System.out.println(content.toString());
 		// content 문자열 반환
