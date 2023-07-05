@@ -54,14 +54,14 @@
 
 		<div sec:authorize="hasAuthority('ADMIN')">
 			<a href="/gototestpage">API TEST</a> <br> <a
-				href="/nav/adminpage">ADMINPAGE</a>
+				href="/nav/adminpage">ADMINPAGE</a> 
 		</div>
 
 	</div>
 
 	<div id="main">
 		<div id="playlist">
-			<h1>플레이리스트</h1>
+			<h1>PLAYLIST</h1>
 			<div class="playlist_btn">
 				<a href=""><img class="playlist_left"
 					src="/resources/img/left.png"></a>
@@ -74,7 +74,7 @@
 		</div>
 
 		<div id="today">
-			<h1>오늘의 선곡</h1>
+			<h1>4Tunes PICK</h1>
 			<div class="btn">
 				<a href="#" class="today_left"><img
 					src="/resources/img/left.png"></a>
@@ -83,11 +83,11 @@
 						<div class="today_card">
 							<div class="today_card_inner">
 								<div class="today_card_front">
-									<a href="innerpaging/playlist/suggested"><img
+									<a th:href="@{/4tunes/suggest/{todayPickNo}(todayPickNo=1)}"><img
 										src="/resources/img/study_front.png" alt="" /></a>
 								</div>
 								<div class="today_card_back">
-									<a href="innerpaging/playlist/suggested"><img
+									<a th:href="@{/4tunes/suggest/{todayPickNo}(todayPickNo=1)}"><img
 										src="/resources/img/study_back.png" alt="" /></a>
 								</div>
 							</div>
@@ -95,11 +95,11 @@
 						<div class="today_card">
 							<div class="today_card_inner">
 								<div class="today_card_front">
-									<a href="innerpaging/playlist/suggested"><img
+									<a th:href="@{/4tunes/suggest/{todayPickNo}(todayPickNo=2)}"><img
 										src="/resources/img/trip-f.png" alt="" /></a>
 								</div>
 								<div class="today_card_back">
-									<a href="innerpaging/playlist/suggested"><img
+									<a th:href="@{/4tunes/suggest/{todayPickNo}(todayPickNo=2)}"><img
 										src="/resources/img/trip-b.png" alt="" /></a>
 								</div>
 							</div>
@@ -107,11 +107,11 @@
 						<div class="today_card">
 							<div class="today_card_inner">
 								<div class="today_card_front">
-									<a href="innerpaging/playlist/suggested"><img
+									<a th:href="@{/4tunes/suggest/{todayPickNo}(todayPickNo=3)}"><img
 										src="/resources/img/sad-f.png" alt="" /></a>
 								</div>
 								<div class="today_card_back">
-									<a href="innerpaging/playlist/suggested"><img
+									<a th:href="@{/4tunes/suggest/{todayPickNo}(todayPickNo=3)}"><img
 										src="/resources/img/sad-b.png" alt="" /></a>
 								</div>
 							</div>
@@ -119,11 +119,11 @@
 						<div class="today_card">
 							<div class="today_card_inner">
 								<div class="today_card_front">
-									<a href="innerpaging/playlist/suggested"><img
+									<a th:href="@{/4tunes/suggest/{todayPickNo}(todayPickNo=4)}"><img
 										src="/resources/img/drive-f.png" alt="" /></a>
 								</div>
 								<div class="today_card_back">
-									<a href="innerpaging/playlist/suggested"><img
+									<a th:href="@{/4tunes/suggest/{todayPickNo}(todayPickNo=4)}"><img
 										src="/resources/img/drive-b.png" alt="" /></a>
 								</div>
 							</div>
@@ -131,11 +131,11 @@
 						<div class="today_card">
 							<div class="today_card_inner">
 								<div class="today_card_front">
-									<a href="innerpaging/playlist/suggested"><img
+									<a th:href="@{/4tunes/suggest/{todayPickNo}(todayPickNo=5)}"><img
 										src="/resources/img/exercise-f.png" alt="" /></a>
 								</div>
 								<div class="today_card_back">
-									<a href="innerpaging/playlist/suggested"><img
+									<a th:href="@{/4tunes/suggest/{todayPickNo}(todayPickNo=5)}"><img
 										src="/resources/img/exercise-b.png" alt="" /></a>
 								</div>
 							</div>
@@ -143,11 +143,11 @@
 						<div class="today_card">
 							<div class="today_card_inner">
 								<div class="today_card_front">
-									<a href="innerpaging/playlist/suggested"><img
+									<a th:href="@{/4tunes/suggest/{todayPickNo}(todayPickNo=6)}"><img
 										src="/resources/img/relax-f.png" alt="" /></a>
 								</div>
 								<div class="today_card_back">
-									<a href="innerpaging/playlist/suggested"><img
+									<a th:href="@{/4tunes/suggest/{todayPickNo}(todayPickNo=6)}"><img
 										src="/resources/img/relax-b.png" alt="" /></a>
 								</div>
 							</div>
@@ -155,11 +155,11 @@
 						<div class="today_card">
 							<div class="today_card_inner">
 								<div class="today_card_front">
-									<a href="innerpaging/playlist/suggested"><img
+									<a th:href="@{/4tunes/suggest/{todayPickNo}(todayPickNo=7)}"><img
 										src="/resources/img/love-f.png" alt="" /></a>
 								</div>
 								<div class="today_card_back">
-									<a href="innerpaging/playlist/suggested"><img
+									<a th:href="@{/4tunes/suggest/{todayPickNo}(todayPickNo=7)}"><img
 										src="/resources/img/love-b.png" alt="" /></a>
 								</div>
 							</div>
@@ -167,11 +167,11 @@
 						<div class="today_card">
 							<div class="today_card_inner">
 								<div class="today_card_front">
-									<a href="innerpaging/playlist/suggested"><img
+									<a th:href="@{/4tunes/suggest/{todayPickNo}(todayPickNo=8)}"><img
 										src="/resources/img/happy-f.png" alt="" /></a>
 								</div>
 								<div class="today_card_back">
-									<a href="innerpaging/playlist/suggested"><img
+									<a th:href="@{/4tunes/suggest/{todayPickNo}(todayPickNo=8)}"><img
 										src="/resources/img/happy-b.png" alt="" /></a>
 								</div>
 							</div>

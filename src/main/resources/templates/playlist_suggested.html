@@ -56,7 +56,7 @@
 	<div id="main">
 		<div id="main-container">
 			<h1>[ <span th:text="${session.login.user_name}"></span> ] 님을 위한 맞춤추천 음악</h1>
-			<h2>현재 키워드는 <span th:text="${userkeyword}"></span> 입니다.</h2>
+			<h2>현재 키워드는 <span id="keyword" th:text="${userkeyword}"></span> 입니다.</h2>
 			<div id="buttons">
 				<input type="button" id="modify" value="키워드 수정" onclick="location.href='/nav/mypage'">
 			</div>
@@ -65,7 +65,7 @@
 			<div id="MyPlayList">
 			
 				<div th:if="${suggestResult == '검색 결과가 없습니다.'}">
-					<div th:text="${suggestResult}"></div>
+					<div id="noResult" th:text="${suggestResult}"></div>
 				</div>
 				
 				<div th:unless="${suggestResult == '검색 결과가 없습니다.'}" th:each="song, iterStat : ${suggestResult}" class="list_wrapper">

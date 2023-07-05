@@ -1,6 +1,8 @@
 package com.multi.fourtunes.model.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,12 +11,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.multi.fourtunes.model.apis.ManiaDbApi;
 import com.multi.fourtunes.model.biz.AdminpageBiz;
 import com.multi.fourtunes.model.dto.CommunityDto;
+import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.dto.AdminCommentReportDto;
 import com.multi.fourtunes.model.dto.AdminCommunityReportDto;
 import com.multi.fourtunes.model.dto.UserDto;
+import com.multi.fourtunes.model.jpa.entity.SongEntity;
+import com.multi.fourtunes.model.jpa.repository.SongRepository;
+
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @Controller
 @RequestMapping("/adminpage")
@@ -22,6 +35,12 @@ public class AdminpageController {
 	
 		@Autowired
 		private AdminpageBiz adminpageBiz;
+		
+		@Autowired
+		ManiaDbApi mania;
+		
+		@Autowired
+		SongRepository songRepository;
 		
 		// 회원정보 조회로 이동
 		@GetMapping("/user")
@@ -108,5 +127,46 @@ public class AdminpageController {
 			
 			return "redirect:/adminpage/comment";
 		}
-
+		
+		// 4Tunes 선곡 관리로 이동
+		@GetMapping("/todaypick")
+		public String gotoAdminpageTodaypick() {
+			return "adminpage_todaypick";
+		}
+		
+		// 관리자가 입력한 노래를 ManiaDB에 검색
+		@GetMapping("/searchsong")
+		public String searchSong(@RequestParam("title") String title, Model model) {
+			mania.setPrompt(title);
+			mania.setType(false);
+			
+			ArrayList<SongDto> searchResult = mania.search();
+			System.out.println("검색 결과: " + searchResult);
+			
+			// YoutubeApi를 통해 SongLink 불러오기
+			ArrayList<SongDto> finalResult = adminpageBiz.setSonglink(searchResult, title);
+			
+			model.addAttribute("searchRes", finalResult);
+			
+			return "adminpage_todaypick";
+		}
+		
+		// 관리자가 선택한 노래를 DB에 저장
+		@GetMapping("/insertsong")
+		@ResponseBody
+		public String insertSong(@RequestParam("songDto") String dto, @RequestParam("playlist") String playlist) {
+			
+			System.out.println("SongDto: " + dto);
+			System.out.println("playlist: " + playlist);
+			
+			// 관리자가 선택한 String 타입의 songDto와 playlist를 biz로 넘김
+			String res = adminpageBiz.insertSong(dto, playlist);
+			
+			return res;
+		}
 }
+
+
+
+
+

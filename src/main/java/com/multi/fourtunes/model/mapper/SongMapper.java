@@ -19,6 +19,6 @@ public interface SongMapper {
             @Result(property = "songId", column = "SONG_ID")
 //            @Result(property = "playlistCount", column = "BOARD_VIEW_CNT")
     })
-    @Select(" SELECT s.* FROM SONG s INNER JOIN MANAGE_SONG ms ON s.SONG_NO = ms.SONG_NO INNER JOIN PLAYLIST p ON p.PLAYLIST_NO = ms.PLAYLIST_NO WHERE p.USER_NO = #{userNo} AND p.PLAYLIST_NO = #{playListNo} ")
+    @Select(" SELECT s.* FROM SONG s INNER JOIN MANAGE_SONG ms ON s.SONG_NO = ms.SONG_NO INNER JOIN PLAYLIST p ON p.PLAYLIST_NO = ms.PLAYLIST_NO WHERE p.USER_NO = #{userNo} AND p.PLAYLIST_NO = #{playListNo} ORDER BY RAND() ")
     List<SongDto> selectSongListByPlayListNo(int playListNo, int userNo);
 }

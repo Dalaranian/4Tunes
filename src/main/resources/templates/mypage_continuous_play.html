@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/resources/css/nav.css" />
+<link rel="stylesheet" href="/resources/css/globalfont.css" />
+<link rel="stylesheet" href="/resources/css/mypage_continuous_play.css" />
+<link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
+<title>4Tunes</title>
+</head>
+<body>
+	<div id="nav">
+		<div class="banner">
+			<a href="/"><img src="/resources/img/banner.png" /></a>
+		</div>
+		<div id="login">
+			<div>
+				<a
+					th:href="${session.login == null ? '/nav/login' : '/login/logout'}">
+					<img class="login_img" src="/resources/img/usertest.png" /> <span
+					th:text="${session.login == null ? 'LOGIN' : 'LOGOUT'}"></span>
+				</a>
+			</div>
+			<br />
+			<div>
+				<a href="/nav/mypage"><img class="mypage_img"
+					src="/resources/img/file.png" />MYPAGE</a>
+			</div>
+		</div>
+		<div class="search-container">
+			<form action="/search/query" method="GET" style="display: flex;">
+				<input type="text" name="query" class="search-input"
+					placeholder="키워드 입력" /> <span class="search-icon"> <input
+					type="image" class="search-icon" src="/resources/img/search.png"
+					alt="submit">
+				</span>
+			</form>
+		</div>
+		<div>
+			<a href="/nav/suggested">맞춤추천</a>
+		</div>
+		<div>
+			<a href="/nav/chart">인기차트</a>
+		</div>
+		<div>
+			<a href="/nav/community">커뮤니티</a>
+		</div>
+		<div>
+			<a href="/nav/membership">멤버십</a>
+		</div>
+	</div>
+
+	<div id="main">
+		<h1>
+			<span th:text="${session.login.user_name}"></span> 님 안녕하세요 !
+		</h1>
+		<br>
+
+		<div class="mypage_nav">
+			<ul>
+				<li id="info" onclick="location.href='/nav/mypage'">내
+					정보 조회</li>
+				<li id="analysis" onclick="alert('개발중인 기능입니다. ')">내 통계 조회</li>
+				<li id="community"
+					onclick="location.href='/innerpaging/mypage/communityContent'">내
+					활동 조회</li>
+				<li id="continuous_play"
+					onclick="location.href='/innerpaging/mypage/continuous_play'">연속
+					재생</li>
+			</ul>
+		</div>
+
+		<div class="mypage_contents">
+			<div id="player-container">
+				<div id="player" style=""></div>
+			</div>
+			<div style="display: flex;">
+				<div class="song_title" style="padding: 10px 0; font-weight: bold;">노래
+					제목</div>
+				<div class="song_singer" style="padding: 10px 0; font-weight: bold;">가수</div>
+			</div>
+			<div id="MyPlayList">
+				<div th:each="song : ${songs}" class="list_wrapper"
+					data-link="@{${song.songLink}}">
+					<div id="video">
+						<div id="context">
+							<input type="hidden" th:value="${song.songLink}">
+							<div class="song_list">
+								<div style="display: flex;">
+									<div class="song_title" th:text="${song.songTitle}">노래제목</div>
+									<div class="song_singer" th:text="${song.songArtist}">가수
+										이름</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+    // YouTube Iframe API를 동적으로 로드
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 모든 노래 링크를 가져오기
+    var songLinks = Array.from(document.querySelectorAll("#context > input")).map(
+    (input) => {
+      var url = new URL(input.value);
+      return url.pathname.split('/')[2];
+    }
+    );
+
+    var currentSongIndex = 0;
+    var player;
+
+    // YouTube 플레이어를 생성하고 이벤트 핸들러를 설정
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '360',
+        width: '640',
+        videoId: songLinks[currentSongIndex],
+        events: {
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
+
+    // 노래가 끝날 때마다 다음 노래를 재생
+    function onPlayerStateChange(event) {
+      if (event.data === 0) {
+        currentSongIndex++;
+        if (currentSongIndex < songLinks.length) {
+          player.loadVideoById(songLinks[currentSongIndex]);
+        }
+        updateSongListHighlight();
+      }
+    }
+    
+    
+    // 현재 재생 중인 노래에 대한 하이라이트를 업데이트
+    function updateSongListHighlight() {
+      var songLists = document.querySelectorAll('.song_list');
+      songLists.forEach(function(list, index) {
+        // 모든 리스트 아이템의 하이라이트를 제거
+        list.style.fontWeight = 'normal';
+        list.style.color="black";
+      });
+      // 현재 재생 중인 노래에 대한 하이라이트를 추가
+      songLists[currentSongIndex].style.fontWeight = 'bold';
+      songLists[currentSongIndex].style.color="#9336B4";
+    }
+
+    // 페이지 로딩 시 첫 번째 노래에 하이라이트를 추가
+    window.onload = function() {
+      updateSongListHighlight();
+
+      // .song_list에 클릭 이벤트 리스너를 추가
+      var songLists = document.querySelectorAll('.song_list');
+      songLists.forEach(function(list, index) {
+        list.addEventListener('click', function() {
+          // 클릭한 노래를 재생
+          player.loadVideoById(songLinks[index]);
+          // 현재 노래 인덱스를 업데이트
+          currentSongIndex = index;
+          updateSongListHighlight();
+        });
+      });
+    }
+  </script>
+
+</body>
+</html>

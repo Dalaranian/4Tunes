@@ -10,6 +10,8 @@ import com.multi.fourtunes.model.dao.KeywordDao;
 import com.multi.fourtunes.model.dao.PayDao;
 import com.multi.fourtunes.model.dao.UserDao;
 import com.multi.fourtunes.model.dto.UserDto;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 @Service
@@ -95,6 +97,11 @@ public class LoginBizImple implements LoginBiz {
 	}
 
 	@Override
+	public LocalDate getPayDate(int user_no) {
+		return payDao.getPayDate(user_no);
+	}
+	
+	@Override
 	public boolean isValidEmail(String joinEmail) {
 
 		UserEntity checkUserEntitiy = userRepository.findByUserId(joinEmail);
@@ -107,6 +114,7 @@ public class LoginBizImple implements LoginBiz {
 
 		return userRepository.findByUserId(joinEmail) == null;
 	}
+
 
 
 }

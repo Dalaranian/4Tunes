@@ -1,6 +1,8 @@
 package com.multi.fourtunes.model.biz;
 
 import com.multi.fourtunes.model.dto.UserDto;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 public interface LoginBiz {
@@ -23,4 +25,6 @@ public interface LoginBiz {
 	int getSubscriptionMonth(int user_no);
 
     boolean isValidEmail(String joinEmail);
+
+	LocalDate getPayDate(int user_no);
 }
