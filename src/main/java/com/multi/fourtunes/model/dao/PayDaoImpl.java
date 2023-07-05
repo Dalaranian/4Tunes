@@ -1,5 +1,6 @@
 package com.multi.fourtunes.model.dao;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class PayDaoImpl implements PayDao {
 	@Override
 	public int getSubscriptionMonth(int user_no) {
 		return payMapper.getSubscriptionMonth(user_no);
+	}
+
+	@Override
+	public LocalDate getPayDate(int user_no) {
+		return payMapper.getPayDate(user_no);
 	}
 
 }

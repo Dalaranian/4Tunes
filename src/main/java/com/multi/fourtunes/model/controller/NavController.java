@@ -74,8 +74,8 @@ public class NavController {
 			if(subscriptionMonth == 0) {
 				model.addAttribute("subscriptionEndDate", null);
 			} else {
-				LocalDate currentDate = LocalDate.now();
-				LocalDate subscriptionEndDate = currentDate.plusMonths(subscriptionMonth);
+				LocalDate payDate = loginBiz.getPayDate(currentUser.getUser_no());
+				LocalDate subscriptionEndDate = payDate.plusMonths(subscriptionMonth);
 				//System.out.println("만료날짜는: " + subscriptionEndDate);
 				model.addAttribute("subscriptionEndDate", subscriptionEndDate);
 			}

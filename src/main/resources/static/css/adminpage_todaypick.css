@@ -1,0 +1,69 @@
+#main>h1 {
+    color: white;
+    margin-top: 40px;
+    margin-left: 60px;
+}
+
+.adminpage_contents {
+    width: 90%;
+    height: 80%;
+    background-color: rgb(224, 224, 224);
+    margin-left: 60px;
+    vertical-align: top;
+    padding-top: 15px;
+}
+
+#title{
+	margin-right: 5px;
+}
+
+/* ---------- 검색창 ---------- */
+.search{
+    margin-left: 30px;
+    margin-top: 10px;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+/* ---------- 검색내용 ---------- */
+.search_content>div{
+	display: inline-block;
+}
+
+.search_content{
+	margin-left: 30px;
+	margin-top: 20px;
+}
+
+.search_title{
+	font-weight: 600;
+}
+
+#playlist{
+	margin-left: 30px;	
+}
+
+/* ---------- 버튼 ---------- */
+#submit{
+    background-color: #1D267D;
+    color: white;
+    cursor: pointer;
+    border: 0px;
+    border-radius: 3px;
+    padding: 3px 5px;
+    margin-left: 10px;
+}
+
+#add{
+    background-color: #1D267D;
+    color: white;
+    cursor: pointer;
+    border: 0px;
+    border-radius: 3px;
+    padding: 3px 5px;
+    margin-left: 10px;
+}
+
+#add:hover{
+	background-color: #5C469C;
+}

@@ -1,8 +1,15 @@
 #main div > h1 {
-  color: #d4adfc;
-  position: relative;
-  margin: 40px 0 40px 5.5vw;
+  	color: white;
+  	position: relative;
+  	margin: 40px 0 40px 0;
+  	top: 7%;
+	left: 6%;
 }
+
+#main-container h1 span {
+	color: #d4adfc;
+}
+
 #main-container {
   width: 80vw;
   margin: 0 auto;
@@ -35,15 +42,15 @@
 
 .list_wrapper {
   display: flex;
-  width: 90%;
+  margin-right: 30px;
 }
 
-#List_left {
+.list_left {
   width: 550px;
   display:flex;
 }
 
-#List_right {
+.list_right {
   width: 550px;
   display:flex;
 }
@@ -89,8 +96,11 @@ iframe {
 }
 h2,
 h3 {
-  margin: 0;
-  padding: 0;
+  	margin: 0;
+  	padding: 0;
+  	white-space: nowrap;
+   	overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 @media (max-width: 1160px) {
@@ -125,3 +135,33 @@ h3 {
     margin-bottom: 35px;
   }
 }
+
+#plus{
+	background-color: transparent;
+	border: none;
+	vertical-align: middle;
+	height: 21px;
+}
+
+#plusimg{
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+/* 검색어 강조 */
+/* @keyframes blink{
+	0%{
+		opacity: 1;
+	}
+	50%{
+		opacity: 0;
+	}
+	100%{
+		opacity: 1;
+	}
+}
+
+#header-query{
+	animation: blink 3s infinite;
+	color: #D4ADFC;
+} */

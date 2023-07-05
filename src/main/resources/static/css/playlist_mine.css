@@ -3,6 +3,8 @@
   position: relative;
   top: 7%;
   left: 6%;
+  font-weight: bold;
+  font-size: 2em;
 }
 #main-container {
   width: 80vw;
@@ -43,6 +45,7 @@
 }
 .list_wrapper {
   display: flex;
+  margin-right: 30px;
 }
 
 #List_left {
@@ -91,14 +94,10 @@ iframe {
   padding: 0 5px;
 }
 .song_title{
-  font-size: 22px;
-  height: 64px;
-  display: block;
+	font-size: 1.5em;
 }
 .song_singer{
-  font-size: 20px;
-  height: 40px;
-  display: block;
+    font-size: 1.17em;
 }
 .plus_btn {
   padding: 0 4px;
@@ -107,6 +106,10 @@ h2,
 h3 {
   margin: 0;
   padding: 0;
+  font-weight: bold !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media (max-width: 1160px) {

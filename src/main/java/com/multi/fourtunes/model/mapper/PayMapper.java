@@ -1,6 +1,7 @@
 package com.multi.fourtunes.model.mapper;
 
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.apache.ibatis.annotations.Insert;
@@ -24,4 +25,7 @@ public interface PayMapper {
 	
 	@Select(" SELECT COUNT(USER_NO) FROM PAY WHERE USER_NO=#{userNo} ")
 	int getSubscriptionMonth(int userNo);
+
+	@Select(" SELECT MIN(PAY_DATE) FROM PAY WHERE USER_NO=#{user_no} ")
+	LocalDate getPayDate(int user_no);
 }
