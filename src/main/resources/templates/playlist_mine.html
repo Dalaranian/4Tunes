@@ -66,6 +66,9 @@
 <div id="main">
     <h1>내 플레이리스트</h1>
     <div id="buttons">
+    	<div class="continuous_play">
+    		<a href="/innerpaging/mypage/continuous_play">연속 재생</a>
+    	</div>
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -93,7 +96,6 @@
                         <!--                        <label th:text="${song.songId}" hidden="hidden"></label>-->
                         <br/>
                         <div style="width:200px;">
-                            <!--								지훈이형 미안한데 혹시 요친구 마이너스 이미지로 바꿔주실 수있어요? 제가 건들면 뭔가 뭔가 이상해질가같음...-->
                             <button id="plus" style="display: inline-block; padding:0 5px;"
                                     th:attr="onclick='deleteToPlaylist(\'' + ${song.songTitle} + '\', \'' + ${song.songArtist} + '\', \'' + ${song.songLink} + '\', \'' + ${song.songId} + '\', \'' + ${song.songAlbumArt} + '\')'">
                                 <img id="plusimg" src="/resources/img/minus.png">

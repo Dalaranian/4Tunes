@@ -60,7 +60,7 @@
 
 		<div class="mypage_nav">
 			<ul>
-				<li id="info" onclick="location.href='/innerpaging/mypage/user'">내
+				<li id="info" onclick="location.href='/nav/mypage'">내
 					정보 조회</li>
 				<li id="analysis" onclick="alert('개발중인 기능입니다. ')">내 통계 조회</li>
 				<li id="community"
@@ -77,26 +77,38 @@
 			<div id="player-container">
 				<div id="player" style=""></div>
 			</div>
-		</div>
-		<div id="MyPlayList">
-			<div th:each="song : ${songs}" class="list_wrapper"
-				data-link="@{${song.songLink}}">
-				<div id="video">
-					<div id="context">
-						<input type="hidden" th:value="${song.songLink}"> 
+			<div style="display: flex;">
+				<div class="song_title" style="padding: 10px 0; font-weight: bold;">노래
+					제목</div>
+				<div class="song_singer" style="padding: 10px 0; font-weight: bold;">가수</div>
+			</div>
+			<div id="MyPlayList">
+				<div th:each="song : ${songs}" class="list_wrapper"
+					data-link="@{${song.songLink}}">
+					<div id="video">
+						<div id="context">
+							<input type="hidden" th:value="${song.songLink}">
+							<div class="song_list">
+								<div style="display: flex;">
+									<div class="song_title" th:text="${song.songTitle}">노래제목</div>
+									<div class="song_singer" th:text="${song.songArtist}">가수
+										이름</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script>
-    // YouTube Iframe API를 동적으로 로드합니다.
+    // YouTube Iframe API를 동적으로 로드
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    // 모든 노래 링크를 가져옵니다.
+    // 모든 노래 링크를 가져오기
     var songLinks = Array.from(document.querySelectorAll("#context > input")).map(
     (input) => {
       var url = new URL(input.value);
@@ -107,7 +119,7 @@
     var currentSongIndex = 0;
     var player;
 
-    // YouTube 플레이어를 생성하고 이벤트 핸들러를 설정합니다.
+    // YouTube 플레이어를 생성하고 이벤트 핸들러를 설정
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('player', {
         height: '360',
@@ -119,16 +131,47 @@
       });
     }
 
-    // 노래가 끝날 때마다 다음 노래를 재생합니다.
+    // 노래가 끝날 때마다 다음 노래를 재생
     function onPlayerStateChange(event) {
       if (event.data === 0) {
         currentSongIndex++;
         if (currentSongIndex < songLinks.length) {
           player.loadVideoById(songLinks[currentSongIndex]);
         }
+        updateSongListHighlight();
       }
     }
-    console.log(songLinks);
+    
+    
+    // 현재 재생 중인 노래에 대한 하이라이트를 업데이트
+    function updateSongListHighlight() {
+      var songLists = document.querySelectorAll('.song_list');
+      songLists.forEach(function(list, index) {
+        // 모든 리스트 아이템의 하이라이트를 제거
+        list.style.fontWeight = 'normal';
+        list.style.color="black";
+      });
+      // 현재 재생 중인 노래에 대한 하이라이트를 추가
+      songLists[currentSongIndex].style.fontWeight = 'bold';
+      songLists[currentSongIndex].style.color="green";
+    }
+
+    // 페이지 로딩 시 첫 번째 노래에 하이라이트를 추가
+    window.onload = function() {
+      updateSongListHighlight();
+
+      // .song_list에 클릭 이벤트 리스너를 추가
+      var songLists = document.querySelectorAll('.song_list');
+      songLists.forEach(function(list, index) {
+        list.addEventListener('click', function() {
+          // 클릭한 노래를 재생
+          player.loadVideoById(songLinks[index]);
+          // 현재 노래 인덱스를 업데이트
+          currentSongIndex = index;
+          updateSongListHighlight();
+        });
+      });
+    }
   </script>
 
 </body>

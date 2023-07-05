@@ -44,6 +44,7 @@
   background-color: rgb(224, 224, 224);
   margin-left: 10px;
   min-width: 720px;
+  min-height:603px;
 }
 .mypage_contents > h1 {
 	padding-top:10px;
@@ -53,7 +54,34 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height:70%;
+    height:60%;
+}
+#MyPlayList{
+  height:140px;
+  overflow-y:scroll;
+}
+.song_title{
+  width:37vw;
+  min-width:450px;
+  font-size:16px;
+  text-align:center;
+  cursor:pointer;
+}
+.song_title:hover{
+  font-weight:bold;
+}
+.song_singer{
+  width:15vw;
+  min-width:250px;
+  font-size:16px;
+  text-align:center;
+  cursor:pointer;
+}
+.song_singer:hover{
+  font-weight:bold;
+}
+.song_list>div:hover{
+  font-weight:bold;
 }
 @media (max-width: 1140px) {
   .mypage_nav {
