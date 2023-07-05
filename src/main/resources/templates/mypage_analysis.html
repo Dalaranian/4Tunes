@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="UTF-8">
@@ -8,42 +8,17 @@
 
 <link rel="stylesheet" href="/resources/css/nav.css" />
 <link rel="stylesheet" href="/resources/css/globalfont.css" />
-<link rel="stylesheet" href="/resources/css/mypage_community.css" />
+<link rel="stylesheet" href="/resources/css/mypage_analysis.css" />
 <link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <title>4Tunes</title>
 </head>
-<style>
-.pie-chart {
-  position: relative;
-  display:inline-block;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  transition: 0.3s;
-  border-width: 30px;
-  padding: 0px;
-}
 
-span.center {
-	background: #fff;
-	display: block;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 100px;
-	height: 100px;
-	border-radius: 50%;
-	text-align: center;
-	line-height: 100px;
-	font-size: 30px;
-	transform: translate(-50%, -50%);
-}
-</style>
-<script>
+<script th:inline="javascript">
 	$(window).ready(function() {
-		draw(80, '.pie-chart1', '#ccc');
-		draw(50, '.pie-chart2', '#8b22ff');
-		draw(30, '.pie-chart3', '#ff0');
+		draw([[${top3KeywordStats[0].ratio}]], '.pie-chart1', '#ccc');
+		draw([[${top3KeywordStats[1].ratio}]], '.pie-chart2', '#8b22ff');
+		draw([[${top3KeywordStats[2].ratio}]], '.pie-chart3', '#ff0');
 	});
 
 	function draw(max, classname, colorname) {
@@ -123,25 +98,32 @@ span.center {
 					활동 조회</li>
 			</ul>
 		</div>
+		
 		<div class="mypage_contents">
-			
-				<h1>내 플레이리스트에 담긴 <span th:text="${totalSongs}" ></span>곡의 취향은... </h1>
-				
-				<div th:each="keywordStat : ${top3KeywordStats}"></div>
+			<h1>
+				내 플레이리스트에 담긴 <span th:text="${totalSongs}"></span>곡의 취향은..
+			</h1>
 
-				<div class="pie-chart pie-chart1">
-					<span class="center"
-						th:text="${top3KeywordStats[0].keyword + ' (' + top3KeywordStats[0].ratio + '%)'}"></span>
-				</div>
+			<div th:each="keywordStat : ${top3KeywordStats}"></div>
 
-				<div class="pie-chart pie-chart2">
-					<span class="center"
-						th:text="${top3KeywordStats[1].keyword + ' (' + top3KeywordStats[1].ratio + '%)'}"></span>
-				</div>
+			<div class="pie-chart pie-chart1">
+				<span class="center"
+					th:text="${top3KeywordStats[0].keyword + top3KeywordStats[0].ratio + '%'}"></span>
+			</div>
 
-				<div class="pie-chart pie-chart3">
-					<span class="center"
-						th:text="${top3KeywordStats[2].keyword + ' (' + top3KeywordStats[2].ratio + '%)'}"></span>
-				</div>
+			<div class="pie-chart pie-chart2">
+				<span class="center"
+					th:text="${top3KeywordStats[1].keyword + top3KeywordStats[1].ratio + '%'}"></span>
+			</div>
+
+			<div class="pie-chart pie-chart3">
+				<span class="center"
+					th:text="${top3KeywordStats[2].keyword + top3KeywordStats[2].ratio + '%'}"></span>
+			</div>
+
+
+
+		</div>
+	</div>
 </body>
 </html>

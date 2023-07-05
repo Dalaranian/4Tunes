@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.multi.fourtunes.model.apis.AnalysisApi;
 import com.multi.fourtunes.model.dto.AnalysisKeywordDto;
 import com.multi.fourtunes.model.jpa.entity.ManageSongEntity;
 import com.multi.fourtunes.model.jpa.entity.PlaylistEntity;
@@ -26,6 +29,8 @@ public class AnalysisBizImpl implements AnalysisBiz {
 	PlaylistRepository playlistRepository;
 	@Autowired
 	SongRepository songRepository;
+	@Autowired
+	AnalysisApi analysisApi;
 
 	@Override
 	public List<AnalysisKeywordDto> getAIKeywordAnalysis(int userNo) {
@@ -76,5 +81,25 @@ public class AnalysisBizImpl implements AnalysisBiz {
 		// 상위 3개의 통계 결과를 반환
 		return top3KeywordStats;
 	}
+	
+	// NULL인 AiKeyword 업데이트
+	public void updateSongAiKeyword() {
+        List<SongEntity> songs = songRepository.findBySongAikeywordIsNull();
+        
+        for (SongEntity song : songs) {
+        	try {
+				Thread.sleep(10000);
+				String songInfo = song.getSongTitle() + "-" + song.getSongArtist();
+				List<String> AIKeyword = analysisApi.suggestedAIKeyword(new String[] { songInfo });
+				
+				if (!AIKeyword.isEmpty()) {
+				    song.setSongAikeyword(AIKeyword.get(0));
+				    songRepository.save(song);
+				}
+			} catch (JsonProcessingException | InterruptedException e) {
+				e.printStackTrace();
+			}
+        }
+    }
 	
 }
