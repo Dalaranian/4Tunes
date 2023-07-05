@@ -55,10 +55,10 @@ h1 {
   margin-bottom: 2px;
 }
 .card {
-  width: 362px;
+  width: 500px;
 }
 .card-body {
-  width: 362px;
+  width: 500px;
   height: 232px;
   overflow: scroll;
 }
