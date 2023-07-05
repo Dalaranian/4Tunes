@@ -24,6 +24,11 @@
   border-radius: 10px;
   margin-right: 1vw;
   cursor: pointer;
+  display: flex;
+  align-self: center;
+}
+.continuous_play{
+  padding:5px !important;
 }
 #MyPlayList {
   width: fit-content;
