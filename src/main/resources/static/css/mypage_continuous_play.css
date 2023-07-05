@@ -44,7 +44,7 @@
   background-color: rgb(224, 224, 224);
   margin-left: 10px;
   min-width: 720px;
-  min-height:603px;
+  /* min-height:603px; */
 }
 .mypage_contents > h1 {
 	padding-top:10px;
@@ -54,7 +54,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height:60%;
+    height:380px;
+    margin-top: 10px;
 }
 #MyPlayList{
   height:140px;
@@ -99,5 +100,8 @@
 @media (max-width: 950px) {
   #nav{
   display:none;
+  }
+  #main{
+  width: 130vw;
   }
 }
