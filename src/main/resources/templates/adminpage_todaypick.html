@@ -79,12 +79,11 @@
 			</select>
 			
 			<div th:each="song : ${searchRes}" class="search_content">
-				<div th:text="${song.songTitle}" class="search_title"></div>
-				- <div th:text="${song.songArtist}" class="search_artist"></div>
-				
-				
 				<button type="button" id="add" th:attr="onclick='insertSong(\'' + ${song.songTitle} + '\', \'' + ${song.songArtist} + '\', \'' + ${song.songLink} + '\', \'' + ${song.songId} + '\', \'' + ${song.songAlbumArt} + '\')'">
 				추가</button>
+				
+				<div th:text="${song.songTitle}" class="search_title"></div>
+				- <div th:text="${song.songArtist}" class="search_artist"></div>
 			</div>
 			
 	
