@@ -44,11 +44,11 @@ public class PlaylistBizImple implements PlaylistBiz {
     @Autowired
     PlayListMapper playListMapper;
     @Autowired
+	KeywordMapper keywordMapper;	
+    @Autowired
     PlaylistDao playlistDao;
     @Autowired
     SongDao songDao;
-	@Autowired
-	KeywordMapper keywordMapper;	
 	@Autowired
 	AnalysisApi analysisApi;
 

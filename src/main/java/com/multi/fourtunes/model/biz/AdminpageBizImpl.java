@@ -13,6 +13,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.multi.fourtunes.model.apis.AnalysisApi;
 import com.multi.fourtunes.model.apis.YoutubeApi;
 import com.multi.fourtunes.model.dao.AdminpageDao;
 import com.multi.fourtunes.model.dao.ReportDao;
@@ -41,6 +42,9 @@ public class AdminpageBizImpl implements AdminpageBiz{
 	
 	@Autowired
 	AdminpageDao adminDao;
+	
+	@Autowired
+	AnalysisApi analysisApi;
 	
 	@Override
 	public List<UserDto> selectList() {
@@ -170,8 +174,20 @@ public class AdminpageBizImpl implements AdminpageBiz{
 				song.setSongId(songDto.getSongId());
 				song.setSongAlbumart(songDto.getSongAlbumArt());
 				
-				songRepository.save(song);
+				// AIKeyword 넣는 부분
+				// 저장하려는 노래의 정보 가져오기
+				String songInfo = songDto.getSongTitle() + "-" + songDto.getSongArtist();
+				// AI 키워드 추출
+				List<String> AIKeyword = analysisApi.suggestedAIKeyword(new String[] { songInfo });
+				if (!AIKeyword.isEmpty()) {
+					// 첫 번째 추출된 키워드를 선택하여 저장
+					song.setSongAikeyword(AIKeyword.get(0));
+				
+				}
+		
+				songRepository.save(song);	
 			} 
+			
 			songEntity = songRepository.findBySongId(songDto.getSongId());
 			
 			// 관리자가 선택한 플레이리스트에 해당 노래 저장
@@ -195,16 +211,4 @@ public class AdminpageBizImpl implements AdminpageBiz{
 		return res;
 	}
 
-
 }
-
-
-
-
-
-
-
-
-
-
-
