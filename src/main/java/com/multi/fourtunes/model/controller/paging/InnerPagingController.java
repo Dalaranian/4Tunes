@@ -3,6 +3,7 @@ package com.multi.fourtunes.model.controller.paging;
 import javax.servlet.http.HttpSession;
 
 import com.multi.fourtunes.model.biz.MyPageBiz;
+import com.multi.fourtunes.model.biz.PlaylistBiz;
 import com.multi.fourtunes.model.dto.CommentDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,14 +12,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.multi.fourtunes.model.biz.AdminpageBiz;
 import com.multi.fourtunes.model.biz.CommunityBiz;
 import com.multi.fourtunes.model.biz.LoginBiz;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import com.multi.fourtunes.model.dto.CommunityDto;
+import com.multi.fourtunes.model.dto.PlaylistDto;
+import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.dto.UserDto;
 
 // 프론트 작성의 편의를 위한 임시 페이징 클래스입니다. 
@@ -33,6 +38,9 @@ public class InnerPagingController {
 	@Autowired
 	private LoginBiz loginBiz;
 
+    @Autowired
+    PlaylistBiz playlist;
+    
 	@Autowired MyPageBiz myPageBiz;
 	// 로그인 페이지
 
@@ -80,6 +88,18 @@ public class InnerPagingController {
 	@GetMapping("/mypage/community")
 	public String gotoCommmunity() {
 		return "community_list";
+	}
+	
+	//연속 재생
+	@GetMapping("/mypage/continuous_play")
+	public String gotoContinuousPlay(Model model,HttpSession session) {
+	    // 세션의 UserDto 불러오기
+	    UserDto currentUser = (UserDto) session.getAttribute("login");	
+	    String userNo=Integer.toString(currentUser.getUser_no());
+	    List<SongDto> songs = playlist.getPlayListSongs(userNo);
+	    System.out.println(songs);
+	    model.addAttribute("songs",songs);
+		return "mypage_continuous_play";
 	}
 	// 글 작성 페이지로 이동
 	@GetMapping("/community/write")
