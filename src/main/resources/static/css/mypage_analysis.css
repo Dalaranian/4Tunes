@@ -70,8 +70,8 @@
 .pie-chart {
 	position: relative;
 	display: inline-block;
-	width: 250px;
-	height: 250px;
+	width: 220px;
+	height: 220px;
 	border-radius: 50%;
 	transition: 0.8s;
 	border-width: 30px;
@@ -97,7 +97,7 @@
 #pie-chart2,
 #pie-chart3 {
 	top: 60px;
-	margin: 20px 70px 0 70px;
+	margin: 20px 45px 0 45px;
 }
 
 .ratio1,
