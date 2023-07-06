@@ -122,3 +122,34 @@
 	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #F3BCC8, 0 0 30px
 		#F3BCC8, 0 0 40px #F3BCC8, 0 0 55px #F3BCC8, 0 0 75px #fff;
 }
+
+@media (max-width: 1140px) {
+  .mypage_nav {
+    display: none;
+  }
+  .mypage_contents {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .mypage_kw_btn button {
+    margin-right: 100px;
+  }
+}
+@media (max-width: 920px) {
+  #nav {
+    display: none;
+  }
+  .mypage_nav {
+    display: none;
+  }
+  .mypage_contents {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #main {
+    width: 130vw;
+    background-color: #424242;
+  }
+}
