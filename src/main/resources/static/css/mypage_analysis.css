@@ -47,8 +47,8 @@
 }
 
 .mypage_contents>h1 {
-	margin-left: 20px;
-	padding-top: 10px;
+	margin-left: 50px;
+	padding-top: 45px;
 }
 
 .mypage_contents h2 {
@@ -60,18 +60,19 @@
 	padding-top: 15px;
 }
 
+/* ---------- 차트 내용 ----------*/
 .pie-chart {
 	position: relative;
 	display: inline-block;
-	width: 200px;
-	height: 200px;
+	width: 250px;
+	height: 250px;
 	border-radius: 50%;
-	transition: 0.3s;
+	transition: 0.8s;
 	border-width: 30px;
 	padding: 0px;
 }
 
-span.center {
+.keyword {
 	background: #fff;
 	display: block;
 	position: absolute;
@@ -84,4 +85,40 @@ span.center {
 	line-height: 100px;
 	font-size: 30px;
 	transform: translate(-50%, -50%);
+}
+
+#pie-chart1,
+#pie-chart2,
+#pie-chart3 {
+	top: 130px;
+	margin-left: 70px;
+    margin-right: 70px;
+}
+
+.ratio1,
+.ratio2,
+.ratio3 {
+    margin-top: 275px;
+	margin-left: 70px;
+    margin-right: 70px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+ /* color: #454545; */	
+}
+
+
+.ratio1 {
+	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #9376E0, 0 0 30px
+		#9376E0, 0 0 40px #9376E0, 0 0 55px #9376E0, 0 0 75px #fff;
+}
+
+.ratio2 {
+	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #E893CF, 0 0 30px
+		#E893CF, 0 0 40px #E893CF, 0 0 55px #E893CF, 0 0 75px #fff;
+}
+
+.ratio3 {
+	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #F3BCC8, 0 0 30px
+		#F3BCC8, 0 0 40px #F3BCC8, 0 0 55px #F3BCC8, 0 0 75px #fff;
 }

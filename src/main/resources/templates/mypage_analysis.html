@@ -16,11 +16,11 @@
 
 <script th:inline="javascript">
 	$(window).ready(function() {
-		draw([[${top3KeywordStats[0].ratio}]], '.pie-chart1', '#ccc');
-		draw([[${top3KeywordStats[1].ratio}]], '.pie-chart2', '#8b22ff');
-		draw([[${top3KeywordStats[2].ratio}]], '.pie-chart3', '#ff0');
+		draw([[${top3KeywordStats[0].ratio}]], '#pie-chart1', '#9376E0');
+		draw([[${top3KeywordStats[1].ratio}]], '#pie-chart2', '#E893CF');
+		draw([[${top3KeywordStats[2].ratio}]], '#pie-chart3', '#F3BCC8');
 	});
-
+	// 차트 그리기
 	function draw(max, classname, colorname) {
 		var i = 1;
 		var func1 = setInterval(function() {
@@ -30,13 +30,14 @@
 			} else {
 				clearInterval(func1);
 			}
-		}, 10);
+		}, 20);
 	}
+	// 차트 색상
 	function color1(i, classname, colorname) {
 		$(classname).css(
 				{
 					"background" : "conic-gradient(" + colorname + " 0% " + i
-							+ "%, #ffffff " + i + "% 100%)"
+							+ "%, #EEEEEE " + i + "% 100%)"
 				});
 	}
 </script>
@@ -100,27 +101,32 @@
 		</div>
 		
 		<div class="mypage_contents">
-			<h1>
-				내 플레이리스트에 담긴 <span th:text="${totalSongs}"></span>곡의 취향은..
+			<h1 class="total">
+				내 플레이리스트에 담긴 <span th:text="${totalSongs}"></span>곡의 취향은...
 			</h1>
 
 			<div th:each="keywordStat : ${top3KeywordStats}"></div>
 
-			<div class="pie-chart pie-chart1">
-				<span class="center"
-					th:text="${top3KeywordStats[0].keyword + top3KeywordStats[0].ratio + '%'}"></span>
+			<div class="pie-chart" id="pie-chart1">
+				<div class="keyword"
+					th:text="${top3KeywordStats[0].keyword}"></div>
+				<div class="ratio1"	
+					th:text="${top3KeywordStats[0].ratio + '%'}"></div>
 			</div>
 
-			<div class="pie-chart pie-chart2">
-				<span class="center"
-					th:text="${top3KeywordStats[1].keyword + top3KeywordStats[1].ratio + '%'}"></span>
+			<div class="pie-chart" id="pie-chart2">
+				<div class="keyword"
+					th:text="${top3KeywordStats[1].keyword}"></div>
+				<div class="ratio2"
+				    th:text="${top3KeywordStats[1].ratio + '%'}"></div>
 			</div>
 
-			<div class="pie-chart pie-chart3">
-				<span class="center"
-					th:text="${top3KeywordStats[2].keyword + top3KeywordStats[2].ratio + '%'}"></span>
+			<div class="pie-chart" id="pie-chart3">
+				<div class="keyword"
+					th:text="${top3KeywordStats[2].keyword}"></div>
+				<div class="ratio3"	
+					th:text="${top3KeywordStats[2].ratio + '%'}"></div>
 			</div>
-
 
 
 		</div>

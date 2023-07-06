@@ -88,6 +88,7 @@ public class AnalysisBizImpl implements AnalysisBiz {
         
         for (SongEntity song : songs) {
         	try {
+        		// 10초 sleep
 				Thread.sleep(10000);
 				String songInfo = song.getSongTitle() + "-" + song.getSongArtist();
 				List<String> AIKeyword = analysisApi.suggestedAIKeyword(new String[] { songInfo });

@@ -23,10 +23,11 @@ public class SuggestCountResseter {
         suggestBiz.seggestCountReset();
     }
     
-    // 5분 마다
-    @Scheduled(cron = "0 0/5 * * * ?")
+    // 매일 오후 12시 실행
+    @Scheduled(cron = "0 0 12 * * ?")
     public void updateSongAiKeywordTask() {
-    	System.out.println("NULL 값인 Aikeyword를 다시 추천 받습니다. ");
+    	System.out.println("NULL 값인 Aikeyword 를 다시 추천 받습니다. ");
+    	
     	analysisBiz.updateSongAiKeyword();
     }
 }
