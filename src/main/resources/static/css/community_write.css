@@ -22,6 +22,7 @@ body {
   height: 80vh;
   min-width:820px;
   min-height:470px;
+  margin-top: 25px;
 }
 h1{
 	position:flex;
@@ -34,7 +35,7 @@ h1{
 
 /* 로그인의 메인 */
 .community-main form {
-  /* height: 80vh; */
+  height: 70vh;
   background-color: #ccc;
   padding: 51px;
   box-sizing: border-box;
@@ -102,6 +103,7 @@ h1{
 .community-btn{
     display: flex;
     float: right;
+    margin-top: 10px;
 }
 
 .community-btn #input button{
