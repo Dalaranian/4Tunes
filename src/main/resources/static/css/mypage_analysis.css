@@ -44,7 +44,7 @@
 	height: 80%;
 	background-color: rgb(224, 224, 224);
 	margin-left: 10px;
-	min-width: 800px;
+	min-width: 932px;
     min-height: 603px;
 }
 
@@ -97,7 +97,7 @@
 #pie-chart2,
 #pie-chart3 {
 	top: 60px;
-	margin: 20px 45px 0 45px;
+	margin: 20px 40px 0 40px;
 }
 
 .ratio1,
@@ -128,7 +128,7 @@
 		#F3BCC8, 0 0 40px #F3BCC8, 0 0 55px #F3BCC8, 0 0 75px #fff;
 }
 
-@media (max-width: 1250px) {
+@media (max-width: 1450px) {
   .mypage_nav {
     display: none;
   }
@@ -141,7 +141,7 @@
     margin-right: 100px;
   }
 }
-@media (max-width: 1050px) {
+@media (max-width: 1150px) {
   #nav {
     display: none;
   }
