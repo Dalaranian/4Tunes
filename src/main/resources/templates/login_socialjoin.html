@@ -8,87 +8,10 @@
 <link rel="stylesheet" href="/resources/css/globalfont.css" />
 <link rel="stylesheet" href="/resources/css/login_join.css" />
 <link rel="shortcut icon" href="/resources/img/realfavicon.ico" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <title>4Tunes</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-	$(document)
-			.ready(
-					function() {
-						const searchKeyword = $("#search-keyword");
-						const kwSelect = $("#kw");
-						const readonlyInput = $("#readonly");
-
-						searchKeyword
-								.on(
-										"input",
-										function() {
-											const inputValue = searchKeyword
-													.val().toLowerCase();
-											//사용자가 영어 소문자를 칠 수 있을 거라고 가정
-											kwSelect
-													.find("option")
-													.each(
-															function() {
-																const optionValue = $(
-																		this)
-																		.val()
-																		.toLowerCase();
-																const optionText = $(
-																		this)
-																		.text()
-																		.toLowerCase();
-																//value값이 같은 게 포함될때, text값이 같은 게 포함될 때 두 경우 모두 보여줌.
-																if (optionValue
-																		.includes(inputValue)
-																		|| optionText
-																				.includes(inputValue)) {
-																	$(this)
-																			.show();
-																} else {
-																	$(this)
-																			.hide();
-																}
-															});
-
-											readonlyInput
-													.val()
-													.split(",")
-													.map(
-															function(item) {
-																const trimmedItem = item
-																		.trim();
-																kwSelect
-																		.find(
-																				"option")
-																		.filter(
-																				function() {
-																					return ($(
-																							this)
-																							.text()
-																							.toLowerCase() === trimmedItem
-																							.toLowerCase());
-																				})
-																		.hide();
-															});
-										});
-
-						//옵션 더블 클릭 시 #readonly에 표시
-						kwSelect.on("dblclick", function() {
-							const selectedOptions = kwSelect.find(
-									"option:selected").map(function() {
-								return $(this).text();
-							}).get();
-
-							readonlyInput.val(function(index, value) {
-								const allOptions = value ? value.split(", ")
-										: [];
-								return allOptions.concat(selectedOptions).join(
-										", ");
-							});
-							kwSelect.find("option:selected").hide();
-						});
-					});
-</script>
+<script type="text/javascript" src="/resources/js/keywordlist.js"></script>
 </head>
 
 <body>
@@ -152,7 +75,7 @@
 							placeholder="이름을 입력해 주세요" readonly />
 					</div>
 					<div class="join-keyword">
-						<p class="join-title">KeyWord</p>
+						<p class="join-title">KeyWord</p><img class="i" src="/resources/img/i.png"></img>
 					</div>
 					<div class="join-kw">
 						<input type="search" id="search-keyword" placeholder="내용을 입력해주세요." />
@@ -179,5 +102,50 @@
 			</form>
 		</div>
 	</div>
+	
+	<div class="chart-back">
+		<h1>전체 유저의 키워드 통계</h1>
+	    <canvas id="chart" style="width: 500px; height: 500px; margin: 10px 0 auto; position: absolute;
+    left: 50%; transform: translateX(-50%);"></canvas>
+	    <div>
+	    <input class="chart-button" type="button" value="확인">
+	    </div>
+	    </div>
+	 <script type="text/javascript" src="/resources/js/verifyEmail.js"></script>
+	 <script type="text/javascript" src="/resources/js/join_i.js"></script>
+		<script th:inline="javascript">
+		var ctx = document.getElementById('chart').getContext('2d');
+		var data = /*[[${keywordCounts}]]*/ 'default';
+		var labels = data.map(function(e) { return e.keywordName; });
+		var counts = data.map(function(e) { return e.count; });
+	
+		var getRandomColor = function() {
+		  var letters = '0123456789ABCDEF';
+		  var color = '#';
+		  for (var i = 0; i < 6; i++) {
+		    color += letters[Math.floor(Math.random() * 16)];
+		  }
+		  return color;
+		};
+	
+		var backgroundColors = data.map(function(e) {
+		  return getRandomColor();
+		});
+	
+		var chart = new Chart(ctx, {
+		  type: 'doughnut',
+		  data: {
+		    labels: labels,
+		    datasets: [{
+		      data: counts,
+		      backgroundColor: backgroundColors,
+		    }]
+		  },
+		  options: {
+		    maintainAspectRatio: false,
+		    responsive: false,
+		  }
+		});	
+	</script>
 </body>
 </html>

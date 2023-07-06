@@ -30,8 +30,8 @@ body {
   text-align: center;
   font-size: 50px;
   color: #5c469c;
-  font-weight: normal;
-  margin-bottom: 40px;
+  font-weight: bold;
+  margin-bottom: 30px;
 }
 
 /* 로그인의 메인 */
@@ -132,7 +132,7 @@ body {
 }
 #kw {
   width: 100%;
-  height: auto;
+  height: 115px;
   font-size: 15px;
   background-color: #ededed;
 }
@@ -143,6 +143,7 @@ body {
   display:flex;
   align-items: center;
   justify-content: center;
+  margin-top: 10px;
 }
 
 .join-btn #find_join button {
@@ -180,10 +181,12 @@ body {
 
 #verify-btn{
     background-color: #d4adfc;
-    border-radius: 10px 10px;
+    border-radius: 5px 5px;
     height: 30px;
     margin-left: 2px;
-    width: fit-content;
+    width: 25px;
+    border: none;
+    margin-left: 5px;
   }
 
 .i{
@@ -191,6 +194,7 @@ body {
   height: 16px;
   display: inline-block;
   float: right;
+  border-radius: 5px 5px;
 }
 .chart-back {
   display: none;
@@ -240,3 +244,8 @@ body {
   	left:50%;
   }
 }
+
+#join-email, #join-pw, #join-name{
+	margin-left: 5px;
+}
+

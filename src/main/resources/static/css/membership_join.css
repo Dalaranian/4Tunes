@@ -13,9 +13,9 @@
 }
 #membershipInfo {
   width: 40vw;
-  height: 653px	;
+  height: 640px	;
   margin: 0 auto;
-  margin-top: 10vh;
+  margin-top: 7vh;
   margin-bottom: 10vh;
   background-color: #ccc;
   border-radius: 5%;
@@ -38,9 +38,10 @@
 }
 h1 {
 	margin-bottom:1.5rem !important;
-  padding-top: 15px;
-  text-align: center;
-  margin: 10px;
+  	padding-top: 25px;
+   	text-align: center;
+  	margin: 10px;
+  	font-weight: bold !important;
 }
 
 .container {

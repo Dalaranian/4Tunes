@@ -72,7 +72,7 @@
 		</div>
     
 		<div class="mypage_contents">
-			<h1>내 정보 조회 및 수정</h1>
+			<h1>내 정보 조회 및 키워드 수정</h1>
 			<form id="mypage_form" action="/mypage/updateuser" method="POST">
 			<div class="mypage_inf">
 				<div class="mypage">
@@ -95,8 +95,8 @@
 					<span class="mypage_title">회원 등급</span> <input type="text"
 						id="mypage_grade" placeholder="회원 등급" th:value="${grade}" readonly>
 				</div>
-				<div class="mypage">
-    				<span class="mypage_title" th:if="${subscriptionEndDate != null}">구독 만료일</span>
+				<div class="mypage" th:if="${subscriptionEndDate != null}">
+    				<span class="mypage_title">구독 만료일</span>
     				<input th:if="${subscriptionEndDate != null}" th:value="${subscriptionEndDate}" readonly>
 				</div>
 				<div th:if="${#session.getAttribute('login').user_grade eq 'FREE'}" class="mypage">
@@ -105,8 +105,8 @@
 				</div>
 				<div class="mypage_kw_group">
 					<div class="mypage_keyword">
-						<p class="mypage_title">KeyWord</p>
-						<p>현재 키워드 : <span th:text="${userkeyword}"></span></p>
+						<p class="mypage_title" style="margin-right: -15px !important;">KeyWord</p>
+						<p style="font-size: 15px;">현재 키워드 : <span th:text="${userkeyword}"></span></p>
 					</div>
 					<div class="mypage_keyword_group">
 						<div class="mypage_kw">
@@ -119,7 +119,7 @@
 							</select>
 						</div>
 						<div class="mypage_kw" name="selected_keyword">
-							<input type="text" name="selected_keyword" id="readonly" placeholder="선택된 내용 보여주기"
+							<input type="text" name="selected_keyword" id="readonly" placeholder="현재 선택된 키워드"
 								readonly>
 						</div>
 

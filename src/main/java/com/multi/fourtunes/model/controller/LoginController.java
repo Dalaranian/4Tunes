@@ -80,6 +80,9 @@ public class LoginController {
 
 			String[] keywordList = loginBiz.getKeyword();
 			model.addAttribute("keywordlist", keywordList);
+			List<KeywordChartDto> keywordCounts = keywordChartBiz.getKeywordChart();
+		    model.addAttribute("keywordCounts", keywordCounts);
+		    
 			return "login_socialjoin";
 		}
 	}
@@ -94,7 +97,7 @@ public class LoginController {
 	public String join(Model model) {
 		String[] keywordList = loginBiz.getKeyword();
 		model.addAttribute("keywordlist", keywordList);
-		 List<KeywordChartDto> keywordCounts = keywordChartBiz.getKeywordChart();
+		List<KeywordChartDto> keywordCounts = keywordChartBiz.getKeywordChart();
 	    model.addAttribute("keywordCounts", keywordCounts);
 		return "login_join";
 	}
