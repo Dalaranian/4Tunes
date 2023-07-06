@@ -55,12 +55,14 @@ h1 {
   margin-bottom: 2px;
 }
 .card {
-  width: 500px;
+  width: 33vw;
+  min-width:362px !important;
 }
 .card-body {
-  width: 500px;
+  width: 33vw;
   height: 232px;
   overflow: scroll;
+  min-width:362px !important;
 }
 .accordion .card-header {
   background: #1d267d;
