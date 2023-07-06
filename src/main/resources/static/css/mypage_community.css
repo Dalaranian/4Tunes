@@ -149,7 +149,7 @@
 }
 
 .title>a {
-    color: black;
+    color: black !important;
     font-size: 1.1rem;
 }
 @media (max-width: 1170px) {
