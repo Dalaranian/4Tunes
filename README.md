@@ -4,7 +4,10 @@
 
 ![header](https://capsule-render.vercel.app/api?type=waving&color=random&height=150&section=header&text=4Tunes&fontSize=70)<br>
 ## 🎧 4 Tunes 🎧<br>
-### 작성 예정
+4tunes는  음악에 접근하기 어려웠던 사용자들에게 무료로 서비스를 제공하는 음악 플랫폼입니다.<br>
+우리 서비스를 통해 사용자들은 다양한 장르와 스타일의 음악을 발견하고 즐길 수 있습니다.<br>
+유사한 유료 서비스들과는 달리, 4tunes는 무료로 이용할 수 있어 접근성이 높아졌으며, 이를 통해 다양한 음악이 더 널리 알려질 수 있습니다.<br>
+우리의 목표는 모든 사람들에게 음악의 매력과 다양성을 알리는 것입니다.<br>
 ## 💻 Using Stack 💻<br>
 #### 🛠 FrameWork
 ![Spring Boot](https://img.shields.io/badge/SpringBoot-6DB33F.svg?&style=for-the-badge&logo=SpringBoot&logoColor=white)
