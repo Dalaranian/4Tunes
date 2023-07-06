@@ -1,9 +1,12 @@
 #main > h1 {
-  color: #d4adfc;
+  color: white;
   position: relative;
   top: 7%;
   left: 6%;
-  
+  margin-bottom: 10px;
+}
+#user-name{
+	color: #d4adfc;
 }
 #main-container {
   width: 80vw;
