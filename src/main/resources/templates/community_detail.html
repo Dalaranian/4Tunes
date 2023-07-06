@@ -194,22 +194,18 @@
 								<span th:text="${comment.commentContent}"></span>
 							</div>
 							<!-- 댓글 옵션 버튼 및 목록 추가 -->
-							<form
-								th:action="@{/community/delete/comment/{commentNo}(commentNo=${comment.commentNo})}"
-								method="post">
-								<button type="submit" class="comment-delete"
+							<form>
+								<button type="button" class="comment-delete"
 									id="comment-delete-btn-user"
-									th:if="${comment.user_name == session.login?.user_name}">
+									th:if="${comment.user_name == session.login?.user_name}" th:onclick="deleteComment([[${comment.commentNo}]])">
 									<img src="/resources/img/delete.png">
 								</button>
 							</form>
-							<form
-								th:action="@{/community/delete/comment/{commentNo}(commentNo=${comment.commentNo})}"
-								method="post">
-								<button type="submit" class="comment-delete"
-									id="comment-delete-btn-admin"
-									th:unless="${comment.user_name == session.login?.user_name}"
-									sec:authorize="hasAuthority('ADMIN')">
+							<form>
+								<button type="button" class="comment-delete"
+									id="comment-delete-btn-admin" th:unless="${comment.user_name == session.login?.user_name}" th:onclick="deleteComment([[${comment.commentNo}]])"
+									sec:authorize="hasAuthority('ADMIN')"
+								>
 									<img src="/resources/img/delete.png">
 								</button>
 							</form>
