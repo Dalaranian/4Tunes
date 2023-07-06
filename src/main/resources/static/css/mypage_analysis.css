@@ -16,6 +16,7 @@
 	color: white;
 	margin-left: 40px;
 	vertical-align: top;
+    min-height: 603px;
 }
 
 .mypage_nav ul {
@@ -43,7 +44,8 @@
 	height: 80%;
 	background-color: rgb(224, 224, 224);
 	margin-left: 10px;
-	min-width: 760px;
+	min-width: 800px;
+    min-height: 603px;
 }
 
 .mypage_contents>h1 {
@@ -61,6 +63,10 @@
 }
 
 /* ---------- 차트 내용 ----------*/
+.total-chart{
+	overflow-y: scroll;
+    height: 509px;
+}
 .pie-chart {
 	position: relative;
 	display: inline-block;
@@ -90,15 +96,14 @@
 #pie-chart1,
 #pie-chart2,
 #pie-chart3 {
-	top: 130px;
-	margin-left: 70px;
-    margin-right: 70px;
+	top: 60px;
+	margin: 20px 70px 0 70px;
 }
 
 .ratio1,
 .ratio2,
 .ratio3 {
-    margin-top: 275px;
+    margin-top: 257px;
 	margin-left: 70px;
     margin-right: 70px;
     text-align: center;
@@ -123,7 +128,7 @@
 		#F3BCC8, 0 0 40px #F3BCC8, 0 0 55px #F3BCC8, 0 0 75px #fff;
 }
 
-@media (max-width: 1140px) {
+@media (max-width: 1250px) {
   .mypage_nav {
     display: none;
   }
@@ -136,7 +141,7 @@
     margin-right: 100px;
   }
 }
-@media (max-width: 920px) {
+@media (max-width: 1050px) {
   #nav {
     display: none;
   }

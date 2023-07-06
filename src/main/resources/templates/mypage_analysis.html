@@ -107,7 +107,8 @@
 			</h1>
 
 			<div th:each="keywordStat : ${top3KeywordStats}"></div>
-
+			
+			<div class="total-chart">
 			<div class="pie-chart" id="pie-chart1">
 				<div class="keyword"
 					th:text="${top3KeywordStats[0].keyword}"></div>
@@ -128,7 +129,7 @@
 				<div class="ratio3"	
 					th:text="${top3KeywordStats[2].ratio + '%'}"></div>
 			</div>
-
+			</div>
 
 		</div>
 	</div>
