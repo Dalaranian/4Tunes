@@ -155,10 +155,19 @@ public class AnalysisApi {
 				// contentObject에서 "keyword" 문자열을 가져옴
 				String FinalKeyword = contentObject.getString("keyword");
 
-				// 추출된 키워드 반환
-				return FinalKeyword;
-			}
-			// 추출된 키워드가 없는 경우 "가요" 기본값을 반환
-			return "가요";
+				// 전체 키워드 배열 가져오기
+		        String[] keywords = keywordDao.getAllList();
+
+		        // 추출된 키워드가 전체 키워드 배열에 있는지 확인
+		        for (String keyword : keywords) {
+		            if (keyword.equals(FinalKeyword)) {
+		                // 추출된 키워드가 전체 키워드 배열에 존재하면 반환
+		                return FinalKeyword;
+		            }
+		        }
+		    }
+
+		    // 추출된 키워드가 없거나 전체 키워드 배열에 없는 경우 "가요"를 반환
+		    return "가요";
 	}
 }

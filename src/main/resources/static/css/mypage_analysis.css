@@ -1,0 +1,155 @@
+@charset "UTF-8";
+
+#main>h1 {
+	color: white;
+	margin-top: 40px;
+	margin-left: 40px;
+	height: 48px;
+}
+
+/* ---------- 네비게이션 ---------- */
+.mypage_nav {
+	display: inline-block;
+	width: 15%;
+	height: 80%;
+	background-color: #1D267D;
+	color: white;
+	margin-left: 40px;
+	vertical-align: top;
+}
+
+.mypage_nav ul {
+	padding: 0;
+	line-height: 375%;
+	/* 줄간격 조정 */
+}
+
+.mypage_nav ul li {
+	list-style: none;
+	font-size: 20px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.mypage_nav ul li:hover {
+	color: orange;
+	font-weight: bold;
+}
+
+/* ---------- 마이페이지 내용 ----------*/
+.mypage_contents {
+	display: inline-block;
+	width: 75%;
+	height: 80%;
+	background-color: rgb(224, 224, 224);
+	margin-left: 10px;
+	min-width: 760px;
+}
+
+.mypage_contents>h1 {
+	margin-left: 50px;
+	padding-top: 45px;
+}
+
+.mypage_contents h2 {
+	margin-left: 20px;
+	margin-bottom: 0px;
+	color: #5C469C;
+	min-width: 737px;
+	min-height: 36px;
+	padding-top: 15px;
+}
+
+/* ---------- 차트 내용 ----------*/
+.pie-chart {
+	position: relative;
+	display: inline-block;
+	width: 250px;
+	height: 250px;
+	border-radius: 50%;
+	transition: 0.8s;
+	border-width: 30px;
+	padding: 0px;
+}
+
+.keyword {
+	background: #fff;
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 100px;
+	font-size: 30px;
+	transform: translate(-50%, -50%);
+}
+
+#pie-chart1,
+#pie-chart2,
+#pie-chart3 {
+	top: 130px;
+	margin-left: 70px;
+    margin-right: 70px;
+}
+
+.ratio1,
+.ratio2,
+.ratio3 {
+    margin-top: 275px;
+	margin-left: 70px;
+    margin-right: 70px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+ /* color: #454545; */	
+}
+
+
+.ratio1 {
+	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #9376E0, 0 0 30px
+		#9376E0, 0 0 40px #9376E0, 0 0 55px #9376E0, 0 0 75px #fff;
+}
+
+.ratio2 {
+	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #E893CF, 0 0 30px
+		#E893CF, 0 0 40px #E893CF, 0 0 55px #E893CF, 0 0 75px #fff;
+}
+
+.ratio3 {
+	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #F3BCC8, 0 0 30px
+		#F3BCC8, 0 0 40px #F3BCC8, 0 0 55px #F3BCC8, 0 0 75px #fff;
+}
+
+@media (max-width: 1140px) {
+  .mypage_nav {
+    display: none;
+  }
+  .mypage_contents {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .mypage_kw_btn button {
+    margin-right: 100px;
+  }
+}
+@media (max-width: 920px) {
+  #nav {
+    display: none;
+  }
+  .mypage_nav {
+    display: none;
+  }
+  .mypage_contents {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #main {
+    width: 130vw;
+    background-color: #424242;
+  }
+}

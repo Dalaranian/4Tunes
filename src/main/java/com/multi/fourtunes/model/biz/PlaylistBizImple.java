@@ -83,7 +83,7 @@ public class PlaylistBizImple implements PlaylistBiz {
 				selectSong.setSongId(song.getSongId());
 				selectSong.setSongAlbumart(song.getSongAlbumArt());
 				
-
+				// AIKeyword 넣는 부분
 				// 저장하려는 노래의 정보 가져오기
 				String songInfo = song.getSongTitle() + "-" + song.getSongArtist();
 
