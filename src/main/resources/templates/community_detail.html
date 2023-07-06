@@ -82,6 +82,8 @@
 			}
 		});
 	});
+	
+		
 </script>
 
 </head>
@@ -132,7 +134,8 @@
 		<div class="detail">
 			<h1 class="detail-title" th:text="${community.boardTitle}"></h1>
 			<div class="detail-btns">
-				<button style="display: inline-block" id="update-btn" th:if="${session.login?.user_name == community.user_name}">
+				<button style="display: inline-block" id="update-btn"
+					th:if="${session.login?.user_name == community.user_name}">
 					<a
 						th:href="@{/community/update/{boardNo}(boardNo=${community.boardNo})}">수정하기</a>
 				</button>
@@ -149,7 +152,7 @@
 						th:action="@{/community/delete/{boardNo}(boardNo=${community.boardNo})}"
 						method="post" id="delete-form">삭제하기</form>
 				</button>
-			
+
 
 				<button style="display: inline-block" id="write-btn">
 					<a href="/community/write">글 작성</a>
@@ -157,17 +160,19 @@
 				<form
 					th:action="@{/community/report/{boardNo}(boardNo=${community.boardNo})}"
 					method="post" id="report-form">
-					<button style="display: inline-block" id="report-btn" type="submit" data-board-no="${community.boardNo}">
-						신고하기</button>
+					<button style="display: inline-block" id="report-btn" type="submit"
+						data-board-no="${community.boardNo}">신고하기</button>
 				</form>
 			</div>
 
 			<div class="detail-wrap">
 				<div class="detail-name">
-					<span>&nbsp;작성자 :&nbsp;</span><span th:text="${community.user_name}"></span>
+					<span>&nbsp;작성자 :&nbsp;</span><span
+						th:text="${community.user_name}"></span>
 				</div>
 				<div class="detail-count">
-					<span>&nbsp;조회수 :&nbsp;</span><span th:text="${community.boardViewCnt}"></span>
+					<span>&nbsp;조회수 :&nbsp;</span><span
+						th:text="${community.boardViewCnt}"></span>
 				</div>
 				<div class="detail-content">
 					<div class="content-box" type="text" id="content-input"
@@ -193,6 +198,7 @@
 								th:action="@{/community/delete/comment/{commentNo}(commentNo=${comment.commentNo})}"
 								method="post">
 								<button type="submit" class="comment-delete"
+									id="comment-delete-btn-user"
 									th:if="${comment.user_name == session.login?.user_name}">
 									<img src="/resources/img/delete.png">
 								</button>
@@ -201,15 +207,17 @@
 								th:action="@{/community/delete/comment/{commentNo}(commentNo=${comment.commentNo})}"
 								method="post">
 								<button type="submit" class="comment-delete"
+									id="comment-delete-btn-admin"
 									th:unless="${comment.user_name == session.login?.user_name}"
-                                    sec:authorize="hasAuthority('ADMIN')">
+									sec:authorize="hasAuthority('ADMIN')">
 									<img src="/resources/img/delete.png">
 								</button>
 							</form>
 							<form
 								th:action="@{/community/report/comment/{commentNo}(commentNo=${comment.commentNo})}"
 								method="post" id="report-comment-form">
-								<button type="submit" class="comment-report" id="report-comment-btn" data-comment-no="${comment.commentNo}">
+								<button type="submit" class="comment-report"
+									id="report-comment-btn" data-comment-no="${comment.commentNo}">
 									<img src="/resources/img/report.png">
 								</button>
 							</form>
@@ -227,7 +235,7 @@
 								placeholder="댓글을 입력해 주세요"></textarea>
 					</div>
 					<div class="comment-btn">
-							<input type="submit" value="작성 완료">
+						<input type="submit" value="작성 완료">
 						</form>
 					</div>
 
@@ -236,5 +244,4 @@
 		</div>
 		<script type="text/javascript" src="/resources/js/detail_delete.js"></script>
 </body>
-
 </html>
