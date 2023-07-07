@@ -119,7 +119,9 @@ h1{
     min-width:103px;
     min-height:30px;
 }
-
+.comment-btn>input{
+   cursor:pointer;
+}
 #cancel{
 	display: flex;
     align-items: center;
