@@ -36,7 +36,7 @@ public interface PlayListMapper {
     @Select("SELECT SONG.* FROM MANAGE_SONG " +
             "INNER JOIN SONG ON MANAGE_SONG.SONG_NO = SONG.SONG_NO " +
             "WHERE MANAGE_SONG.PLAYLIST_NO = #{playlistNo} " +
-            "ORDER BY RAND() LIMIT 1")
+            "ORDER BY MANAGE_SONG.SONG_NO DESC LIMIT 1")
     SongDto selectMostRecentSongAlbumArtInPlaylist(int playlistNo);
     
     @Results({
