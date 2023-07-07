@@ -96,7 +96,7 @@
 						id="mypage_grade" placeholder="회원 등급" th:value="${grade}" readonly>
 				</div>
 				<div class="mypage" th:if="${subscriptionEndDate != null}">
-    				<span class="mypage_title">구독 만료일</span>
+    				<span class="mypage_title">멤버쉽 만료일</span>
     				<input th:if="${subscriptionEndDate != null}" th:value="${subscriptionEndDate}" readonly>
 				</div>
 				<div th:if="${#session.getAttribute('login').user_grade eq 'FREE'}" class="mypage">

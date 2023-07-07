@@ -68,17 +68,7 @@ public class NavController {
 //			System.out.println(currentUser);
 			String userKeyword = loginBiz.getUserKeyword(currentUser.getUser_no());
 
-			// 결제 개월수 조회
-			int subscriptionMonth = loginBiz.getSubscriptionMonth(currentUser.getUser_no());
-			//System.out.println("month : " + subscriptionMonth);
-			if(subscriptionMonth == 0) {
-				model.addAttribute("subscriptionEndDate", null);
-			} else {
-				LocalDate payDate = loginBiz.getPayDate(currentUser.getUser_no());
-				LocalDate subscriptionEndDate = payDate.plusMonths(subscriptionMonth);
-				//System.out.println("만료날짜는: " + subscriptionEndDate);
-				model.addAttribute("subscriptionEndDate", subscriptionEndDate);
-			}
+			get(model, currentUser);
 
 			// 내 회원등급 조회
 		    String grade = adminpageBiz.selectGrade(currentUser.getUser_no());
@@ -89,6 +79,20 @@ public class NavController {
 		} else {
 			model.addAttribute("error", "로그인이 필요합니다.");
 			return "login_login";
+		}
+	}
+
+	private void get(Model model, UserDto currentUser) {
+		// 결제 개월수 조회
+		int subscriptionMonth = loginBiz.getSubscriptionMonth(currentUser.getUser_no());
+		//System.out.println("month : " + subscriptionMonth);
+		if(subscriptionMonth == 0) {
+			model.addAttribute("subscriptionEndDate", null);
+		} else {
+			LocalDate payDate = loginBiz.getPayDate(currentUser.getUser_no());
+			LocalDate subscriptionEndDate = payDate.plusMonths(subscriptionMonth);
+			//System.out.println("만료날짜는: " + subscriptionEndDate);
+			model.addAttribute("subscriptionEndDate", subscriptionEndDate);
 		}
 	}
 
