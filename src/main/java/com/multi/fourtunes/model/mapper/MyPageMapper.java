@@ -21,7 +21,7 @@ public interface MyPageMapper {
     @Select("SELECT u.USER_NO, b.BOARD_NO, b.BOARD_TITLE, b.BOARD_CONTENT,b.BOARD_WRITE_DATE, b.BOARD_VIEW_CNT " +
             " FROM COMMUNITY_BOARD b " +
             " JOIN USER u  ON u.USER_NO = b.USER_NO " +
-            " WHERE b.USER_NO = #{userNo} " )
+            " WHERE b.USER_NO = #{userNo} " + " ORDER BY BOARD_NO DESC " )
     List<CommunityDto> getUserMyContentAll(int userNo);
 
     // 내가 작성한 댓글
