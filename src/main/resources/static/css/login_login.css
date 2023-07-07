@@ -15,7 +15,7 @@ body {
 /* 기본틀 */
 .loginbox {
   position: absolute;
-  top: 50%;
+  top: 54%;
   left: 58.5%;
   transform: translate(-50%, -50%);
   width: 35vw;

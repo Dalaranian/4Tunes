@@ -180,19 +180,10 @@ public class LoginController {
 	@PostMapping("/verifyemailid")
 	@ResponseBody
 	public String verifyEmail(@RequestParam("joinEmail") String joinEmail) {
-//		String rowJsonString;
-//		if (loginBiz.isValidEmail(joinEmail)) {
-//			rowJsonString = "{\"status\": \"success\", \"message\": \"Email verification successful\"}";
-//		} else {
-//			rowJsonString = "{\"status\": \"error\", \"message\": \"Invalid email format\"}";
-//		}
-
 		if (loginBiz.isValidEmail(joinEmail)) {
 			return "{\"status\": \"success\", \"message\": \"Email verification successful\"}";
 		} else {
 			return "{\"status\": \"error\", \"message\": \"Invalid email format\"}";
 		}
-
-//		return ResponseEntity.ok().body(new JSONObject(rowJsonString));
 	}
 }

@@ -19,7 +19,7 @@ function verifyEmail() {
           alert("사용할 수 있는 Email 입니다. ")
         } else {
           console.log("Invalid email format");
-          alert("중복되었습니다");
+          alert("ID가 중복되었습니다.");
         }
       },
       error: function (xhr, status, error) {
