@@ -59,7 +59,7 @@
     width: 10%;
 }
 .title>a {
-    color: black;
+    color: black !important;
     font-size: 1.1rem;
 }
 .community_list .title:hover {
