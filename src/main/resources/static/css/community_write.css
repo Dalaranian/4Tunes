@@ -120,9 +120,13 @@ h1{
     margin-right: 0.6vw;
     min-width:103px;
     min-height:30px;
+    cursor:pointer;
 }
 .comment-btn>input{
    cursor:pointer;
+}
+#cancel{
+  cursor:pointer;
 }
 #cancel{
 	display: flex;
