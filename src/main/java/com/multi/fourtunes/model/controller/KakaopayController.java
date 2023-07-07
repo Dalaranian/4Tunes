@@ -51,19 +51,23 @@ public class KakaopayController {
 		model.addAttribute("info", approveDto);
 		
 		// PAY 테이블에 결제정보 저장
-		int userNo = ((UserDto)session.getAttribute("login")).getUser_no();
+//		int userNo = ((UserDto)session.getAttribute("login")).getUser_no();
+		UserDto current = (UserDto) session.getAttribute("login");
 		Date payDate = approveDto.getApproved_at();
 		String payPrice = approveDto.getAmount().getTotal() + "";
 		
 		PayDto insert = new PayDto();
-		insert.setUser_no(userNo);
+		insert.setUser_no(current.getUser_no());
 		insert.setPay_date(payDate);
 		insert.setPay_price(payPrice);
 		
 		if(kakaoPayBiz.insertPayInfo(insert) > 0) {
 			// USER 테이블에 USER_GRADE update
-			if(kakaoPayBiz.updateUserGrade(userNo) > 0) {
+			if(kakaoPayBiz.updateUserGrade(current.getUser_no()) > 0) {
 				System.out.println("UserGrade update 성공");
+				session.removeAttribute("login");
+				current.setUser_grade("PAID");
+				session.setAttribute("login", current);
 				return "redirect:/nav/mypage";
 			}
 		}
