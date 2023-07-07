@@ -192,6 +192,7 @@ body{
   white-space: normal;
   width: 230px;
   margin-right: 30px;
+  word-wrap: break-word;
 }
 
 .comment-delete,

@@ -1,8 +1,9 @@
 #main  h1 {
 	color: #d4adfc;
 	position: relative;
-	top: 7%;
-	left: 6%;
+	top: 6%;
+	left: 5%;
+	margin-bottom: 20px;
 }
 
 #main-container {
@@ -69,12 +70,12 @@
 
 .rank {
 	display: flex;
-	font-size: 28px;
+	font-size: 25px;
 	font-weight: bold;
 	color: #fff;
 	/* pink: #ff0080 */
 	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #a31acb, 0 0 30px
-		#a31acb, 0 0 40px #a31acb, 0 0 55px #a31acb, 0 0 75px #a31acb;
+		#a31acb, 0 0 40px #a31acb;
 }
 
 iframe {

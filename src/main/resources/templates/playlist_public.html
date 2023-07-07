@@ -53,7 +53,7 @@
 </div>
 
 <div id="main">
-    <h1><span th:text="${name}"></span> 님의 재생목록</h1>
+    <h1>[ <span id="user-name" th:text="${name}"></span> ] 님의 플레이리스트</h1>
     <!-- 재생목록이 추가될 경우 list_wrapper클래스 div를 복붙하게 할것 -->
     <div id="MyPlayList">
         <div th:each="song, iterStat : ${songs}" class="list_wrapper">

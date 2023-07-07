@@ -83,16 +83,16 @@ public class PlaylistBizImple implements PlaylistBiz {
 				selectSong.setSongId(song.getSongId());
 				selectSong.setSongAlbumart(song.getSongAlbumArt());
 				
-				// AIKeyword 넣는 부분
-				// 저장하려는 노래의 정보 가져오기
-				String songInfo = song.getSongTitle() + "-" + song.getSongArtist();
-
-				// AI 키워드 추출
-				List<String> AIKeyword = analysisApi.suggestedAIKeyword(new String[] { songInfo });
-				if (!AIKeyword.isEmpty()) {
-					// 첫 번째 추출된 키워드를 선택하여 저장
-					selectSong.setSongAikeyword(AIKeyword.get(0));
-				}
+//				// AIKeyword 넣는 부분
+//				// 저장하려는 노래의 정보 가져오기
+//				String songInfo = song.getSongTitle() + "-" + song.getSongArtist();
+//
+//				// AI 키워드 추출
+//				List<String> AIKeyword = analysisApi.suggestedAIKeyword(new String[] { songInfo });
+//				if (!AIKeyword.isEmpty()) {
+//					// 첫 번째 추출된 키워드를 선택하여 저장
+//					selectSong.setSongAikeyword(AIKeyword.get(0));
+//				}
 
 				// entity 저장
 				songRepository.save(selectSong);

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -112,7 +113,9 @@ public class OpenAiApi {
 			e.printStackTrace();
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
-		} 
+		} catch(HttpServerErrorException e) {
+			e.printStackTrace();
+		}
         
 		return result;
     }

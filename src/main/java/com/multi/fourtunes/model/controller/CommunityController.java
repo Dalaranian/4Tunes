@@ -139,7 +139,7 @@ public class CommunityController {
 	}
 
 	// 댓글 삭제
-	@PostMapping("/delete/comment/{commentNo}")
+	@GetMapping("/delete/comment/{commentNo}")
 	public String deleteComment(@PathVariable int commentNo, HttpSession session) {
 		// 세션에서 로그인된 사용자 정보를 가져옴
 		UserDto loginUser = (UserDto) session.getAttribute("login");

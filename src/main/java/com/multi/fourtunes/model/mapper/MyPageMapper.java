@@ -21,10 +21,10 @@ public interface MyPageMapper {
     @Select("SELECT u.USER_NO, b.BOARD_NO, b.BOARD_TITLE, b.BOARD_CONTENT,b.BOARD_WRITE_DATE, b.BOARD_VIEW_CNT " +
             " FROM COMMUNITY_BOARD b " +
             " JOIN USER u  ON u.USER_NO = b.USER_NO " +
-            " WHERE b.USER_NO = #{userNo} " )
+            " WHERE b.USER_NO = #{userNo} " + " ORDER BY BOARD_NO DESC " )
     List<CommunityDto> getUserMyContentAll(int userNo);
 
-    // 내가 작성할 댓글
+    // 내가 작성한 댓글
     @Results({@Result(property = "commentNo", column = "COMMENT_NO"),
             @Result(property = "boardNo", column = "BOARD_NO"),
             @Result(property = "boardTitle", column = "BOARD_TITLE"),
@@ -34,6 +34,6 @@ public interface MyPageMapper {
             @Result(property = "user_name", column = "USER_NAME")})
     @Select(" SELECT b.USER_NO, c.BOARD_NO, b.BOARD_TITLE, c.COMMENT_CONTENT " +
             " FROM COMMENT c JOIN COMMUNITY_BOARD b ON b.BOARD_NO = c.BOARD_NO " +
-            " WHERE c.USER_NO = #{userNo} ")
+            " WHERE c.USER_NO = #{userNo} "+" ORDER BY COMMENT_NO DESC")
     List<CommentDto> getComments(int userNo);
 }

@@ -80,6 +80,9 @@ public class LoginController {
 
 			String[] keywordList = loginBiz.getKeyword();
 			model.addAttribute("keywordlist", keywordList);
+			List<KeywordChartDto> keywordCounts = keywordChartBiz.getKeywordChart();
+		    model.addAttribute("keywordCounts", keywordCounts);
+		    
 			return "login_socialjoin";
 		}
 	}
@@ -94,7 +97,7 @@ public class LoginController {
 	public String join(Model model) {
 		String[] keywordList = loginBiz.getKeyword();
 		model.addAttribute("keywordlist", keywordList);
-		 List<KeywordChartDto> keywordCounts = keywordChartBiz.getKeywordChart();
+		List<KeywordChartDto> keywordCounts = keywordChartBiz.getKeywordChart();
 	    model.addAttribute("keywordCounts", keywordCounts);
 		return "login_join";
 	}
@@ -177,19 +180,10 @@ public class LoginController {
 	@PostMapping("/verifyemailid")
 	@ResponseBody
 	public String verifyEmail(@RequestParam("joinEmail") String joinEmail) {
-//		String rowJsonString;
-//		if (loginBiz.isValidEmail(joinEmail)) {
-//			rowJsonString = "{\"status\": \"success\", \"message\": \"Email verification successful\"}";
-//		} else {
-//			rowJsonString = "{\"status\": \"error\", \"message\": \"Invalid email format\"}";
-//		}
-
 		if (loginBiz.isValidEmail(joinEmail)) {
 			return "{\"status\": \"success\", \"message\": \"Email verification successful\"}";
 		} else {
 			return "{\"status\": \"error\", \"message\": \"Invalid email format\"}";
 		}
-
-//		return ResponseEntity.ok().body(new JSONObject(rowJsonString));
 	}
 }
