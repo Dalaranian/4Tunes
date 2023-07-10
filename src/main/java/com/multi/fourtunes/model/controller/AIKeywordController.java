@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.fourtunes.model.jpa.entity.SongEntity;
 import com.multi.fourtunes.model.jpa.repository.SongRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping("/AIkeyword")
 public class AIKeywordController {
@@ -63,7 +65,7 @@ public class AIKeywordController {
                 
             }
             // 하얀 화면, 콘솔창에 메시지 뜨면 성공
-            System.out.println("JSON 데이터가 성공적으로 insert 되었습니다.");
+            log.info("JSON 데이터가 성공적으로 insert 되었습니다.");
         } catch (IOException e) {
             e.printStackTrace();
         }

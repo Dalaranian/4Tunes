@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.multi.fourtunes.model.jpa.entity.UserEntity;
 import com.multi.fourtunes.model.jpa.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,7 @@ import com.multi.fourtunes.model.dto.CommunityDto;
 import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.dto.UserDto;
 
+@Slf4j
 @Controller
 @RequestMapping("/nav")
 public class NavController {
@@ -65,7 +67,7 @@ public class NavController {
 			String[] keywordList = loginBiz.getKeyword();
 			UserDto currentUser = (UserDto) session.getAttribute("login");
 			currentUser.setUser_suggestcount(userRepository.findByUserId(currentUser.getUser_id()).getUserSuggestCount());
-//			System.out.println(currentUser);
+//			log.info(currentUser);
 			String userKeyword = loginBiz.getUserKeyword(currentUser.getUser_no());
 
 			get(model, currentUser);
@@ -85,13 +87,13 @@ public class NavController {
 	private void get(Model model, UserDto currentUser) {
 		// 결제 개월수 조회
 		int subscriptionMonth = loginBiz.getSubscriptionMonth(currentUser.getUser_no());
-		//System.out.println("month : " + subscriptionMonth);
+		//log.info("month : " + subscriptionMonth);
 		if(subscriptionMonth == 0) {
 			model.addAttribute("subscriptionEndDate", null);
 		} else {
 			LocalDate payDate = loginBiz.getPayDate(currentUser.getUser_no());
 			LocalDate subscriptionEndDate = payDate.plusMonths(subscriptionMonth);
-			//System.out.println("만료날짜는: " + subscriptionEndDate);
+			//log.info("만료날짜는: " + subscriptionEndDate);
 			model.addAttribute("subscriptionEndDate", subscriptionEndDate);
 		}
 	}

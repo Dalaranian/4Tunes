@@ -3,6 +3,7 @@ package com.multi.fourtunes.model.security;
 import com.multi.fourtunes.model.dto.UserDto;
 import com.multi.fourtunes.model.jpa.entity.UserEntity;
 import com.multi.fourtunes.model.jpa.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+@Slf4j
 @Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
@@ -33,13 +35,13 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-//        System.out.println(userDetails);
+//        log.info(userDetails);
 
         UserEntity user = userRepository.findByUserId(userDetails.getUsername());
 
         UserDto dto = new UserDto(user.getUserNo(), user.getUserId(), user.getUserName(), "", user.getUserGrade(), user.getUserSuggestCount());
 
-//        System.out.println(dto);
+//        log.info(dto);
 
         HttpSession session = request.getSession();
         session.setAttribute("login", dto);

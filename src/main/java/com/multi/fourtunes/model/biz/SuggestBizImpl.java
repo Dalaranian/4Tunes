@@ -3,6 +3,7 @@ package com.multi.fourtunes.model.biz;
 import java.util.ArrayList;
 
 import com.multi.fourtunes.model.dao.UserDao;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import com.multi.fourtunes.model.jpa.entity.SongEntity;
 import com.multi.fourtunes.model.jpa.repository.SongRepository;
 import org.springframework.web.client.HttpClientErrorException;
 
+@Slf4j
 @Service
 public class SuggestBizImpl implements SuggestBiz {
 
@@ -52,12 +54,11 @@ public class SuggestBizImpl implements SuggestBiz {
 			
 			// ManiaDB를 통해 검색 결과 10개가 담겨있는 searchResult를 받아옴
 			ArrayList<SongDto> searchResult = mania.search();
-//			System.out.println("검색 결과: " + searchResult);
+//			log.info("검색 결과: " + searchResult);
 
 			
 			for (SongDto res : searchResult) {
 				// 검색 결과 10개를 하나씩 꺼내어, DB에 이미 저장되어있는 노래인지 확인 과정 거침 (JPA 활용)
-				System.out.println(res);
 				SongEntity songEntitiy = songRepository.findBySongId(res.getSongId());
 				if(songEntitiy != null && res.getSongArtist().replace(" ", "").toUpperCase().contains(suggest.getSongArtist().toUpperCase())) {  // DB에 이미 있는 노래이면, DB에 저장되어있는 youtubeLink 저장
 					res.setSongLink(songEntitiy.getSongLink());
@@ -80,13 +81,13 @@ public class SuggestBizImpl implements SuggestBiz {
 
 			try {
 				// 한 노래에 대해 여러 검색결과가 있는 경우, 첫번째 검색결과만 finalRes에 저장
-				//System.out.println("걸러진 친구들 은 \n"+filterRes);
+				//log.info("걸러진 친구들 은 \n"+filterRes);
 				finalRes.add(filterRes.get(0));
 			} catch (java.lang.IndexOutOfBoundsException e) {
-//				System.out.println(suggest.getSongTitle() + "에 관한 결과 없음");
+//				log.info(suggest.getSongTitle() + "에 관한 결과 없음");
 				continue;
 			}
-//			System.out.println("**최종 결과: " + finalRes);
+//			log.info("**최종 결과: " + finalRes);
 		}
 		return finalRes;
 	}

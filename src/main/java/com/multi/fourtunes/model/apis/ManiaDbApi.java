@@ -3,6 +3,7 @@ package com.multi.fourtunes.model.apis;
 import java.util.ArrayList;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.http.HttpMethod;
@@ -15,6 +16,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.fourtunes.model.dto.SongDto;
 
+@Slf4j
 @Component
 public class ManiaDbApi {
 
@@ -70,7 +72,7 @@ public class ManiaDbApi {
 
 			// set 된 데이터를 포장하여 REST URL 형식으로 변환
 			String restURL = MakeURL();
-//			System.out.println("요청 URL : " + restURL);
+//			log.info("요청 URL : " + restURL);
 
 			// ManiaDB 에 API 요청 후 값 받기
 			restTemplate = new RestTemplate();
@@ -91,7 +93,7 @@ public class ManiaDbApi {
 		// XML 을 JSON 으로 파싱
 		JSONObject jsonObject = XML.toJSONObject(responseBodyByXML);
 
-//		System.out.println("불러온 JSON : " + jsonObject.toString());
+//		log.info("불러온 JSON : " + jsonObject.toString());
 
 		try {
 			ObjectMapper objectMapper = new ObjectMapper();
@@ -104,23 +106,23 @@ public class ManiaDbApi {
 				JsonNode channelNode = rssNode.get("channel");
 				itemArrayNode = channelNode.get("item");
 			} catch (JsonProcessingException e) {
-				System.out.println("파싱 오류");
+				log.info("파싱 오류");
 				return null;
 			}
 
-//			System.out.println(itemArrayNode);
+//			log.info(itemArrayNode);
 
 			// 데이터 꺼내서 DTO에 포장 후 List 에 넣기
 			for (JsonNode itemNode : itemArrayNode) {
-//				System.out.println(itemNode.toString());
+//				log.info(itemNode.toString());
 				String title = itemNode.get("title").asText().replaceAll("&nbsp;", " ");
 				String name = itemNode.get("maniadb:artist").get("name").asText();
 				String id = itemNode.get("id").asText();
 				String albumArt = itemNode.get("maniadb:album").get("image").asText();
 
-//				System.out.println("Title: " + title);
-//				System.out.println("Name: " + name);
-//				System.out.println("Link " + link);
+//				log.info("Title: " + title);
+//				log.info("Name: " + name);
+//				log.info("Link " + link);
 
 				// SongDto 생성후 값 Set
 				SongDto currentMusic = new SongDto();
@@ -131,7 +133,7 @@ public class ManiaDbApi {
 
 				// 다 불러온 친구를 저장
 				result.add(currentMusic);
-//				System.out.println("----------------");
+//				log.info("----------------");
 
 			}
 		} catch (Exception e) {

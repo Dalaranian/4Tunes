@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ import com.multi.fourtunes.model.dto.CommunityDto;
 import com.multi.fourtunes.model.dto.CommunityReportDto;
 import com.multi.fourtunes.model.dto.UserDto;
 
+@Slf4j
 @Controller
 @RequestMapping("/community")
 public class CommunityController {
@@ -53,7 +55,7 @@ public class CommunityController {
 
 	@RequestMapping("/write")
 	public String communityWrite(HttpSession session) {
-		System.out.println("Session Contents: " + session.getAttribute("login"));
+		log.info("Session Contents: " + session.getAttribute("login"));
 		return "community_write";
 	}
 

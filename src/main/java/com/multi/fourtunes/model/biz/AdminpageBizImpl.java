@@ -3,6 +3,7 @@ package com.multi.fourtunes.model.biz;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
@@ -25,6 +26,7 @@ import com.multi.fourtunes.model.dto.UserDto;
 import com.multi.fourtunes.model.jpa.entity.SongEntity;
 import com.multi.fourtunes.model.jpa.repository.SongRepository;
 
+@Slf4j
 @Service
 public class AdminpageBizImpl implements AdminpageBiz{
 
@@ -115,7 +117,7 @@ public class AdminpageBizImpl implements AdminpageBiz{
 		for(SongDto res : searchResult) {
 			// 검색 결과 10개를 하나씩 꺼내어, DB에 이미 저장되어있는 노래인지 확인 과정 거침 (JPA 활용)
 			SongEntity songEntitiy = songRepository.findBySongId(res.getSongId());
-			System.out.println("songEntity: " + songEntitiy);
+			log.info("songEntity: " + songEntitiy);
 			
 			// DB에 이미 있는 노래이면, DB에 저장되어있는 youtubeLink 저장
 			if(songEntitiy != null) {  
@@ -137,12 +139,12 @@ public class AdminpageBizImpl implements AdminpageBiz{
 		
 		try {
 			// 한 노래에 대해 여러 검색결과가 있는 경우, 첫번째 검색결과만 finalRes에 저장
-			//System.out.println("걸러진 친구들 은 \n"+filterRes);
+			//log.info("걸러진 친구들 은 \n"+filterRes);
 			//finalRes.add(filterRes.get(0));
 		} catch (java.lang.IndexOutOfBoundsException e) {
-			System.out.println(title + "에 관한 결과 없음");
+			log.info(title + "에 관한 결과 없음");
 		}
-		System.out.println("**최종 결과: " + filterRes);
+		log.info("**최종 결과: " + filterRes);
 		return filterRes;
 	}
 

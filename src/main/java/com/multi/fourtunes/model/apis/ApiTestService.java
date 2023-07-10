@@ -2,9 +2,11 @@ package com.multi.fourtunes.model.apis;
 
 import com.multi.fourtunes.model.jpa.entity.SongEntity;
 import com.multi.fourtunes.model.jpa.repository.SongRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class ApiTestService {
     private final SongRepository songRepository;
@@ -15,12 +17,12 @@ public class ApiTestService {
     }
 
     public void saveSongEntitiy(SongEntity entity) {
-        System.out.println("service : " + entity.toString());
+        log.info("service : " + entity.toString());
 
         try {
             songRepository.save(entity);
         } catch (Exception e) {
-            System.out.println("Duplicate Insert : " + entity);
+            log.info("Duplicate Insert : " + entity);
         }
     }
 }

@@ -2,6 +2,7 @@ package com.multi.fourtunes.model.dao;
 
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,7 @@ import com.multi.fourtunes.model.dto.CommunityDto;
 import com.multi.fourtunes.model.dto.CommunityReportDto;
 import com.multi.fourtunes.model.mapper.CommunityMapper;
 
+@Slf4j
 @Repository
 public class CommunityDaoImpl implements CommunityDao {
 
@@ -21,7 +23,7 @@ public class CommunityDaoImpl implements CommunityDao {
 	public List<CommunityDto> getAll() {
 		// List<CommunityDto> temp = communityMapper.getAll();
 		// for (CommunityDto dto : temp) {
-		// System.out.println(dto.toString());
+		// log.info(dto.toString());
 		// }
 		return communityMapper.getAll();
 	}

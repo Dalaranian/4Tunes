@@ -45,7 +45,7 @@ public class KakaopayController {
 	public String kakaoPaySuccess(@RequestParam("pg_token") String pg_token, HttpSession session, Model model) {
 		log.info("pg_token : " + pg_token);
 		String tid = (String)session.getAttribute("tid");
-		System.out.println(tid);
+		log.info(tid);
 		
 		ApproveDto approveDto = kakaoPayBiz.payApprove(tid, pg_token);
 		model.addAttribute("info", approveDto);
@@ -64,7 +64,7 @@ public class KakaopayController {
 		if(kakaoPayBiz.insertPayInfo(insert) > 0) {
 			// USER 테이블에 USER_GRADE update
 			if(kakaoPayBiz.updateUserGrade(current.getUser_no()) > 0) {
-				System.out.println("UserGrade update 성공");
+				log.info("UserGrade update 성공");
 				session.removeAttribute("login");
 				current.setUser_grade("PAID");
 				session.setAttribute("login", current);

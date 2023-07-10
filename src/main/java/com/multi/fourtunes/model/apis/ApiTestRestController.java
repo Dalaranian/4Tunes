@@ -3,6 +3,7 @@ package com.multi.fourtunes.model.apis;
 import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.jpa.entity.SongEntity;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api")
 public class ApiTestRestController {
@@ -45,7 +47,7 @@ public class ApiTestRestController {
             song.setSongTitle(res.getSongTitle());
             song.setSongLink("temp");
             song.setSongId(res.getSongId());
-            System.out.println(song.toString());
+            log.info(song.toString());
 
             service.saveSongEntitiy(song);
         }
@@ -58,7 +60,7 @@ public class ApiTestRestController {
     @GetMapping("/gpt")
     public ResponseEntity<String> openAi(String[] keyword){
 
-        System.out.println(Arrays.toString(keyword));
+        log.info(Arrays.toString(keyword));
 
         //openAiApi.suggestedSong(new String[] {"kpop"});
 
