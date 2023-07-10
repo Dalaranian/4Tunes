@@ -30,9 +30,9 @@ public class KakaoPayBizImpl implements KakaoPayBiz{
 		params.add("quantity", "1");
 		params.add("total_amount", "990");
 		params.add("tax_free_amount", "0");
-		params.add("approval_url", "http://ec2-52-78-2-172.ap-northeast-2.compute.amazonaws.com/jq/success");
-		params.add("cancel_url", "http://ec2-52-78-2-172.ap-northeast-2.compute.amazonaws.com/nav/membership");
-		params.add("fail_url", "http://ec2-52-78-2-172.ap-northeast-2.compute.amazonaws.com/nav/membership");
+		params.add("approval_url", "http://-52-78-2-172.ap-northeast-2.compute.amazonaws.com:8787/jq/success");
+		params.add("cancel_url", "http://ec2-52-78-2-172.ap-northeast-2.compute.amazonaws.com:8787/nav/membership");
+		params.add("fail_url", "http://ec2-52-78-2-172.ap-northeast-2.compute.amazonaws.com:8787/nav/membership");
 		
 		HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, this.getHeaders());
 		
