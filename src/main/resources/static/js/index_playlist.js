@@ -23,7 +23,7 @@ $(document).ready(function () {
           )
           .append(img);
 
-        playlistDiv.append($("<div></div>").append(a).append(anchorWithImage));
+        playlistDiv.append($("<div></div>").append(anchorWithImage).append(a));
 
         playlistsDiv.append(playlistDiv);
       });

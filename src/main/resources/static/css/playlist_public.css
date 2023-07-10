@@ -2,7 +2,7 @@
   color: white;
   position: relative;
   top: 7%;
-  left: 6%;
+  left: 65px;
   margin-bottom: 10px;
 }
 #user-name{
@@ -33,7 +33,7 @@
   width: fit-content;
   position: relative;
   top: 10%;
-  left: 6%;
+  left: 65px;
   display: flex;
   flex-wrap: wrap;
 }
@@ -101,28 +101,29 @@ h3 {
    	overflow: hidden;
     text-overflow: ellipsis;
 }
-@media (max-width: 1160px) {
+@media (max-width: 1200px) {
   #nav {
     display: none !important;
   }
   #main {
     width: 110vw !important;
-    background-color: #424242 !important;
     overflow-x: scroll !important;
-  }
+  }	
   #main div > h1 {
     margin-left: 55.8px;
   }
   #MyPlayList {
     margin-top: 10px;
+    width:1200px;
   }
   #video {
     display: block;
     margin-bottom: 0;
+    width:400px;
   }
   .video-container {
-    min-width: 340px;
-    min-height: 140px;
+    min-width: 400px;
+    min-height: 124px;
   }
   #buttons {
     position: relative;
@@ -131,6 +132,12 @@ h3 {
     min-width: 90px;
     min-height: 28px;
     margin-bottom: 35px;
+  }
+  .list_wrapper{
+  width: 460px;
+  }
+  #context{
+  width:400px;
   }
 }
 
