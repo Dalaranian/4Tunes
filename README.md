@@ -30,6 +30,7 @@
 ## 💻 Will Be Used 💻<br>
 ![TypeScript](https://img.shields.io/badge/typescript-61DAFB.svg?&style=for-the-badge&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/react-3178C6.svg?&style=for-the-badge&logo=react&logoColor=white)
+![docker](https://img.shields.io/badge/docker-2496ED.svg?&style=for-the-badge&logo=docker&logoColor=white)
 <br>
 ## 👨🏻‍💻 Contributors 👩🏻‍💻<br>
 <table border="1" class="table">
