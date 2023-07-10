@@ -196,6 +196,9 @@ body {
   float: right;
   border-radius: 5px 5px;
 }
+.i:hover{
+  cursor:pointer;
+}
 .chart-back {
   display: none;
   width: 35vw;
