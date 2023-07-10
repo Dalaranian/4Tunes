@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +31,7 @@ import com.multi.fourtunes.model.jpa.entity.SongEntity;
 import com.multi.fourtunes.model.jpa.repository.SongRepository;
 import com.multi.fourtunes.model.mapper.PlayListMapper;
 
+@Slf4j
 @Component
 public class AnalysisApi {
 	@Autowired
@@ -84,12 +86,12 @@ public class AnalysisApi {
 			// API 응답이 성공적으로 수신된 경우
 			if (responseEntity.getStatusCode().is2xxSuccessful()) {
 				// API 응답을 콘솔에 출력
-				System.out.println("API Response: " + responseEntity.getBody());
+				log.info("API Response: " + responseEntity.getBody());
 
 				// API 응답에서 키워드 추출
 				String Finalkeyword = AIKeywordFromJson(responseEntity);
 				// 추출된 키워드를 콘솔에 출력
-				System.out.println("Keyword: " + Finalkeyword);
+				log.info("Keyword: " + Finalkeyword);
 				// 추출된 키워드를 리스트에 추가
 				AIKeyword.add(Finalkeyword);
 					
@@ -126,7 +128,7 @@ public class AnalysisApi {
 		content.add("<keyword: " + String.join(", ", keywords) + ">");
 		content.add("중에서 어떤 keyword에 제일 유사한지 keyword 하나만 json 형식으로 반환해줘.");
 
-		System.out.println(content.toString());
+		log.info(content.toString());
 		// content 문자열 반환
 		return content.toString();
 	}

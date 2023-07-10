@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.fourtunes.model.dto.SongDto;
 
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,6 +22,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Component
 public class OpenAiApi {
 
@@ -64,7 +66,7 @@ public class OpenAiApi {
         // 위에서 만든 messageMap 을 requestBody에 넣음
         // Arrays.asList() -> 배열을 리스트로 만들어주는 역할
         requestBody.put("messages", Arrays.asList(messagesMap));
-        System.out.println("messages : " + Arrays.asList(messagesMap).toString());
+        log.info("messages : " + Arrays.asList(messagesMap).toString());
 
         // OpenAI 자연어 처리 모델을 지정
         // gpt-3.5-turbo 가 가장 가성비 좋음
@@ -128,7 +130,7 @@ public class OpenAiApi {
 		try {
 			// ResponseEntity의 Body 추출
 			JSONObject responseBody = new JSONObject(responseEntity.getBody());
-			System.out.println("응답: " + responseBody);
+			log.info("응답: " + responseBody);
 			
 			// responseBody에서 노래 제목과 가수만 추출하는 파싱 작업
 			// ObjectMapper : JSON을 JAVA객체로 역직렬화하는 Jackson의 클래스

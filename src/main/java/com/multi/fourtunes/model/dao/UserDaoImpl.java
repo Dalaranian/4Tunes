@@ -3,6 +3,7 @@ package com.multi.fourtunes.model.dao;
 import java.util.List;
 
 import com.multi.fourtunes.model.mapper.RoleManagerMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +11,7 @@ import com.multi.fourtunes.model.dto.UserDto;
 import com.multi.fourtunes.model.mapper.KeywordMapper;
 import com.multi.fourtunes.model.mapper.UserMapper;
 
+@Slf4j
 @Repository
 public class UserDaoImpl implements UserDao {
 
@@ -86,7 +88,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void addSuggestCount(Integer userNo, int count) {
-//		System.out.println(userNo + " " + count);
+//		log.info(userNo + " " + count);
 		userMapper.addSuggestCount(userNo, count);
 	}
 

@@ -1,6 +1,7 @@
 package com.multi.fourtunes.model.apis;
 
 import com.multi.fourtunes.model.dto.SongDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
  * @author 조장
  *	API 테스트를 위한 임시 컨트롤러입니다. 
  */
+@Slf4j
 @Controller
 public class ApiTestController {
 	@Autowired
@@ -26,13 +28,13 @@ public class ApiTestController {
 
 	@GetMapping("/ManiaDB")
 	public String test1(String query) {
-//		System.out.println(query);
+//		log.info(query);
 
 		mania.setPrompt(query);
 		mania.setType(false);
 		ArrayList<SongDto> dtos = mania.search();
 		for (SongDto current:dtos){
-			System.out.println(current);
+			log.info(current.toString());
 		}
 
 		ArrayList<SongDto> result = mania.search();
@@ -40,7 +42,7 @@ public class ApiTestController {
 				.setSongLink(youtube.embedLinkGetter(currentSong.getSongArtist(), currentSong.getSongTitle())));
 
 		for(SongDto dto:result){
-			System.out.println(dto.toString());
+			log.info(dto.toString());
 		}
 
 		return "apitestpage";
@@ -49,13 +51,13 @@ public class ApiTestController {
 	@GetMapping("/YoutubeData")
 	public String test2(String singer, String title) {
 		
-		System.out.println("YouTubeController 진입");
+		log.info("YouTubeController 진입");
 		
 //		YoutubeApi getLink = new YoutubeApi();
 		
 		String link = youtube.embedLinkGetter(singer, title);
 		
-		System.out.println(link);
+		log.info(link);
 		
 		return "apitestpage";
 	}

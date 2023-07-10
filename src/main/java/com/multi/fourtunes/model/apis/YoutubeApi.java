@@ -1,5 +1,6 @@
 package com.multi.fourtunes.model.apis;
 
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
@@ -19,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+@Slf4j
 @Component
 public class YoutubeApi {
 
@@ -103,17 +105,17 @@ public class YoutubeApi {
 		JsonNode rootNode;
 		try {
 			rootNode = objMapper.readTree(response.toString());
-//			System.out.println(rootNode.toPrettyString());
-//			System.out.println("-------------------------------------");
+//			log.info(rootNode.toPrettyString());
+//			log.info("-------------------------------------");
 			JsonNode itemsNode = rootNode.get("items");
-//			System.out.println(itemsNode.toPrettyString());
-//			System.out.println("-------------------------------------");
+//			log.info(itemsNode.toPrettyString());
+//			log.info("-------------------------------------");
 			JsonNode targetNode = itemsNode.get(0);
-//			System.out.println(targetNode.toPrettyString());
-//			System.out.println("-------------------------------------");
+//			log.info(targetNode.toPrettyString());
+//			log.info("-------------------------------------");
 			JsonNode targetIdNode = targetNode.get("id");
-//			System.out.println(targetIdNode.toPrettyString());
-//			System.out.println("-------------------------------------");
+//			log.info(targetIdNode.toPrettyString());
+//			log.info("-------------------------------------");
 			String id = targetIdNode.get("videoId").asText();
 
 			return id;

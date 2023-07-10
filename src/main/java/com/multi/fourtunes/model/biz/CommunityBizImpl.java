@@ -2,6 +2,7 @@ package com.multi.fourtunes.model.biz;
 
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import com.multi.fourtunes.model.dto.CommentReportDto;
 import com.multi.fourtunes.model.dto.CommunityDto;
 import com.multi.fourtunes.model.dto.CommunityReportDto;
 
+@Slf4j
 @Service
 public class CommunityBizImpl implements CommunityBiz {
 
@@ -21,7 +23,7 @@ public class CommunityBizImpl implements CommunityBiz {
 	@Override
 	@Transactional
 	public List<CommunityDto> getAll() {
-		// System.out.println("Biz getAll 진입");
+		// log.info("Biz getAll 진입");
 		return communityDao.getAll();
 	}
 

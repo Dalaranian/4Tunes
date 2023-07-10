@@ -3,6 +3,7 @@ package com.multi.fourtunes.model.biz;
 import com.multi.fourtunes.model.dao.RoleManageDao;
 import com.multi.fourtunes.model.jpa.entity.UserEntity;
 import com.multi.fourtunes.model.jpa.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import com.multi.fourtunes.model.dto.UserDto;
 import java.time.LocalDate;
 import java.util.Date;
 
+@Slf4j
 @Service
 public class LoginBizImple implements LoginBiz {
 
@@ -39,7 +41,7 @@ public class LoginBizImple implements LoginBiz {
 
 	@Override
 	public boolean checkUserExist(String email, String userId) {
-		System.out.println("email : " + email + "\nuserId : " + userId);
+		log.info("email : " + email + "\nuserId : " + userId);
 		UserDto userDTO = userDao.selectUserByEmailAndId(email, userId);
 
 		return (userDTO != null) ? true : false;
@@ -107,7 +109,7 @@ public class LoginBizImple implements LoginBiz {
 		UserEntity checkUserEntitiy = userRepository.findByUserId(joinEmail);
 
 		try {
-			System.out.println("isValidEmail : " + checkUserEntitiy.toString());
+			log.info("isValidEmail : " + checkUserEntitiy.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

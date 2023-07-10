@@ -6,6 +6,7 @@ import com.multi.fourtunes.model.biz.MyPageBiz;
 import com.multi.fourtunes.model.dto.AnalysisKeywordDto;
 import com.multi.fourtunes.model.biz.PlaylistBiz;
 import com.multi.fourtunes.model.dto.CommentDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +41,7 @@ import com.multi.fourtunes.model.mapper.KeywordMapper;
 
 // 프론트 작성의 편의를 위한 임시 페이징 클래스입니다. 
 
+@Slf4j
 @Controller
 @RequestMapping("/innerpaging")
 public class InnerPagingController {
@@ -80,7 +82,7 @@ public class InnerPagingController {
 	public String gotoMyPageUser(Model model, HttpSession session) {
 	    String[] keywordList = loginBiz.getKeyword();
 	    UserDto currentUser = (UserDto) session.getAttribute("login");
-	    System.out.println(currentUser.getUser_no());
+	    log.info(currentUser.getUser_no() + "");
 	    Date subscriptionEndDate = loginBiz.getSubscriptionEndDate(currentUser.getUser_no());
 	    String userKeyword = loginBiz.getUserKeyword(currentUser.getUser_no());
 	    StringBuilder myKeyword = new StringBuilder();
@@ -101,7 +103,7 @@ public class InnerPagingController {
 		UserDto currentUser = (UserDto) session.getAttribute("login");
 		List<CommunityDto> communityContent = myPageBiz.getUserMyContentAll(currentUser.getUser_no());
 		List<CommentDto> communityComment = myPageBiz.getComments(currentUser.getUser_no());
-		System.out.println(communityComment);
+		log.info(communityComment.toString());
 		model.addAttribute("communityComment", communityComment);
 		model.addAttribute("communityContent", communityContent);
 		return "mypage_community";
@@ -120,7 +122,7 @@ public class InnerPagingController {
 	    UserDto currentUser = (UserDto) session.getAttribute("login");	
 	    String userNo=Integer.toString(currentUser.getUser_no());
 	    List<SongDto> songs = playlist.getPlayListSongs(userNo);
-	    System.out.println(songs);
+	    log.info(songs.toString());
 	    model.addAttribute("songs",songs);
 		return "mypage_continuous_play";
 	}

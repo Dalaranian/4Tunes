@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.fourtunes.model.dao.SongDao;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,7 @@ import com.multi.fourtunes.model.mapper.UserMapper;
 
 import javax.servlet.http.HttpSession;
 
+@Slf4j
 @Service
 public class PlaylistBizImple implements PlaylistBiz {
 
@@ -64,7 +66,7 @@ public class PlaylistBizImple implements PlaylistBiz {
 	public String insertPlaylist(SongDto song, UserDto user) {
 		String result;
 
-		// System.out.println(song + "\n" + user);
+		// log.info(song + "\n" + user);
 
 		// 추가하려는 노래가 DB 에 존재하는지 확인
 		// SongDto selectSong = songDao.SelectSongById(song.getSongId());
@@ -198,7 +200,7 @@ public class PlaylistBizImple implements PlaylistBiz {
     @Override
     public String visibilityManage(UserDto currentLogin, boolean request) {
 
-        System.out.println(currentLogin + "\n" + request);
+        log.info(currentLogin + "\n" + request);
 
         String res = "";
 
@@ -248,9 +250,9 @@ public class PlaylistBizImple implements PlaylistBiz {
             userNoList.add(userNo.asInt());
         }
 
-//        System.out.println("Page Number: " + pageNo);
-//        System.out.println("Page Size: " + pageSize);
-//        System.out.println("User Number List: " + userNoList);
+//        log.info("Page Number: " + pageNo);
+//        log.info("Page Size: " + pageSize);
+//        log.info("User Number List: " + userNoList);
 
         // return 할 Dtos 생성
         List<SongDto> dtos = new ArrayList<>();
@@ -268,7 +270,7 @@ public class PlaylistBizImple implements PlaylistBiz {
                 dtos.add(songs.get(i));
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("index out of bounds");
+            log.info("index out of bounds");
 //            e.printStackTrace();
         }
 

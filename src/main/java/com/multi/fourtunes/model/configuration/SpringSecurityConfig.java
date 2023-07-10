@@ -2,6 +2,7 @@ package com.multi.fourtunes.model.configuration;
 
 import com.multi.fourtunes.model.security.CustomAuthenticationSuccessHandler;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +29,7 @@ import java.io.IOException;
  * Autor JMBAE
  */
 
+@Slf4j
 @EnableWebSecurity(debug = false)
 @AllArgsConstructor
 public class SpringSecurityConfig {
@@ -75,7 +77,7 @@ public class SpringSecurityConfig {
                             new AuthenticationFailureHandler() {
                                 @Override
                                 public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-                                    System.out.println("exception : " + exception.getMessage());
+                                    log.info("exception : " + exception.getMessage());
                                     response.sendRedirect("/nav/login");
                                 }
                             }
