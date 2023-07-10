@@ -14,6 +14,7 @@ import com.multi.fourtunes.model.jpa.entity.SongEntity;
 import com.multi.fourtunes.model.jpa.entity.UserEntity;
 import com.multi.fourtunes.model.jpa.repository.SongRepository;
 import com.multi.fourtunes.model.jpa.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,7 @@ import com.multi.fourtunes.model.dto.SongDto;
 import com.multi.fourtunes.model.dto.UserDto;
 import org.springframework.web.servlet.ModelAndView;
 
+@Slf4j
 @RestController
 @RequestMapping("/playlist")
 public class PlayListController {
@@ -64,6 +66,9 @@ public class PlayListController {
 
             // myPlaylists에 이미 있는 플레이리스트 제외
             allPlaylists.removeAll(myPlaylists);
+
+            // 본인 플레이리스트 구분 가능하게 식별자 추가
+            myPlaylists.get(0).setUserName(myPlaylists.get(0).getUserName() + "(나) ");
         } else {
             allPlaylists = playlist.getAllPlaylists();
         }
@@ -73,6 +78,7 @@ public class PlayListController {
         playlists.addAll(myPlaylists);
         playlists.addAll(allPlaylists);
 
+        log.info("Load playlist = {}", playlists);
 
         return ResponseEntity.ok(playlists);
     }
