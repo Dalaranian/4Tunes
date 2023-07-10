@@ -129,7 +129,6 @@ h2, h3 {
 	}
 	#main {
 		width: 110vw !important;
-		background-color: #424242 !important;
 		overflow-x: scroll !important;
 	}
 	#main div>h1 {
@@ -153,9 +152,14 @@ h2, h3 {
 		position: relative;
 		display: flex;
 		float: right;
+		bottom: 80px;
+        right: 250px;
 		min-width: 90px;
-		min-height: 28px;
+		min-height: 28px;	
 		margin-bottom: 35px;
+	}
+	#video{
+		width:auto;
 	}
 }
 

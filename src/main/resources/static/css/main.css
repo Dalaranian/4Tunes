@@ -14,7 +14,7 @@ h1 {
   height: 250px;
   margin: 10px;
 }
-.today img {
+.today img {	
   width: 240px;
   height: 240px;
   margin: 10px;
@@ -149,7 +149,6 @@ h1 {
   }
   #main {
     width: 110vw !important;
-    background-color: #424242 !important;
   }
   h1{
     text-align:center !important;

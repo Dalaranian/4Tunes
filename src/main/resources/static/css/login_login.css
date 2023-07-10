@@ -9,9 +9,8 @@
 body {
   text-size-adjust: 100%;
   overflow: hidden;
-  background-color: #454545;
+  background-color: #252525;
 }
-
 /* 기본틀 */
 .loginbox {
   position: absolute;

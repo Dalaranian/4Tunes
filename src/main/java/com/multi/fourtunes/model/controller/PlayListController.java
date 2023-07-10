@@ -67,8 +67,13 @@ public class PlayListController {
             // myPlaylists에 이미 있는 플레이리스트 제외
             allPlaylists.removeAll(myPlaylists);
 
-            // 본인 플레이리스트 구분 가능하게 식별자 추가
-            myPlaylists.get(0).setUserName(myPlaylists.get(0).getUserName() + "(나) ");
+            try {
+                // 본인 플레이리스트 구분 가능하게 식별자 추가
+                myPlaylists.get(0).setUserName(myPlaylists.get(0).getUserName() + "(나) ");
+            } catch (IndexOutOfBoundsException e) {
+//                e.printStackTrace();
+                log.info("관리자 접속 예외 처리");
+            }
         } else {
             allPlaylists = playlist.getAllPlaylists();
         }

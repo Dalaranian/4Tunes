@@ -175,13 +175,19 @@ public class InnerPagingController {
 			// 플레이리스트 노래 SONG_AIKEYWORD 통계 조회
 			// List<AnalysisKeywordDto> keywordStats = analysisBiz.getAIKeywordAnalysis(userNo);
 			List<AnalysisKeywordDto> top3KeywordStats = analysisBiz.getAIKeywordAnalysis(userNo);
-			  
-			// 결과 model에 추가
-			model.addAttribute("totalSongs", totalSongs);
-			// model.addAttribute("keywordStats", keywordStats);
-			model.addAttribute("top3KeywordStats", top3KeywordStats);
-			
-			return "mypage_analysis";
+
+			// HotFix 타임리프 파싱 에러 처리
+			if (totalSongs >= 3) {
+				// 결과 model에 추가
+				model.addAttribute("totalSongs", totalSongs);
+				// model.addAttribute("keywordStats", keywordStats);
+				model.addAttribute("top3KeywordStats", top3KeywordStats);
+
+				return "mypage_analysis";
+			} else {
+				log.error("빈 플레이리스트가 통계 페이지 접근");
+				return "index";
+			}
 		}
 		
 		return "login_login";

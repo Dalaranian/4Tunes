@@ -11,7 +11,7 @@ body {
   text-size-adjust: 100%;
   overflow: hidden;
   zoom: 1;
-  background-color: #454545;
+  background-color: #252525;
 }
 
 /* 기본틀 */
@@ -196,6 +196,9 @@ body {
   float: right;
   border-radius: 5px 5px;
 }
+.i:hover{
+  cursor:pointer;
+}
 .chart-back {
   display: none;
   width: 35vw;
@@ -235,7 +238,6 @@ body {
   }
   #main {
     width: 130vw;
-    background-color: #424242;
   }
   .loginbox {
     left: 50%;

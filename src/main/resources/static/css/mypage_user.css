@@ -17,6 +17,7 @@
   margin-left: 40px;
   vertical-align: top;
   min-width: 150px;
+  min-height:550px;
 }
 .mypage_nav ul {
   padding: 0;
@@ -47,6 +48,7 @@ fieldset{
   background-color: rgb(224, 224, 224);
   margin-left: 10px;
   min-width: 720px;
+  min-height:550px;
 }
 .mypage_contents > h1 {
   padding-top:10px;
@@ -132,6 +134,7 @@ fieldset{
   width: 100%;
   height: 100%;
   font-size: 15px;
+  min-height:200px;	
 }
 
 .mypage_kw {

@@ -14,7 +14,7 @@ $(document).ready(function () {
             "/innerpaging/playlist/public?userNo=" + playlist.userNo
           )
           .text(playlist.userName + "님의 플레이리스트")
-          .css({ "padding-left": "20px" });
+          .css({ "padding-left": "25px" });
         var img = $("<img>").attr("src", playlist.albumArt);
         var anchorWithImage = $("<a></a>")
           .attr(
@@ -23,7 +23,7 @@ $(document).ready(function () {
           )
           .append(img);
 
-        playlistDiv.append($("<div></div>").append(a).append(anchorWithImage));
+        playlistDiv.append($("<div></div>").append(anchorWithImage).append(a));
 
         playlistsDiv.append(playlistDiv);
       });
