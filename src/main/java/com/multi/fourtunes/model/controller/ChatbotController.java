@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 @RestController
-public class ChatController {
+public class ChatbotController {
 
 	// 카카오톡 오픈빌더로 리턴할 스킬 API
 	@RequestMapping(value = "/kkoChat/v1", method = { RequestMethod.POST, RequestMethod.GET }, headers = {
