@@ -1,8 +1,8 @@
-#main > h1 {
+	#main > h1 {
   color: #d4adfc;
   position: relative;
   top: 7%;
-  left: 6%;
+  left: 65px;
   font-weight: bold;
   font-size: 2em;
   margin-bottom: 10px;
@@ -41,7 +41,7 @@
   width: fit-content;
   position: relative;
   top: 10%;
-  left: 6%;
+  left: 65px;
   display: flex;
   flex-wrap: wrap;
 }
@@ -122,13 +122,12 @@ h3 {
   text-overflow: ellipsis;
 }
 
-@media (max-width: 1160px) {
+@media (max-width: 1200px) {
   #nav {
     display: none !important;
   }
   #main {
     width: 110vw !important;
-    background-color: #424242 !important;
     overflow-x: scroll !important;
   }
   #main div > h1 {
@@ -136,21 +135,32 @@ h3 {
   }
   #MyPlayList {
     margin-top: 10px;
+    width:1200px;
   }
   #video {
     display: block;
     margin-bottom: 0;
+    width:auto;
+  }
+  #list_left{
+  	margin-right:100px;
   }
   .video-container {
-    min-width: 340px;
-    min-height: 140px;
+    width: 400px;
+    height: 250px;
   }
   #buttons {
     position: relative;
     display: flex;
-    float: right;
+    left:690px;
     min-width: 90px;
     min-height: 28px;
     margin-bottom: 35px;
+  }
+  .list_wrapper{
+  	width:460px;
+  }
+  #context{
+  width:400px;
   }
 }

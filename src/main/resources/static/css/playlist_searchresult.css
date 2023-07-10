@@ -99,7 +99,6 @@ h3 {
   }
   #main {
     width: 110vw !important;
-    background-color: #424242 !important;
     overflow-x: scroll !important;
   }
   #main div > h1 {
