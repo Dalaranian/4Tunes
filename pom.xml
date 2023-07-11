@@ -11,7 +11,7 @@
     </parent>
     <groupId>com.multi</groupId>
     <artifactId>4Tunes</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.3-SNAPSHOT</version>
     <name>4Tunes</name>
     <description>Demo project for Spring Boot</description>
     <properties>
