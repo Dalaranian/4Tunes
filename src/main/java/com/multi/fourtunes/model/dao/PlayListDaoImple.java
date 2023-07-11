@@ -50,7 +50,7 @@ public class PlayListDaoImple implements PlaylistDao{
 
     @Override
     public int deleteMyPlayList(String playListNo, Long songNo) {
-//        // log.info("playlist : " + playListNo + " " + "songNo : " + songNo);
+//        // log.debug("playlist : " + playListNo + " " + "songNo : " + songNo);
         return playListMapper.deleteMyPlayList(playListNo, songNo);
     }
 

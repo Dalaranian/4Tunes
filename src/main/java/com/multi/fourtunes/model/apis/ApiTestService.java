@@ -17,12 +17,12 @@ public class ApiTestService {
     }
 
     public void saveSongEntitiy(SongEntity entity) {
-        // log.info("service : " + entity.toString());
+        // log.debug("service : " + entity.toString());
 
         try {
             songRepository.save(entity);
         } catch (Exception e) {
-            // log.info("Duplicate Insert : " + entity);
+            // log.debug("Duplicate Insert : " + entity);
         }
     }
 }

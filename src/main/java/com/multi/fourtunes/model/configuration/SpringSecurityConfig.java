@@ -77,7 +77,7 @@ public class SpringSecurityConfig {
                             new AuthenticationFailureHandler() {
                                 @Override
                                 public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-                                    // log.info("exception : " + exception.getMessage());
+                                    // log.debug("exception : " + exception.getMessage());
                                     response.sendRedirect("/nav/login");
                                 }
                             }

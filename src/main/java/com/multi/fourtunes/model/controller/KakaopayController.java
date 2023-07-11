@@ -33,8 +33,8 @@ public class KakaopayController {
 	public @ResponseBody ReadyDto payReady(PayDto payDto, HttpSession session, Model model) {
 		ReadyDto readyDto = kakaoPayBiz.payReady();
 		
-		// log.info("tid : " + readyDto.getTid());
-		// log.info("url : " + readyDto.getNext_redirect_pc_url());
+		// log.debug("tid : " + readyDto.getTid());
+		// log.debug("url : " + readyDto.getNext_redirect_pc_url());
 		session.setAttribute("tid", readyDto.getTid());
 		
 		return readyDto;
@@ -43,9 +43,9 @@ public class KakaopayController {
 	// 결제 승인 요청
 	@RequestMapping("/success")
 	public String kakaoPaySuccess(@RequestParam("pg_token") String pg_token, HttpSession session, Model model) {
-		// log.info("pg_token : " + pg_token);
+		// log.debug("pg_token : " + pg_token);
 		String tid = (String)session.getAttribute("tid");
-		// log.info(tid);
+		// log.debug(tid);
 		
 		ApproveDto approveDto = kakaoPayBiz.payApprove(tid, pg_token);
 		model.addAttribute("info", approveDto);
@@ -64,7 +64,7 @@ public class KakaopayController {
 		if(kakaoPayBiz.insertPayInfo(insert) > 0) {
 			// USER 테이블에 USER_GRADE update
 			if(kakaoPayBiz.updateUserGrade(current.getUser_no()) > 0) {
-				// log.info("UserGrade update 성공");
+				// log.debug("UserGrade update 성공");
 				session.removeAttribute("login");
 				current.setUser_grade("PAID");
 				session.setAttribute("login", current);

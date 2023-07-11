@@ -28,13 +28,13 @@ public class ApiTestController {
 
 	@GetMapping("/ManiaDB")
 	public String test1(String query) {
-//		// log.info(query);
+//		// log.debug(query);
 
 		mania.setPrompt(query);
 		mania.setType(false);
 		ArrayList<SongDto> dtos = mania.search();
 		for (SongDto current:dtos){
-			// log.info(current.toString());
+			// log.debug(current.toString());
 		}
 
 		ArrayList<SongDto> result = mania.search();
@@ -42,7 +42,7 @@ public class ApiTestController {
 				.setSongLink(youtube.embedLinkGetter(currentSong.getSongArtist(), currentSong.getSongTitle())));
 
 		for(SongDto dto:result){
-			// log.info(dto.toString());
+			// log.debug(dto.toString());
 		}
 
 		return "apitestpage";
@@ -51,13 +51,13 @@ public class ApiTestController {
 	@GetMapping("/YoutubeData")
 	public String test2(String singer, String title) {
 		
-		// log.info("YouTubeController 진입");
+		// log.debug("YouTubeController 진입");
 		
 //		YoutubeApi getLink = new YoutubeApi();
 		
 		String link = youtube.embedLinkGetter(singer, title);
 		
-		// log.info(link);
+		// log.debug(link);
 		
 		return "apitestpage";
 	}

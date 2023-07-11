@@ -72,7 +72,7 @@ public class ManiaDbApi {
 
 			// set 된 데이터를 포장하여 REST URL 형식으로 변환
 			String restURL = MakeURL();
-//			// log.info("요청 URL : " + restURL);
+//			// log.debug("요청 URL : " + restURL);
 
 			// ManiaDB 에 API 요청 후 값 받기
 			restTemplate = new RestTemplate();
@@ -93,7 +93,7 @@ public class ManiaDbApi {
 		// XML 을 JSON 으로 파싱
 		JSONObject jsonObject = XML.toJSONObject(responseBodyByXML);
 
-//		// log.info("불러온 JSON : " + jsonObject.toString());
+//		// log.debug("불러온 JSON : " + jsonObject.toString());
 
 		try {
 			ObjectMapper objectMapper = new ObjectMapper();
@@ -106,23 +106,23 @@ public class ManiaDbApi {
 				JsonNode channelNode = rssNode.get("channel");
 				itemArrayNode = channelNode.get("item");
 			} catch (JsonProcessingException e) {
-				// log.info("파싱 오류");
+				// log.debug("파싱 오류");
 				return null;
 			}
 
-//			// log.info(itemArrayNode);
+//			// log.debug(itemArrayNode);
 
 			// 데이터 꺼내서 DTO에 포장 후 List 에 넣기
 			for (JsonNode itemNode : itemArrayNode) {
-//				// log.info(itemNode.toString());
+//				// log.debug(itemNode.toString());
 				String title = itemNode.get("title").asText().replaceAll("&nbsp;", " ");
 				String name = itemNode.get("maniadb:artist").get("name").asText();
 				String id = itemNode.get("id").asText();
 				String albumArt = itemNode.get("maniadb:album").get("image").asText();
 
-//				// log.info("Title: " + title);
-//				// log.info("Name: " + name);
-//				// log.info("Link " + link);
+//				// log.debug("Title: " + title);
+//				// log.debug("Name: " + name);
+//				// log.debug("Link " + link);
 
 				// SongDto 생성후 값 Set
 				SongDto currentMusic = new SongDto();
@@ -133,7 +133,7 @@ public class ManiaDbApi {
 
 				// 다 불러온 친구를 저장
 				result.add(currentMusic);
-//				// log.info("----------------");
+//				// log.debug("----------------");
 
 			}
 		} catch (Exception e) {

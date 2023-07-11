@@ -47,7 +47,7 @@ public class ApiTestRestController {
             song.setSongTitle(res.getSongTitle());
             song.setSongLink("temp");
             song.setSongId(res.getSongId());
-            // log.info(song.toString());
+            // log.debug(song.toString());
 
             service.saveSongEntitiy(song);
         }
@@ -60,7 +60,7 @@ public class ApiTestRestController {
     @GetMapping("/gpt")
     public ResponseEntity<String> openAi(String[] keyword){
 
-        // log.info(Arrays.toString(keyword));
+        // log.debug(Arrays.toString(keyword));
 
         //openAiApi.suggestedSong(new String[] {"kpop"});
 

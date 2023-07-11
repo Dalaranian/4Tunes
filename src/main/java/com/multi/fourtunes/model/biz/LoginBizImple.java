@@ -41,7 +41,7 @@ public class LoginBizImple implements LoginBiz {
 
 	@Override
 	public boolean checkUserExist(String email, String userId) {
-		// log.info("email : " + email + "\nuserId : " + userId);
+		// log.debug("email : " + email + "\nuserId : " + userId);
 		UserDto userDTO = userDao.selectUserByEmailAndId(email, userId);
 
 		return (userDTO != null) ? true : false;
@@ -109,7 +109,7 @@ public class LoginBizImple implements LoginBiz {
 		UserEntity checkUserEntitiy = userRepository.findByUserId(joinEmail);
 
 		try {
-			// log.info("isValidEmail : " + checkUserEntitiy.toString());
+			// log.debug("isValidEmail : " + checkUserEntitiy.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -66,7 +66,7 @@ public class PlaylistBizImple implements PlaylistBiz {
 	public String insertPlaylist(SongDto song, UserDto user) {
 		String result;
 
-		// // log.info(song + "\n" + user);
+		// // log.debug(song + "\n" + user);
 
 		// 추가하려는 노래가 DB 에 존재하는지 확인
 		// SongDto selectSong = songDao.SelectSongById(song.getSongId());
@@ -200,7 +200,7 @@ public class PlaylistBizImple implements PlaylistBiz {
     @Override
     public String visibilityManage(UserDto currentLogin, boolean request) {
 
-        // log.info(currentLogin + "\n" + request);
+        // log.debug(currentLogin + "\n" + request);
 
         String res = "";
 
@@ -250,9 +250,9 @@ public class PlaylistBizImple implements PlaylistBiz {
             userNoList.add(userNo.asInt());
         }
 
-//        // log.info("Page Number: " + pageNo);
-//        // log.info("Page Size: " + pageSize);
-//        // log.info("User Number List: " + userNoList);
+//        // log.debug("Page Number: " + pageNo);
+//        // log.debug("Page Size: " + pageSize);
+//        // log.debug("User Number List: " + userNoList);
 
         // return 할 Dtos 생성
         List<SongDto> dtos = new ArrayList<>();
@@ -270,7 +270,7 @@ public class PlaylistBizImple implements PlaylistBiz {
                 dtos.add(songs.get(i));
             }
         } catch (IndexOutOfBoundsException e) {
-            // log.info("index out of bounds");
+            // log.debug("index out of bounds");
 //            e.printStackTrace();
         }
 

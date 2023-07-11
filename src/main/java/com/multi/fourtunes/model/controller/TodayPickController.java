@@ -23,7 +23,7 @@ public class TodayPickController {
 	
 	@GetMapping("/suggest/{todayPickNo}")
 	public String todayPickDetail(@PathVariable int todayPickNo, Model model) {
-		//// log.info("번호: " + todayPickNo);
+		//// log.debug("번호: " + todayPickNo);
 		
 		// todayPickNo에 해당하는 플레이리스트의 이름 받아오기
 		String playlistName = todayPickBiz.getTodayPickName(todayPickNo);

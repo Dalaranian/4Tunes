@@ -88,7 +88,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void addSuggestCount(Integer userNo, int count) {
-//		// log.info(userNo + " " + count);
+//		// log.debug(userNo + " " + count);
 		userMapper.addSuggestCount(userNo, count);
 	}
 

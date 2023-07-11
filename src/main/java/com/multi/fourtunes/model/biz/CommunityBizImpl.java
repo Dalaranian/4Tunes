@@ -23,7 +23,7 @@ public class CommunityBizImpl implements CommunityBiz {
 	@Override
 	@Transactional
 	public List<CommunityDto> getAll() {
-		// // log.info("Biz getAll 진입");
+		// // log.debug("Biz getAll 진입");
 		return communityDao.getAll();
 	}
 

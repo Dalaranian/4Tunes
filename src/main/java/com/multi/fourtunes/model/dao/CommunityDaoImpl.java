@@ -23,7 +23,7 @@ public class CommunityDaoImpl implements CommunityDao {
 	public List<CommunityDto> getAll() {
 		// List<CommunityDto> temp = communityMapper.getAll();
 		// for (CommunityDto dto : temp) {
-		// // log.info(dto.toString());
+		// // log.debug(dto.toString());
 		// }
 		return communityMapper.getAll();
 	}
