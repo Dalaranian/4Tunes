@@ -35,13 +35,13 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-//        log.info(userDetails);
+//        // log.info(userDetails);
 
         UserEntity user = userRepository.findByUserId(userDetails.getUsername());
 
         UserDto dto = new UserDto(user.getUserNo(), user.getUserId(), user.getUserName(), "", user.getUserGrade(), user.getUserSuggestCount());
 
-//        log.info(dto);
+//        // log.info(dto);
 
         HttpSession session = request.getSession();
         session.setAttribute("login", dto);

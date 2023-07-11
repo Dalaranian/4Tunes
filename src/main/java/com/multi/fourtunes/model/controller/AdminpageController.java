@@ -77,7 +77,7 @@ public class AdminpageController {
 		@GetMapping("/search")
 		public String searchUser(@RequestParam("username") String name, Model model) {
 			List<UserDto> userList = adminpageBiz.searchUser(name);
-			//log.info("userList: " + userList);
+			//// log.info("userList: " + userList);
 			model.addAttribute("searchUserList", userList);
 			
 			return "adminpage_searchuser";
@@ -89,7 +89,7 @@ public class AdminpageController {
 		public String gotoAdminpageCommunity(Model model) {
 			// 신고당한 게시글과 사용자를 조회
 			List<AdminCommunityReportDto> report = adminpageBiz.selectReport();
-			//log.info("report: " + report);
+			//// log.info("report: " + report);
 			model.addAttribute("report", report);
 			
 			return "adminpage_community";
@@ -97,7 +97,7 @@ public class AdminpageController {
 		
 		@GetMapping("/confirm/{board_no}")
 		public String confirm(@PathVariable int board_no) {
-			//log.info("board_no는? : " + board_no);
+			//// log.info("board_no는? : " + board_no);
 			// 관리자가 문제없음 클릭 시, 해당 게시글의 신고누적횟수를 0으로 변경
 			if(adminpageBiz.confirmReport(board_no) > 0) {
 				// COMMUNITY_REPORT 테이블에서 해당 게시글의 신고내역을 지움
@@ -113,14 +113,14 @@ public class AdminpageController {
 		public String gotoAdminpageComment(Model model) {
 			// 신고당한 댓글과 사용자를 조회
 			List<AdminCommentReportDto> report = adminpageBiz.selectReportComment();
-			//log.info("report: " + report);
+			//// log.info("report: " + report);
 			model.addAttribute("report", report);
 			return "adminpage_comment";
 		}
 		
 		@GetMapping("/confirmComment/{comment_no}")
 		public String confirmComment(@PathVariable int comment_no) {
-			//log.info("comment_no는? : " + comment_no);
+			//// log.info("comment_no는? : " + comment_no);
 			// 관리자가 문제없음 클릭 시, 해당 댓글의 신고누적횟수를 0으로 변경
 			if(adminpageBiz.confirmReportComment(comment_no) > 0) {
 				// COMMUNITY_REPORT 테이블에서 해당 댓글의 신고내역을 지움
@@ -143,7 +143,7 @@ public class AdminpageController {
 			mania.setType(false);
 			
 			ArrayList<SongDto> searchResult = mania.search();
-			log.info("검색 결과: " + searchResult);
+			// log.info("검색 결과: " + searchResult);
 			
 			// YoutubeApi를 통해 SongLink 불러오기
 			ArrayList<SongDto> finalResult = adminpageBiz.setSonglink(searchResult, title);
@@ -158,8 +158,8 @@ public class AdminpageController {
 		@ResponseBody
 		public String insertSong(@RequestParam("songDto") String dto, @RequestParam("playlist") String playlist) {
 			
-			log.info("SongDto: " + dto);
-			log.info("playlist: " + playlist);
+			// log.info("SongDto: " + dto);
+			// log.info("playlist: " + playlist);
 			
 			// 관리자가 선택한 String 타입의 songDto와 playlist를 biz로 넘김
 			String res = adminpageBiz.insertSong(dto, playlist);

@@ -25,8 +25,8 @@ public class Application {
 	@RequestMapping("/")
 	public String root(HttpServletRequest request) {
 		// Root 에 접속한 유저 정보 Info에 띄우기
-		log.info("접속 유저 = {}", request.getHeader("User-Agent"));
-		log.info("접속 아이피 = {}", request.getRemoteAddr());
+		 log.info("접속 유저 = {}", request.getHeader("User-Agent"));
+		 log.info("접속 아이피 = {}", request.getRemoteAddr());
 		return "index";
 	}
 

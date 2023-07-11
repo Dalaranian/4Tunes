@@ -105,17 +105,17 @@ public class YoutubeApi {
 		JsonNode rootNode;
 		try {
 			rootNode = objMapper.readTree(response.toString());
-//			log.info(rootNode.toPrettyString());
-//			log.info("-------------------------------------");
+//			// log.info(rootNode.toPrettyString());
+//			// log.info("-------------------------------------");
 			JsonNode itemsNode = rootNode.get("items");
-//			log.info(itemsNode.toPrettyString());
-//			log.info("-------------------------------------");
+//			// log.info(itemsNode.toPrettyString());
+//			// log.info("-------------------------------------");
 			JsonNode targetNode = itemsNode.get(0);
-//			log.info(targetNode.toPrettyString());
-//			log.info("-------------------------------------");
+//			// log.info(targetNode.toPrettyString());
+//			// log.info("-------------------------------------");
 			JsonNode targetIdNode = targetNode.get("id");
-//			log.info(targetIdNode.toPrettyString());
-//			log.info("-------------------------------------");
+//			// log.info(targetIdNode.toPrettyString());
+//			// log.info("-------------------------------------");
 			String id = targetIdNode.get("videoId").asText();
 
 			return id;
