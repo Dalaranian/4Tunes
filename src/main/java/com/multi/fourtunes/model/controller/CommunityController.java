@@ -55,7 +55,7 @@ public class CommunityController {
 
 	@RequestMapping("/write")
 	public String communityWrite(HttpSession session) {
-		log.info("Session Contents: " + session.getAttribute("login"));
+		// log.info("Session Contents: " + session.getAttribute("login"));
 		return "community_write";
 	}
 

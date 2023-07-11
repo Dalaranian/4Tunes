@@ -65,7 +65,7 @@ public class AIKeywordController {
                 
             }
             // 하얀 화면, 콘솔창에 메시지 뜨면 성공
-            log.info("JSON 데이터가 성공적으로 insert 되었습니다.");
+            // log.info("JSON 데이터가 성공적으로 insert 되었습니다.");
         } catch (IOException e) {
             e.printStackTrace();
         }

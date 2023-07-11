@@ -43,7 +43,7 @@ public class PlayListController {
 
     @PostMapping("/insertmyplaylist")
     public ResponseEntity<String> addToPlaylist(@RequestBody SongDto songDto, HttpSession session) {
-//        log.info(songDto);
+//        // log.info(songDto);
         UserDto currentUser = (UserDto) session.getAttribute("login");
         String res = playlist.insertPlaylist(songDto, currentUser);
 
@@ -72,7 +72,7 @@ public class PlayListController {
                 myPlaylists.get(0).setUserName(myPlaylists.get(0).getUserName() + "(나) ");
             } catch (IndexOutOfBoundsException e) {
 //                e.printStackTrace();
-                log.info("관리자 접속 예외 처리");
+                // log.info("관리자 접속 예외 처리");
             }
         } else {
             allPlaylists = playlist.getAllPlaylists();
@@ -83,7 +83,7 @@ public class PlayListController {
         playlists.addAll(myPlaylists);
         playlists.addAll(allPlaylists);
 
-        log.info("Load playlist = {}", playlists);
+        // log.info("Load playlist = {}", playlists);
 
         return ResponseEntity.ok(playlists);
     }
@@ -103,12 +103,12 @@ public class PlayListController {
         // 현재 유저 소유의 플레이리스트인지, 아니면 타인의 플레이리스트인지 확인하여 return 할 view 결정
         if (Integer.parseInt(userNo) == currentUser.getUser_no()) {
             modelAndView.setViewName("playlist_mine");
-//            log.info("내꺼");
+//            // log.info("내꺼");
         } else {
             UserEntity owner = userRepository.findByUserNo(Integer.parseInt(userNo));
             modelAndView.setViewName("playlist_public");
             modelAndView.addObject("name", owner.getUserName());
-//            log.info("남꺼");
+//            // log.info("남꺼");
         }
 
         // PlayList에 담겨있는 모든 노래를 페이징을 위해 세션에 저장함
@@ -126,7 +126,7 @@ public class PlayListController {
                 finalResult.add(songs.get(i));
             }
         } catch (IndexOutOfBoundsException e) {
-            log.info("log : 불러온 플레이리스트 갯수가 8개 이하");
+            // log.info("log : 불러온 플레이리스트 갯수가 8개 이하");
             e.printStackTrace();
         }
         modelAndView.addObject("songs", finalResult);

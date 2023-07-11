@@ -54,7 +54,7 @@ public class SuggestBizImpl implements SuggestBiz {
 			
 			// ManiaDB를 통해 검색 결과 10개가 담겨있는 searchResult를 받아옴
 			ArrayList<SongDto> searchResult = mania.search();
-//			log.info("검색 결과: " + searchResult);
+//			// log.info("검색 결과: " + searchResult);
 
 			
 			for (SongDto res : searchResult) {
@@ -81,13 +81,13 @@ public class SuggestBizImpl implements SuggestBiz {
 
 			try {
 				// 한 노래에 대해 여러 검색결과가 있는 경우, 첫번째 검색결과만 finalRes에 저장
-				//log.info("걸러진 친구들 은 \n"+filterRes);
+				//// log.info("걸러진 친구들 은 \n"+filterRes);
 				finalRes.add(filterRes.get(0));
 			} catch (java.lang.IndexOutOfBoundsException e) {
-//				log.info(suggest.getSongTitle() + "에 관한 결과 없음");
+//				// log.info(suggest.getSongTitle() + "에 관한 결과 없음");
 				continue;
 			}
-//			log.info("**최종 결과: " + finalRes);
+//			// log.info("**최종 결과: " + finalRes);
 		}
 		return finalRes;
 	}

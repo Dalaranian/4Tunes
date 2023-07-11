@@ -53,7 +53,7 @@ public class LoginController {
 	@GetMapping("/sociallogin")
 	public String socialLogin(@RequestParam("email") String email, @RequestParam("name") String name, Model model,
 							  HttpSession session) {
-		log.info(email + " " + name);
+		// // log.info(email + " " + name);
 		boolean isUserExist = loginBiz.checkUserExist(email, name);
 		if (isUserExist) {
 			// DB에 있는 이메일이면 로그인 진행
@@ -111,9 +111,9 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public String login(HttpSession session, UserDto dto) {
-//		log.info("LoginController 진입 \n" + dto.toString());
+//		// log.info("LoginController 진입 \n" + dto.toString());
 		UserDto res = loginBiz.login(dto);
-//		log.info("리턴받은 dto : " + res.toString());
+//		// log.info("리턴받은 dto : " + res.toString());
 		if (res != null && passwordEncoder.matches(dto.getUser_pw(), res.getUser_pw())) {
 			res.setUser_no(res.getUser_no());
 			session.setAttribute("login", res);
@@ -134,7 +134,7 @@ public class LoginController {
 	@GetMapping("/insertuser")
 	public String insertUser(@RequestParam("join-email") String email, @RequestParam("join-pw") String password,
 							 @RequestParam("join-name") String name, @RequestParam("selected_keyword") List<String> selectedKeywords) {
-		//log.info(email + " " + password + " " + name + " " + selectedKeywords.toString());
+		//// log.info(email + " " + password + " " + name + " " + selectedKeywords.toString());
 
 		UserDto insert = new UserDto();
 		insert.setUser_id(email);
@@ -146,16 +146,16 @@ public class LoginController {
 		if(loginBiz.insertUser(insert) > 0) {
 			// 선택한 Keyword Insert 처리 (회원번호 저장해야해서?)
 			String userId = insert.getUser_id();
-			//log.info(userId);
+			//// log.info(userId);
 
 			for(Object object : selectedKeywords) {
 				String keyword = (String)object;
-				//log.info(keyword);
+				//// log.info(keyword);
 
 				if(keywordBiz.insertKeyword(keyword, userId) > 0 ) {
-					//log.info("키워드 insert 성공 ㅎㅎ");
+					//// log.info("키워드 insert 성공 ㅎㅎ");
 				} else {
-					//log.info("키워드 insert 실패 ㅜㅜ");
+					//// log.info("키워드 insert 실패 ㅜㅜ");
 				}
 			}
 
