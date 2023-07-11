@@ -32,7 +32,7 @@ public class ChatbotController {
 
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonInString = mapper.writeValueAsString(params);
-			System.out.println(jsonInString);
+			log.info(jsonInString);
 
 			// 발화 들어온거 확인하기 
 			// messageText = "발화내용" 
